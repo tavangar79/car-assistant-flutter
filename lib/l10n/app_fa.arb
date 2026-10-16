@@ -1,0 +1,67 @@
+{
+  "@@locale": "fa",
+  "appTitle": "دستیار خودرو",
+  "@appTitle": {
+    "description": "App name, used as the OS task title and in the splash header."
+  },
+  "splashTagline": "دفترچه اختصاصی",
+  "@splashTagline": {
+    "description": "Small label at the top of the splash screen."
+  },
+  "splashHeadline": "مدیریت خودرو",
+  "@splashHeadline": {
+    "description": "Large headline in the center of the splash screen."
+  },
+  "splashDescription": "دفتر کل هزینه‌ها، سرویس‌ها و مدارک اختصاصی خودرو",
+  "@splashDescription": {
+    "description": "Short description under the splash headline."
+  },
+  "splashLoading": "در حال دریافت اطلاعات...",
+  "@splashLoading": {
+    "description": "Shown under the splash loading bar."
+  },
+  "splashFooter": "اطلاعات خودرو، همیشه در دسترس شما",
+  "@splashFooter": {
+    "description": "Footer slogan on the splash screen."
+  },
+  "splashLogoLabel": "نشان‌واره اپلیکیشن مدیریت خودرو",
+  "@splashLogoLabel": {
+    "description": "Screen-reader label for the app logo on the splash screen."
+  },
+  "versionLabel": "نسخه",
+  "@versionLabel": {
+    "description": "Word shown before the app version number."
+  },
+  "vehiclesTitle": "خودروهای من",
+  "@vehiclesTitle": {
+    "description": "App bar title of the vehicles list page."
+  },
+  "vehiclesEmpty": "هنوز خودرویی ثبت نشده است",
+  "@vehiclesEmpty": {
+    "description": "Shown when the user has no vehicles."
+  },
+  "vehiclesLoadError": "دریافت خودروها ممکن نشد",
+  "@vehiclesLoadError": {
+    "description": "Shown when the vehicles list could not be loaded."
+  },
+  "retry": "تلاش دوباره",
+  "@retry": {
+    "description": "Button that retries a failed action."
+  },
+  "vehicleTitle": "{make} {model} مدل {year}",
+  "@vehicleTitle": {
+    "description": "Vehicle name in the list, e.g. 'Kia Rio model 2021'. year is already locale-formatted.",
+    "placeholders": {
+      "make": {"type": "String", "example": "Kia"},
+      "model": {"type": "String", "example": "Rio"},
+      "year": {"type": "String", "example": "۲۰۲۱"}
+    }
+  },
+  "vehicleMileage": "{km} کیلومتر",
+  "@vehicleMileage": {
+    "description": "Vehicle mileage in kilometers.",
+    "placeholders": {
+      "km": {"type": "int", "format": "decimalPattern", "example": "12500"}
+    }
+  }
+}

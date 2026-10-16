@@ -15,8 +15,6 @@ class Vehicle extends Equatable {
   final int year;
   final int mileageKm;
 
-  String get displayName => '$year $make $model';
-
   @override
   List<Object?> get props => [id, make, model, year, mileageKm];
 }

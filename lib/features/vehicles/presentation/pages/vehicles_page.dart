@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/error/failure.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../providers/vehicle_providers.dart';
 import '../widgets/vehicle_tile.dart';
 
@@ -10,18 +10,19 @@ class VehiclesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final vehicles = ref.watch(vehiclesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Vehicles')),
+      appBar: AppBar(title: Text(l10n.vehiclesTitle)),
       body: vehicles.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => _ErrorView(
-          message: error is Failure ? error.message : 'Something went wrong',
+        error: (_, _) => _ErrorView(
+          message: l10n.vehiclesLoadError,
           onRetry: () => ref.invalidate(vehiclesProvider),
         ),
         data: (items) => items.isEmpty
-            ? const Center(child: Text('No vehicles yet'))
+            ? Center(child: Text(l10n.vehiclesEmpty))
             : ListView(children: [for (final v in items) VehicleTile(vehicle: v)]),
       ),
     );
@@ -42,7 +43,7 @@ class _ErrorView extends StatelessWidget {
         children: [
           Text(message),
           const SizedBox(height: 16),
-          FilledButton(onPressed: onRetry, child: const Text('Retry')),
+          FilledButton(onPressed: onRetry, child: Text(AppLocalizations.of(context).retry)),
         ],
       ),
     );

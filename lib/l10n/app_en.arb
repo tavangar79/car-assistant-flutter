@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Car Assistant",
+  "splashTagline": "Your private logbook",
+  "splashHeadline": "Car Management",
+  "splashDescription": "One ledger for your car's expenses, services and documents",
+  "splashLoading": "Loading your data...",
+  "splashFooter": "Your car's info, always at hand",
+  "splashLogoLabel": "Car Management app logo",
+  "versionLabel": "Version",
+  "vehiclesTitle": "My Vehicles",
+  "vehiclesEmpty": "No vehicles yet",
+  "vehiclesLoadError": "Couldn't load your vehicles",
+  "retry": "Retry",
+  "vehicleTitle": "{year} {make} {model}",
+  "vehicleMileage": "{km} km"
+}

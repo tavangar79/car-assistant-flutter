@@ -47,7 +47,12 @@ or the data/presentation layers.
 ## Rules
 - All steps and code must be **simple, readable and testable**. Don't add speculative abstractions.
 - Entities are immutable `Equatable` classes. DTOs own `fromJson` and `toEntity()`. JSON never leaks past data/.
-- Repositories convert every exception to `Failure`, so the UI only shows `Failure.message`.
+- Repositories convert every exception to `Failure`. `Failure.message` is a developer-facing (English) log
+  message; the UI shows a localized message instead.
+- **Localization:** always use `AppLocalizations` (gen-l10n, ARB files in `lib/l10n/`, locales `fa` + `en`) for
+  any user-facing text, including semantics labels. Never hardcode strings. Every new string must be added to
+  both `app_fa.arb` (template, with an `@key` description) and `app_en.arb`. Format numbers with `intl`
+  (ARB placeholder formats or `NumberFormat(..., l10n.localeName)`), so `fa` shows Persian digits.
 - Wire dependencies with Riverpod `Provider`s in `presentation/providers/`. Async UI state is a `FutureProvider`
   or `AsyncNotifier`, rendered with `.when(loading:, error:, data:)`.
 - Tests: use cases use a mocktail repo, repositories use `http/testing.dart` `MockClient`, and widgets use
