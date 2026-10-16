@@ -57,4 +57,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
     return '$kmString km';
   }
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get logout => 'Sign out';
+
+  @override
+  String get authPhoneTitle => 'Sign in or sign up';
+
+  @override
+  String get authPhoneSubtitle => 'Enter your mobile number and we\'ll text you a code';
+
+  @override
+  String get authPhoneLabel => 'Mobile number';
+
+  @override
+  String get authPhoneInvalid => 'Enter a valid mobile number';
+
+  @override
+  String get authSendCode => 'Get code';
+
+  @override
+  String get authOtpTitle => 'Enter the code';
+
+  @override
+  String authOtpSubtitle(String phone) {
+    return 'We texted a code to $phone';
+  }
+
+  @override
+  String get authEditPhone => 'Change number';
+
+  @override
+  String get authOtpFieldLabel => 'Verification code';
+
+  @override
+  String get authVerify => 'Verify and sign in';
+
+  @override
+  String authResendIn(String time) {
+    return 'Resend code in $time';
+  }
+
+  @override
+  String get authResend => 'Resend code';
+
+  @override
+  String get authCodeResent => 'A new code is on its way';
+
+  @override
+  String get authInvalidCode => 'Invalid or expired code';
+
+  @override
+  String get authSmsFailed => 'Couldn\'t send the SMS, try again';
+
+  @override
+  String get authTooManyRequests => 'Please wait a moment and try again';
+
+  @override
+  String authTooManyRequestsRetryIn(String time) {
+    return 'Too many tries, try again in $time';
+  }
+
+  @override
+  String get authGenericError => 'Something went wrong, try again';
 }

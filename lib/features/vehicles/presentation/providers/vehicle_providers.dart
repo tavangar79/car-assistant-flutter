@@ -13,7 +13,7 @@ import '../../domain/usecases/get_vehicles.dart';
 
 final vehicleRepositoryProvider = Provider<VehicleRepository>((ref) {
   final remote = VehicleRemoteDataSource(
-    client: ref.watch(httpClientProvider),
+    client: ref.watch(authenticatedHttpClientProvider),
     baseUrl: AppConfig.apiBaseUrl,
   );
   return VehicleRepositoryImpl(remote);
@@ -23,6 +23,8 @@ final getVehiclesProvider = Provider<GetVehicles>((ref) {
   return GetVehicles(ref.watch(vehicleRepositoryProvider));
 });
 
-final vehiclesProvider = FutureProvider<List<Vehicle>>((ref) {
+/// User-scoped: auto-disposed once the vehicles page is gone (e.g. after logout), so the next user
+/// never sees the previous user's list.
+final vehiclesProvider = FutureProvider.autoDispose<List<Vehicle>>((ref) {
   return ref.watch(getVehiclesProvider).call();
 });

@@ -1,7 +1,9 @@
 import 'package:car_assistant/core/theme/app_theme.dart';
+import 'package:car_assistant/features/auth/domain/repositories/auth_repository.dart';
+import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
 import 'package:car_assistant/features/splash/presentation/pages/splash_page.dart';
 import 'package:car_assistant/features/splash/presentation/providers/splash_providers.dart';
-import 'package:car_assistant/features/splash/presentation/widgets/grid_background.dart';
+import 'package:car_assistant/core/widgets/grid_background.dart';
 import 'package:car_assistant/features/splash/presentation/widgets/splash_emblem.dart';
 import 'package:car_assistant/features/splash/presentation/widgets/splash_loading_bar.dart';
 import 'package:car_assistant/features/splash/presentation/widgets/version_badge.dart';
@@ -11,7 +13,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+class MockAuthRepository extends Mock implements AuthRepository {}
 
 const _delay = Duration(seconds: 2);
 
@@ -29,8 +34,11 @@ Widget _app({Future<PackageInfo> Function()? packageInfo, Locale locale = const 
       GoRoute(path: '/vehicles', builder: (context, state) => const Text('vehicles')),
     ],
   );
+  final auth = MockAuthRepository();
+  when(auth.hasSession).thenAnswer((_) async => false);
   return ProviderScope(
     overrides: [
+      authRepositoryProvider.overrideWithValue(auth),
       splashDelayProvider.overrideWithValue(_delay),
       packageInfoProvider.overrideWith(
         (ref) => packageInfo?.call() ?? Future.value(_packageInfo('1.0.0')),

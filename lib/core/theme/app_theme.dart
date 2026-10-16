@@ -56,6 +56,10 @@ abstract final class AppTheme {
   );
 
   static ThemeData _build(ColorScheme scheme) {
+    OutlineInputBorder border(Color color, [double width = 1]) => OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: color, width: width),
+    );
     return ThemeData(
       colorScheme: scheme,
       fontFamily: AppTextStyles.fontFamily,
@@ -66,6 +70,17 @@ abstract final class AppTheme {
           minimumSize: const Size(64, 56),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
+      ),
+      // Inputs from the Stitch auth screens: 12px radius, hairline border, 2px focus ring.
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: scheme.surfaceContainer,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        border: border(scheme.outlineVariant),
+        enabledBorder: border(scheme.outlineVariant),
+        focusedBorder: border(scheme.primary, 2),
+        errorBorder: border(scheme.error),
+        focusedErrorBorder: border(scheme.error, 2),
       ),
     );
   }

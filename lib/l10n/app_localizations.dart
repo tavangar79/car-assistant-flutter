@@ -176,6 +176,126 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'{km} کیلومتر'**
   String vehicleMileage(int km);
+
+  /// Tooltip / screen-reader label of the back button.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازگشت'**
+  String get back;
+
+  /// Tooltip of the sign-out button on the vehicles page.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروج از حساب'**
+  String get logout;
+
+  /// Headline of the phone number page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ورود یا ثبت‌نام'**
+  String get authPhoneTitle;
+
+  /// One-line explanation under the phone page headline.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود'**
+  String get authPhoneSubtitle;
+
+  /// Label of the phone number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره موبایل'**
+  String get authPhoneLabel;
+
+  /// Error when the phone number is not a valid Iranian mobile number.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره موبایل معتبر نیست'**
+  String get authPhoneInvalid;
+
+  /// Primary button on the phone page that sends the SMS code.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت کد تأیید'**
+  String get authSendCode;
+
+  /// Headline of the code verification page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کد تأیید را وارد کنید'**
+  String get authOtpTitle;
+
+  /// Shown under the code page headline. phone is already locale-formatted.
+  ///
+  /// In fa, this message translates to:
+  /// **'کد تأیید به {phone} پیامک شد'**
+  String authOtpSubtitle(String phone);
+
+  /// Link back to the phone page to fix the number.
+  ///
+  /// In fa, this message translates to:
+  /// **'ویرایش شماره'**
+  String get authEditPhone;
+
+  /// Screen-reader label of the code input.
+  ///
+  /// In fa, this message translates to:
+  /// **'کد تأیید'**
+  String get authOtpFieldLabel;
+
+  /// Primary button on the code page.
+  ///
+  /// In fa, this message translates to:
+  /// **'تأیید و ورود'**
+  String get authVerify;
+
+  /// Countdown until a new code can be requested. time is m:ss, locale-formatted.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال دوباره کد تا {time}'**
+  String authResendIn(String time);
+
+  /// Button that requests a new SMS code.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال دوباره کد'**
+  String get authResend;
+
+  /// Snackbar after a new code was sent.
+  ///
+  /// In fa, this message translates to:
+  /// **'کد جدید پیامک شد'**
+  String get authCodeResent;
+
+  /// Error when the entered code is wrong or expired.
+  ///
+  /// In fa, this message translates to:
+  /// **'کد نادرست است یا منقضی شده'**
+  String get authInvalidCode;
+
+  /// Error when the server could not send the SMS.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال پیامک ممکن نشد، دوباره تلاش کنید'**
+  String get authSmsFailed;
+
+  /// Error when codes are requested too often.
+  ///
+  /// In fa, this message translates to:
+  /// **'کمی صبر کنید و دوباره تلاش کنید'**
+  String get authTooManyRequests;
+
+  /// Rate-limit error (HTTP 429) with the wait. time is m:ss, locale-formatted.
+  ///
+  /// In fa, this message translates to:
+  /// **'تعداد درخواست‌ها زیاد است، {time} دیگر دوباره تلاش کنید'**
+  String authTooManyRequestsRetryIn(String time);
+
+  /// Generic error, e.g. no internet connection.
+  ///
+  /// In fa, this message translates to:
+  /// **'مشکلی پیش آمد، دوباره تلاش کنید'**
+  String get authGenericError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

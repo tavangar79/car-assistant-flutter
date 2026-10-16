@@ -6,13 +6,15 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../auth/presentation/providers/auth_providers.dart';
 import '../providers/splash_providers.dart';
-import '../widgets/grid_background.dart';
+import '../../../../core/widgets/grid_background.dart';
 import '../widgets/splash_emblem.dart';
 import '../widgets/splash_loading_bar.dart';
 import '../widgets/version_badge.dart';
 
-/// Branded launch screen. Moves to the vehicles page after [splashDelayProvider].
+/// Branded launch screen. Restores the session, then after at least [splashDelayProvider] moves
+/// to the vehicles page; the router guard sends signed-out users to the phone page instead.
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
@@ -26,7 +28,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer(ref.read(splashDelayProvider), () {
+    final delay = Completer<void>();
+    _timer = Timer(ref.read(splashDelayProvider), delay.complete);
+    final session = ref.read(authStatusProvider.notifier).restore();
+    Future.wait([delay.future, session]).then((_) {
       if (mounted) context.go(AppRoutes.vehiclesPath);
     });
   }

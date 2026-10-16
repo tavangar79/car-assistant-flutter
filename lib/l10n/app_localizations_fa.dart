@@ -57,4 +57,70 @@ class AppLocalizationsFa extends AppLocalizations {
 
     return '$kmString کیلومتر';
   }
+
+  @override
+  String get back => 'بازگشت';
+
+  @override
+  String get logout => 'خروج از حساب';
+
+  @override
+  String get authPhoneTitle => 'ورود یا ثبت‌نام';
+
+  @override
+  String get authPhoneSubtitle => 'شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود';
+
+  @override
+  String get authPhoneLabel => 'شماره موبایل';
+
+  @override
+  String get authPhoneInvalid => 'شماره موبایل معتبر نیست';
+
+  @override
+  String get authSendCode => 'دریافت کد تأیید';
+
+  @override
+  String get authOtpTitle => 'کد تأیید را وارد کنید';
+
+  @override
+  String authOtpSubtitle(String phone) {
+    return 'کد تأیید به $phone پیامک شد';
+  }
+
+  @override
+  String get authEditPhone => 'ویرایش شماره';
+
+  @override
+  String get authOtpFieldLabel => 'کد تأیید';
+
+  @override
+  String get authVerify => 'تأیید و ورود';
+
+  @override
+  String authResendIn(String time) {
+    return 'ارسال دوباره کد تا $time';
+  }
+
+  @override
+  String get authResend => 'ارسال دوباره کد';
+
+  @override
+  String get authCodeResent => 'کد جدید پیامک شد';
+
+  @override
+  String get authInvalidCode => 'کد نادرست است یا منقضی شده';
+
+  @override
+  String get authSmsFailed => 'ارسال پیامک ممکن نشد، دوباره تلاش کنید';
+
+  @override
+  String get authTooManyRequests => 'کمی صبر کنید و دوباره تلاش کنید';
+
+  @override
+  String authTooManyRequestsRetryIn(String time) {
+    return 'تعداد درخواست‌ها زیاد است، $time دیگر دوباره تلاش کنید';
+  }
+
+  @override
+  String get authGenericError => 'مشکلی پیش آمد، دوباره تلاش کنید';
 }

@@ -63,5 +63,94 @@
     "placeholders": {
       "km": {"type": "int", "format": "decimalPattern", "example": "12500"}
     }
+  },
+  "back": "بازگشت",
+  "@back": {
+    "description": "Tooltip / screen-reader label of the back button."
+  },
+  "logout": "خروج از حساب",
+  "@logout": {
+    "description": "Tooltip of the sign-out button on the vehicles page."
+  },
+  "authPhoneTitle": "ورود یا ثبت‌نام",
+  "@authPhoneTitle": {
+    "description": "Headline of the phone number page."
+  },
+  "authPhoneSubtitle": "شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود",
+  "@authPhoneSubtitle": {
+    "description": "One-line explanation under the phone page headline."
+  },
+  "authPhoneLabel": "شماره موبایل",
+  "@authPhoneLabel": {
+    "description": "Label of the phone number field."
+  },
+  "authPhoneInvalid": "شماره موبایل معتبر نیست",
+  "@authPhoneInvalid": {
+    "description": "Error when the phone number is not a valid Iranian mobile number."
+  },
+  "authSendCode": "دریافت کد تأیید",
+  "@authSendCode": {
+    "description": "Primary button on the phone page that sends the SMS code."
+  },
+  "authOtpTitle": "کد تأیید را وارد کنید",
+  "@authOtpTitle": {
+    "description": "Headline of the code verification page."
+  },
+  "authOtpSubtitle": "کد تأیید به {phone} پیامک شد",
+  "@authOtpSubtitle": {
+    "description": "Shown under the code page headline. phone is already locale-formatted.",
+    "placeholders": {
+      "phone": {"type": "String", "example": "۰۹۱۲۱۲۳۴۵۶۷"}
+    }
+  },
+  "authEditPhone": "ویرایش شماره",
+  "@authEditPhone": {
+    "description": "Link back to the phone page to fix the number."
+  },
+  "authOtpFieldLabel": "کد تأیید",
+  "@authOtpFieldLabel": {
+    "description": "Screen-reader label of the code input."
+  },
+  "authVerify": "تأیید و ورود",
+  "@authVerify": {
+    "description": "Primary button on the code page."
+  },
+  "authResendIn": "ارسال دوباره کد تا {time}",
+  "@authResendIn": {
+    "description": "Countdown until a new code can be requested. time is m:ss, locale-formatted.",
+    "placeholders": {
+      "time": {"type": "String", "example": "۰:۴۵"}
+    }
+  },
+  "authResend": "ارسال دوباره کد",
+  "@authResend": {
+    "description": "Button that requests a new SMS code."
+  },
+  "authCodeResent": "کد جدید پیامک شد",
+  "@authCodeResent": {
+    "description": "Snackbar after a new code was sent."
+  },
+  "authInvalidCode": "کد نادرست است یا منقضی شده",
+  "@authInvalidCode": {
+    "description": "Error when the entered code is wrong or expired."
+  },
+  "authSmsFailed": "ارسال پیامک ممکن نشد، دوباره تلاش کنید",
+  "@authSmsFailed": {
+    "description": "Error when the server could not send the SMS."
+  },
+  "authTooManyRequests": "کمی صبر کنید و دوباره تلاش کنید",
+  "@authTooManyRequests": {
+    "description": "Error when codes are requested too often."
+  },
+  "authTooManyRequestsRetryIn": "تعداد درخواست‌ها زیاد است، {time} دیگر دوباره تلاش کنید",
+  "@authTooManyRequestsRetryIn": {
+    "description": "Rate-limit error (HTTP 429) with the wait. time is m:ss, locale-formatted.",
+    "placeholders": {
+      "time": {"type": "String", "example": "۰:۴۲"}
+    }
+  },
+  "authGenericError": "مشکلی پیش آمد، دوباره تلاش کنید",
+  "@authGenericError": {
+    "description": "Generic error, e.g. no internet connection."
   }
 }
