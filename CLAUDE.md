@@ -9,7 +9,7 @@ by the car-assistant manager repo, whose CTO sends tasks with an API contract.
 - **Use graphify first:** `graphify query "<question>"`. If `graphify-out/` is missing, run `/graphify .`.
   After meaningful changes, refresh it with `/graphify . --update`.
 - Load the `flutter-senior` skill for the full conventions and recipes.
-- The `senior-flutter-engineer` agent (`.claude/agents/`) owns client work.
+- **Mohammad** (`mohammad` agent, `.claude/agents/mohammad.md`) owns client work.
 - Tooling in this repo: the `dart` MCP server (`.mcp.json`) and the `stitch` MCP server (local scope; its API key lives in
   `~/.claude.json` and must never be committed). Use Context7 for library docs.
 
