@@ -1,0 +1,122 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1792136308.864642,
+    "ast_hash": "18740945040801341c1811905d62f03e",
+    "semantic_hash": "18740945040801341c1811905d62f03e"
+  },
+  ".mcp.json": {
+    "mtime": 1792136294.6396983,
+    "ast_hash": "657a6e42b54c9bf27e7dba64ec639aef",
+    "semantic_hash": "657a6e42b54c9bf27e7dba64ec639aef"
+  },
+  "lib/app.dart": {
+    "mtime": 1792135542.1044762,
+    "ast_hash": "63e8665b2910cd4a086af134a1d06877",
+    "semantic_hash": "63e8665b2910cd4a086af134a1d06877"
+  },
+  "lib/core/config/app_config.dart": {
+    "mtime": 1792135542.3016796,
+    "ast_hash": "2b791e595fd6c48c8a9806ca74bf4619",
+    "semantic_hash": "2b791e595fd6c48c8a9806ca74bf4619"
+  },
+  "lib/core/error/failure.dart": {
+    "mtime": 1792135542.4894829,
+    "ast_hash": "fbe0d0351d2932c9cac5d1b1a2f78b9b",
+    "semantic_hash": "fbe0d0351d2932c9cac5d1b1a2f78b9b"
+  },
+  "lib/core/network/http_client_provider.dart": {
+    "mtime": 1792135542.7163937,
+    "ast_hash": "a703a72c0af5bafa4fb7174cb750b91c",
+    "semantic_hash": "a703a72c0af5bafa4fb7174cb750b91c"
+  },
+  "lib/features/vehicles/data/datasources/vehicle_remote_data_source.dart": {
+    "mtime": 1792135621.6797802,
+    "ast_hash": "2269b8287fa0f13af25b9c9b76c27576",
+    "semantic_hash": "2269b8287fa0f13af25b9c9b76c27576"
+  },
+  "lib/features/vehicles/data/models/vehicle_dto.dart": {
+    "mtime": 1792135550.022376,
+    "ast_hash": "d860d4f5a809d5323e75e32dad59a568",
+    "semantic_hash": "d860d4f5a809d5323e75e32dad59a568"
+  },
+  "lib/features/vehicles/data/repositories/vehicle_repository_impl.dart": {
+    "mtime": 1792135543.8724072,
+    "ast_hash": "bfd3253b70d421a22d3fb408a3d623ec",
+    "semantic_hash": "bfd3253b70d421a22d3fb408a3d623ec"
+  },
+  "lib/features/vehicles/domain/entities/vehicle.dart": {
+    "mtime": 1792135542.9407947,
+    "ast_hash": "d0903c33a328e8816ad1fa0709af8938",
+    "semantic_hash": "d0903c33a328e8816ad1fa0709af8938"
+  },
+  "lib/features/vehicles/domain/repositories/vehicle_repository.dart": {
+    "mtime": 1792135543.138793,
+    "ast_hash": "9436b75ea3264b71a0a8f43382c7ac13",
+    "semantic_hash": "9436b75ea3264b71a0a8f43382c7ac13"
+  },
+  "lib/features/vehicles/domain/usecases/get_vehicles.dart": {
+    "mtime": 1792135543.3371892,
+    "ast_hash": "2575c5002f6122b16c1dc9660bfcb59d",
+    "semantic_hash": "2575c5002f6122b16c1dc9660bfcb59d"
+  },
+  "lib/features/vehicles/presentation/pages/vehicles_page.dart": {
+    "mtime": 1792135544.4219558,
+    "ast_hash": "f6a160d51359a3ded686a88ca8b9c647",
+    "semantic_hash": "f6a160d51359a3ded686a88ca8b9c647"
+  },
+  "lib/features/vehicles/presentation/providers/vehicle_providers.dart": {
+    "mtime": 1792135544.0636916,
+    "ast_hash": "e04c9fe7506d2a1608b82c7186df297e",
+    "semantic_hash": "e04c9fe7506d2a1608b82c7186df297e"
+  },
+  "lib/features/vehicles/presentation/widgets/vehicle_tile.dart": {
+    "mtime": 1792135544.2430427,
+    "ast_hash": "34f4f449642b01d83842483af5aedac9",
+    "semantic_hash": "34f4f449642b01d83842483af5aedac9"
+  },
+  "lib/main.dart": {
+    "mtime": 1792135541.89264,
+    "ast_hash": "1c3c2f977900e9813490d4fe3c5bebf9",
+    "semantic_hash": "1c3c2f977900e9813490d4fe3c5bebf9"
+  },
+  "test/features/vehicles/data/repositories/vehicle_repository_impl_test.dart": {
+    "mtime": 1792135544.8202333,
+    "ast_hash": "d9719d71adadbdea11f4d695dd6ede7e",
+    "semantic_hash": "d9719d71adadbdea11f4d695dd6ede7e"
+  },
+  "test/features/vehicles/domain/usecases/get_vehicles_test.dart": {
+    "mtime": 1792135544.6153045,
+    "ast_hash": "018110ac414fa48a563e75c9a511d78c",
+    "semantic_hash": "018110ac414fa48a563e75c9a511d78c"
+  },
+  "test/features/vehicles/presentation/pages/vehicles_page_test.dart": {
+    "mtime": 1792135545.0075152,
+    "ast_hash": "185fa591b08ee3e1a55c16d7d2ca2972",
+    "semantic_hash": "185fa591b08ee3e1a55c16d7d2ca2972"
+  },
+  ".claude/agents/senior-flutter-engineer.md": {
+    "mtime": 1792136272.905944,
+    "ast_hash": "70c096a2b5bda3ecabebc90eb43c3128",
+    "semantic_hash": "70c096a2b5bda3ecabebc90eb43c3128"
+  },
+  ".claude/skills/flutter-senior/SKILL.md": {
+    "mtime": 1792135728.1537275,
+    "ast_hash": "d3226ca526539d9121f58620cb496209",
+    "semantic_hash": "d3226ca526539d9121f58620cb496209"
+  },
+  "CLAUDE.md": {
+    "mtime": 1792136346.7900991,
+    "ast_hash": "daab5132f0cda8726eae39af8890891b",
+    "semantic_hash": "daab5132f0cda8726eae39af8890891b"
+  },
+  "analysis_options.yaml": {
+    "mtime": 1792135625.30846,
+    "ast_hash": "2146c9d63dcbd90b78195e1b46f10ab4",
+    "semantic_hash": "2146c9d63dcbd90b78195e1b46f10ab4"
+  },
+  "pubspec.yaml": {
+    "mtime": 1792135485.929595,
+    "ast_hash": "a98dda4361c4005bc5564efa07199106",
+    "semantic_hash": "a98dda4361c4005bc5564efa07199106"
+  }
+}
