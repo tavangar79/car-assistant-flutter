@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/vehicles/presentation/pages/vehicles_page.dart';
+import 'core/router/app_router.dart';
+import 'core/theme/app_theme.dart';
 
-class CarAssistantApp extends StatelessWidget {
+class CarAssistantApp extends ConsumerWidget {
   const CarAssistantApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
       title: 'Car Assistant',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.indigo, brightness: Brightness.light),
-      darkTheme: ThemeData(colorSchemeSeed: Colors.indigo, brightness: Brightness.dark),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
-      home: const VehiclesPage(),
+      locale: const Locale('fa'),
+      supportedLocales: const [Locale('fa')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      routerConfig: ref.watch(appRouterProvider),
     );
   }
 }
