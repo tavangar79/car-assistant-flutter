@@ -8,7 +8,20 @@
       "Bash(dart format:*)",
       "Bash(dart analyze:*)",
       "Bash(dart fix --dry-run:*)",
-      "Bash(graphify:*)"
+      "Bash(graphify:*)",
+      "mcp__stitch__*",
+      "Bash(flutter pub add:*)",
+      "Bash(flutter pub remove:*)",
+      "Bash(flutter gen-l10n:*)",
+      "Bash(dart fix --apply:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "defaultMode": "acceptEdits",
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
