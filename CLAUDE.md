@@ -1,5 +1,10 @@
 # car-assistant-flutter — Car Assistant app
 
+## Communication style
+- Keep answers short and simple. Answer first, with no preamble or recap.
+- Elaborate only when asked.
+- Always flag risky or destructive actions in one line.
+
 Flutter with DDD and Clean Architecture, Riverpod 3 (manual providers, no codegen), `http`, `equatable`,
 and `mocktail` for tests.
 Repo: https://github.com/tavangar79/car-assistant-flutter.git. It's a standalone project, used as a submodule
