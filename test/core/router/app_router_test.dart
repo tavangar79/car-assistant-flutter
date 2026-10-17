@@ -15,6 +15,7 @@ import 'package:car_assistant/features/vehicles/presentation/providers/vehicle_p
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -30,7 +31,7 @@ void main() {
   setUp(() {
     vehicles = MockVehicleRepository();
     auth = MockAuthRepository();
-    when(() => vehicles.getVehicles()).thenAnswer((_) async => []);
+    when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([]));
   });
 
   Widget app() => ProviderScope(
@@ -61,9 +62,9 @@ void main() {
 
   testWidgets('with a valid session: splash, then vehicles (RTL)', (tester) async {
     when(() => auth.hasSession()).thenAnswer((_) async => true);
-    when(
-      () => auth.getCurrentUser(),
-    ).thenAnswer((_) async => User(id: 'u1', phone: '09121234567', createdAt: DateTime.utc(2026)));
+    when(() => auth.getCurrentUser()).thenAnswer(
+      (_) async => Right(User(id: 'u1', phone: '09121234567', createdAt: DateTime.utc(2026))),
+    );
 
     await passSplash(tester);
 
@@ -83,8 +84,8 @@ void main() {
 
   testWidgets('when /me returns 401: clears the token and shows the phone page', (tester) async {
     when(() => auth.hasSession()).thenAnswer((_) async => true);
-    when(() => auth.getCurrentUser()).thenThrow(const UnauthorizedFailure());
-    when(() => auth.clearSession()).thenAnswer((_) async {});
+    when(() => auth.getCurrentUser()).thenAnswer((_) async => const Left(UnauthorizedFailure()));
+    when(() => auth.clearSession()).thenAnswer((_) async => const Right(unit));
 
     await passSplash(tester);
 
@@ -94,10 +95,10 @@ void main() {
 
   testWidgets('logout from vehicles returns to the phone page', (tester) async {
     when(() => auth.hasSession()).thenAnswer((_) async => true);
-    when(
-      () => auth.getCurrentUser(),
-    ).thenAnswer((_) async => User(id: 'u1', phone: '09121234567', createdAt: DateTime.utc(2026)));
-    when(() => auth.clearSession()).thenAnswer((_) async {});
+    when(() => auth.getCurrentUser()).thenAnswer(
+      (_) async => Right(User(id: 'u1', phone: '09121234567', createdAt: DateTime.utc(2026))),
+    );
+    when(() => auth.clearSession()).thenAnswer((_) async => const Right(unit));
     await passSplash(tester);
 
     await tester.tap(find.byTooltip('خروج از حساب'));
@@ -113,25 +114,28 @@ void main() {
     const phone = '09121234567';
     final user = User(id: 'u1', phone: phone, createdAt: DateTime.utc(2026));
     when(() => auth.hasSession()).thenAnswer((_) async => true);
-    when(() => auth.getCurrentUser()).thenAnswer((_) async => user);
-    when(() => auth.clearSession()).thenAnswer((_) async {});
+    when(() => auth.getCurrentUser()).thenAnswer((_) async => Right(user));
+    when(() => auth.clearSession()).thenAnswer((_) async => const Right(unit));
     when(() => auth.requestOtp(phone)).thenAnswer(
-      (_) async => const OtpRequest(
-        phone: phone,
-        expiresInSeconds: 120,
-        resendInSeconds: 60,
-        codeLength: 5,
-        isRegistered: true,
+      (_) async => const Right(
+        OtpRequest(
+          phone: phone,
+          expiresInSeconds: 120,
+          resendInSeconds: 60,
+          codeLength: 5,
+          isRegistered: true,
+        ),
       ),
     );
     when(() => auth.verifyOtp(phone: phone, code: '12345'))
-        .thenAnswer((_) async => AuthResult(user: user, isNewUser: false));
+        .thenAnswer((_) async => Right(AuthResult(user: user, isNewUser: false)));
     await passSplash(tester);
     verify(() => vehicles.getVehicles()).called(1);
 
     await tester.tap(find.byTooltip('خروج از حساب'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), phone);
+    await tester.pump(); // the button enables once the number is valid
     await tester.tap(find.byType(FilledButton));
     await tester.pumpAndSettle();
     expect(find.byType(OtpPage), findsOneWidget);

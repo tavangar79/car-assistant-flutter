@@ -11,12 +11,7 @@ class AuthStatusNotifier extends Notifier<AuthStatus> {
 
   /// Checks the stored session (called once by the splash screen).
   Future<void> restore() async {
-    bool signedIn;
-    try {
-      signedIn = await ref.read(checkSessionProvider).call();
-    } catch (_) {
-      signedIn = false;
-    }
+    final signedIn = await ref.read(checkSessionProvider).call();
     state = signedIn ? AuthStatus.signedIn : AuthStatus.signedOut;
   }
 
@@ -25,9 +20,7 @@ class AuthStatusNotifier extends Notifier<AuthStatus> {
   /// Signs out even when the token cannot be removed: the repository has then already made it
   /// unusable, and the user asked to leave.
   Future<void> logout() async {
-    try {
-      await ref.read(logoutProvider).call();
-    } catch (_) {}
+    await ref.read(logoutProvider).call();
     state = AuthStatus.signedOut;
   }
 

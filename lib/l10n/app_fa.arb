@@ -52,16 +52,29 @@
   "@vehicleTitle": {
     "description": "Vehicle name in the list, e.g. 'Kia Rio model 2021'. year is already locale-formatted.",
     "placeholders": {
-      "make": {"type": "String", "example": "Kia"},
-      "model": {"type": "String", "example": "Rio"},
-      "year": {"type": "String", "example": "۲۰۲۱"}
+      "make": {
+        "type": "String",
+        "example": "Kia"
+      },
+      "model": {
+        "type": "String",
+        "example": "Rio"
+      },
+      "year": {
+        "type": "String",
+        "example": "۲۰۲۱"
+      }
     }
   },
   "vehicleMileage": "{km} کیلومتر",
   "@vehicleMileage": {
     "description": "Vehicle mileage in kilometers.",
     "placeholders": {
-      "km": {"type": "int", "format": "decimalPattern", "example": "12500"}
+      "km": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "12500"
+      }
     }
   },
   "back": "بازگشت",
@@ -72,59 +85,202 @@
   "@logout": {
     "description": "Tooltip of the sign-out button on the vehicles page."
   },
-  "authPhoneTitle": "ورود یا ثبت‌نام",
+  "authBrandTitle": "مدیریت خودرو",
+  "@authBrandTitle": {
+    "description": "App name in the header of the phone page."
+  },
+  "authBrandSubtitle": "دفتر کل اختصاصی هزینه‌های اتومبیل",
+  "@authBrandSubtitle": {
+    "description": "Tagline under the app name in the phone page header."
+  },
+  "authLogoLabel": "نشان‌واره مدیریت خودرو",
+  "@authLogoLabel": {
+    "description": "Screen-reader label of the logo in the phone page header."
+  },
+  "authPhoneTitle": "ورود یا ایجاد حساب کاربری",
   "@authPhoneTitle": {
-    "description": "Headline of the phone number page."
+    "description": "Headline of the phone page."
   },
-  "authPhoneSubtitle": "شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود",
+  "authPhoneSubtitle": "جهت ثبت امن دفترچه خودرو و نگهداری سوابق سرویس‌ها، شماره موبایل خود را وارد کنید.",
   "@authPhoneSubtitle": {
-    "description": "One-line explanation under the phone page headline."
+    "description": "Explanation under the phone page headline."
   },
-  "authPhoneLabel": "شماره موبایل",
+  "authPhoneLabel": "شماره تلفن همراه",
   "@authPhoneLabel": {
-    "description": "Label of the phone number field."
+    "description": "Label of the phone field, also above the number on the code page."
+  },
+  "authPhoneHint": "912 345 6789",
+  "@authPhoneHint": {
+    "description": "Placeholder of the phone field: the number after +98, Latin digits as in the design."
+  },
+  "authCountryCode": "+98",
+  "@authCountryCode": {
+    "description": "Iran country calling code shown before the phone field."
+  },
+  "authSmsCodeHint": "ارسال کد تایید پیامکی",
+  "@authSmsCodeHint": {
+    "description": "Hint under the phone field."
+  },
+  "authPhoneDigitsProgress": "{count} از {total} رقم",
+  "@authPhoneDigitsProgress": {
+    "description": "How many digits of the number after +98 are typed.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "7"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "10"
+      }
+    }
+  },
+  "authPhoneDigitsComplete": "{count} رقم کامل شد",
+  "@authPhoneDigitsComplete": {
+    "description": "Shown when the mobile number is complete. count is the full number length (11).",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "11"
+      }
+    }
   },
   "authPhoneInvalid": "شماره موبایل معتبر نیست",
   "@authPhoneInvalid": {
     "description": "Error when the phone number is not a valid Iranian mobile number."
   },
-  "authSendCode": "دریافت کد تأیید",
+  "authFeaturesTitle": "مزایای ثبت و مدیریت در سامانه",
+  "@authFeaturesTitle": {
+    "description": "Heading above the feature cards on the phone page."
+  },
+  "authFeatureRemindersTitle": "یادآور هوشمند سرویس‌ها",
+  "@authFeatureRemindersTitle": {
+    "description": "Title of the first feature card."
+  },
+  "authFeatureRemindersTag": "کیلومتر و تاریخ",
+  "@authFeatureRemindersTag": {
+    "description": "Chip on the first feature card."
+  },
+  "authFeatureRemindersBody": "هشدار تعویض روغن، تسمه‌تایم، لنت و بیمه‌نامه بر اساس کارکرد واقعی خودرو یا تاریخ سررسید.",
+  "@authFeatureRemindersBody": {
+    "description": "Text of the first feature card."
+  },
+  "authFeatureInvoicesTitle": "ثبت دقیق فاکتورها و هزینه‌ها",
+  "@authFeatureInvoicesTitle": {
+    "description": "Title of the second feature card."
+  },
+  "authFeatureInvoicesTag": "بایگانی فاکتور",
+  "@authFeatureInvoicesTag": {
+    "description": "Chip on the second feature card."
+  },
+  "authFeatureInvoicesBody": "بایگانی قطعات مصرفی، دستمزد تعمیرکار، فاکتورهای بنزین، عوارض و خلافی‌ها با محاسبه تومان.",
+  "@authFeatureInvoicesBody": {
+    "description": "Text of the second feature card."
+  },
+  "authFeatureTransferTitle": "انتقال آنلاین سوابق خودرو",
+  "@authFeatureTransferTitle": {
+    "description": "Title of the third feature card."
+  },
+  "authFeatureTransferTag": "هنگام فروش",
+  "@authFeatureTransferTag": {
+    "description": "Chip on the third feature card."
+  },
+  "authFeatureTransferBody": "انتقال معتبر و یکپارچه کل شناسنامه سرویس‌ها و هزینه‌ها به مالک یا خریدار جدید در زمان معامله.",
+  "@authFeatureTransferBody": {
+    "description": "Text of the third feature card."
+  },
+  "authSendCode": "دریافت کد تایید",
   "@authSendCode": {
     "description": "Primary button on the phone page that sends the SMS code."
   },
+  "authTermsPrefix": "با ورود یا ثبت‌نام در سامانه،",
+  "@authTermsPrefix": {
+    "description": "Start of the terms sentence under the phone page button."
+  },
+  "authTermsLink": "قوانین و مقررات",
+  "@authTermsLink": {
+    "description": "Terms link inside the terms sentence."
+  },
+  "authTermsAnd": "و",
+  "@authTermsAnd": {
+    "description": "Joins the two links of the terms sentence."
+  },
+  "authPrivacyLink": "حریم خصوصی",
+  "@authPrivacyLink": {
+    "description": "Privacy link inside the terms sentence."
+  },
+  "authTermsSuffix": "را می‌پذیرید.",
+  "@authTermsSuffix": {
+    "description": "End of the terms sentence."
+  },
   "authOtpTitle": "کد تأیید را وارد کنید",
   "@authOtpTitle": {
-    "description": "Headline of the code verification page."
+    "description": "Headline of the code page."
   },
-  "authOtpSubtitle": "کد تأیید به {phone} پیامک شد",
+  "authOtpSubtitle": "کد تأیید {length} رقمی به شماره زیر پیامک شد:",
   "@authOtpSubtitle": {
-    "description": "Shown under the code page headline. phone is already locale-formatted.",
+    "description": "Shown under the code page headline, above the phone card.",
     "placeholders": {
-      "phone": {"type": "String", "example": "۰۹۱۲۱۲۳۴۵۶۷"}
+      "length": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "5"
+      }
     }
   },
   "authEditPhone": "ویرایش شماره",
   "@authEditPhone": {
-    "description": "Link back to the phone page to fix the number."
+    "description": "Button on the code page that goes back to fix the number."
   },
-  "authOtpFieldLabel": "کد تأیید",
+  "authOtpFieldLabel": "کد {length} رقمی ارسالی",
   "@authOtpFieldLabel": {
-    "description": "Screen-reader label of the code input."
-  },
-  "authVerify": "تأیید و ورود",
-  "@authVerify": {
-    "description": "Primary button on the code page."
-  },
-  "authResendIn": "ارسال دوباره کد تا {time}",
-  "@authResendIn": {
-    "description": "Countdown until a new code can be requested. time is m:ss, locale-formatted.",
+    "description": "Label above the code boxes.",
     "placeholders": {
-      "time": {"type": "String", "example": "۰:۴۵"}
+      "length": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "5"
+      }
     }
   },
-  "authResend": "ارسال دوباره کد",
+  "authOtpAutoDetect": "کد به صورت خودکار شناسایی می‌شود",
+  "@authOtpAutoDetect": {
+    "description": "Hint under the code boxes."
+  },
+  "authOtpProgress": "{count} از {length} رقم درج شد",
+  "@authOtpProgress": {
+    "description": "How many code digits are typed.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "2"
+      },
+      "length": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "5"
+      }
+    }
+  },
+  "authResendIn": "ارسال مجدد تا",
+  "@authResendIn": {
+    "description": "Text before the countdown on the code page."
+  },
+  "authResendHint": "پیامک را دریافت نکردید؟ پس از اتمام زمان می‌توانید درخواست ارسال مجدد دهید.",
+  "@authResendHint": {
+    "description": "Hint under the resend countdown."
+  },
+  "authResend": "ارسال مجدد کد پیامکی",
   "@authResend": {
     "description": "Button that requests a new SMS code."
+  },
+  "authVerify": "تأیید و ادامه",
+  "@authVerify": {
+    "description": "Primary button on the code page."
   },
   "authCodeResent": "کد جدید پیامک شد",
   "@authCodeResent": {
@@ -144,9 +300,12 @@
   },
   "authTooManyRequestsRetryIn": "تعداد درخواست‌ها زیاد است، {time} دیگر دوباره تلاش کنید",
   "@authTooManyRequestsRetryIn": {
-    "description": "Rate-limit error (HTTP 429) with the wait. time is m:ss, locale-formatted.",
+    "description": "Rate-limit error (HTTP 429) with the wait. time is mm:ss, locale-formatted.",
     "placeholders": {
-      "time": {"type": "String", "example": "۰:۴۲"}
+      "time": {
+        "type": "String",
+        "example": "۰۰:۴۲"
+      }
     }
   },
   "authGenericError": "مشکلی پیش آمد، دوباره تلاش کنید",

@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error/failure.dart';
 import '../entities/vehicle.dart';
 import '../repositories/vehicle_repository.dart';
 
@@ -6,8 +9,9 @@ class GetVehicles {
 
   final VehicleRepository _repository;
 
-  Future<List<Vehicle>> call() async {
+  /// The user's vehicles, newest model year first.
+  Future<Either<Failure, List<Vehicle>>> call() async {
     final vehicles = await _repository.getVehicles();
-    return [...vehicles]..sort((a, b) => b.year.compareTo(a.year));
+    return vehicles.map((list) => [...list]..sort((a, b) => b.year.compareTo(a.year)));
   }
 }

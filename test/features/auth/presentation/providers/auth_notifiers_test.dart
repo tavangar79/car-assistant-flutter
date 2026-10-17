@@ -9,6 +9,7 @@ import 'package:car_assistant/features/auth/presentation/providers/auth_status_n
 import 'package:car_assistant/features/auth/presentation/providers/otp_args.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
@@ -37,7 +38,7 @@ void main() {
   group('AuthStatusNotifier', () {
     test('starts unknown and restores a valid session', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
-      when(() => repository.getCurrentUser()).thenAnswer((_) async => user);
+      when(() => repository.getCurrentUser()).thenAnswer((_) async => Right(user));
 
       expect(container.read(authStatusProvider), AuthStatus.unknown);
       await container.read(authStatusProvider.notifier).restore();
@@ -54,7 +55,7 @@ void main() {
     });
 
     test('logout clears the session and signs out', () async {
-      when(() => repository.clearSession()).thenAnswer((_) async {});
+      when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
       container.read(authStatusProvider.notifier).markSignedIn();
 
       await container.read(authStatusProvider.notifier).logout();
@@ -64,7 +65,8 @@ void main() {
     });
 
     test('logout still signs out when clearing the session fails', () async {
-      when(() => repository.clearSession()).thenThrow(const Failure('keystore broken'));
+      when(() => repository.clearSession())
+          .thenAnswer((_) async => const Left(Failure('keystore broken')));
       container.read(authStatusProvider.notifier).markSignedIn();
 
       await container.read(authStatusProvider.notifier).logout();
@@ -73,7 +75,7 @@ void main() {
     });
 
     test('handleUnauthorized signs a signed-in user out and clears the token', () async {
-      when(() => repository.clearSession()).thenAnswer((_) async {});
+      when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
       container.read(authStatusProvider.notifier).markSignedIn();
 
       await container.read(authStatusProvider.notifier).handleUnauthorized();
@@ -92,7 +94,7 @@ void main() {
 
   group('PhoneController', () {
     test('returns code page args on success', () async {
-      when(() => repository.requestOtp(phone)).thenAnswer((_) async => otpRequest);
+      when(() => repository.requestOtp(phone)).thenAnswer((_) async => const Right(otpRequest));
       final sub = container.listen(phoneControllerProvider, (_, _) {});
 
       final args = await container.read(phoneControllerProvider.notifier).submit('۰۹۱۲۱۲۳۴۵۶۷');
@@ -112,7 +114,8 @@ void main() {
     });
 
     test('on 429 continues to the code page with retryAfterSeconds', () async {
-      when(() => repository.requestOtp(phone)).thenThrow(const TooManyRequestsFailure(42));
+      when(() => repository.requestOtp(phone))
+          .thenAnswer((_) async => const Left(TooManyRequestsFailure(42)));
       container.listen(phoneControllerProvider, (_, _) {});
 
       final args = await container.read(phoneControllerProvider.notifier).submit(phone);
@@ -125,7 +128,7 @@ void main() {
 
     test('on 429 uses the codeLength the server sent', () async {
       when(() => repository.requestOtp(phone))
-          .thenThrow(const TooManyRequestsFailure(42, codeLength: 6));
+          .thenAnswer((_) async => const Left(TooManyRequestsFailure(42, codeLength: 6)));
       container.listen(phoneControllerProvider, (_, _) {});
 
       final args = await container.read(phoneControllerProvider.notifier).submit(phone);
@@ -134,7 +137,8 @@ void main() {
     });
 
     test('keeps SmsSendFailure in state', () async {
-      when(() => repository.requestOtp(phone)).thenThrow(const SmsSendFailure());
+      when(() => repository.requestOtp(phone))
+          .thenAnswer((_) async => const Left(SmsSendFailure()));
       final sub = container.listen(phoneControllerProvider, (_, _) {});
 
       expect(await container.read(phoneControllerProvider.notifier).submit(phone), isNull);
@@ -145,7 +149,7 @@ void main() {
   group('OtpController', () {
     test('verify signs in', () async {
       when(() => repository.verifyOtp(phone: phone, code: '12345'))
-          .thenAnswer((_) async => AuthResult(user: user, isNewUser: false));
+          .thenAnswer((_) async => Right(AuthResult(user: user, isNewUser: false)));
       container.listen(otpControllerProvider, (_, _) {});
 
       final ok = await container
@@ -158,7 +162,7 @@ void main() {
 
     test('verify keeps InvalidCodeFailure in state and stays signed out', () async {
       when(() => repository.verifyOtp(phone: phone, code: '00000'))
-          .thenThrow(const InvalidCodeFailure());
+          .thenAnswer((_) async => const Left(InvalidCodeFailure()));
       final sub = container.listen(otpControllerProvider, (_, _) {});
 
       final ok = await container
@@ -171,14 +175,15 @@ void main() {
     });
 
     test('resend returns the new cooldown', () async {
-      when(() => repository.requestOtp(phone)).thenAnswer((_) async => otpRequest);
+      when(() => repository.requestOtp(phone)).thenAnswer((_) async => const Right(otpRequest));
       container.listen(otpControllerProvider, (_, _) {});
 
       expect(await container.read(otpControllerProvider.notifier).resend(phone), 60);
     });
 
     test('resend on 429 returns retryAfterSeconds and keeps the failure in state', () async {
-      when(() => repository.requestOtp(phone)).thenThrow(const TooManyRequestsFailure(42));
+      when(() => repository.requestOtp(phone))
+          .thenAnswer((_) async => const Left(TooManyRequestsFailure(42)));
       final sub = container.listen(otpControllerProvider, (_, _) {});
 
       expect(await container.read(otpControllerProvider.notifier).resend(phone), 42);
@@ -187,7 +192,7 @@ void main() {
 
     test('verify on 429 keeps TooManyRequestsFailure in state', () async {
       when(() => repository.verifyOtp(phone: phone, code: '12345'))
-          .thenThrow(const TooManyRequestsFailure(30));
+          .thenAnswer((_) async => const Left(TooManyRequestsFailure(30)));
       final sub = container.listen(otpControllerProvider, (_, _) {});
 
       final ok = await container
@@ -199,7 +204,8 @@ void main() {
     });
 
     test('resend on 502 keeps SmsSendFailure in state', () async {
-      when(() => repository.requestOtp(phone)).thenThrow(const SmsSendFailure());
+      when(() => repository.requestOtp(phone))
+          .thenAnswer((_) async => const Left(SmsSendFailure()));
       final sub = container.listen(otpControllerProvider, (_, _) {});
 
       expect(await container.read(otpControllerProvider.notifier).resend(phone), isNull);

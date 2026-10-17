@@ -36,8 +36,3 @@ class SmsSendFailure extends Failure {
 class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure([super.message = 'Unauthorized']);
 }
-
-/// The server could not be reached.
-class NetworkFailure extends Failure {
-  const NetworkFailure([super.message = 'Could not reach the server']);
-}

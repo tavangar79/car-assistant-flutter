@@ -7,6 +7,7 @@ import 'package:car_assistant/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockVehicleRepository extends Mock implements VehicleRepository {}
@@ -31,7 +32,7 @@ void main() {
   const kia = Vehicle(id: '1', make: 'Kia', model: 'Rio', year: 2021, mileageKm: 12500);
 
   testWidgets('shows the list of vehicles', (tester) async {
-    when(() => repository.getVehicles()).thenAnswer((_) async => [kia]);
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([kia]));
 
     await tester.pumpWidget(buildPage(repository));
     await tester.pumpAndSettle();
@@ -42,7 +43,7 @@ void main() {
   });
 
   testWidgets('shows vehicles with Persian digits in fa', (tester) async {
-    when(() => repository.getVehicles()).thenAnswer((_) async => [kia]);
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([kia]));
 
     await tester.pumpWidget(buildPage(repository, locale: const Locale('fa')));
     await tester.pumpAndSettle();
@@ -53,7 +54,7 @@ void main() {
   });
 
   testWidgets('shows an empty message when there are no vehicles', (tester) async {
-    when(() => repository.getVehicles()).thenAnswer((_) async => []);
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([]));
 
     await tester.pumpWidget(buildPage(repository));
     await tester.pumpAndSettle();
@@ -62,13 +63,14 @@ void main() {
   });
 
   testWidgets('shows a localized error and retries', (tester) async {
-    when(() => repository.getVehicles()).thenThrow(const Failure('Could not reach the server'));
+    when(() => repository.getVehicles())
+        .thenAnswer((_) async => const Left(Failure('Could not reach the server')));
 
     await tester.pumpWidget(buildPage(repository));
     await tester.pumpAndSettle();
     expect(find.text("Couldn't load your vehicles"), findsOneWidget);
 
-    when(() => repository.getVehicles()).thenAnswer((_) async => []);
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([]));
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
 

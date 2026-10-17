@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error/failure.dart';
 import '../../../../core/utils/latin_digits.dart';
 import '../entities/auth_failures.dart';
 import '../entities/auth_result.dart';
@@ -12,9 +15,9 @@ class VerifyOtp {
 
   final AuthRepository _repository;
 
-  Future<AuthResult> call({required String phone, required String code}) async {
+  Future<Either<Failure, AuthResult>> call({required String phone, required String code}) async {
     final digits = toLatinDigits(code.trim());
-    if (!_numeric.hasMatch(digits)) throw const InvalidCodeFailure('Code must be numeric');
+    if (!_numeric.hasMatch(digits)) return const Left(InvalidCodeFailure('Code must be numeric'));
     return _repository.verifyOtp(phone: phone, code: digits);
   }
 }

@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error/failure.dart';
 import '../entities/auth_failures.dart';
 import '../entities/otp_request.dart';
 import '../entities/phone_number.dart';
@@ -9,9 +12,9 @@ class RequestOtp {
 
   final AuthRepository _repository;
 
-  Future<OtpRequest> call(String rawPhone) async {
+  Future<Either<Failure, OtpRequest>> call(String rawPhone) async {
     final phone = PhoneNumber.normalize(rawPhone);
-    if (phone == null) throw const InvalidPhoneFailure();
+    if (phone == null) return const Left(InvalidPhoneFailure());
     return _repository.requestOtp(phone);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/config/app_config.dart';
-import '../../../../core/network/http_client_provider.dart';
+import '../../../../core/network/dio_provider.dart';
 import '../../../../core/storage/token_storage_provider.dart';
 import '../../data/datasources/auth_remote_data_source.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -18,11 +17,10 @@ import 'phone_controller.dart';
 // (or [tokenStorageProvider]) in tests to avoid real HTTP and secure storage.
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  final remote = AuthRemoteDataSource(
-    client: ref.watch(authenticatedHttpClientProvider),
-    baseUrl: AppConfig.apiBaseUrl,
+  return AuthRepositoryImpl(
+    remote: AuthRemoteDataSource(ref.watch(dioProvider)),
+    tokenStorage: ref.watch(tokenStorageProvider),
   );
-  return AuthRepositoryImpl(remote: remote, tokenStorage: ref.watch(tokenStorageProvider));
 });
 
 final requestOtpProvider = Provider<RequestOtp>(
@@ -42,10 +40,12 @@ final logoutProvider = Provider<Logout>((ref) => Logout(ref.watch(authRepository
 /// App-wide sign-in state, read by the router guard.
 final authStatusProvider = NotifierProvider<AuthStatusNotifier, AuthStatus>(AuthStatusNotifier.new);
 
+/// State of the phone page: loading while a code is requested, and the last error.
 final phoneControllerProvider = AsyncNotifierProvider.autoDispose<PhoneController, void>(
   PhoneController.new,
 );
 
+/// State of the code page: loading while verifying or resending, and the last error.
 final otpControllerProvider = AsyncNotifierProvider.autoDispose<OtpController, void>(
   OtpController.new,
 );

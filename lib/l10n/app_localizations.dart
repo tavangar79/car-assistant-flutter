@@ -189,23 +189,71 @@ abstract class AppLocalizations {
   /// **'خروج از حساب'**
   String get logout;
 
-  /// Headline of the phone number page.
+  /// App name in the header of the phone page.
   ///
   /// In fa, this message translates to:
-  /// **'ورود یا ثبت‌نام'**
+  /// **'مدیریت خودرو'**
+  String get authBrandTitle;
+
+  /// Tagline under the app name in the phone page header.
+  ///
+  /// In fa, this message translates to:
+  /// **'دفتر کل اختصاصی هزینه‌های اتومبیل'**
+  String get authBrandSubtitle;
+
+  /// Screen-reader label of the logo in the phone page header.
+  ///
+  /// In fa, this message translates to:
+  /// **'نشان‌واره مدیریت خودرو'**
+  String get authLogoLabel;
+
+  /// Headline of the phone page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ورود یا ایجاد حساب کاربری'**
   String get authPhoneTitle;
 
-  /// One-line explanation under the phone page headline.
+  /// Explanation under the phone page headline.
   ///
   /// In fa, this message translates to:
-  /// **'شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود'**
+  /// **'جهت ثبت امن دفترچه خودرو و نگهداری سوابق سرویس‌ها، شماره موبایل خود را وارد کنید.'**
   String get authPhoneSubtitle;
 
-  /// Label of the phone number field.
+  /// Label of the phone field, also above the number on the code page.
   ///
   /// In fa, this message translates to:
-  /// **'شماره موبایل'**
+  /// **'شماره تلفن همراه'**
   String get authPhoneLabel;
+
+  /// Placeholder of the phone field: the number after +98, Latin digits as in the design.
+  ///
+  /// In fa, this message translates to:
+  /// **'912 345 6789'**
+  String get authPhoneHint;
+
+  /// Iran country calling code shown before the phone field.
+  ///
+  /// In fa, this message translates to:
+  /// **'+98'**
+  String get authCountryCode;
+
+  /// Hint under the phone field.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال کد تایید پیامکی'**
+  String get authSmsCodeHint;
+
+  /// How many digits of the number after +98 are typed.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} از {total} رقم'**
+  String authPhoneDigitsProgress(int count, int total);
+
+  /// Shown when the mobile number is complete. count is the full number length (11).
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} رقم کامل شد'**
+  String authPhoneDigitsComplete(int count);
 
   /// Error when the phone number is not a valid Iranian mobile number.
   ///
@@ -213,53 +261,161 @@ abstract class AppLocalizations {
   /// **'شماره موبایل معتبر نیست'**
   String get authPhoneInvalid;
 
+  /// Heading above the feature cards on the phone page.
+  ///
+  /// In fa, this message translates to:
+  /// **'مزایای ثبت و مدیریت در سامانه'**
+  String get authFeaturesTitle;
+
+  /// Title of the first feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآور هوشمند سرویس‌ها'**
+  String get authFeatureRemindersTitle;
+
+  /// Chip on the first feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیلومتر و تاریخ'**
+  String get authFeatureRemindersTag;
+
+  /// Text of the first feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'هشدار تعویض روغن، تسمه‌تایم، لنت و بیمه‌نامه بر اساس کارکرد واقعی خودرو یا تاریخ سررسید.'**
+  String get authFeatureRemindersBody;
+
+  /// Title of the second feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت دقیق فاکتورها و هزینه‌ها'**
+  String get authFeatureInvoicesTitle;
+
+  /// Chip on the second feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'بایگانی فاکتور'**
+  String get authFeatureInvoicesTag;
+
+  /// Text of the second feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'بایگانی قطعات مصرفی، دستمزد تعمیرکار، فاکتورهای بنزین، عوارض و خلافی‌ها با محاسبه تومان.'**
+  String get authFeatureInvoicesBody;
+
+  /// Title of the third feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال آنلاین سوابق خودرو'**
+  String get authFeatureTransferTitle;
+
+  /// Chip on the third feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنگام فروش'**
+  String get authFeatureTransferTag;
+
+  /// Text of the third feature card.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال معتبر و یکپارچه کل شناسنامه سرویس‌ها و هزینه‌ها به مالک یا خریدار جدید در زمان معامله.'**
+  String get authFeatureTransferBody;
+
   /// Primary button on the phone page that sends the SMS code.
   ///
   /// In fa, this message translates to:
-  /// **'دریافت کد تأیید'**
+  /// **'دریافت کد تایید'**
   String get authSendCode;
 
-  /// Headline of the code verification page.
+  /// Start of the terms sentence under the phone page button.
+  ///
+  /// In fa, this message translates to:
+  /// **'با ورود یا ثبت‌نام در سامانه،'**
+  String get authTermsPrefix;
+
+  /// Terms link inside the terms sentence.
+  ///
+  /// In fa, this message translates to:
+  /// **'قوانین و مقررات'**
+  String get authTermsLink;
+
+  /// Joins the two links of the terms sentence.
+  ///
+  /// In fa, this message translates to:
+  /// **'و'**
+  String get authTermsAnd;
+
+  /// Privacy link inside the terms sentence.
+  ///
+  /// In fa, this message translates to:
+  /// **'حریم خصوصی'**
+  String get authPrivacyLink;
+
+  /// End of the terms sentence.
+  ///
+  /// In fa, this message translates to:
+  /// **'را می‌پذیرید.'**
+  String get authTermsSuffix;
+
+  /// Headline of the code page.
   ///
   /// In fa, this message translates to:
   /// **'کد تأیید را وارد کنید'**
   String get authOtpTitle;
 
-  /// Shown under the code page headline. phone is already locale-formatted.
+  /// Shown under the code page headline, above the phone card.
   ///
   /// In fa, this message translates to:
-  /// **'کد تأیید به {phone} پیامک شد'**
-  String authOtpSubtitle(String phone);
+  /// **'کد تأیید {length} رقمی به شماره زیر پیامک شد:'**
+  String authOtpSubtitle(int length);
 
-  /// Link back to the phone page to fix the number.
+  /// Button on the code page that goes back to fix the number.
   ///
   /// In fa, this message translates to:
   /// **'ویرایش شماره'**
   String get authEditPhone;
 
-  /// Screen-reader label of the code input.
+  /// Label above the code boxes.
   ///
   /// In fa, this message translates to:
-  /// **'کد تأیید'**
-  String get authOtpFieldLabel;
+  /// **'کد {length} رقمی ارسالی'**
+  String authOtpFieldLabel(int length);
 
-  /// Primary button on the code page.
+  /// Hint under the code boxes.
   ///
   /// In fa, this message translates to:
-  /// **'تأیید و ورود'**
-  String get authVerify;
+  /// **'کد به صورت خودکار شناسایی می‌شود'**
+  String get authOtpAutoDetect;
 
-  /// Countdown until a new code can be requested. time is m:ss, locale-formatted.
+  /// How many code digits are typed.
   ///
   /// In fa, this message translates to:
-  /// **'ارسال دوباره کد تا {time}'**
-  String authResendIn(String time);
+  /// **'{count} از {length} رقم درج شد'**
+  String authOtpProgress(int count, int length);
+
+  /// Text before the countdown on the code page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال مجدد تا'**
+  String get authResendIn;
+
+  /// Hint under the resend countdown.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیامک را دریافت نکردید؟ پس از اتمام زمان می‌توانید درخواست ارسال مجدد دهید.'**
+  String get authResendHint;
 
   /// Button that requests a new SMS code.
   ///
   /// In fa, this message translates to:
-  /// **'ارسال دوباره کد'**
+  /// **'ارسال مجدد کد پیامکی'**
   String get authResend;
+
+  /// Primary button on the code page.
+  ///
+  /// In fa, this message translates to:
+  /// **'تأیید و ادامه'**
+  String get authVerify;
 
   /// Snackbar after a new code was sent.
   ///
@@ -285,7 +441,7 @@ abstract class AppLocalizations {
   /// **'کمی صبر کنید و دوباره تلاش کنید'**
   String get authTooManyRequests;
 
-  /// Rate-limit error (HTTP 429) with the wait. time is m:ss, locale-formatted.
+  /// Rate-limit error (HTTP 429) with the wait. time is mm:ss, locale-formatted.
   ///
   /// In fa, this message translates to:
   /// **'تعداد درخواست‌ها زیاد است، {time} دیگر دوباره تلاش کنید'**

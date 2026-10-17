@@ -1,21 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_routes.dart';
-import '../../../../core/utils/localize_digits.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../domain/entities/auth_failures.dart';
 import '../providers/auth_providers.dart';
 import '../providers/otp_args.dart';
-import '../widgets/auth_error_message.dart';
-import '../widgets/auth_header.dart';
-import '../widgets/auth_layout.dart';
-import '../widgets/otp_code_field.dart';
-import '../widgets/primary_action_button.dart';
-import '../widgets/resend_timer.dart';
+import '../widgets/auth_error_text.dart';
+import '../widgets/auth_failure_message.dart';
+import '../widgets/auth_scaffold.dart';
+import '../widgets/back_tile_button.dart';
+import '../widgets/bottom_action_dock.dart';
+import '../widgets/masked_phone_card.dart';
+import '../widgets/otp_code_input.dart';
+import '../widgets/otp_intro.dart';
+import '../widgets/primary_cta_button.dart';
+import '../widgets/resend_card.dart';
 
-/// Step 2 of sign-in / sign-up: type the SMS code, with a resend countdown.
+/// Enter the SMS code (Stitch screen `8e8f9a27ae4f4dcfbfe34140a8f9942a`).
+/// On success the router guard moves on to the vehicles page.
 class OtpPage extends ConsumerStatefulWidget {
   const OtpPage({super.key, required this.args});
 
@@ -27,102 +32,99 @@ class OtpPage extends ConsumerStatefulWidget {
 
 class _OtpPageState extends ConsumerState<OtpPage> {
   final _code = TextEditingController();
-  late int _resendSeconds = widget.args.resendInSeconds;
+  Timer? _timer;
+  late int _secondsLeft;
+  bool _resending = false;
 
-  /// Bumped to restart the countdown.
-  int _countdownRun = 0;
+  @override
+  void initState() {
+    super.initState();
+    _code.addListener(() => setState(() {}));
+    _startCountdown(widget.args.resendInSeconds);
+  }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _code.dispose();
     super.dispose();
   }
 
+  void _startCountdown(int seconds) {
+    _timer?.cancel();
+    setState(() => _secondsLeft = seconds < 0 ? 0 : seconds);
+    if (_secondsLeft == 0) return;
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() => _secondsLeft--);
+      if (_secondsLeft <= 0) timer.cancel();
+    });
+  }
+
+  bool get _isComplete => _code.text.length == widget.args.codeLength;
+
   Future<void> _verify() async {
-    if (_code.text.isEmpty || ref.read(otpControllerProvider).isLoading) return;
-    final notifier = ref.read(otpControllerProvider.notifier);
-    // On success the router guard leaves the sign-in flow by itself.
-    final signedIn = await notifier.verify(phone: widget.args.phone, code: _code.text);
-    if (!signedIn && mounted) _code.clear();
+    if (ref.read(otpControllerProvider).isLoading) return;
+    final ok = await ref
+        .read(otpControllerProvider.notifier)
+        .verify(phone: widget.args.phone, code: _code.text);
+    if (!ok && mounted) _code.clear();
   }
 
   Future<void> _resend() async {
-    final l10n = AppLocalizations.of(context);
+    setState(() => _resending = true);
     final seconds = await ref.read(otpControllerProvider.notifier).resend(widget.args.phone);
-    if (seconds == null || !mounted) return;
-    setState(() {
-      _resendSeconds = seconds;
-      _countdownRun++;
-    });
-    // Rate limited: no new code was sent; the error text shows the wait.
-    if (ref.read(otpControllerProvider).error is TooManyRequestsFailure) return;
-    _code.clear();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.authCodeResent)));
+    if (!mounted) return;
+    setState(() => _resending = false);
+    if (seconds != null) _startCountdown(seconds);
+    if (!ref.read(otpControllerProvider).hasError) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).authCodeResent)));
+    }
   }
 
-  void _editPhone() => context.go(AppRoutes.phonePath);
+  void _back() {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.goNamed(AppRoutes.phoneName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(otpControllerProvider);
-    final busy = state.isLoading;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          iconSize: 28,
-          tooltip: l10n.back,
-          onPressed: _editPhone,
-          icon: const BackButtonIcon(),
-        ),
-      ),
-      body: AuthLayout(
-        content: [
-          AuthHeader(
-            title: l10n.authOtpTitle,
-            subtitle: l10n.authOtpSubtitle(localizeDigits(widget.args.phone, l10n.localeName)),
-          ),
-          Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: TextButton(
-              style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
-              onPressed: _editPhone,
-              child: Text(l10n.authEditPhone),
-            ),
-          ),
-          const SizedBox(height: 24),
-          Center(
-            child: OtpCodeField(
-              controller: _code,
+    final error = state.hasError ? authFailureMessage(state.error!, l10n) : null;
+    final verifying = state.isLoading && !_resending;
+    return AuthScaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            BackTileButton(onPressed: _back),
+            const SizedBox(height: 16),
+            OtpIntro(codeLength: widget.args.codeLength),
+            const SizedBox(height: 14),
+            MaskedPhoneCard(phone: widget.args.phone, onEdit: _back),
+            const SizedBox(height: 28),
+            OtpCodeInput(
               length: widget.args.codeLength,
-              hasError: state.hasError,
+              controller: _code,
+              hasError: error != null && _code.text.isEmpty,
               onCompleted: (_) => _verify(),
             ),
-          ),
-          if (state.hasError) ...[
-            const SizedBox(height: 12),
-            Text(
-              authErrorMessage(l10n, state.error),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge!
-                  .copyWith(color: Theme.of(context).colorScheme.error),
-            ),
+            if (error != null) ...[const SizedBox(height: 10), AuthErrorText(error)],
+            const SizedBox(height: 16),
+            ResendCard(secondsLeft: _secondsLeft, loading: _resending, onResend: _resend),
           ],
-          const SizedBox(height: 16),
-          ResendTimer(
-            key: ValueKey(_countdownRun),
-            seconds: _resendSeconds,
-            onResend: busy ? null : _resend,
-          ),
-        ],
-        action: ListenableBuilder(
-          listenable: _code,
-          builder: (context, _) => PrimaryActionButton(
-            label: l10n.authVerify,
-            loading: busy,
-            onPressed: _code.text.isEmpty ? null : _verify,
-          ),
+        ),
+      ),
+      dock: BottomActionDock(
+        child: PrimaryCtaButton(
+          label: l10n.authVerify,
+          loading: verifying,
+          onPressed: _isComplete ? _verify : null,
         ),
       ),
     );

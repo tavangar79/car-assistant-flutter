@@ -1,3 +1,3 @@
 # car_assistant
 
-A new Flutter project.
+Car Assistant Flutter client. See `CLAUDE.md` for architecture, conventions and commands.

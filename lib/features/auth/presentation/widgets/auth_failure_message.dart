@@ -2,8 +2,8 @@ import '../../../../core/utils/format_countdown.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/auth_failures.dart';
 
-/// Localized, user-facing text for an auth error. Network and unknown errors get a generic text.
-String authErrorMessage(AppLocalizations l10n, Object? error) => switch (error) {
+/// The localized text for an error of the sign-in flow.
+String authFailureMessage(Object error, AppLocalizations l10n) => switch (error) {
   InvalidPhoneFailure() => l10n.authPhoneInvalid,
   InvalidCodeFailure() => l10n.authInvalidCode,
   SmsSendFailure() => l10n.authSmsFailed,

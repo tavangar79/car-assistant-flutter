@@ -1,4 +1,5 @@
 import 'package:car_assistant/core/error/failure.dart';
+import 'package:car_assistant/core/error/network_failure.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_failures.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_result.dart';
 import 'package:car_assistant/features/auth/domain/entities/otp_request.dart';
@@ -9,6 +10,7 @@ import 'package:car_assistant/features/auth/domain/usecases/logout.dart';
 import 'package:car_assistant/features/auth/domain/usecases/request_otp.dart';
 import 'package:car_assistant/features/auth/domain/usecases/verify_otp.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
@@ -30,16 +32,19 @@ void main() {
 
   group('RequestOtp', () {
     test('sends the normalized phone', () async {
-      when(() => repository.requestOtp(phone)).thenAnswer((_) async => otpRequest);
+      when(() => repository.requestOtp(phone)).thenAnswer((_) async => const Right(otpRequest));
 
       final result = await RequestOtp(repository)('+۹۸۹۱۲۱۲۳۴۵۶۷');
 
-      expect(result, otpRequest);
+      expect(result, const Right<Failure, OtpRequest>(otpRequest));
       verify(() => repository.requestOtp(phone)).called(1);
     });
 
-    test('throws InvalidPhoneFailure without calling the API', () async {
-      await expectLater(RequestOtp(repository)('123'), throwsA(isA<InvalidPhoneFailure>()));
+    test('returns InvalidPhoneFailure without calling the API', () async {
+      expect(
+        await RequestOtp(repository)('123'),
+        const Left<Failure, OtpRequest>(InvalidPhoneFailure()),
+      );
       verifyNever(() => repository.requestOtp(any()));
     });
   });
@@ -48,27 +53,29 @@ void main() {
     test('sends the typed code with Latin digits, whatever its length', () async {
       final result = AuthResult(user: user, isNewUser: true);
       when(() => repository.verifyOtp(phone: phone, code: '123456'))
-          .thenAnswer((_) async => result);
+          .thenAnswer((_) async => Right(result));
 
-      expect(await VerifyOtp(repository)(phone: phone, code: '۱۲۳۴۵۶'), result);
+      expect(
+        await VerifyOtp(repository)(phone: phone, code: '۱۲۳۴۵۶'),
+        Right<Failure, AuthResult>(result),
+      );
     });
 
-    test('rejects an empty or non-numeric code without calling the API', () async {
-      await expectLater(
-        VerifyOtp(repository)(phone: phone, code: ''),
-        throwsA(isA<InvalidCodeFailure>()),
-      );
-      await expectLater(
-        VerifyOtp(repository)(phone: phone, code: '12a45'),
-        throwsA(isA<InvalidCodeFailure>()),
-      );
-      verifyNever(
-        () => repository.verifyOtp(
-          phone: any(named: 'phone'),
-          code: any(named: 'code'),
-        ),
-      );
-    });
+    test(
+      'returns InvalidCodeFailure for an empty or non-numeric code without calling the API',
+      () async {
+        for (final code in ['', '12a45']) {
+          final result = await VerifyOtp(repository)(phone: phone, code: code);
+          expect(result.getLeft().toNullable(), isA<InvalidCodeFailure>());
+        }
+        verifyNever(
+          () => repository.verifyOtp(
+            phone: any(named: 'phone'),
+            code: any(named: 'code'),
+          ),
+        );
+      },
+    );
   });
 
   group('CheckSession', () {
@@ -81,15 +88,16 @@ void main() {
 
     test('is signed in when /me succeeds', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
-      when(() => repository.getCurrentUser()).thenAnswer((_) async => user);
+      when(() => repository.getCurrentUser()).thenAnswer((_) async => Right(user));
 
       expect(await CheckSession(repository)(), isTrue);
     });
 
     test('clears the token and signs out on 401', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
-      when(() => repository.getCurrentUser()).thenThrow(const UnauthorizedFailure());
-      when(() => repository.clearSession()).thenAnswer((_) async {});
+      when(() => repository.getCurrentUser())
+          .thenAnswer((_) async => const Left(UnauthorizedFailure()));
+      when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
 
       expect(await CheckSession(repository)(), isFalse);
       verify(() => repository.clearSession()).called(1);
@@ -97,7 +105,7 @@ void main() {
 
     test('keeps the session when offline', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
-      when(() => repository.getCurrentUser()).thenThrow(const NetworkFailure());
+      when(() => repository.getCurrentUser()).thenAnswer((_) async => const Left(NetworkFailure()));
 
       expect(await CheckSession(repository)(), isTrue);
       verifyNever(() => repository.clearSession());
@@ -105,14 +113,15 @@ void main() {
 
     test('keeps the session on other server errors', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
-      when(() => repository.getCurrentUser()).thenThrow(const Failure('HTTP 500'));
+      when(() => repository.getCurrentUser())
+          .thenAnswer((_) async => const Left(Failure('HTTP 500')));
 
       expect(await CheckSession(repository)(), isTrue);
     });
   });
 
   test('Logout clears the session', () async {
-    when(() => repository.clearSession()).thenAnswer((_) async {});
+    when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
 
     await Logout(repository)();
 

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/config/app_config.dart';
-import '../../../../core/network/http_client_provider.dart';
+import '../../../../core/network/dio_provider.dart';
 import '../../data/datasources/vehicle_remote_data_source.dart';
 import '../../data/repositories/vehicle_repository_impl.dart';
 import '../../domain/entities/vehicle.dart';
@@ -12,11 +11,7 @@ import '../../domain/usecases/get_vehicles.dart';
 // [vehicleRepositoryProvider] in tests to avoid real HTTP calls.
 
 final vehicleRepositoryProvider = Provider<VehicleRepository>((ref) {
-  final remote = VehicleRemoteDataSource(
-    client: ref.watch(authenticatedHttpClientProvider),
-    baseUrl: AppConfig.apiBaseUrl,
-  );
-  return VehicleRepositoryImpl(remote);
+  return VehicleRepositoryImpl(VehicleRemoteDataSource(ref.watch(dioProvider)));
 });
 
 final getVehiclesProvider = Provider<GetVehicles>((ref) {
@@ -24,7 +19,8 @@ final getVehiclesProvider = Provider<GetVehicles>((ref) {
 });
 
 /// User-scoped: auto-disposed once the vehicles page is gone (e.g. after logout), so the next user
-/// never sees the previous user's list.
-final vehiclesProvider = FutureProvider.autoDispose<List<Vehicle>>((ref) {
-  return ref.watch(getVehiclesProvider).call();
+/// never sees the previous user's list. A failure becomes the provider's error state.
+final vehiclesProvider = FutureProvider.autoDispose<List<Vehicle>>((ref) async {
+  final vehicles = await ref.watch(getVehiclesProvider).call();
+  return vehicles.getOrElse((failure) => throw failure);
 });

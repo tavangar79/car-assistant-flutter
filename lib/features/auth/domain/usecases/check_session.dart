@@ -1,8 +1,9 @@
-import '../../../../core/error/failure.dart';
+import 'package:fpdart/fpdart.dart';
+
 import '../entities/auth_failures.dart';
 import '../repositories/auth_repository.dart';
 
-/// Decides at startup whether the user is signed in.
+/// Decides at startup whether the user is signed in. Never fails.
 ///
 /// No token, or a token the server rejects (401), means signed out; a rejected token is cleared.
 /// Other failures (e.g. offline) keep the session so the app stays usable.
@@ -13,14 +14,11 @@ class CheckSession {
 
   Future<bool> call() async {
     if (!await _repository.hasSession()) return false;
-    try {
-      await _repository.getCurrentUser();
-      return true;
-    } on UnauthorizedFailure {
+    final user = await _repository.getCurrentUser();
+    if (user case Left(value: UnauthorizedFailure())) {
       await _repository.clearSession();
       return false;
-    } on Failure {
-      return true;
     }
+    return true;
   }
 }

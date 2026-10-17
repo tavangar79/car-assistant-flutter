@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error/failure.dart';
 import '../repositories/auth_repository.dart';
 
 /// Signs the user out by forgetting the stored token.
@@ -6,5 +9,5 @@ class Logout {
 
   final AuthRepository _repository;
 
-  Future<void> call() => _repository.clearSession();
+  Future<Either<Failure, Unit>> call() => _repository.clearSession();
 }

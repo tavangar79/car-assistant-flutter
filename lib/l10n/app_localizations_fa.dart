@@ -65,44 +65,152 @@ class AppLocalizationsFa extends AppLocalizations {
   String get logout => 'خروج از حساب';
 
   @override
-  String get authPhoneTitle => 'ورود یا ثبت‌نام';
+  String get authBrandTitle => 'مدیریت خودرو';
 
   @override
-  String get authPhoneSubtitle => 'شماره موبایل خود را وارد کنید تا کد تأیید برایتان پیامک شود';
+  String get authBrandSubtitle => 'دفتر کل اختصاصی هزینه‌های اتومبیل';
 
   @override
-  String get authPhoneLabel => 'شماره موبایل';
+  String get authLogoLabel => 'نشان‌واره مدیریت خودرو';
+
+  @override
+  String get authPhoneTitle => 'ورود یا ایجاد حساب کاربری';
+
+  @override
+  String get authPhoneSubtitle =>
+      'جهت ثبت امن دفترچه خودرو و نگهداری سوابق سرویس‌ها، شماره موبایل خود را وارد کنید.';
+
+  @override
+  String get authPhoneLabel => 'شماره تلفن همراه';
+
+  @override
+  String get authPhoneHint => '912 345 6789';
+
+  @override
+  String get authCountryCode => '+98';
+
+  @override
+  String get authSmsCodeHint => 'ارسال کد تایید پیامکی';
+
+  @override
+  String authPhoneDigitsProgress(int count, int total) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+    final intl.NumberFormat totalNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return '$countString از $totalString رقم';
+  }
+
+  @override
+  String authPhoneDigitsComplete(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString رقم کامل شد';
+  }
 
   @override
   String get authPhoneInvalid => 'شماره موبایل معتبر نیست';
 
   @override
-  String get authSendCode => 'دریافت کد تأیید';
+  String get authFeaturesTitle => 'مزایای ثبت و مدیریت در سامانه';
+
+  @override
+  String get authFeatureRemindersTitle => 'یادآور هوشمند سرویس‌ها';
+
+  @override
+  String get authFeatureRemindersTag => 'کیلومتر و تاریخ';
+
+  @override
+  String get authFeatureRemindersBody =>
+      'هشدار تعویض روغن، تسمه‌تایم، لنت و بیمه‌نامه بر اساس کارکرد واقعی خودرو یا تاریخ سررسید.';
+
+  @override
+  String get authFeatureInvoicesTitle => 'ثبت دقیق فاکتورها و هزینه‌ها';
+
+  @override
+  String get authFeatureInvoicesTag => 'بایگانی فاکتور';
+
+  @override
+  String get authFeatureInvoicesBody =>
+      'بایگانی قطعات مصرفی، دستمزد تعمیرکار، فاکتورهای بنزین، عوارض و خلافی‌ها با محاسبه تومان.';
+
+  @override
+  String get authFeatureTransferTitle => 'انتقال آنلاین سوابق خودرو';
+
+  @override
+  String get authFeatureTransferTag => 'هنگام فروش';
+
+  @override
+  String get authFeatureTransferBody =>
+      'انتقال معتبر و یکپارچه کل شناسنامه سرویس‌ها و هزینه‌ها به مالک یا خریدار جدید در زمان معامله.';
+
+  @override
+  String get authSendCode => 'دریافت کد تایید';
+
+  @override
+  String get authTermsPrefix => 'با ورود یا ثبت‌نام در سامانه،';
+
+  @override
+  String get authTermsLink => 'قوانین و مقررات';
+
+  @override
+  String get authTermsAnd => 'و';
+
+  @override
+  String get authPrivacyLink => 'حریم خصوصی';
+
+  @override
+  String get authTermsSuffix => 'را می‌پذیرید.';
 
   @override
   String get authOtpTitle => 'کد تأیید را وارد کنید';
 
   @override
-  String authOtpSubtitle(String phone) {
-    return 'کد تأیید به $phone پیامک شد';
+  String authOtpSubtitle(int length) {
+    final intl.NumberFormat lengthNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String lengthString = lengthNumberFormat.format(length);
+
+    return 'کد تأیید $lengthString رقمی به شماره زیر پیامک شد:';
   }
 
   @override
   String get authEditPhone => 'ویرایش شماره';
 
   @override
-  String get authOtpFieldLabel => 'کد تأیید';
+  String authOtpFieldLabel(int length) {
+    final intl.NumberFormat lengthNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String lengthString = lengthNumberFormat.format(length);
 
-  @override
-  String get authVerify => 'تأیید و ورود';
-
-  @override
-  String authResendIn(String time) {
-    return 'ارسال دوباره کد تا $time';
+    return 'کد $lengthString رقمی ارسالی';
   }
 
   @override
-  String get authResend => 'ارسال دوباره کد';
+  String get authOtpAutoDetect => 'کد به صورت خودکار شناسایی می‌شود';
+
+  @override
+  String authOtpProgress(int count, int length) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+    final intl.NumberFormat lengthNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String lengthString = lengthNumberFormat.format(length);
+
+    return '$countString از $lengthString رقم درج شد';
+  }
+
+  @override
+  String get authResendIn => 'ارسال مجدد تا';
+
+  @override
+  String get authResendHint =>
+      'پیامک را دریافت نکردید؟ پس از اتمام زمان می‌توانید درخواست ارسال مجدد دهید.';
+
+  @override
+  String get authResend => 'ارسال مجدد کد پیامکی';
+
+  @override
+  String get authVerify => 'تأیید و ادامه';
 
   @override
   String get authCodeResent => 'کد جدید پیامک شد';

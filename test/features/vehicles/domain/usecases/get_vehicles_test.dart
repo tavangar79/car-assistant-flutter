@@ -2,6 +2,7 @@ import 'package:car_assistant/features/vehicles/domain/entities/vehicle.dart';
 import 'package:car_assistant/features/vehicles/domain/repositories/vehicle_repository.dart';
 import 'package:car_assistant/features/vehicles/domain/usecases/get_vehicles.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockVehicleRepository extends Mock implements VehicleRepository {}
@@ -19,10 +20,10 @@ void main() {
   });
 
   test('returns vehicles sorted newest first', () async {
-    when(() => repository.getVehicles()).thenAnswer((_) async => [older, newer]);
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([older, newer]));
 
     final result = await getVehicles();
 
-    expect(result, [newer, older]);
+    expect(result.getOrElse((f) => throw f), [newer, older]);
   });
 }

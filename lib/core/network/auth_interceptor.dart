@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import '../storage/token_storage.dart';
 
@@ -6,23 +6,29 @@ import '../storage/token_storage.dart';
 ///
 /// When the server rejects a sent token (401), [onUnauthorized] is called so the app can sign out.
 /// The OTP endpoints are excluded: a 401 there means a wrong code, not a lost session.
-class AuthenticatedClient extends http.BaseClient {
-  AuthenticatedClient({required this._inner, required this._tokenStorage, this._onUnauthorized});
+class AuthInterceptor extends Interceptor {
+  AuthInterceptor({required this._tokenStorage, this._onUnauthorized});
 
-  final http.Client _inner;
+  static const _header = 'Authorization';
+
   final TokenStorage _tokenStorage;
   final void Function()? _onUnauthorized;
 
   @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) async {
+  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await _readToken();
-    final hasToken = token != null && token.isNotEmpty;
-    if (hasToken) request.headers['Authorization'] = 'Bearer $token';
-    final response = await _inner.send(request);
-    if (response.statusCode == 401 && hasToken && !_isOtpCall(request.url)) {
+    if (token != null && token.isNotEmpty) options.headers[_header] = 'Bearer $token';
+    handler.next(options);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    final request = err.requestOptions;
+    final sentToken = request.headers.containsKey(_header);
+    if (err.response?.statusCode == 401 && sentToken && !_isOtpCall(request.path)) {
       _onUnauthorized?.call();
     }
-    return response;
+    handler.next(err);
   }
 
   /// A broken keystore must not block sign-in: treat it as "no token" and try to wipe it.
@@ -37,9 +43,5 @@ class AuthenticatedClient extends http.BaseClient {
     }
   }
 
-  static bool _isOtpCall(Uri url) => url.path.contains('/api/auth/otp/');
-
-  // The inner client is owned (and closed) by its own provider.
-  @override
-  void close() {}
+  static bool _isOtpCall(String path) => path.contains('/api/auth/otp/');
 }

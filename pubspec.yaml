@@ -7,6 +7,7 @@ environment:
   sdk: ^3.13.2
 
 dependencies:
+  dio: ^5.11.1
   equatable: ^3.0.0
   flutter:
     sdk: flutter
@@ -15,8 +16,8 @@ dependencies:
   flutter_riverpod: ^3.4.3
   flutter_secure_storage: ^11.2.0
   flutter_svg: ^2.3.0
+  fpdart: ^1.2.0
   go_router: ^18.1.0
-  http: ^1.6.0
   intl: any
   package_info_plus: ^10.2.2
 
@@ -32,6 +33,7 @@ flutter:
 
   assets:
     - assets/images/logo.svg
+    - assets/images/flag_ir.svg
 
   fonts:
     - family: Vazirmatn

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../domain/entities/auth_failures.dart';
 import 'auth_providers.dart';
@@ -13,15 +14,16 @@ class OtpController extends AsyncNotifier<void> {
   /// Returns `true` once signed in.
   Future<bool> verify({required String phone, required String code}) async {
     state = const AsyncLoading();
-    try {
-      await ref.read(verifyOtpProvider).call(phone: phone, code: code);
-      if (!ref.mounted) return false; // Page left; the stored token is restored on next start.
-      ref.read(authStatusProvider.notifier).markSignedIn();
-      state = const AsyncData(null);
-      return true;
-    } catch (error, stackTrace) {
-      if (ref.mounted) state = AsyncError(error, stackTrace);
-      return false;
+    final result = await ref.read(verifyOtpProvider).call(phone: phone, code: code);
+    if (!ref.mounted) return false; // Page left; the stored token is restored on next start.
+    switch (result) {
+      case Right():
+        ref.read(authStatusProvider.notifier).markSignedIn();
+        state = const AsyncData(null);
+        return true;
+      case Left(value: final failure):
+        state = AsyncError(failure, StackTrace.current);
+        return false;
     }
   }
 
@@ -30,16 +32,18 @@ class OtpController extends AsyncNotifier<void> {
   /// `retryAfterSeconds` is returned so the countdown restarts.
   Future<int?> resend(String phone) async {
     state = const AsyncLoading();
-    try {
-      final request = await ref.read(requestOtpProvider).call(phone);
-      if (ref.mounted) state = const AsyncData(null);
-      return request.resendInSeconds;
-    } on TooManyRequestsFailure catch (failure, stackTrace) {
-      if (ref.mounted) state = AsyncError(failure, stackTrace);
-      return failure.retryAfterSeconds;
-    } catch (error, stackTrace) {
-      if (ref.mounted) state = AsyncError(error, stackTrace);
-      return null;
+    final result = await ref.read(requestOtpProvider).call(phone);
+    if (!ref.mounted) return null;
+    switch (result) {
+      case Right(value: final request):
+        state = const AsyncData(null);
+        return request.resendInSeconds;
+      case Left(value: final TooManyRequestsFailure failure):
+        state = AsyncError(failure, StackTrace.current);
+        return failure.retryAfterSeconds;
+      case Left(value: final failure):
+        state = AsyncError(failure, StackTrace.current);
+        return null;
     }
   }
 }

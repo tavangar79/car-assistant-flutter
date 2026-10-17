@@ -5,8 +5,9 @@
 - Elaborate only when asked.
 - Always flag risky or destructive actions in one line.
 
-Flutter with DDD and Clean Architecture, Riverpod 3 (manual providers, no codegen), `http`, `equatable`,
-and `mocktail` for tests.
+Flutter with DDD and Clean Architecture, Riverpod 3 (manual providers, no codegen), `dio` (one instance,
+`dioProvider`, bearer token via `AuthInterceptor`), `fpdart` (`Either<Failure, T>`), `equatable`, and `mocktail`
+for tests.
 Repo: https://github.com/tavangar79/car-assistant-flutter.git. It's a standalone project, used as a submodule
 by the car-assistant manager repo, whose CTO sends tasks with an API contract.
 
@@ -32,7 +33,7 @@ by the car-assistant manager repo, whose CTO sends tasks with an API contract.
 ```
 lib/
   main.dart, app.dart
-  core/                  cross-cutting: config, error (Failure), network
+  core/                  cross-cutting: config, error (Failure), network (Dio, apiCall)
   features/<feature>/
     domain/              PURE Dart: entities, repository interfaces, use cases
     data/                DTOs (JSON), data sources (HTTP), repository implementations
@@ -41,12 +42,15 @@ test/                    mirrors lib/
 ```
 
 ## Dependency rule
-`presentation → domain ← data`. The **domain layer imports nothing** from Flutter, http, Riverpod,
-or the data/presentation layers.
+`presentation → domain ← data`. The **domain layer imports nothing** from Flutter, Dio, Riverpod,
+or the data/presentation layers (pure-Dart `fpdart` and `equatable` are allowed).
 
 ## Rules
 - All steps and code must be **simple, readable and testable**. Don't add speculative abstractions.
 - Entities are immutable `Equatable` classes. DTOs own `fromJson` and `toEntity()`. JSON never leaks past data/.
+- Repositories and use cases return `Future<Either<Failure, T>>` (fpdart); they never throw. Data sources call
+  Dio and may throw `DioException`; repositories wrap them in `apiCall` (`core/network/api_call.dart`), which maps
+  the status + backend error body `{ "error": { "message", "details"? } }` to `Failure`. Only data/ sees Dio.
 - Repositories convert every exception to `Failure`. `Failure.message` is a developer-facing (English) log
   message; the UI shows a localized message instead.
 - **Localization:** always use `AppLocalizations` (gen-l10n, ARB files in `lib/l10n/`, locales `fa` + `en`) for
@@ -55,7 +59,8 @@ or the data/presentation layers.
   (ARB placeholder formats or `NumberFormat(..., l10n.localeName)`), so `fa` shows Persian digits.
 - Wire dependencies with Riverpod `Provider`s in `presentation/providers/`. Async UI state is a `FutureProvider`
   or `AsyncNotifier`, rendered with `.when(loading:, error:, data:)`.
-- Tests: use cases use a mocktail repo, repositories use `http/testing.dart` `MockClient`, and widgets use
+- Tests: use cases use a mocktail repo, repositories use a mocktail `Dio` (`class MockDio extends Mock implements
+  Dio {}`, answering `Response(...)` or `DioException.badResponse(...)`), and widgets use
   `ProviderScope(overrides: [xRepositoryProvider.overrideWithValue(fake)])`.
 - Keep widgets small. Extract a widget once a build method gets hard to read.
 

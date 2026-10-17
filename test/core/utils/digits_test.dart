@@ -20,10 +20,10 @@ void main() {
   });
 
   group('formatCountdown', () {
-    test('formats m:ss with locale digits', () {
-      expect(formatCountdown(45, 'en'), '0:45');
-      expect(formatCountdown(65, 'en'), '1:05');
-      expect(formatCountdown(45, 'fa'), '۰:۴۵');
+    test('formats mm:ss with locale digits', () {
+      expect(formatCountdown(45, 'en'), '00:45');
+      expect(formatCountdown(65, 'en'), '01:05');
+      expect(formatCountdown(45, 'fa'), '۰۰:۴۵');
     });
   });
 }
