@@ -11,6 +11,14 @@ class ToneColors {
     required this.chipForeground,
   });
 
+  /// A Stitch status pair: [color] on its [container] (tile, chip and border all use the container).
+  const ToneColors.status(Color color, Color container)
+    : background = container,
+      border = container,
+      foreground = color,
+      chipBackground = container,
+      chipForeground = color;
+
   final Color background;
   final Color border;
   final Color foreground;

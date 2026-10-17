@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 120 120">
+  <ellipse cx="60" cy="98" fill="currentColor" fill-opacity="0.08" rx="46" ry="10"/>
+  <path d="M22 98H98" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity="0.3" stroke-width="1.5"/>
+  <path d="M24 96V38C24 28 32 20 42 20H78C88 20 96 28 96 38V96" stroke="currentColor" stroke-linecap="round" stroke-opacity="0.25" stroke-width="1.75"/>
+  <path d="M32 20V12M88 20V12" stroke="currentColor" stroke-linecap="round" stroke-opacity="0.2" stroke-width="1.5"/>
+  <line stroke="currentColor" stroke-opacity="0.2" stroke-width="1" x1="28" x2="92" y1="36" y2="36"/>
+  <path d="M34 86C34 82 37 79 41 79H79C83 79 86 82 86 86V92H34V86Z" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="1.75"/>
+  <path d="M42 79L47 62C48 59 51 57 54 57H66C69 57 72 59 73 62L78 79" stroke="currentColor" stroke-linejoin="round" stroke-width="1.75"/>
+  <circle cx="45" cy="92" fill="#FFFFFF" r="5" stroke="currentColor" stroke-width="2"/>
+  <circle cx="75" cy="92" fill="#FFFFFF" r="5" stroke="currentColor" stroke-width="2"/>
+  <circle cx="39" cy="84" fill="#F59E0B" r="1.5"/>
+  <circle cx="81" cy="84" fill="#F59E0B" r="1.5"/>
+  <g transform="translate(68, 22) rotate(18)">
+    <rect fill="#F59E0B" fill-opacity="0.16" height="20" rx="6" width="20"/>
+    <path d="M6 14L10 10M9 7C8.5 7.5 7.7 7.7 7 7.4L5.6 8.8C6 9.8 5.8 11 5 11.8C4.2 12.6 3 12.8 2 12.4L3.4 11C3.1 10.3 3.3 9.5 3.8 9C4.6 8.2 5.8 8 6.8 8.4L8.2 7C7.9 6.3 8.1 5.5 8.6 5C9.4 4.2 10.6 4.4 11.3 5.1C12 5.8 12.2 7 11.4 7.8L9.9 9.3" stroke="#F59E0B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25" transform="translate(2, 2)"/>
+  </g>
+</svg>

@@ -35,7 +35,7 @@ void main() {
 
   tearDown(() => container.dispose());
 
-  Future<void> pumpPage(WidgetTester tester) async {
+  Future<void> pumpPage(WidgetTester tester, {OtpArgs args = _args}) async {
     tester.view
       ..physicalSize = const Size(390 * 3, 1000 * 3)
       ..devicePixelRatio = 3;
@@ -44,11 +44,11 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-          theme: AppTheme.dark,
+          theme: AppTheme.light,
           locale: const Locale('fa'),
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          home: const OtpPage(args: _args),
+          home: OtpPage(args: args),
         ),
       ),
     );
@@ -78,7 +78,12 @@ void main() {
   });
 
   testWidgets('fills the boxes with Persian digits and signs in when complete', (tester) async {
-    final user = User(id: 'u1', phone: _phone, createdAt: DateTime.utc(2026));
+    final user = User(
+      id: 'u1',
+      phone: _phone,
+      createdAt: DateTime.utc(2026),
+      isProfileComplete: true,
+    );
     when(() => repository.verifyOtp(phone: _phone, code: '12345'))
         .thenAnswer((_) async => Right(AuthResult(user: user, isNewUser: false)));
     await pumpPage(tester);
@@ -145,5 +150,32 @@ void main() {
     await tester.pump();
 
     expect(find.text('مشکلی پیش آمد، دوباره تلاش کنید'), findsOneWidget);
+  });
+
+  testWidgets('starts over when opened again for another number', (tester) async {
+    when(() => repository.verifyOtp(phone: _phone, code: '00000'))
+        .thenAnswer((_) async => const Left(InvalidCodeFailure()));
+    await pumpPage(tester, args: const OtpArgs(phone: _phone, resendInSeconds: 60, codeLength: 5));
+    await tester.pump(const Duration(seconds: 10));
+    expect(find.text('۰۰:۵۰'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), '00000');
+    await tester.pump();
+    expect(find.text('کد نادرست است یا منقضی شده'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), '12');
+    await tester.pump();
+
+    await pumpPage(
+      tester,
+      args: const OtpArgs(phone: '09351112222', resendInSeconds: 120, codeLength: 5),
+    );
+    await tester.pump();
+
+    expect(find.text('۰۲:۰۰'), findsOneWidget);
+    expect(find.text('۰ از ۵ رقم درج شد'), findsOneWidget);
+    expect(find.text('کد نادرست است یا منقضی شده'), findsNothing);
+    expect(find.text('۰۹۳۵ ••• ۲۲۲۲'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('۰۱:۵۹'), findsOneWidget);
   });
 }

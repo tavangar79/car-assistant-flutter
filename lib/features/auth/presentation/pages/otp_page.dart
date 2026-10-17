@@ -20,7 +20,7 @@ import '../widgets/primary_cta_button.dart';
 import '../widgets/resend_card.dart';
 
 /// Enter the SMS code (Stitch screen `8e8f9a27ae4f4dcfbfe34140a8f9942a`).
-/// On success the router guard moves on to the vehicles page.
+/// On success the router guard moves on to the home tab.
 class OtpPage extends ConsumerStatefulWidget {
   const OtpPage({super.key, required this.args});
 
@@ -40,6 +40,21 @@ class _OtpPageState extends ConsumerState<OtpPage> {
   void initState() {
     super.initState();
     _code.addListener(() => setState(() {}));
+    _startCountdown(widget.args.resendInSeconds);
+  }
+
+  /// go_router can reuse this state when a new code is requested for another number,
+  /// so start over: empty boxes, no old error, and the new countdown.
+  @override
+  void didUpdateWidget(OtpPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.args == oldWidget.args) return;
+    _code.clear();
+    _resending = false;
+    // Riverpod forbids invalidating while the tree builds, so drop the old error right after.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) ref.invalidate(otpControllerProvider);
+    });
     _startCountdown(widget.args.resendInSeconds);
   }
 
@@ -71,9 +86,11 @@ class _OtpPageState extends ConsumerState<OtpPage> {
   }
 
   Future<void> _resend() async {
+    final args = widget.args;
     setState(() => _resending = true);
-    final seconds = await ref.read(otpControllerProvider.notifier).resend(widget.args.phone);
-    if (!mounted) return;
+    final seconds = await ref.read(otpControllerProvider.notifier).resend(args.phone);
+    // Ignore a late answer for a number the user has since changed.
+    if (!mounted || args != widget.args) return;
     setState(() => _resending = false);
     if (seconds != null) _startCountdown(seconds);
     if (!ref.read(otpControllerProvider).hasError) {

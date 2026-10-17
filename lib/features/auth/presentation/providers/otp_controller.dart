@@ -17,8 +17,8 @@ class OtpController extends AsyncNotifier<void> {
     final result = await ref.read(verifyOtpProvider).call(phone: phone, code: code);
     if (!ref.mounted) return false; // Page left; the stored token is restored on next start.
     switch (result) {
-      case Right():
-        ref.read(authStatusProvider.notifier).markSignedIn();
+      case Right(value: final auth):
+        ref.read(authStatusProvider.notifier).signIn(auth.user);
         state = const AsyncData(null);
         return true;
       case Left(value: final failure):

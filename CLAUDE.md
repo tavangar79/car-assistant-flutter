@@ -27,6 +27,13 @@ by the car-assistant manager repo, whose CTO sends tasks with an API contract.
 | Test         | `flutter test`                                                       |
 | Format       | `dart format lib test`                                               |
 
+**Dev run (Chrome):** use the VS Code config `car-assistant (Chrome)` (`.vscode/launch.json`): fixed
+`--web-port=5555` (same origin, so the stored token survives restarts), `NO_PROXY=localhost`, hot reload on save.
+It passes `--dart-define-from-file=dart_defines.dev.json`; copy `dart_defines.dev.example.json` to it. In debug
+builds a non-empty `DEV_TOKEN` is written to `TokenStorage` at startup (`core/storage/seed_dev_token.dart`), so
+the app opens signed in. The file is gitignored: never commit it. To regenerate a token, sign an HS256 JWT with
+the backend `JWT_SECRET` and `sub` = the user id.
+
 **Definition of done:** `dart format lib test && flutter analyze && flutter test` with no issues.
 
 ## Structure (feature-first, layered)
@@ -71,4 +78,4 @@ or the data/presentation layers (pure-Dart `fpdart` and `equatable` are allowed)
 4. When UI changes in code, sync it back to Stitch (`stitch-design:code-to-design`).
 
 **Car-context UI rules:** glanceable, large touch targets (≥48dp, prefer 64dp+), high contrast,
-dark mode by default, minimal text, short flows.
+light theme only (the Stitch light palette), minimal text, short flows.

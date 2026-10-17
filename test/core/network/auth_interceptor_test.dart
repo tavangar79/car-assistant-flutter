@@ -93,4 +93,28 @@ void main() {
 
     expect(unauthorizedCalls, 0);
   });
+
+  test('reports a 404 from the account endpoints (account deleted)', () async {
+    storage.token = 'jwt';
+    final (dio, _) = build(404);
+
+    await expectLater(dio.get<Object?>('/api/auth/me'), throwsA(isA<DioException>()));
+    await expectLater(dio.put<Object?>('/api/auth/me'), throwsA(isA<DioException>()));
+    await expectLater(dio.delete<Object?>('/api/auth/me/avatar'), throwsA(isA<DioException>()));
+
+    expect(unauthorizedCalls, 3);
+  });
+
+  test('ignores a 404 when loading the photo or from other endpoints', () async {
+    storage.token = 'jwt';
+    final (dio, _) = build(404);
+
+    await expectLater(
+      dio.get<Object?>('/api/auth/me/avatar?v=1729150000000'),
+      throwsA(isA<DioException>()),
+    );
+    await expectLater(dio.get<Object?>('/api/vehicles/42'), throwsA(isA<DioException>()));
+
+    expect(unauthorizedCalls, 0);
+  });
 }

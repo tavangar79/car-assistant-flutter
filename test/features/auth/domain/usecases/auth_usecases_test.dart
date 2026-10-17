@@ -19,7 +19,12 @@ void main() {
   late MockAuthRepository repository;
 
   const phone = '09121234567';
-  final user = User(id: 'u1', phone: phone, createdAt: DateTime.utc(2026, 1, 1));
+  final user = User(
+    id: 'u1',
+    phone: phone,
+    createdAt: DateTime.utc(2026, 1, 1),
+    isProfileComplete: true,
+  );
   const otpRequest = OtpRequest(
     phone: phone,
     expiresInSeconds: 120,
@@ -82,7 +87,7 @@ void main() {
     test('is signed out without a token', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => false);
 
-      expect(await CheckSession(repository)(), isFalse);
+      expect((await CheckSession(repository)()).signedIn, isFalse);
       verifyNever(() => repository.getCurrentUser());
     });
 
@@ -90,7 +95,7 @@ void main() {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
       when(() => repository.getCurrentUser()).thenAnswer((_) async => Right(user));
 
-      expect(await CheckSession(repository)(), isTrue);
+      expect(await CheckSession(repository)(), (signedIn: true, user: user));
     });
 
     test('clears the token and signs out on 401', () async {
@@ -99,7 +104,7 @@ void main() {
           .thenAnswer((_) async => const Left(UnauthorizedFailure()));
       when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
 
-      expect(await CheckSession(repository)(), isFalse);
+      expect((await CheckSession(repository)()).signedIn, isFalse);
       verify(() => repository.clearSession()).called(1);
     });
 
@@ -107,7 +112,7 @@ void main() {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
       when(() => repository.getCurrentUser()).thenAnswer((_) async => const Left(NetworkFailure()));
 
-      expect(await CheckSession(repository)(), isTrue);
+      expect((await CheckSession(repository)()).signedIn, isTrue);
       verifyNever(() => repository.clearSession());
     });
 
@@ -116,7 +121,7 @@ void main() {
       when(() => repository.getCurrentUser())
           .thenAnswer((_) async => const Left(Failure('HTTP 500')));
 
-      expect(await CheckSession(repository)(), isTrue);
+      expect((await CheckSession(repository)()).signedIn, isTrue);
     });
   });
 

@@ -18,8 +18,10 @@ dependencies:
   flutter_svg: ^2.3.0
   fpdart: ^1.2.0
   go_router: ^18.1.0
+  image_picker: ^1.2.4
   intl: any
   package_info_plus: ^10.2.2
+  shamsi_date: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +36,7 @@ flutter:
   assets:
     - assets/images/logo.svg
     - assets/images/flag_ir.svg
+    - assets/images/empty_garage.svg
 
   fonts:
     - family: Vazirmatn

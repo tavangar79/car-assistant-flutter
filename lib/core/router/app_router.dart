@@ -1,12 +1,18 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/pages/complete_profile_page.dart';
 import '../../features/auth/presentation/pages/otp_page.dart';
 import '../../features/auth/presentation/pages/phone_page.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/providers/otp_args.dart';
+import '../../features/history/presentation/pages/history_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/shell/presentation/pages/app_shell.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/vehicles/presentation/pages/add_vehicle_page.dart';
 import '../../features/vehicles/presentation/pages/vehicles_page.dart';
 import 'app_routes.dart';
 import 'auth_redirect.dart';
@@ -41,9 +47,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
-        path: AppRoutes.vehiclesPath,
-        name: AppRoutes.vehiclesName,
-        builder: (context, state) => const VehiclesPage(),
+        path: AppRoutes.completeProfilePath,
+        name: AppRoutes.completeProfileName,
+        builder: (context, state) => const CompleteProfilePage(),
+      ),
+      GoRoute(
+        path: AppRoutes.addVehiclePath,
+        name: AppRoutes.addVehicleName,
+        builder: (context, state) => const AddVehiclePage(),
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) => AppShell(navigationShell: navigationShell),
+        branches: [
+          _tab(AppRoutes.homePath, AppRoutes.homeName, const HomePage()),
+          _tab(AppRoutes.vehiclesPath, AppRoutes.vehiclesName, const VehiclesPage()),
+          _tab(AppRoutes.historyPath, AppRoutes.historyName, const HistoryPage()),
+          _tab(AppRoutes.profilePath, AppRoutes.profileName, const ProfilePage()),
+        ],
       ),
     ],
   );
@@ -53,3 +73,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   });
   return router;
 });
+
+StatefulShellBranch _tab(String path, String name, Widget page) => StatefulShellBranch(
+  routes: [GoRoute(path: path, name: name, builder: (context, state) => page)],
+);

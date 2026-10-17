@@ -21,4 +21,13 @@ abstract final class AppTextStyles {
     labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, height: 16 / 12),
     labelSmall: TextStyle(fontSize: 10, fontWeight: FontWeight.w500, height: 14 / 10),
   );
+
+  /// Stitch `metric-odometer`: odometer readouts and invoice totals. No [TextTheme] slot, so use it directly.
+  static const metricOdometer = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 28,
+    fontWeight: FontWeight.w800,
+    height: 34 / 28,
+    letterSpacing: 28 * -0.02,
+  );
 }

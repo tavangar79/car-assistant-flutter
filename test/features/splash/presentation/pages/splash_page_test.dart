@@ -31,7 +31,7 @@ Widget _app({Future<PackageInfo> Function()? packageInfo, Locale locale = const 
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashPage()),
-      GoRoute(path: '/vehicles', builder: (context, state) => const Text('vehicles')),
+      GoRoute(path: '/home', builder: (context, state) => const Text('home')),
     ],
   );
   final auth = MockAuthRepository();
@@ -45,7 +45,7 @@ Widget _app({Future<PackageInfo> Function()? packageInfo, Locale locale = const 
       ),
     ],
     child: MaterialApp.router(
-      theme: AppTheme.dark,
+      theme: AppTheme.light,
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -126,17 +126,17 @@ void main() {
     expect(find.text('مدیریت خودرو'), findsOneWidget);
   });
 
-  testWidgets('navigates to the vehicles page after the splash delay', (tester) async {
+  testWidgets('navigates to the home tab after the splash delay', (tester) async {
     await tester.pumpWidget(_app());
     await tester.pump();
 
     await tester.pump(_delay - const Duration(milliseconds: 1));
     expect(find.byType(SplashPage), findsOneWidget);
-    expect(find.text('vehicles'), findsNothing);
+    expect(find.text('home'), findsNothing);
 
     await tester.pump(const Duration(milliseconds: 1));
     await tester.pumpAndSettle();
     expect(find.byType(SplashPage), findsNothing);
-    expect(find.text('vehicles'), findsOneWidget);
+    expect(find.text('home'), findsOneWidget);
   });
 }

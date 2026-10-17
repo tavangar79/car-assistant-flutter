@@ -52,7 +52,7 @@ Create `lib/features/trips/` with three layers, and mirror it in `test/features/
 - Use `const` wherever possible, `final` locals, and single quotes.
 - Never use `dynamic` outside JSON parsing, and cast JSON fields explicitly in `fromJson`.
 - UI follows the Stitch designs and the car-context rules: touch targets ≥48dp (prefer 64dp+), high contrast,
-  dark mode first, minimal text.
+  light theme only, minimal text.
 - Theme values (colors, typography, spacing) live in one place (`core/theme/`, created when the
   Stitch design system lands). Widgets never hardcode colors.
 

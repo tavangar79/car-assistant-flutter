@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 import 'app_tones.dart';
+import 'vehicle_palette.dart';
 
-/// The app's single source of theme data. Dark is the default in the car.
+/// The app's single theme: the light Stitch design system. The app always runs in light mode.
 abstract final class AppTheme {
-  /// Corner radius of inputs and interactive buttons (Stitch: 12px, `rounded-xl`).
+  /// Corner radius of inputs and interactive buttons (Stitch: 12px).
   static const radius = BorderRadius.all(Radius.circular(12));
 
-  /// Corner radius of cards (Stitch: 16px, `rounded-2xl`).
+  /// Corner radius of cards (Stitch: 16px, `rounded-lg`).
   static const cardRadius = BorderRadius.all(Radius.circular(16));
 
   static final light = _build(
@@ -26,42 +27,23 @@ abstract final class AppTheme {
       errorContainer: AppColors.errorContainer,
       onErrorContainer: AppColors.onErrorContainer,
       surface: AppColors.canvas,
-      onSurface: AppColors.onSurfaceLight,
-      onSurfaceVariant: AppColors.onSurfaceVariantLight,
+      onSurface: AppColors.onSurface,
+      onSurfaceVariant: AppColors.onSurfaceVariant,
+      surfaceDim: AppColors.containerHigh,
+      surfaceBright: AppColors.white,
       surfaceContainerLowest: AppColors.white,
       surfaceContainerLow: AppColors.canvas,
       surfaceContainer: AppColors.container,
       surfaceContainerHigh: AppColors.containerHigh,
       surfaceContainerHighest: AppColors.containerHighest,
+      inverseSurface: AppColors.inverseSurface,
+      onInverseSurface: AppColors.inverseOnSurface,
       outline: AppColors.outline,
-      outlineVariant: AppColors.outlineVariant,
+      outlineVariant: AppColors.containerHigh,
+      // Stitch shadows are tinted with the navy: rgba(15, 23, 42, …).
+      shadow: AppColors.navy,
     ),
     AppTones.light,
-  );
-
-  static final dark = _build(
-    const ColorScheme(
-      brightness: Brightness.dark,
-      primary: AppColors.amber,
-      onPrimary: AppColors.navy,
-      secondary: AppColors.slate300,
-      onSecondary: AppColors.navy,
-      tertiary: AppColors.amber,
-      onTertiary: AppColors.navy,
-      error: AppColors.errorDark,
-      onError: AppColors.white,
-      surface: AppColors.navy,
-      onSurface: AppColors.canvas,
-      onSurfaceVariant: AppColors.outline,
-      surfaceContainerLowest: AppColors.navy,
-      surfaceContainerLow: AppColors.navy,
-      surfaceContainer: AppColors.slate,
-      surfaceContainerHigh: AppColors.slate,
-      surfaceContainerHighest: AppColors.slate700,
-      outline: AppColors.outline,
-      outlineVariant: AppColors.slate700,
-    ),
-    AppTones.dark,
   );
 
   static ThemeData _build(ColorScheme scheme, AppTones tones) {
@@ -72,7 +54,7 @@ abstract final class AppTheme {
     const shape = RoundedRectangleBorder(borderRadius: radius);
     return ThemeData(
       colorScheme: scheme,
-      extensions: [tones],
+      extensions: [tones, VehiclePalette.light],
       fontFamily: AppTextStyles.fontFamily,
       textTheme: AppTextStyles.textTheme,
       scaffoldBackgroundColor: scheme.surface,
@@ -81,9 +63,17 @@ abstract final class AppTheme {
       ),
       // Material 3 defaults text and outlined buttons to a pill and icon buttons to a circle; the design uses 12px.
       textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(shape: shape)),
-      outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: shape)),
+      // Secondary / outline button: white surface, #CBD5E1 outline, secondary slate text.
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: shape,
+          backgroundColor: scheme.surfaceContainerLowest,
+          foregroundColor: scheme.secondary,
+          side: BorderSide(color: scheme.surfaceContainerHighest),
+        ),
+      ),
       iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(shape: shape)),
-      // Inputs from the Stitch auth screens: 12px radius, hairline border, 2px focus ring.
+      // Inputs: 12px radius, hairline border, 2px focus ring.
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: scheme.surfaceContainer,

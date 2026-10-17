@@ -9,9 +9,6 @@ class GetVehicles {
 
   final VehicleRepository _repository;
 
-  /// The user's vehicles, newest model year first.
-  Future<Either<Failure, List<Vehicle>>> call() async {
-    final vehicles = await _repository.getVehicles();
-    return vehicles.map((list) => [...list]..sort((a, b) => b.year.compareTo(a.year)));
-  }
+  /// The user's vehicles in the server's order: default first, then newest first.
+  Future<Either<Failure, List<Vehicle>>> call() => _repository.getVehicles();
 }

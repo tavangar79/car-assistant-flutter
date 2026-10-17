@@ -71,7 +71,7 @@ void main() {
       ProviderScope(
         overrides: [authRepositoryProvider.overrideWithValue(repository)],
         child: MaterialApp.router(
-          theme: AppTheme.dark, // the page switches itself to the light Stitch theme
+          theme: AppTheme.light,
           locale: const Locale('fa'),
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -119,8 +119,7 @@ void main() {
     expect(find.text('دریافت کد تایید'), findsOneWidget);
     expect(find.textContaining('قوانین و مقررات', findRichText: true), findsOneWidget);
 
-    final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
-    expect(scaffold.backgroundColor, AppTheme.light.colorScheme.surface);
+    expect(Theme.of(tester.element(find.byType(PhonePage))).brightness, Brightness.light);
     expect(Directionality.of(tester.element(find.byType(PhonePage))), TextDirection.rtl);
   });
 

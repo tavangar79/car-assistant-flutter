@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Full-width navy button with a forward arrow (Stitch: 48px high, 12px radius).
+/// Full-width navy button with an [icon] right of the label (Stitch: 48px high, 12px radius).
 /// [onPressed] `null` disables it; [loading] shows a spinner instead of the label.
 class PrimaryCtaButton extends StatelessWidget {
   const PrimaryCtaButton({
@@ -8,11 +8,15 @@ class PrimaryCtaButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     this.loading = false,
+    this.icon = Icons.arrow_forward,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final bool loading;
+
+  /// Forward arrow by default; the complete-profile page uses a check mark.
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class PrimaryCtaButton extends StatelessWidget {
               dimension: 20,
               child: CircularProgressIndicator(strokeWidth: 2, color: scheme.onSurfaceVariant),
             )
-          // The design puts the arrow to the right of the label, pointing right.
+          // The design puts the icon to the right of the label (the arrow points right).
           : Directionality(
               textDirection: TextDirection.ltr,
               child: Row(
@@ -36,7 +40,7 @@ class PrimaryCtaButton extends StatelessWidget {
                 children: [
                   Flexible(child: Text(label, textDirection: TextDirection.rtl)),
                   const SizedBox(width: 8),
-                  const Icon(Icons.arrow_forward, size: 16),
+                  Icon(icon, size: 16),
                 ],
               ),
             ),

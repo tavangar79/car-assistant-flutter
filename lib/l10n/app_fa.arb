@@ -32,14 +32,6 @@
   "@versionLabel": {
     "description": "Word shown before the app version number."
   },
-  "vehiclesTitle": "خودروهای من",
-  "@vehiclesTitle": {
-    "description": "App bar title of the vehicles list page."
-  },
-  "vehiclesEmpty": "هنوز خودرویی ثبت نشده است",
-  "@vehiclesEmpty": {
-    "description": "Shown when the user has no vehicles."
-  },
   "vehiclesLoadError": "دریافت خودروها ممکن نشد",
   "@vehiclesLoadError": {
     "description": "Shown when the vehicles list could not be loaded."
@@ -48,42 +40,13 @@
   "@retry": {
     "description": "Button that retries a failed action."
   },
-  "vehicleTitle": "{make} {model} مدل {year}",
-  "@vehicleTitle": {
-    "description": "Vehicle name in the list, e.g. 'Kia Rio model 2021'. year is already locale-formatted.",
-    "placeholders": {
-      "make": {
-        "type": "String",
-        "example": "Kia"
-      },
-      "model": {
-        "type": "String",
-        "example": "Rio"
-      },
-      "year": {
-        "type": "String",
-        "example": "۲۰۲۱"
-      }
-    }
-  },
-  "vehicleMileage": "{km} کیلومتر",
-  "@vehicleMileage": {
-    "description": "Vehicle mileage in kilometers.",
-    "placeholders": {
-      "km": {
-        "type": "int",
-        "format": "decimalPattern",
-        "example": "12500"
-      }
-    }
-  },
   "back": "بازگشت",
   "@back": {
     "description": "Tooltip / screen-reader label of the back button."
   },
   "logout": "خروج از حساب",
   "@logout": {
-    "description": "Tooltip of the sign-out button on the vehicles page."
+    "description": "Sign-out button on the profile tab."
   },
   "authBrandTitle": "مدیریت خودرو",
   "@authBrandTitle": {
@@ -311,5 +274,682 @@
   "authGenericError": "مشکلی پیش آمد، دوباره تلاش کنید",
   "@authGenericError": {
     "description": "Generic error, e.g. no internet connection."
+  },
+  "profileHeaderTitle": "تکمیل اطلاعات کاربری",
+  "@profileHeaderTitle": {
+    "description": "Title in the top bar of the complete-profile page."
+  },
+  "profileTitle": "تکمیل اطلاعات حساب",
+  "@profileTitle": {
+    "description": "Heading of the complete-profile page."
+  },
+  "profileDescription": "برای صدور فاکتورها، یادآور تمدید گواهینامه و انتقال رسمی سوابق خودرو، مشخصات فردی خود را وارد نمایید.",
+  "@profileDescription": {
+    "description": "Text under the complete-profile heading."
+  },
+  "profileFirstNameLabel": "نام",
+  "@profileFirstNameLabel": {
+    "description": "Label of the first name field."
+  },
+  "profileFirstNameHint": "مثال: علی",
+  "@profileFirstNameHint": {
+    "description": "Placeholder of the first name field."
+  },
+  "profileLastNameLabel": "نام خانوادگی",
+  "@profileLastNameLabel": {
+    "description": "Label of the last name field."
+  },
+  "profileLastNameHint": "مثال: محمدی",
+  "@profileLastNameHint": {
+    "description": "Placeholder of the last name field."
+  },
+  "profileRequiredLabel": "الزامی",
+  "@profileRequiredLabel": {
+    "description": "Screen-reader text for the * next to a required field label."
+  },
+  "profileBirthDateLabel": "تاریخ تولد",
+  "@profileBirthDateLabel": {
+    "description": "Label of the birth date field."
+  },
+  "profileBirthDatePlaceholder": "انتخاب تاریخ",
+  "@profileBirthDatePlaceholder": {
+    "description": "Birth date field before a date is chosen."
+  },
+  "profileBirthDateChange": "تغییر تاریخ",
+  "@profileBirthDateChange": {
+    "description": "Chip on the birth date field that opens the picker."
+  },
+  "profileBirthDateHint": "انتخاب تاریخ تولد به صورت سال‌محور در تقویم جلالی انجام می‌شود.",
+  "@profileBirthDateHint": {
+    "description": "Helper text under the birth date field."
+  },
+  "profilePhoneLabel": "شماره تماس مالک",
+  "@profilePhoneLabel": {
+    "description": "Label of the read-only verified phone row."
+  },
+  "profilePhoneVerified": "تأیید شده",
+  "@profilePhoneVerified": {
+    "description": "Badge on the verified phone row."
+  },
+  "profilePrivacyTitle": "امنیت و حریم شخصی سوابق",
+  "@profilePrivacyTitle": {
+    "description": "Title of the privacy note card."
+  },
+  "profilePrivacyBody": "اطلاعات هویتی صرفاً برای بایگانی رسمی فاکتورها، معاینه فنی و انتقال دفترچه سوابق هنگام فروش خودرو نگهداری می‌شود.",
+  "@profilePrivacyBody": {
+    "description": "Body of the privacy note card."
+  },
+  "profileSave": "تأیید و ذخیره اطلاعات",
+  "@profileSave": {
+    "description": "Primary button that saves the profile."
+  },
+  "profileFirstNameError": "نام را وارد کنید (حداکثر ۵۰ حرف)",
+  "@profileFirstNameError": {
+    "description": "Validation error under the first name field."
+  },
+  "profileLastNameError": "نام خانوادگی را وارد کنید (حداکثر ۵۰ حرف)",
+  "@profileLastNameError": {
+    "description": "Validation error under the last name field."
+  },
+  "profileBirthDateError": "تاریخ تولد معتبر انتخاب کنید",
+  "@profileBirthDateError": {
+    "description": "Validation error under the birth date field."
+  },
+  "profileSaveInvalid": "اطلاعات واردشده معتبر نیست، دوباره بررسی کنید",
+  "@profileSaveInvalid": {
+    "description": "Server rejected the profile (HTTP 400)."
+  },
+  "profilePickerTitle": "انتخاب تاریخ تولد (تقویم جلالی)",
+  "@profilePickerTitle": {
+    "description": "Title of the birth date picker sheet."
+  },
+  "profilePickerDay": "روز",
+  "@profilePickerDay": {
+    "description": "Day column header in the date picker."
+  },
+  "profilePickerMonth": "ماه",
+  "@profilePickerMonth": {
+    "description": "Month column header in the date picker."
+  },
+  "profilePickerYear": "سال",
+  "@profilePickerYear": {
+    "description": "Year column header in the date picker."
+  },
+  "profilePickerHint": "گردونه را جهت تنظیم روز، ماه و سال حرکت دهید",
+  "@profilePickerHint": {
+    "description": "Helper text under the date picker wheels."
+  },
+  "profilePickerConfirm": "تأیید تاریخ تولد",
+  "@profilePickerConfirm": {
+    "description": "Confirm button of the date picker sheet."
+  },
+  "profilePickerCancel": "انصراف",
+  "@profilePickerCancel": {
+    "description": "Cancel button of the date picker sheet."
+  },
+  "profilePickerClose": "بستن",
+  "@profilePickerClose": {
+    "description": "Screen-reader label of the close button of the date picker sheet."
+  },
+  "profileBirthDateValue": "{day} {month} {year}",
+  "jalaliMonth": "{month, select, 1{فروردین} 2{اردیبهشت} 3{خرداد} 4{تیر} 5{مرداد} 6{شهریور} 7{مهر} 8{آبان} 9{آذر} 10{دی} 11{بهمن} 12{اسفند} other{}}",
+  "@profileBirthDateValue": {
+    "description": "Chosen Jalali birth date, e.g. ۲۱ آبان ۱۳۷۰. day and year use locale digits.",
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "۲۱"
+      },
+      "month": {
+        "type": "String",
+        "example": "آبان"
+      },
+      "year": {
+        "type": "String",
+        "example": "۱۳۷۰"
+      }
+    }
+  },
+  "@jalaliMonth": {
+    "description": "Name of a Jalali (Persian calendar) month, month is 1–12.",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "profileAvatarOptional": "بارگذاری تصویر پرسنلی اختیاری است",
+  "@profileAvatarOptional": {
+    "description": "Hint under the profile photo circle."
+  },
+  "profileAvatarEdit": "ویرایش تصویر پروفایل",
+  "@profileAvatarEdit": {
+    "description": "Screen-reader label of the camera button on the profile photo."
+  },
+  "profileAvatarGallery": "انتخاب از گالری",
+  "@profileAvatarGallery": {
+    "description": "Photo option: pick an existing image."
+  },
+  "profileAvatarCamera": "گرفتن عکس",
+  "@profileAvatarCamera": {
+    "description": "Photo option: use the camera."
+  },
+  "profileAvatarRemove": "حذف تصویر",
+  "@profileAvatarRemove": {
+    "description": "Photo option: delete the current photo."
+  },
+  "profileAvatarUploading": "در حال بارگذاری تصویر...",
+  "@profileAvatarUploading": {
+    "description": "Screen-reader label while the photo uploads."
+  },
+  "profileAvatarInvalid": "فقط تصویر JPG، PNG یا WebP قابل بارگذاری است",
+  "@profileAvatarInvalid": {
+    "description": "Photo rejected: wrong file type (HTTP 400)."
+  },
+  "profileAvatarTooLarge": "حجم تصویر باید کمتر از ۲ مگابایت باشد",
+  "@profileAvatarTooLarge": {
+    "description": "Photo rejected: larger than 2 MB (HTTP 413)."
+  },
+  "profileAvatarPickFailed": "دسترسی به تصویر ممکن نشد",
+  "@profileAvatarPickFailed": {
+    "description": "The gallery or camera could not be opened."
+  },
+  "navHome": "خانه",
+  "@navHome": {
+    "description": "Home tab label in the bottom dock and its app bar title."
+  },
+  "navGarage": "گاراژ من",
+  "@navGarage": {
+    "description": "Garage tab label in the bottom dock and its app bar title."
+  },
+  "navHistory": "تاریخچه",
+  "@navHistory": {
+    "description": "History tab label in the bottom dock and its app bar title."
+  },
+  "navProfile": "پروفایل",
+  "@navProfile": {
+    "description": "Profile tab label in the bottom dock and its app bar title."
+  },
+  "quickAdd": "ثبت سریع",
+  "@quickAdd": {
+    "description": "Screen-reader label of the raised add button in the bottom dock."
+  },
+  "notifications": "اعلانات",
+  "@notifications": {
+    "description": "Tooltip of the notifications button in the app bar."
+  },
+  "accountLabel": "حساب کاربری",
+  "@accountLabel": {
+    "description": "Screen-reader label of the avatar in the app bar."
+  },
+  "garageVehicleCount": "{count} خودرو",
+  "@garageVehicleCount": {
+    "description": "Subtitle under the Garage tab title with the number of vehicles.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "0"
+      }
+    }
+  },
+  "emptyGarageTitle": "یک خودرو اضافه کنید",
+  "@emptyGarageTitle": {
+    "description": "Headline of the empty garage card."
+  },
+  "emptyGarageBody": "برای شروع ثبت سرویس‌ها، فاکتورها و یادآورهای دوره‌ای، اولین خودروی خود را به گاراژ اضافه کنید.",
+  "@emptyGarageBody": {
+    "description": "Description in the empty garage card."
+  },
+  "addVehicle": "افزودن خودرو",
+  "@addVehicle": {
+    "description": "Button that starts adding a vehicle."
+  },
+  "garageBenefitsTitle": "امکانات اختصاصی پرونده خودرو",
+  "@garageBenefitsTitle": {
+    "description": "Heading of the benefits list under the empty garage card."
+  },
+  "garageBenefitsSteps": "{count} گام اولیه",
+  "@garageBenefitsSteps": {
+    "description": "Small label next to the benefits heading.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "3"
+      }
+    }
+  },
+  "benefitPlateTitle": "پلاک استاندارد ملی",
+  "@benefitPlateTitle": {
+    "description": "Title of the plate benefit tile."
+  },
+  "benefitPlateBody": "ثبت پلاک ایران با فرمت رسمی و استان محل شماره‌گذاری",
+  "@benefitPlateBody": {
+    "description": "Description of the plate benefit tile."
+  },
+  "benefitServiceTitle": "دفترچه سرویس هوشمند",
+  "@benefitServiceTitle": {
+    "description": "Title of the service book benefit tile."
+  },
+  "benefitServiceBody": "محاسبه دقیق موعد تعویض روغن، فیلترها و قطعات مصرفی",
+  "@benefitServiceBody": {
+    "description": "Description of the service book benefit tile."
+  },
+  "benefitRecordsTitle": "انتقال سوابق و فاکتورها",
+  "@benefitRecordsTitle": {
+    "description": "Title of the records benefit tile."
+  },
+  "benefitRecordsBody": "حفظ شناسنامه مالی کامل هنگام نقل و انتقال یا فروش خودرو",
+  "@benefitRecordsBody": {
+    "description": "Description of the records benefit tile."
+  },
+  "comingSoon": "به‌زودی",
+  "@comingSoon": {
+    "description": "Placeholder text on tabs that are not built yet."
+  },
+  "vehicleFormIntroTitle": "مشخصات هویتی خودرو",
+  "@vehicleFormIntroTitle": {
+    "description": "Heading of the banner at the top of the vehicle form."
+  },
+  "vehicleFormIntroBody": "اطلاعات پرونده فنی خودرو در گاراژ شما",
+  "@vehicleFormIntroBody": {
+    "description": "Line under the vehicle form banner heading."
+  },
+  "vehicleOptional": "(اختیاری)",
+  "@vehicleOptional": {
+    "description": "Marks an optional field of the vehicle form."
+  },
+  "vehicleRequiredLabel": "الزامی",
+  "@vehicleRequiredLabel": {
+    "description": "Screen-reader label of the red * on required vehicle fields."
+  },
+  "vehiclePhotoLabel": "تصویر خودرو",
+  "@vehiclePhotoLabel": {
+    "description": "Label of the vehicle photo section, and of the photo thumbnail."
+  },
+  "vehiclePhotoTitle": "بارگذاری یا عکاسی از خودرو",
+  "@vehiclePhotoTitle": {
+    "description": "Title inside the empty photo upload tile."
+  },
+  "vehiclePhotoLimits": "حداکثر حجم {mb} مگابایت • فرمت JPG یا PNG",
+  "@vehiclePhotoLimits": {
+    "description": "Size and format limits of the vehicle photo.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "5",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "vehiclePhotoGalleryChip": "انتخاب فایل از گالری",
+  "@vehiclePhotoGalleryChip": {
+    "description": "Chip in the empty photo tile, and the gallery option."
+  },
+  "vehiclePhotoCamera": "عکاسی با دوربین",
+  "@vehiclePhotoCamera": {
+    "description": "Option that takes the vehicle photo with the camera."
+  },
+  "vehiclePhotoChange": "تغییر تصویر",
+  "@vehiclePhotoChange": {
+    "description": "Shown over the chosen vehicle photo."
+  },
+  "vehiclePhotoRemove": "حذف تصویر",
+  "@vehiclePhotoRemove": {
+    "description": "Option that removes the chosen vehicle photo."
+  },
+  "vehiclePhotoPickFailed": "باز کردن گالری یا دوربین ممکن نشد",
+  "@vehiclePhotoPickFailed": {
+    "description": "Shown when the image picker fails."
+  },
+  "vehiclePhotoTooLarge": "حجم تصویر بیشتر از {mb} مگابایت است",
+  "@vehiclePhotoTooLarge": {
+    "description": "Shown when the vehicle photo is too large.",
+    "placeholders": {
+      "mb": {
+        "type": "int",
+        "example": "5",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "vehiclePhotoInvalid": "فقط تصویر JPG یا PNG پذیرفته می‌شود",
+  "@vehiclePhotoInvalid": {
+    "description": "Shown when the vehicle photo has the wrong type."
+  },
+  "vehicleNicknameLabel": "نام مستعار یا عنوان دلخواه",
+  "@vehicleNicknameLabel": {
+    "description": "Label of the vehicle nickname field."
+  },
+  "vehicleNicknameBadge": "نمایش در داشبورد",
+  "@vehicleNicknameBadge": {
+    "description": "Small note next to the nickname label."
+  },
+  "vehicleNicknameHint": "مثلاً: ۲۰۶ خاکستری من، شاهین کاری",
+  "@vehicleNicknameHint": {
+    "description": "Placeholder of the nickname field."
+  },
+  "vehicleNicknameHelp": "یک نام مشخص برای تفکیک آسان میان خودروهای ثبت‌شده در گاراژ",
+  "@vehicleNicknameHelp": {
+    "description": "Help text under the nickname field."
+  },
+  "vehicleNicknameError": "نام خودرو را وارد کنید (حداکثر {max} نویسه)",
+  "@vehicleNicknameError": {
+    "description": "Error when the nickname is empty or too long.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "example": "40",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "vehiclePlateLabel": "پلاک ملی خودرو",
+  "@vehiclePlateLabel": {
+    "description": "Label of the plate input."
+  },
+  "vehiclePlateBadge": "استاندارد راهور",
+  "@vehiclePlateBadge": {
+    "description": "Small note next to the plate label."
+  },
+  "vehiclePlateHelp": "ترتیب درج: دو رقم، حرف الفبا، سه رقم و کد استان دو رقمی معتبر",
+  "@vehiclePlateHelp": {
+    "description": "Help text under the plate input."
+  },
+  "vehiclePlateTwoDigits": "دو رقم پلاک",
+  "@vehiclePlateTwoDigits": {
+    "description": "Screen-reader label of the plate's two-digit box."
+  },
+  "vehiclePlateLetter": "حرف الفبای پلاک",
+  "@vehiclePlateLetter": {
+    "description": "Screen-reader label of the plate's letter picker."
+  },
+  "vehiclePlateThreeDigits": "سه رقم پلاک",
+  "@vehiclePlateThreeDigits": {
+    "description": "Screen-reader label of the plate's three-digit box."
+  },
+  "vehiclePlateProvince": "کد استان پلاک",
+  "@vehiclePlateProvince": {
+    "description": "Screen-reader label of the plate's province code box."
+  },
+  "vehiclePlateIran": "ایران",
+  "@vehiclePlateIran": {
+    "description": "Word printed above the province code on an Iranian plate (as on the real plate)."
+  },
+  "vehiclePlateBandTop": "I.R.",
+  "@vehiclePlateBandTop": {
+    "description": "First line printed on the blue band of the plate."
+  },
+  "vehiclePlateBandBottom": "IRAN",
+  "@vehiclePlateBandBottom": {
+    "description": "Second line printed on the blue band of the plate."
+  },
+  "vehiclePlateError": "پلاک را کامل و درست وارد کنید",
+  "@vehiclePlateError": {
+    "description": "Error when the plate is incomplete or invalid."
+  },
+  "vehiclePlateTaken": "این پلاک قبلاً در گاراژ شما ثبت شده است",
+  "@vehiclePlateTaken": {
+    "description": "Error when the plate is already registered (HTTP 409)."
+  },
+  "vehicleVinLabel": "کد شناسایی خودرو (VIN)",
+  "@vehicleVinLabel": {
+    "description": "Label of the VIN field."
+  },
+  "vehicleVinBadge": "{count} کاراکتر انگلیسی",
+  "@vehicleVinBadge": {
+    "description": "Small note next to the VIN label.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "17",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "vehicleVinHint": "NAAM21CA9KK123456",
+  "@vehicleVinHint": {
+    "description": "Placeholder of the VIN field: a sample valid VIN."
+  },
+  "vehicleVinHelp": "کد هفده‌رقمی مندرج در کارت مشخصات خودرو یا لبه شیشه جلو",
+  "@vehicleVinHelp": {
+    "description": "Help text under the VIN field."
+  },
+  "vehicleVinError": "VIN باید {count} حرف انگلیسی یا رقم باشد (بدون I، O و Q)",
+  "@vehicleVinError": {
+    "description": "Error when the VIN is not valid.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "17",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "vehicleMakeSectionTitle": "سازنده و مشخصات فنی",
+  "@vehicleMakeSectionTitle": {
+    "description": "Heading of the make, model and trim section."
+  },
+  "vehicleMakeSectionBadge": "فهرست رسمی کارخانه",
+  "@vehicleMakeSectionBadge": {
+    "description": "Small note next to the make section heading."
+  },
+  "vehicleMakeLabel": "برند / سازنده",
+  "@vehicleMakeLabel": {
+    "description": "Label of the make dropdown."
+  },
+  "vehicleModelLabel": "مدل خودرو",
+  "@vehicleModelLabel": {
+    "description": "Label of the model dropdown."
+  },
+  "vehicleTrimLabel": "تیپ و گیربکس",
+  "@vehicleTrimLabel": {
+    "description": "Label of the trim dropdown."
+  },
+  "vehicleMakeHint": "انتخاب برند",
+  "@vehicleMakeHint": {
+    "description": "Placeholder of the make dropdown."
+  },
+  "vehicleModelHint": "انتخاب مدل",
+  "@vehicleModelHint": {
+    "description": "Placeholder of the model dropdown."
+  },
+  "vehicleTrimHint": "انتخاب تیپ",
+  "@vehicleTrimHint": {
+    "description": "Placeholder of the trim dropdown."
+  },
+  "vehicleMakeError": "برند را انتخاب کنید",
+  "@vehicleMakeError": {
+    "description": "Error when no make is chosen."
+  },
+  "vehicleModelError": "مدل را انتخاب کنید",
+  "@vehicleModelError": {
+    "description": "Error when no model is chosen."
+  },
+  "vehicleTrimError": "تیپ انتخاب‌شده معتبر نیست",
+  "@vehicleTrimError": {
+    "description": "Error when the server rejects the trim."
+  },
+  "vehicleCatalogError": "دریافت فهرست خودروها ممکن نشد",
+  "@vehicleCatalogError": {
+    "description": "Shown when the make/model catalog could not be loaded."
+  },
+  "vehicleYearLabel": "سال ساخت (خورشیدی)",
+  "@vehicleYearLabel": {
+    "description": "Label of the model year field."
+  },
+  "vehicleYearBadge": "تقویم جلالی",
+  "@vehicleYearBadge": {
+    "description": "Small note next to the model year label."
+  },
+  "vehicleYearHint": "انتخاب سال",
+  "@vehicleYearHint": {
+    "description": "Shown in the model year field before a year is chosen."
+  },
+  "vehicleYearPickerTitle": "انتخاب سال ساخت (خورشیدی)",
+  "@vehicleYearPickerTitle": {
+    "description": "Title of the model year picker sheet."
+  },
+  "vehicleYearZeroKm": "{year} (صفر کیلومتر)",
+  "@vehicleYearZeroKm": {
+    "description": "The newest year in the picker. year is already locale-formatted.",
+    "placeholders": {
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۶"
+      }
+    }
+  },
+  "vehicleYearConfirm": "تأیید سال",
+  "@vehicleYearConfirm": {
+    "description": "Button that confirms the model year."
+  },
+  "vehicleYearClose": "بستن",
+  "@vehicleYearClose": {
+    "description": "Tooltip of the button that closes the year picker."
+  },
+  "vehicleYearError": "سال ساخت را انتخاب کنید",
+  "@vehicleYearError": {
+    "description": "Error when no valid model year is chosen."
+  },
+  "vehicleMileageLabel": "کارکرد فعلی کیلومترشمار",
+  "@vehicleMileageLabel": {
+    "description": "Label of the odometer field."
+  },
+  "vehicleMileageBadge": "بسیار مهم",
+  "@vehicleMileageBadge": {
+    "description": "Chip next to the odometer label."
+  },
+  "vehicleMileageUnit": "کیلومتر",
+  "@vehicleMileageUnit": {
+    "description": "Unit shown inside the odometer field."
+  },
+  "vehicleMileageHelp": "مبنای دقیق کلیه هشدارهای دوره‌ای سرویس، روغن موتور، بیمه و محاسبات استهلاک گاراژ",
+  "@vehicleMileageHelp": {
+    "description": "Help text under the odometer field."
+  },
+  "vehicleMileageError": "کارکرد را بین ۰ تا {max} کیلومتر وارد کنید",
+  "@vehicleMileageError": {
+    "description": "Error when the odometer is empty or out of range.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "2000000"
+      }
+    }
+  },
+  "vehicleColorLabel": "رنگ بدنه",
+  "@vehicleColorLabel": {
+    "description": "Label of the colour swatches."
+  },
+  "vehicleColorWhite": "سفید روغنی",
+  "@vehicleColorWhite": {
+    "description": "Name of the white body colour."
+  },
+  "vehicleColorBlack": "مشکی آبنوس",
+  "@vehicleColorBlack": {
+    "description": "Name of the black body colour."
+  },
+  "vehicleColorSilver": "نقره‌ای متالیک",
+  "@vehicleColorSilver": {
+    "description": "Name of the silver body colour."
+  },
+  "vehicleColorBlue": "آبی رویال / کاربنی",
+  "@vehicleColorBlue": {
+    "description": "Name of the blue body colour."
+  },
+  "vehicleColorRed": "قرمز رژ روناس",
+  "@vehicleColorRed": {
+    "description": "Name of the red body colour."
+  },
+  "vehicleColorBeige": "بژ تیتانیوم",
+  "@vehicleColorBeige": {
+    "description": "Name of the beige body colour."
+  },
+  "vehicleColorError": "رنگ انتخاب‌شده معتبر نیست",
+  "@vehicleColorError": {
+    "description": "Error when the server rejects the colour."
+  },
+  "vehicleDefaultTitle": "تنظیم به عنوان خودروی پیش‌فرض",
+  "@vehicleDefaultTitle": {
+    "description": "Title of the default-vehicle toggle."
+  },
+  "vehicleDefaultBody": "ثبت سریع سوخت، سرویس‌ها و داده‌های داشبورد به صورت خودکار برای این خودرو در اولویت قرار می‌گیرد.",
+  "@vehicleDefaultBody": {
+    "description": "Description of the default-vehicle toggle."
+  },
+  "vehicleSave": "ثبت و افزودن به گاراژ",
+  "@vehicleSave": {
+    "description": "Primary button of the add-vehicle form."
+  },
+  "vehicleSaving": "در حال ذخیره‌سازی...",
+  "@vehicleSaving": {
+    "description": "Primary button label while the vehicle is saved."
+  },
+  "vehicleCancel": "انصراف",
+  "@vehicleCancel": {
+    "description": "Button that leaves the vehicle form without saving."
+  },
+  "vehicleAdded": "خودرو اضافه شد",
+  "@vehicleAdded": {
+    "description": "Shown after a vehicle was added."
+  },
+  "vehicleAddedPhotoFailed": "خودرو اضافه شد، اما بارگذاری تصویر ناموفق بود",
+  "@vehicleAddedPhotoFailed": {
+    "description": "Shown when the vehicle was added but its photo upload failed."
+  },
+  "vehicleSaveInvalid": "برخی اطلاعات معتبر نیست؛ موارد مشخص‌شده را بررسی کنید",
+  "@vehicleSaveInvalid": {
+    "description": "Shown when the vehicle form has invalid fields."
+  },
+  "vehicleSaveFailed": "ذخیره خودرو ممکن نشد. دوباره تلاش کنید",
+  "@vehicleSaveFailed": {
+    "description": "Shown when saving the vehicle failed for another reason."
+  },
+  "vehiclePlateText": "{twoDigits} {letter} {threeDigits} ایران {provinceCode}",
+  "@vehiclePlateText": {
+    "description": "A plate written on one line. Digits are already locale-formatted.",
+    "placeholders": {
+      "twoDigits": {
+        "type": "String",
+        "example": "۷۲"
+      },
+      "letter": {
+        "type": "String",
+        "example": "ب"
+      },
+      "threeDigits": {
+        "type": "String",
+        "example": "۳۴۵"
+      },
+      "provinceCode": {
+        "type": "String",
+        "example": "۶۸"
+      }
+    }
+  },
+  "vehicleTileSubtitle": "{make} {model} • {plate}",
+  "@vehicleTileSubtitle": {
+    "description": "Second line of a vehicle in the garage list.",
+    "placeholders": {
+      "make": {
+        "type": "String",
+        "example": "ایران خودرو"
+      },
+      "model": {
+        "type": "String",
+        "example": "تارا"
+      },
+      "plate": {
+        "type": "String",
+        "example": "۷۲ ب ۳۴۵ ایران ۶۸"
+      }
+    }
+  },
+  "vehiclePlateLetterHint": "حرف",
+  "@vehiclePlateLetterHint": {
+    "description": "Shown in the plate letter picker before a letter is chosen."
   }
 }

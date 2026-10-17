@@ -7,7 +7,9 @@ void main() {
   const splash = AppRoutes.splashPath;
   const phone = AppRoutes.phonePath;
   const otp = AppRoutes.otpPath;
+  const home = AppRoutes.homePath;
   const vehicles = AppRoutes.vehiclesPath;
+  const profile = AppRoutes.completeProfilePath;
 
   test('splash is never redirected', () {
     for (final status in AuthStatus.values) {
@@ -27,9 +29,28 @@ void main() {
   });
 
   test('signed in skips the sign-in flow', () {
-    expect(authRedirect(AuthStatus.signedIn, phone), vehicles);
-    expect(authRedirect(AuthStatus.signedIn, otp), vehicles);
-    expect(authRedirect(AuthStatus.signedIn, vehicles), isNull);
+    expect(authRedirect(AuthStatus.signedIn, phone), home);
+    expect(authRedirect(AuthStatus.signedIn, otp), home);
+    for (final tab in [home, vehicles, AppRoutes.historyPath, AppRoutes.profilePath]) {
+      expect(authRedirect(AuthStatus.signedIn, tab), isNull);
+    }
+  });
+
+  test('an incomplete profile is always sent to complete-profile', () {
+    expect(authRedirect(AuthStatus.profileIncomplete, profile), isNull);
+    expect(authRedirect(AuthStatus.profileIncomplete, vehicles), profile);
+    expect(authRedirect(AuthStatus.profileIncomplete, phone), profile);
+    expect(authRedirect(AuthStatus.profileIncomplete, otp), profile);
+    expect(authRedirect(AuthStatus.profileIncomplete, '/anything'), profile);
+  });
+
+  test('a complete profile cannot open complete-profile', () {
+    expect(authRedirect(AuthStatus.signedIn, profile), home);
+  });
+
+  test('signed out cannot open complete-profile', () {
+    expect(authRedirect(AuthStatus.signedOut, profile), phone);
+    expect(authRedirect(AuthStatus.unknown, profile), splash);
   });
 
   test('only the sign-in routes count as the sign-in flow', () {

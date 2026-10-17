@@ -32,7 +32,32 @@ class SmsSendFailure extends Failure {
   const SmsSendFailure([super.message = 'SMS provider failed']);
 }
 
-/// The stored token is missing, invalid or expired (HTTP 401 on authenticated calls).
+/// The stored token is missing, invalid or expired (HTTP 401 on authenticated calls), or the
+/// account no longer exists (HTTP 404 on `/api/auth/me`).
 class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure([super.message = 'Unauthorized']);
+}
+
+/// Which profile field a validation error belongs to.
+enum ProfileField { firstName, lastName, birthDate }
+
+/// The profile was rejected: by the client rules ([field] is set) or by the server (HTTP 400,
+/// [field] is `null` because the error body does not name one).
+class InvalidProfileFailure extends Failure {
+  const InvalidProfileFailure({this.field, String message = 'Invalid profile'}) : super(message);
+
+  final ProfileField? field;
+
+  @override
+  List<Object?> get props => [message, field];
+}
+
+/// The photo was rejected: missing or not a JPEG, PNG or WebP image (HTTP 400).
+class InvalidAvatarFailure extends Failure {
+  const InvalidAvatarFailure([super.message = 'Invalid image']);
+}
+
+/// The photo is larger than [AvatarFile.maxBytes] (client check or HTTP 413).
+class AvatarTooLargeFailure extends Failure {
+  const AvatarTooLargeFailure([super.message = 'Image too large']);
 }

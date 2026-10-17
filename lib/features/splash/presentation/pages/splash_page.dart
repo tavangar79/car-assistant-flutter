@@ -14,7 +14,7 @@ import '../widgets/splash_loading_bar.dart';
 import '../widgets/version_badge.dart';
 
 /// Branded launch screen. Restores the session, then after at least [splashDelayProvider] moves
-/// to the vehicles page; the router guard sends signed-out users to the phone page instead.
+/// to the home tab; the router guard sends signed-out users to the phone page instead.
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
@@ -32,7 +32,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     _timer = Timer(ref.read(splashDelayProvider), delay.complete);
     final session = ref.read(authStatusProvider.notifier).restore();
     Future.wait([delay.future, session]).then((_) {
-      if (mounted) context.go(AppRoutes.vehiclesPath);
+      if (mounted) context.go(AppRoutes.homePath);
     });
   }
 

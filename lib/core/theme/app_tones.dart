@@ -10,6 +10,11 @@ class AppTones extends ThemeExtension<AppTones> {
     required this.muted,
     required this.label,
     required this.success,
+    required this.accentOnPrimary,
+    required this.ok,
+    required this.dueSoon,
+    required this.overdue,
+    required this.info,
     required this.amber,
     required this.neutral,
     required this.emerald,
@@ -21,8 +26,18 @@ class AppTones extends ThemeExtension<AppTones> {
   /// Field labels and strong secondary text (Stitch slate-700).
   final Color label;
 
-  /// Positive status, e.g. a complete phone number (Stitch emerald-600).
+  /// Positive inline status, e.g. a complete phone number (Stitch emerald-600).
   final Color success;
+
+  /// Accent glyph on a primary-filled control, e.g. the dock's add button (amber on navy).
+  final Color accentOnPrimary;
+
+  /// Status matrix: سالم, نزدیک به موعد, رسیدگی فوری, اطلاعاتی. Foreground in `foreground`,
+  /// container in `background`.
+  final ToneColors ok;
+  final ToneColors dueSoon;
+  final ToneColors overdue;
+  final ToneColors info;
 
   final ToneColors amber;
   final ToneColors neutral;
@@ -32,8 +47,13 @@ class AppTones extends ThemeExtension<AppTones> {
     muted: AppColors.slate500,
     label: AppColors.slate700,
     success: AppColors.emerald600,
+    accentOnPrimary: AppColors.amber,
+    ok: ToneColors.status(AppColors.statusOk, AppColors.statusOkContainer),
+    dueSoon: ToneColors.status(AppColors.statusDueSoon, AppColors.statusDueSoonContainer),
+    overdue: ToneColors.status(AppColors.statusOverdue, AppColors.statusOverdueContainer),
+    info: ToneColors.status(AppColors.statusInfo, AppColors.statusInfoContainer),
     amber: ToneColors(
-      background: AppColors.amber50,
+      background: AppColors.statusDueSoonContainer,
       border: AppColors.amber200,
       foreground: AppColors.amber600,
       chipBackground: AppColors.amber100,
@@ -47,38 +67,11 @@ class AppTones extends ThemeExtension<AppTones> {
       chipForeground: AppColors.slate,
     ),
     emerald: ToneColors(
-      background: AppColors.emerald50,
+      background: AppColors.statusOkContainer,
       border: AppColors.emerald200,
       foreground: AppColors.emerald600,
       chipBackground: AppColors.emerald100,
       chipForeground: AppColors.emerald800,
-    ),
-  );
-
-  static const dark = AppTones(
-    muted: AppColors.outline,
-    label: AppColors.slate300,
-    success: AppColors.emerald400,
-    amber: ToneColors(
-      background: AppColors.amber950,
-      border: AppColors.amber800,
-      foreground: AppColors.amber,
-      chipBackground: AppColors.amber900,
-      chipForeground: AppColors.amber200,
-    ),
-    neutral: ToneColors(
-      background: AppColors.slate,
-      border: AppColors.slate700,
-      foreground: AppColors.canvas,
-      chipBackground: AppColors.slate700,
-      chipForeground: AppColors.slate300,
-    ),
-    emerald: ToneColors(
-      background: AppColors.emerald950,
-      border: AppColors.emerald800,
-      foreground: AppColors.emerald400,
-      chipBackground: AppColors.emerald900,
-      chipForeground: AppColors.emerald200,
     ),
   );
 
@@ -89,6 +82,11 @@ class AppTones extends ThemeExtension<AppTones> {
     Color? muted,
     Color? label,
     Color? success,
+    Color? accentOnPrimary,
+    ToneColors? ok,
+    ToneColors? dueSoon,
+    ToneColors? overdue,
+    ToneColors? info,
     ToneColors? amber,
     ToneColors? neutral,
     ToneColors? emerald,
@@ -96,6 +94,11 @@ class AppTones extends ThemeExtension<AppTones> {
     muted: muted ?? this.muted,
     label: label ?? this.label,
     success: success ?? this.success,
+    accentOnPrimary: accentOnPrimary ?? this.accentOnPrimary,
+    ok: ok ?? this.ok,
+    dueSoon: dueSoon ?? this.dueSoon,
+    overdue: overdue ?? this.overdue,
+    info: info ?? this.info,
     amber: amber ?? this.amber,
     neutral: neutral ?? this.neutral,
     emerald: emerald ?? this.emerald,
@@ -108,6 +111,11 @@ class AppTones extends ThemeExtension<AppTones> {
       muted: Color.lerp(muted, other.muted, t)!,
       label: Color.lerp(label, other.label, t)!,
       success: Color.lerp(success, other.success, t)!,
+      accentOnPrimary: Color.lerp(accentOnPrimary, other.accentOnPrimary, t)!,
+      ok: ToneColors.lerp(ok, other.ok, t),
+      dueSoon: ToneColors.lerp(dueSoon, other.dueSoon, t),
+      overdue: ToneColors.lerp(overdue, other.overdue, t),
+      info: ToneColors.lerp(info, other.info, t),
       amber: ToneColors.lerp(amber, other.amber, t),
       neutral: ToneColors.lerp(neutral, other.neutral, t),
       emerald: ToneColors.lerp(emerald, other.emerald, t),

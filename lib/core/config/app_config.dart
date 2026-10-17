@@ -9,4 +9,7 @@ class AppConfig {
     'API_BASE_URL',
     defaultValue: 'http://localhost:3000',
   );
+
+  /// Debug-only auto-login token, from `--dart-define-from-file=dart_defines.dev.json`. Empty by default.
+  static const devToken = String.fromEnvironment('DEV_TOKEN');
 }
