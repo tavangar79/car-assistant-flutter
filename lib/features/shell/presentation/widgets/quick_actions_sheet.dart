@@ -9,19 +9,23 @@ import '../../../vehicles/presentation/providers/vehicle_providers.dart';
 import '../../../vehicles/presentation/widgets/plate_text.dart';
 
 /// "اقدامات سریع" (Stitch `8666dc1c749b4630bbe951bb49aa89bb`), opened by the dock's add button:
-/// the active vehicle (the default one, else the first), then the entries. Fuel and expense are
-/// disabled until their phase; the odometer and service entries need a vehicle.
-/// The sheet closes itself before calling [onUpdateOdometer], [onAddService] or [onAddVehicle].
+/// the active vehicle (the default one, else the first), then the entries. The odometer, service,
+/// fuel and expense entries need a vehicle.
+/// The sheet closes itself before calling any of the callbacks.
 class QuickActionsSheet extends ConsumerWidget {
   const QuickActionsSheet({
     super.key,
     required this.onUpdateOdometer,
     required this.onAddService,
+    required this.onAddFuel,
+    required this.onAddExpense,
     required this.onAddVehicle,
   });
 
   final ValueChanged<Vehicle> onUpdateOdometer;
   final ValueChanged<Vehicle> onAddService;
+  final ValueChanged<Vehicle> onAddFuel;
+  final ValueChanged<Vehicle> onAddExpense;
   final VoidCallback onAddVehicle;
 
   /// Opens the sheet above the whole app.
@@ -29,6 +33,8 @@ class QuickActionsSheet extends ConsumerWidget {
     BuildContext context, {
     required ValueChanged<Vehicle> onUpdateOdometer,
     required ValueChanged<Vehicle> onAddService,
+    required ValueChanged<Vehicle> onAddFuel,
+    required ValueChanged<Vehicle> onAddExpense,
     required VoidCallback onAddVehicle,
   }) => showModalBottomSheet<void>(
     context: context,
@@ -42,6 +48,8 @@ class QuickActionsSheet extends ConsumerWidget {
     builder: (_) => QuickActionsSheet(
       onUpdateOdometer: onUpdateOdometer,
       onAddService: onAddService,
+      onAddFuel: onAddFuel,
+      onAddExpense: onAddExpense,
       onAddVehicle: onAddVehicle,
     ),
   );
@@ -131,12 +139,14 @@ class QuickActionsSheet extends ConsumerWidget {
             tone: tones.neutral,
             title: l10n.quickActionFuelTitle,
             body: l10n.quickActionFuelBody,
+            onTap: active == null ? null : () => close(() => onAddFuel(active)),
           ),
           _ActionRow(
             icon: Icons.receipt_long_outlined,
             tone: tones.neutral,
             title: l10n.quickActionExpenseTitle,
             body: l10n.quickActionExpenseBody,
+            onTap: active == null ? null : () => close(() => onAddExpense(active)),
           ),
           Divider(height: 13, thickness: 1, color: scheme.surfaceContainerHighest),
           _ActionRow(
@@ -232,7 +242,7 @@ class _ActiveVehicleBanner extends StatelessWidget {
 }
 
 /// One 64dp entry: tinted icon tile, title (and optional tag), one-line description, chevron.
-/// Without [onTap] it is shown disabled (its page isn't built yet, or no vehicle exists).
+/// Without [onTap] it is shown disabled (no vehicle exists).
 class _ActionRow extends StatelessWidget {
   const _ActionRow({
     required this.icon,

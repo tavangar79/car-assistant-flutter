@@ -15,6 +15,10 @@ import 'package:car_assistant/features/odometer/domain/repositories/odometer_rep
 import 'package:car_assistant/features/odometer/presentation/providers/odometer_providers.dart';
 import 'package:car_assistant/features/intervals/domain/repositories/interval_repository.dart';
 import 'package:car_assistant/features/intervals/presentation/providers/interval_providers.dart';
+import 'package:car_assistant/features/expenses/domain/repositories/expense_repository.dart';
+import 'package:car_assistant/features/expenses/presentation/providers/expense_providers.dart';
+import 'package:car_assistant/features/fuel/domain/repositories/fuel_repository.dart';
+import 'package:car_assistant/features/fuel/presentation/providers/fuel_providers.dart';
 import 'package:car_assistant/features/services/domain/repositories/service_repository.dart';
 import 'package:car_assistant/features/services/presentation/providers/service_providers.dart';
 import 'package:car_assistant/features/vehicles/domain/entities/vehicle.dart';
@@ -43,6 +47,10 @@ class MockServiceRepository extends Mock implements ServiceRepository {}
 
 class MockIntervalRepository extends Mock implements IntervalRepository {}
 
+class MockFuelRepository extends Mock implements FuelRepository {}
+
+class MockExpenseRepository extends Mock implements ExpenseRepository {}
+
 void main() {
   const delay = Duration(milliseconds: 10);
 
@@ -53,12 +61,16 @@ void main() {
     final odometer = MockOdometerRepository();
     final services = MockServiceRepository();
     final intervals = MockIntervalRepository();
+    final fuel = MockFuelRepository();
+    final expenses = MockExpenseRepository();
     when(() => services.getCatalog()).thenAnswer((_) async => const Right([]));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right(garage));
     for (final vehicle in garage) {
       when(() => vehicles.getVehicle(vehicle.id)).thenAnswer((_) async => Right(vehicle));
       when(() => odometer.getReadings(vehicle.id)).thenAnswer((_) async => const Right([]));
       when(() => services.getVisits(vehicle.id)).thenAnswer((_) async => const Right([]));
+      when(() => fuel.getLogs(vehicle.id)).thenAnswer((_) async => const Right([]));
+      when(() => expenses.getExpenses(vehicle.id)).thenAnswer((_) async => const Right([]));
       when(() => intervals.getDue(vehicle.id))
           .thenAnswer((_) async => Right(due_fixtures.allOkReport));
     }
@@ -81,6 +93,8 @@ void main() {
           odometerRepositoryProvider.overrideWithValue(odometer),
           serviceRepositoryProvider.overrideWithValue(services),
           intervalRepositoryProvider.overrideWithValue(intervals),
+          fuelRepositoryProvider.overrideWithValue(fuel),
+          expenseRepositoryProvider.overrideWithValue(expenses),
           authRepositoryProvider.overrideWithValue(auth),
           splashDelayProvider.overrideWithValue(delay),
           packageInfoProvider.overrideWith(

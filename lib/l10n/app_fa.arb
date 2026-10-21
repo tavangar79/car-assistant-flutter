@@ -2422,5 +2422,588 @@
   "serviceSharedCardBody": "تعمیرگاه و تصویر فاکتور برای همه اقلام این مراجعه",
   "@serviceSharedCardBody": {
     "description": "Subtitle of the shared card at the top of step 3."
+  },
+  "fuelPageTitle": "ثبت سوخت‌گیری",
+  "@fuelPageTitle": {
+    "description": "App bar title of the new fuel log page."
+  },
+  "fuelLastFillFull": "آخرین سوخت‌گیری: {date} • {km} کیلومتر (باک پر)",
+  "@fuelLastFillFull": {
+    "description": "Header line of the fuel page when the last log was a full fill.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelLastFillPartial": "آخرین سوخت‌گیری: {date} • {km} کیلومتر",
+  "@fuelLastFillPartial": {
+    "description": "Header line of the fuel page when the last log was a partial fill.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelNoLastFill": "هنوز سوخت‌گیری ثبت نشده است",
+  "@fuelNoLastFill": {
+    "description": "Header line of the fuel page when the vehicle has no fuel log."
+  },
+  "fuelDateLabel": "تاریخ سوخت‌گیری",
+  "@fuelDateLabel": {
+    "description": "Label of the date card on the fuel page."
+  },
+  "fuelDateOther": "انتخاب تاریخ دیگر",
+  "@fuelDateOther": {
+    "description": "Chip that opens the Jalali date picker on the fuel page."
+  },
+  "fuelDatePickTitle": "تاریخ سوخت‌گیری (تقویم جلالی)",
+  "@fuelDatePickTitle": {
+    "description": "Title of the date picker sheet on the fuel page."
+  },
+  "fuelTimePickHelp": "ساعت سوخت‌گیری",
+  "@fuelTimePickHelp": {
+    "description": "Help text of the time picker on the fuel page."
+  },
+  "fuelTimeHint": "تغییر ساعت",
+  "@fuelTimeHint": {
+    "description": "Tooltip of the time on the fuel date card."
+  },
+  "fuelOdometerLabel": "کارکرد کیلومترشمار فعلی",
+  "@fuelOdometerLabel": {
+    "description": "Label of the odometer card on the fuel page."
+  },
+  "fuelOdometerPrevious": "سند ثبت‌شده قبلی: {km}",
+  "@fuelOdometerPrevious": {
+    "description": "Trailing hint of the odometer card: the vehicle's current mileage.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelOdometerSinceLast": "{diff} کیلومتر پیمایش از باک قبل",
+  "@fuelOdometerSinceLast": {
+    "description": "Distance between the entered odometer and the last fuel log's odometer, with its sign.",
+    "placeholders": {
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelTypeLabel": "نوع سوخت دریافتی",
+  "@fuelTypeLabel": {
+    "description": "Label of the fuel type segmented control."
+  },
+  "fuelTypeRegular": "معمولی",
+  "@fuelTypeRegular": {
+    "description": "Fuel type `regular`."
+  },
+  "fuelTypeSuper": "سوپر",
+  "@fuelTypeSuper": {
+    "description": "Fuel type `super`."
+  },
+  "fuelTypeCng": "CNG",
+  "@fuelTypeCng": {
+    "description": "Fuel type `cng`."
+  },
+  "fuelTypeLpg": "LPG",
+  "@fuelTypeLpg": {
+    "description": "Fuel type `lpg`."
+  },
+  "fuelVolumeLabel": "حجم سوخت‌گیری",
+  "@fuelVolumeLabel": {
+    "description": "Label of the volume field."
+  },
+  "fuelUnitLitre": "لیتر",
+  "@fuelUnitLitre": {
+    "description": "Volume unit for liquid fuels."
+  },
+  "fuelUnitCubicMetre": "متر مکعب",
+  "@fuelUnitCubicMetre": {
+    "description": "Volume unit for CNG."
+  },
+  "fuelTotalCostLabel": "مبلغ کل پرداختی",
+  "@fuelTotalCostLabel": {
+    "description": "Label of the total cost field."
+  },
+  "fuelRateLabel": "نرخ محاسبه‌شده:",
+  "@fuelRateLabel": {
+    "description": "Label of the computed price per unit row."
+  },
+  "fuelRateValue": "{amount} تومان / {unit}",
+  "@fuelRateValue": {
+    "description": "Price per unit, computed from the total cost and the volume.",
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelFullFillTitle": "باک کاملاً پر شد (باک پر)",
+  "@fuelFullFillTitle": {
+    "description": "Title of the full-fill toggle."
+  },
+  "fuelFullFillBody": "جهت محاسبه دقیق مصرف سوخت در ۱۰۰ کیلومتر، فعال‌بودن این گزینه الزامی است.",
+  "@fuelFullFillBody": {
+    "description": "Body of the full-fill toggle."
+  },
+  "fuelEconomyTitle": "میانگین مصرف این دوره:",
+  "@fuelEconomyTitle": {
+    "description": "Title of the economy preview card."
+  },
+  "fuelEconomyUnit": "{unit} در ۱۰۰ کیلومتر",
+  "@fuelEconomyUnit": {
+    "description": "Unit after the economy figure.",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelEconomyBreakdown": "{km} کیلومتر پیمایش با {volume} {unit} سوخت (از باک پر قبلی تا الان)",
+  "@fuelEconomyBreakdown": {
+    "description": "How the preview was computed.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "volume": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelEconomyDisclaimer": "اگر این باک کامل پر نشده بود، به جای عدد عبارت «قابل محاسبه نیست» نمایش داده می‌شد.",
+  "@fuelEconomyDisclaimer": {
+    "description": "Footnote of the economy preview card when computable."
+  },
+  "fuelEconomyUnavailable": "برای محاسبه، این باک و باک قبلی باید کامل پر شده و نوع سوخت یکسان باشد.",
+  "@fuelEconomyUnavailable": {
+    "description": "Footnote of the economy preview card when not computable."
+  },
+  "fuelStationLabel": "جایگاه سوخت",
+  "@fuelStationLabel": {
+    "description": "Label of the station field."
+  },
+  "fuelPaymentLabel": "روش پرداخت و سهمیه",
+  "@fuelPaymentLabel": {
+    "description": "Label of the payment method picker."
+  },
+  "fuelPaymentPick": "انتخاب روش پرداخت",
+  "@fuelPaymentPick": {
+    "description": "Placeholder of the payment method picker."
+  },
+  "fuelPaymentPersonalFuelCard": "کارت‌خوان جایگاه (کارت سوخت شخصی)",
+  "@fuelPaymentPersonalFuelCard": {
+    "description": "Payment method `personal_fuel_card`."
+  },
+  "fuelPaymentStationFuelCard": "کارت سوخت جایگاه (نرخ آزاد)",
+  "@fuelPaymentStationFuelCard": {
+    "description": "Payment method `station_fuel_card`."
+  },
+  "fuelPaymentBankCard": "کارت بانکی",
+  "@fuelPaymentBankCard": {
+    "description": "Payment method `bank_card`."
+  },
+  "fuelPaymentCash": "نقدی",
+  "@fuelPaymentCash": {
+    "description": "Payment method `cash`."
+  },
+  "fuelNotesLabel": "یادداشت (اختیاری)",
+  "@fuelNotesLabel": {
+    "description": "Label of the notes field."
+  },
+  "fuelNotesHint": "مثال: استفاده از مکمل سوخت یا وضعیت پمپ...",
+  "@fuelNotesHint": {
+    "description": "Placeholder of the notes field."
+  },
+  "fuelSubmit": "ثبت سوخت‌گیری و ذخیره",
+  "@fuelSubmit": {
+    "description": "Primary button of the fuel page."
+  },
+  "fuelCancel": "انصراف و بازگشت",
+  "@fuelCancel": {
+    "description": "Secondary button of the fuel page."
+  },
+  "fuelSaved": "سوخت‌گیری ثبت شد",
+  "@fuelSaved": {
+    "description": "Snackbar after a fuel log is saved."
+  },
+  "fuelSaveFailed": "ثبت سوخت‌گیری ممکن نشد",
+  "@fuelSaveFailed": {
+    "description": "Snackbar when saving the fuel log fails."
+  },
+  "fuelSaveInvalid": "برخی مقادیر نامعتبر است، فرم را بررسی کنید",
+  "@fuelSaveInvalid": {
+    "description": "Snackbar when the fuel log was rejected for invalid fields."
+  },
+  "fuelDateInFuture": "تاریخ و ساعت سوخت‌گیری نمی‌تواند در آینده باشد",
+  "@fuelDateInFuture": {
+    "description": "Error when the fill-up date is after now."
+  },
+  "fuelVolumeError": "حجم سوخت را وارد کنید (بیشتر از ۰ و حداکثر {max})",
+  "@fuelVolumeError": {
+    "description": "Inline error of the volume field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelTotalCostError": "مبلغ کل پرداختی را وارد کنید",
+  "@fuelTotalCostError": {
+    "description": "Inline error of the total cost field."
+  },
+  "fuelStationError": "نام جایگاه حداکثر {max} حرف است",
+  "@fuelStationError": {
+    "description": "Inline error of the station field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelNotesError": "یادداشت حداکثر {max} حرف است",
+  "@fuelNotesError": {
+    "description": "Inline error of the notes field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "fuelSectionTitle": "آخرین سوخت‌گیری‌ها",
+  "@fuelSectionTitle": {
+    "description": "Heading of the fuel section on the vehicle details page."
+  },
+  "fuelSectionEmpty": "هنوز سوخت‌گیری برای این خودرو ثبت نشده است",
+  "@fuelSectionEmpty": {
+    "description": "Empty state of the fuel section."
+  },
+  "fuelSectionLoadError": "دریافت سوخت‌گیری‌ها ممکن نشد",
+  "@fuelSectionLoadError": {
+    "description": "Error of the fuel section."
+  },
+  "fuelRowTitle": "{type} • {volume} {unit}",
+  "@fuelRowTitle": {
+    "description": "Title of a fuel row: type, volume and unit.",
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "volume": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "fuelRowEconomy": "{economy} {unit}/۱۰۰ ک‌م",
+  "@fuelRowEconomy": {
+    "description": "Economy badge of a fuel row.",
+    "placeholders": {
+      "economy": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "expensePageTitle": "ثبت هزینه",
+  "@expensePageTitle": {
+    "description": "App bar title and submit label of the new expense page."
+  },
+  "expenseManualNotice": "کلیه ردیف‌های این بخش، ثبت دستی اطلاعات توسط کاربر است و ارتباط یا استعلام مستقیمی از سامانه‌های بیرونی انجام نمی‌شود.",
+  "@expenseManualNotice": {
+    "description": "Notice at the top of the expense page."
+  },
+  "expenseCategoryLabel": "انتخاب سرفصل هزینه",
+  "@expenseCategoryLabel": {
+    "description": "Label of the category grid."
+  },
+  "expenseCategoryBadge": "دسته‌بندی اصلی",
+  "@expenseCategoryBadge": {
+    "description": "Trailing hint of the category grid."
+  },
+  "expenseCategoryThirdPartyInsurance": "بیمه شخص ثالث",
+  "@expenseCategoryThirdPartyInsurance": {
+    "description": "Category `third_party_insurance`."
+  },
+  "expenseCategoryBodyInsurance": "بیمه بدنه",
+  "@expenseCategoryBodyInsurance": {
+    "description": "Category `body_insurance`."
+  },
+  "expenseCategoryFine": "جریمه رانندگی",
+  "@expenseCategoryFine": {
+    "description": "Category `fine`."
+  },
+  "expenseCategoryToll": "عوارض و طرح",
+  "@expenseCategoryToll": {
+    "description": "Category `toll`."
+  },
+  "expenseCategoryInspection": "معاینه فنی",
+  "@expenseCategoryInspection": {
+    "description": "Category `inspection`."
+  },
+  "expenseCategoryOther": "سایر هزینه‌ها",
+  "@expenseCategoryOther": {
+    "description": "Category `other`."
+  },
+  "expenseAmountLabel": "مبلغ هزینه پرداخت‌شده",
+  "@expenseAmountLabel": {
+    "description": "Label of the amount field."
+  },
+  "expenseRequired": "الزامی",
+  "@expenseRequired": {
+    "description": "Trailing hint of a required field."
+  },
+  "expenseRoundAmount": "رند کردن",
+  "@expenseRoundAmount": {
+    "description": "Chip that rounds the amount to the nearest 50,000."
+  },
+  "expenseTitleLabel": "عنوان هزینه",
+  "@expenseTitleLabel": {
+    "description": "Label of the title field."
+  },
+  "expenseTitleHint": "عنوان یا سرفصل ثبت‌شده",
+  "@expenseTitleHint": {
+    "description": "Placeholder of the title field."
+  },
+  "expenseReferenceLabel": "شماره بیمه‌نامه یا کد یکتا / ارجاع",
+  "@expenseReferenceLabel": {
+    "description": "Label of the reference number field."
+  },
+  "expenseReferenceHint": "اختیاری - شماره سریال یا ارجاع",
+  "@expenseReferenceHint": {
+    "description": "Placeholder of the reference number field."
+  },
+  "expensePaidAtLabel": "تاریخ پرداخت / صدور",
+  "@expensePaidAtLabel": {
+    "description": "Label of the paid date card."
+  },
+  "expenseDatePick": "انتخاب تاریخ",
+  "@expenseDatePick": {
+    "description": "Chip that opens the Jalali date picker on the expense page."
+  },
+  "expensePaidAtPickTitle": "تاریخ پرداخت (تقویم جلالی)",
+  "@expensePaidAtPickTitle": {
+    "description": "Title of the paid date picker sheet."
+  },
+  "expenseExpiryTitle": "تعیین موعد انقضا یا تمدید بعدی",
+  "@expenseExpiryTitle": {
+    "description": "Title of the expiry toggle card."
+  },
+  "expenseExpiryBody": "جهت صدور یادآور دوره‌ای",
+  "@expenseExpiryBody": {
+    "description": "Subtitle of the expiry toggle card."
+  },
+  "expenseExpiryOneYear": "{date} (۱ سال بعد)",
+  "@expenseExpiryOneYear": {
+    "description": "The expiry date when it is exactly one year after the paid date.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "expenseExpiryPick": "انتخاب تاریخ انقضا",
+  "@expenseExpiryPick": {
+    "description": "Placeholder of the expiry row when no date is chosen."
+  },
+  "expenseExpiryPickTitle": "تاریخ انقضا (تقویم جلالی)",
+  "@expenseExpiryPickTitle": {
+    "description": "Title of the expiry date picker sheet."
+  },
+  "expenseDaysLeft": "{days, plural, =0{امروز} =1{۱ روز مانده} other{{days} روز مانده}}",
+  "@expenseDaysLeft": {
+    "description": "Pill next to the expiry date: days from today.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expenseReminderCheck": "ارسال اعلان یادآور در روزهای ۷، ۱۵ و ۳۰ روز پیش از موعد",
+  "@expenseReminderCheck": {
+    "description": "Label of the reminder checkbox."
+  },
+  "expenseAttachmentLabel": "پیوست سند یا فیش پرداخت",
+  "@expenseAttachmentLabel": {
+    "description": "Label of the attachment card."
+  },
+  "expenseAttachmentAttached": "۱ فایل پیوست شده",
+  "@expenseAttachmentAttached": {
+    "description": "Trailing hint of the attachment card when a file is chosen."
+  },
+  "expenseAttachmentNone": "بدون پیوست",
+  "@expenseAttachmentNone": {
+    "description": "Trailing hint of the attachment card when no file is chosen."
+  },
+  "expenseAttachmentAdd": "افزودن سند یا فیش پرداخت",
+  "@expenseAttachmentAdd": {
+    "description": "Tile that opens the file picker."
+  },
+  "expenseAttachmentHelp": "فرمت‌های مجاز: PDF ، JPG و PNG تا سقف ۱۰ مگابایت.",
+  "@expenseAttachmentHelp": {
+    "description": "Help line under the attachment card."
+  },
+  "expenseAttachmentRemove": "حذف فایل",
+  "@expenseAttachmentRemove": {
+    "description": "Tooltip of the remove button of the attachment."
+  },
+  "expenseAttachmentMeta": "{size} • {kind}",
+  "@expenseAttachmentMeta": {
+    "description": "Second line of the attached file: size and kind.",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "expenseAttachmentPdf": "سند PDF",
+  "@expenseAttachmentPdf": {
+    "description": "Kind of a PDF attachment."
+  },
+  "expenseAttachmentImage": "تصویر",
+  "@expenseAttachmentImage": {
+    "description": "Kind of an image attachment."
+  },
+  "expenseAttachmentPickFailed": "انتخاب فایل ممکن نشد",
+  "@expenseAttachmentPickFailed": {
+    "description": "Error when the file picker fails."
+  },
+  "expenseAttachmentInvalid": "فقط فایل PDF، JPG یا PNG مجاز است",
+  "@expenseAttachmentInvalid": {
+    "description": "Error when the attachment has another type."
+  },
+  "expenseAttachmentTooLarge": "حجم فایل بیشتر از {max} مگابایت است",
+  "@expenseAttachmentTooLarge": {
+    "description": "Error when the attachment is above the size limit.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expensePaymentLabel": "شیوه پرداخت",
+  "@expensePaymentLabel": {
+    "description": "Label of the payment method buttons."
+  },
+  "expensePaymentOnline": "پرداخت اینترنتی",
+  "@expensePaymentOnline": {
+    "description": "Payment method `online`."
+  },
+  "expensePaymentPos": "کارت‌خوان / پوز",
+  "@expensePaymentPos": {
+    "description": "Payment method `pos`."
+  },
+  "expenseIssuerLabel": "واحد صادرکننده یا نمایندگی",
+  "@expenseIssuerLabel": {
+    "description": "Label of the issuer field."
+  },
+  "expenseIssuerHint": "نام نمایندگی یا مرکز معاینه",
+  "@expenseIssuerHint": {
+    "description": "Placeholder of the issuer field."
+  },
+  "expenseSaved": "هزینه ثبت شد",
+  "@expenseSaved": {
+    "description": "Snackbar after an expense is saved."
+  },
+  "expenseSavedAttachmentFailed": "هزینه ثبت شد، اما پیوست ذخیره نشد",
+  "@expenseSavedAttachmentFailed": {
+    "description": "Snackbar when the expense is saved and its attachment upload fails."
+  },
+  "expenseSaveFailed": "ثبت هزینه ممکن نشد",
+  "@expenseSaveFailed": {
+    "description": "Snackbar when saving the expense fails."
+  },
+  "expenseSaveInvalid": "برخی مقادیر نامعتبر است، فرم را بررسی کنید",
+  "@expenseSaveInvalid": {
+    "description": "Snackbar when the expense was rejected for invalid fields."
+  },
+  "expenseCategoryError": "سرفصل هزینه را انتخاب کنید",
+  "@expenseCategoryError": {
+    "description": "Error when no category is chosen."
+  },
+  "expenseAmountError": "مبلغ هزینه را وارد کنید",
+  "@expenseAmountError": {
+    "description": "Inline error of the amount field."
+  },
+  "expenseTitleError": "عنوان حداکثر {max} حرف است",
+  "@expenseTitleError": {
+    "description": "Inline error of the title field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expenseReferenceError": "شماره حداکثر {max} حرف است",
+  "@expenseReferenceError": {
+    "description": "Inline error of the reference number field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expensePaidAtError": "تاریخ پرداخت نمی‌تواند در آینده باشد",
+  "@expensePaidAtError": {
+    "description": "Error when the paid date is after today."
+  },
+  "expenseExpiresAtError": "تاریخ انقضا باید بعد از تاریخ پرداخت باشد",
+  "@expenseExpiresAtError": {
+    "description": "Error when the expiry is missing or not after the paid date."
+  },
+  "expenseIssuerError": "نام صادرکننده حداکثر {max} حرف است",
+  "@expenseIssuerError": {
+    "description": "Inline error of the issuer field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expenseSectionTitle": "آخرین هزینه‌ها",
+  "@expenseSectionTitle": {
+    "description": "Heading of the expense section on the vehicle details page."
+  },
+  "expenseSectionEmpty": "هنوز هزینه‌ای برای این خودرو ثبت نشده است",
+  "@expenseSectionEmpty": {
+    "description": "Empty state of the expense section."
+  },
+  "expenseSectionLoadError": "دریافت هزینه‌ها ممکن نشد",
+  "@expenseSectionLoadError": {
+    "description": "Error of the expense section."
   }
 }

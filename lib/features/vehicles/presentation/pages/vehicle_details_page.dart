@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../expenses/presentation/widgets/expense_section.dart';
+import '../../../fuel/presentation/widgets/fuel_section.dart';
 import '../../../intervals/presentation/widgets/due_section.dart';
 import '../../../odometer/presentation/providers/odometer_providers.dart';
 import '../../../odometer/presentation/widgets/odometer_sheet.dart';
@@ -15,8 +17,8 @@ import '../widgets/vehicle_details/vehicle_summary_card.dart';
 import '../widgets/vehicle_options_menu.dart';
 
 /// "جزئیات خودرو" (Stitch `50ada0c7b66e446587de52803c726122`): the vehicle's identity and plate,
-/// its mileage with the odometer update, the upcoming services (empty until the due computation
-/// lands) and the last service visits. Opened from the garage list, inside the Garage tab.
+/// its mileage with the odometer update, the upcoming services, the last service visits, the
+/// last fill-ups and the last expenses. Opened from the garage list, inside the Garage tab.
 class VehicleDetailsPage extends ConsumerWidget {
   const VehicleDetailsPage({super.key, required this.vehicleId});
 
@@ -110,6 +112,10 @@ class _DetailsBody extends ConsumerWidget {
           vehicleId: vehicle.id,
           onOpen: (visit) => context.push(AppRoutes.serviceDetailsPath(vehicle.id, visit.id)),
         ),
+        gap,
+        FuelSection(vehicleId: vehicle.id),
+        gap,
+        ExpenseSection(vehicleId: vehicle.id),
         const SizedBox(height: 4),
         // The report export comes with the services; until then the button is shown disabled.
         TextButton.icon(

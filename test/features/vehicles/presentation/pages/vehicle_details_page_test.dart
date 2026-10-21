@@ -1,6 +1,10 @@
 import 'package:car_assistant/core/error/failure.dart';
 import 'package:car_assistant/core/router/app_routes.dart';
 import 'package:car_assistant/core/theme/app_theme.dart';
+import 'package:car_assistant/features/expenses/domain/repositories/expense_repository.dart';
+import 'package:car_assistant/features/expenses/presentation/providers/expense_providers.dart';
+import 'package:car_assistant/features/fuel/domain/repositories/fuel_repository.dart';
+import 'package:car_assistant/features/fuel/presentation/providers/fuel_providers.dart';
 import 'package:car_assistant/features/intervals/domain/repositories/interval_repository.dart';
 import 'package:car_assistant/features/intervals/presentation/providers/interval_providers.dart';
 import 'package:car_assistant/features/odometer/domain/repositories/odometer_repository.dart';
@@ -20,6 +24,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../expenses/expense_fixtures.dart' as expense_fixtures;
+import '../../../fuel/fuel_fixtures.dart' as fuel_fixtures;
 import '../../../intervals/interval_fixtures.dart' as due_fixtures;
 import '../../../odometer/odometer_fixtures.dart';
 import '../../../services/service_fixtures.dart' as services_fixtures;
@@ -33,17 +39,27 @@ class MockServiceRepository extends Mock implements ServiceRepository {}
 
 class MockIntervalRepository extends Mock implements IntervalRepository {}
 
+class MockFuelRepository extends Mock implements FuelRepository {}
+
+class MockExpenseRepository extends Mock implements ExpenseRepository {}
+
 void main() {
   late MockVehicleRepository vehicles;
   late MockOdometerRepository odometer;
   late MockServiceRepository services;
   late MockIntervalRepository intervals;
+  late MockFuelRepository fuel;
+  late MockExpenseRepository expenses;
 
   setUp(() {
     vehicles = MockVehicleRepository();
     odometer = MockOdometerRepository();
     services = MockServiceRepository();
     intervals = MockIntervalRepository();
+    fuel = MockFuelRepository();
+    expenses = MockExpenseRepository();
+    when(() => fuel.getLogs('v1')).thenAnswer((_) async => const Right([]));
+    when(() => expenses.getExpenses('v1')).thenAnswer((_) async => const Right([]));
     when(() => intervals.getDue('v1')).thenAnswer((_) async => Right(due_fixtures.allOkReport));
     when(() => vehicles.getVehicle('v1')).thenAnswer((_) async => const Right(tara));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([tara]));
@@ -89,6 +105,8 @@ void main() {
           odometerRepositoryProvider.overrideWithValue(odometer),
           serviceRepositoryProvider.overrideWithValue(services),
           intervalRepositoryProvider.overrideWithValue(intervals),
+          fuelRepositoryProvider.overrideWithValue(fuel),
+          expenseRepositoryProvider.overrideWithValue(expenses),
         ],
         child: MaterialApp.router(
           theme: AppTheme.light,
@@ -124,6 +142,10 @@ void main() {
     expect(find.text('هنوز موردی برای پیگیری ثبت نشده است'), findsOneWidget);
     expect(find.text('تاریخچه آخرین خدمات و سرویس‌ها'), findsOneWidget);
     expect(find.text('هنوز سرویسی برای این خودرو ثبت نشده است'), findsOneWidget);
+    expect(find.text('آخرین سوخت‌گیری‌ها'), findsOneWidget);
+    expect(find.text('هنوز سوخت‌گیری برای این خودرو ثبت نشده است'), findsOneWidget);
+    expect(find.text('آخرین هزینه‌ها'), findsOneWidget);
+    expect(find.text('هنوز هزینه‌ای برای این خودرو ثبت نشده است'), findsOneWidget);
     final export = find.ancestor(
       of: find.text('دریافت کارنامه و گزارش فاکتورها (PDF)'),
       matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
@@ -174,6 +196,24 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('service s1'), findsOneWidget);
+  });
+
+  testWidgets('lists the latest fill-ups and expenses', (tester) async {
+    when(() => fuel.getLogs('v1'))
+        .thenAnswer((_) async => Right([fuel_fixtures.contractFuelLog()]));
+    when(() => expenses.getExpenses('v1'))
+        .thenAnswer((_) async => Right([expense_fixtures.expense(withAttachment: true)]));
+
+    await openPage(tester);
+
+    expect(find.text('هنوز سوخت‌گیری برای این خودرو ثبت نشده است'), findsNothing);
+    expect(find.text('سوپر • ۴۸٫۵ لیتر'), findsOneWidget);
+    expect(find.textContaining('۳۴٬۸۵۰ کیلومتر • ۱۴۵٬۵۰۰ تومان'), findsOneWidget);
+    expect(find.text('۷٫۴۶ لیتر/۱۰۰ ک‌م'), findsOneWidget);
+    expect(find.text('هنوز هزینه‌ای برای این خودرو ثبت نشده است'), findsNothing);
+    expect(find.text('تمدید بیمه‌نامه شخص ثالث ۱۲ ماهه ایران'), findsOneWidget);
+    expect(find.textContaining('۵٬۸۵۰٬۰۰۰ تومان'), findsOneWidget);
+    expect(find.byIcon(Icons.attach_file), findsOneWidget);
   });
 
   testWidgets('shows the date of the latest reading', (tester) async {

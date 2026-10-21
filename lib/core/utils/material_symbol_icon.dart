@@ -31,5 +31,12 @@ IconData materialSymbolIcon(String name) => switch (name) {
   'cleaning_services' => Icons.cleaning_services,
   'handyman' => Icons.handyman,
   'sync' => Icons.sync,
+  // Expense categories.
+  'verified_user' => Icons.verified_user_outlined,
+  'shield' => Icons.shield_outlined,
+  'gavel' => Icons.gavel,
+  'toll' => Icons.toll,
+  'fact_check' => Icons.fact_check_outlined,
+  'payments' => Icons.payments_outlined,
   _ => Icons.build,
 };

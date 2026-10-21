@@ -26,6 +26,8 @@ class AppShell extends StatelessWidget {
           context,
           onUpdateOdometer: (vehicle) => OdometerSheet.show(context, vehicleId: vehicle.id),
           onAddService: (vehicle) => context.push(AppRoutes.newServicePath(vehicle.id)),
+          onAddFuel: (vehicle) => context.push(AppRoutes.newFuelPath(vehicle.id)),
+          onAddExpense: (vehicle) => context.push(AppRoutes.newExpensePath(vehicle.id)),
           onAddVehicle: () => context.push(AppRoutes.addVehiclePath),
         ),
       ),

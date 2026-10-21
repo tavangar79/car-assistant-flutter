@@ -1762,4 +1762,428 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get serviceSharedCardBody => 'تعمیرگاه و تصویر فاکتور برای همه اقلام این مراجعه';
+
+  @override
+  String get fuelPageTitle => 'ثبت سوخت‌گیری';
+
+  @override
+  String fuelLastFillFull(String date, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'آخرین سوخت‌گیری: $date • $kmString کیلومتر (باک پر)';
+  }
+
+  @override
+  String fuelLastFillPartial(String date, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'آخرین سوخت‌گیری: $date • $kmString کیلومتر';
+  }
+
+  @override
+  String get fuelNoLastFill => 'هنوز سوخت‌گیری ثبت نشده است';
+
+  @override
+  String get fuelDateLabel => 'تاریخ سوخت‌گیری';
+
+  @override
+  String get fuelDateOther => 'انتخاب تاریخ دیگر';
+
+  @override
+  String get fuelDatePickTitle => 'تاریخ سوخت‌گیری (تقویم جلالی)';
+
+  @override
+  String get fuelTimePickHelp => 'ساعت سوخت‌گیری';
+
+  @override
+  String get fuelTimeHint => 'تغییر ساعت';
+
+  @override
+  String get fuelOdometerLabel => 'کارکرد کیلومترشمار فعلی';
+
+  @override
+  String fuelOdometerPrevious(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'سند ثبت‌شده قبلی: $kmString';
+  }
+
+  @override
+  String fuelOdometerSinceLast(String diff) {
+    return '$diff کیلومتر پیمایش از باک قبل';
+  }
+
+  @override
+  String get fuelTypeLabel => 'نوع سوخت دریافتی';
+
+  @override
+  String get fuelTypeRegular => 'معمولی';
+
+  @override
+  String get fuelTypeSuper => 'سوپر';
+
+  @override
+  String get fuelTypeCng => 'CNG';
+
+  @override
+  String get fuelTypeLpg => 'LPG';
+
+  @override
+  String get fuelVolumeLabel => 'حجم سوخت‌گیری';
+
+  @override
+  String get fuelUnitLitre => 'لیتر';
+
+  @override
+  String get fuelUnitCubicMetre => 'متر مکعب';
+
+  @override
+  String get fuelTotalCostLabel => 'مبلغ کل پرداختی';
+
+  @override
+  String get fuelRateLabel => 'نرخ محاسبه‌شده:';
+
+  @override
+  String fuelRateValue(int amount, String unit) {
+    final intl.NumberFormat amountNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$amountString تومان / $unit';
+  }
+
+  @override
+  String get fuelFullFillTitle => 'باک کاملاً پر شد (باک پر)';
+
+  @override
+  String get fuelFullFillBody =>
+      'جهت محاسبه دقیق مصرف سوخت در ۱۰۰ کیلومتر، فعال‌بودن این گزینه الزامی است.';
+
+  @override
+  String get fuelEconomyTitle => 'میانگین مصرف این دوره:';
+
+  @override
+  String fuelEconomyUnit(String unit) {
+    return '$unit در ۱۰۰ کیلومتر';
+  }
+
+  @override
+  String fuelEconomyBreakdown(int km, String volume, String unit) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر پیمایش با $volume $unit سوخت (از باک پر قبلی تا الان)';
+  }
+
+  @override
+  String get fuelEconomyDisclaimer =>
+      'اگر این باک کامل پر نشده بود، به جای عدد عبارت «قابل محاسبه نیست» نمایش داده می‌شد.';
+
+  @override
+  String get fuelEconomyUnavailable =>
+      'برای محاسبه، این باک و باک قبلی باید کامل پر شده و نوع سوخت یکسان باشد.';
+
+  @override
+  String get fuelStationLabel => 'جایگاه سوخت';
+
+  @override
+  String get fuelPaymentLabel => 'روش پرداخت و سهمیه';
+
+  @override
+  String get fuelPaymentPick => 'انتخاب روش پرداخت';
+
+  @override
+  String get fuelPaymentPersonalFuelCard => 'کارت‌خوان جایگاه (کارت سوخت شخصی)';
+
+  @override
+  String get fuelPaymentStationFuelCard => 'کارت سوخت جایگاه (نرخ آزاد)';
+
+  @override
+  String get fuelPaymentBankCard => 'کارت بانکی';
+
+  @override
+  String get fuelPaymentCash => 'نقدی';
+
+  @override
+  String get fuelNotesLabel => 'یادداشت (اختیاری)';
+
+  @override
+  String get fuelNotesHint => 'مثال: استفاده از مکمل سوخت یا وضعیت پمپ...';
+
+  @override
+  String get fuelSubmit => 'ثبت سوخت‌گیری و ذخیره';
+
+  @override
+  String get fuelCancel => 'انصراف و بازگشت';
+
+  @override
+  String get fuelSaved => 'سوخت‌گیری ثبت شد';
+
+  @override
+  String get fuelSaveFailed => 'ثبت سوخت‌گیری ممکن نشد';
+
+  @override
+  String get fuelSaveInvalid => 'برخی مقادیر نامعتبر است، فرم را بررسی کنید';
+
+  @override
+  String get fuelDateInFuture => 'تاریخ و ساعت سوخت‌گیری نمی‌تواند در آینده باشد';
+
+  @override
+  String fuelVolumeError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'حجم سوخت را وارد کنید (بیشتر از ۰ و حداکثر $maxString)';
+  }
+
+  @override
+  String get fuelTotalCostError => 'مبلغ کل پرداختی را وارد کنید';
+
+  @override
+  String fuelStationError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'نام جایگاه حداکثر $maxString حرف است';
+  }
+
+  @override
+  String fuelNotesError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'یادداشت حداکثر $maxString حرف است';
+  }
+
+  @override
+  String get fuelSectionTitle => 'آخرین سوخت‌گیری‌ها';
+
+  @override
+  String get fuelSectionEmpty => 'هنوز سوخت‌گیری برای این خودرو ثبت نشده است';
+
+  @override
+  String get fuelSectionLoadError => 'دریافت سوخت‌گیری‌ها ممکن نشد';
+
+  @override
+  String fuelRowTitle(String type, String volume, String unit) {
+    return '$type • $volume $unit';
+  }
+
+  @override
+  String fuelRowEconomy(String economy, String unit) {
+    return '$economy $unit/۱۰۰ ک‌م';
+  }
+
+  @override
+  String get expensePageTitle => 'ثبت هزینه';
+
+  @override
+  String get expenseManualNotice =>
+      'کلیه ردیف‌های این بخش، ثبت دستی اطلاعات توسط کاربر است و ارتباط یا استعلام مستقیمی از سامانه‌های بیرونی انجام نمی‌شود.';
+
+  @override
+  String get expenseCategoryLabel => 'انتخاب سرفصل هزینه';
+
+  @override
+  String get expenseCategoryBadge => 'دسته‌بندی اصلی';
+
+  @override
+  String get expenseCategoryThirdPartyInsurance => 'بیمه شخص ثالث';
+
+  @override
+  String get expenseCategoryBodyInsurance => 'بیمه بدنه';
+
+  @override
+  String get expenseCategoryFine => 'جریمه رانندگی';
+
+  @override
+  String get expenseCategoryToll => 'عوارض و طرح';
+
+  @override
+  String get expenseCategoryInspection => 'معاینه فنی';
+
+  @override
+  String get expenseCategoryOther => 'سایر هزینه‌ها';
+
+  @override
+  String get expenseAmountLabel => 'مبلغ هزینه پرداخت‌شده';
+
+  @override
+  String get expenseRequired => 'الزامی';
+
+  @override
+  String get expenseRoundAmount => 'رند کردن';
+
+  @override
+  String get expenseTitleLabel => 'عنوان هزینه';
+
+  @override
+  String get expenseTitleHint => 'عنوان یا سرفصل ثبت‌شده';
+
+  @override
+  String get expenseReferenceLabel => 'شماره بیمه‌نامه یا کد یکتا / ارجاع';
+
+  @override
+  String get expenseReferenceHint => 'اختیاری - شماره سریال یا ارجاع';
+
+  @override
+  String get expensePaidAtLabel => 'تاریخ پرداخت / صدور';
+
+  @override
+  String get expenseDatePick => 'انتخاب تاریخ';
+
+  @override
+  String get expensePaidAtPickTitle => 'تاریخ پرداخت (تقویم جلالی)';
+
+  @override
+  String get expenseExpiryTitle => 'تعیین موعد انقضا یا تمدید بعدی';
+
+  @override
+  String get expenseExpiryBody => 'جهت صدور یادآور دوره‌ای';
+
+  @override
+  String expenseExpiryOneYear(String date) {
+    return '$date (۱ سال بعد)';
+  }
+
+  @override
+  String get expenseExpiryPick => 'انتخاب تاریخ انقضا';
+
+  @override
+  String get expenseExpiryPickTitle => 'تاریخ انقضا (تقویم جلالی)';
+
+  @override
+  String expenseDaysLeft(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$daysString روز مانده',
+      one: '۱ روز مانده',
+      zero: 'امروز',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get expenseReminderCheck => 'ارسال اعلان یادآور در روزهای ۷، ۱۵ و ۳۰ روز پیش از موعد';
+
+  @override
+  String get expenseAttachmentLabel => 'پیوست سند یا فیش پرداخت';
+
+  @override
+  String get expenseAttachmentAttached => '۱ فایل پیوست شده';
+
+  @override
+  String get expenseAttachmentNone => 'بدون پیوست';
+
+  @override
+  String get expenseAttachmentAdd => 'افزودن سند یا فیش پرداخت';
+
+  @override
+  String get expenseAttachmentHelp => 'فرمت‌های مجاز: PDF ، JPG و PNG تا سقف ۱۰ مگابایت.';
+
+  @override
+  String get expenseAttachmentRemove => 'حذف فایل';
+
+  @override
+  String expenseAttachmentMeta(String size, String kind) {
+    return '$size • $kind';
+  }
+
+  @override
+  String get expenseAttachmentPdf => 'سند PDF';
+
+  @override
+  String get expenseAttachmentImage => 'تصویر';
+
+  @override
+  String get expenseAttachmentPickFailed => 'انتخاب فایل ممکن نشد';
+
+  @override
+  String get expenseAttachmentInvalid => 'فقط فایل PDF، JPG یا PNG مجاز است';
+
+  @override
+  String expenseAttachmentTooLarge(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'حجم فایل بیشتر از $maxString مگابایت است';
+  }
+
+  @override
+  String get expensePaymentLabel => 'شیوه پرداخت';
+
+  @override
+  String get expensePaymentOnline => 'پرداخت اینترنتی';
+
+  @override
+  String get expensePaymentPos => 'کارت‌خوان / پوز';
+
+  @override
+  String get expenseIssuerLabel => 'واحد صادرکننده یا نمایندگی';
+
+  @override
+  String get expenseIssuerHint => 'نام نمایندگی یا مرکز معاینه';
+
+  @override
+  String get expenseSaved => 'هزینه ثبت شد';
+
+  @override
+  String get expenseSavedAttachmentFailed => 'هزینه ثبت شد، اما پیوست ذخیره نشد';
+
+  @override
+  String get expenseSaveFailed => 'ثبت هزینه ممکن نشد';
+
+  @override
+  String get expenseSaveInvalid => 'برخی مقادیر نامعتبر است، فرم را بررسی کنید';
+
+  @override
+  String get expenseCategoryError => 'سرفصل هزینه را انتخاب کنید';
+
+  @override
+  String get expenseAmountError => 'مبلغ هزینه را وارد کنید';
+
+  @override
+  String expenseTitleError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'عنوان حداکثر $maxString حرف است';
+  }
+
+  @override
+  String expenseReferenceError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'شماره حداکثر $maxString حرف است';
+  }
+
+  @override
+  String get expensePaidAtError => 'تاریخ پرداخت نمی‌تواند در آینده باشد';
+
+  @override
+  String get expenseExpiresAtError => 'تاریخ انقضا باید بعد از تاریخ پرداخت باشد';
+
+  @override
+  String expenseIssuerError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'نام صادرکننده حداکثر $maxString حرف است';
+  }
+
+  @override
+  String get expenseSectionTitle => 'آخرین هزینه‌ها';
+
+  @override
+  String get expenseSectionEmpty => 'هنوز هزینه‌ای برای این خودرو ثبت نشده است';
+
+  @override
+  String get expenseSectionLoadError => 'دریافت هزینه‌ها ممکن نشد';
 }

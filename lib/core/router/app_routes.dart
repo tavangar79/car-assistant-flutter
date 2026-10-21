@@ -23,6 +23,14 @@ abstract final class AppRoutes {
   static const newServiceName = 'newService';
   static String newServicePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/services/new';
 
+  /// Record a fill-up: a full page above the tabs (no dock).
+  static const newFuelName = 'newFuel';
+  static String newFuelPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/fuel/new';
+
+  /// Record an expense: a full page above the tabs (no dock).
+  static const newExpenseName = 'newExpense';
+  static String newExpensePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/expenses/new';
+
   /// The service intervals of a vehicle, inside the Garage tab: `/vehicles/:id/intervals`.
   static const intervalsName = 'intervals';
   static String intervalsPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/intervals';

@@ -2900,6 +2900,678 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'تعمیرگاه و تصویر فاکتور برای همه اقلام این مراجعه'**
   String get serviceSharedCardBody;
+
+  /// App bar title of the new fuel log page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت سوخت‌گیری'**
+  String get fuelPageTitle;
+
+  /// Header line of the fuel page when the last log was a full fill.
+  ///
+  /// In fa, this message translates to:
+  /// **'آخرین سوخت‌گیری: {date} • {km} کیلومتر (باک پر)'**
+  String fuelLastFillFull(String date, int km);
+
+  /// Header line of the fuel page when the last log was a partial fill.
+  ///
+  /// In fa, this message translates to:
+  /// **'آخرین سوخت‌گیری: {date} • {km} کیلومتر'**
+  String fuelLastFillPartial(String date, int km);
+
+  /// Header line of the fuel page when the vehicle has no fuel log.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز سوخت‌گیری ثبت نشده است'**
+  String get fuelNoLastFill;
+
+  /// Label of the date card on the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ سوخت‌گیری'**
+  String get fuelDateLabel;
+
+  /// Chip that opens the Jalali date picker on the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب تاریخ دیگر'**
+  String get fuelDateOther;
+
+  /// Title of the date picker sheet on the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ سوخت‌گیری (تقویم جلالی)'**
+  String get fuelDatePickTitle;
+
+  /// Help text of the time picker on the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ساعت سوخت‌گیری'**
+  String get fuelTimePickHelp;
+
+  /// Tooltip of the time on the fuel date card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تغییر ساعت'**
+  String get fuelTimeHint;
+
+  /// Label of the odometer card on the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارکرد کیلومترشمار فعلی'**
+  String get fuelOdometerLabel;
+
+  /// Trailing hint of the odometer card: the vehicle's current mileage.
+  ///
+  /// In fa, this message translates to:
+  /// **'سند ثبت‌شده قبلی: {km}'**
+  String fuelOdometerPrevious(int km);
+
+  /// Distance between the entered odometer and the last fuel log's odometer, with its sign.
+  ///
+  /// In fa, this message translates to:
+  /// **'{diff} کیلومتر پیمایش از باک قبل'**
+  String fuelOdometerSinceLast(String diff);
+
+  /// Label of the fuel type segmented control.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوع سوخت دریافتی'**
+  String get fuelTypeLabel;
+
+  /// Fuel type `regular`.
+  ///
+  /// In fa, this message translates to:
+  /// **'معمولی'**
+  String get fuelTypeRegular;
+
+  /// Fuel type `super`.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوپر'**
+  String get fuelTypeSuper;
+
+  /// Fuel type `cng`.
+  ///
+  /// In fa, this message translates to:
+  /// **'CNG'**
+  String get fuelTypeCng;
+
+  /// Fuel type `lpg`.
+  ///
+  /// In fa, this message translates to:
+  /// **'LPG'**
+  String get fuelTypeLpg;
+
+  /// Label of the volume field.
+  ///
+  /// In fa, this message translates to:
+  /// **'حجم سوخت‌گیری'**
+  String get fuelVolumeLabel;
+
+  /// Volume unit for liquid fuels.
+  ///
+  /// In fa, this message translates to:
+  /// **'لیتر'**
+  String get fuelUnitLitre;
+
+  /// Volume unit for CNG.
+  ///
+  /// In fa, this message translates to:
+  /// **'متر مکعب'**
+  String get fuelUnitCubicMetre;
+
+  /// Label of the total cost field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مبلغ کل پرداختی'**
+  String get fuelTotalCostLabel;
+
+  /// Label of the computed price per unit row.
+  ///
+  /// In fa, this message translates to:
+  /// **'نرخ محاسبه‌شده:'**
+  String get fuelRateLabel;
+
+  /// Price per unit, computed from the total cost and the volume.
+  ///
+  /// In fa, this message translates to:
+  /// **'{amount} تومان / {unit}'**
+  String fuelRateValue(int amount, String unit);
+
+  /// Title of the full-fill toggle.
+  ///
+  /// In fa, this message translates to:
+  /// **'باک کاملاً پر شد (باک پر)'**
+  String get fuelFullFillTitle;
+
+  /// Body of the full-fill toggle.
+  ///
+  /// In fa, this message translates to:
+  /// **'جهت محاسبه دقیق مصرف سوخت در ۱۰۰ کیلومتر، فعال‌بودن این گزینه الزامی است.'**
+  String get fuelFullFillBody;
+
+  /// Title of the economy preview card.
+  ///
+  /// In fa, this message translates to:
+  /// **'میانگین مصرف این دوره:'**
+  String get fuelEconomyTitle;
+
+  /// Unit after the economy figure.
+  ///
+  /// In fa, this message translates to:
+  /// **'{unit} در ۱۰۰ کیلومتر'**
+  String fuelEconomyUnit(String unit);
+
+  /// How the preview was computed.
+  ///
+  /// In fa, this message translates to:
+  /// **'{km} کیلومتر پیمایش با {volume} {unit} سوخت (از باک پر قبلی تا الان)'**
+  String fuelEconomyBreakdown(int km, String volume, String unit);
+
+  /// Footnote of the economy preview card when computable.
+  ///
+  /// In fa, this message translates to:
+  /// **'اگر این باک کامل پر نشده بود، به جای عدد عبارت «قابل محاسبه نیست» نمایش داده می‌شد.'**
+  String get fuelEconomyDisclaimer;
+
+  /// Footnote of the economy preview card when not computable.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای محاسبه، این باک و باک قبلی باید کامل پر شده و نوع سوخت یکسان باشد.'**
+  String get fuelEconomyUnavailable;
+
+  /// Label of the station field.
+  ///
+  /// In fa, this message translates to:
+  /// **'جایگاه سوخت'**
+  String get fuelStationLabel;
+
+  /// Label of the payment method picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'روش پرداخت و سهمیه'**
+  String get fuelPaymentLabel;
+
+  /// Placeholder of the payment method picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب روش پرداخت'**
+  String get fuelPaymentPick;
+
+  /// Payment method `personal_fuel_card`.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت‌خوان جایگاه (کارت سوخت شخصی)'**
+  String get fuelPaymentPersonalFuelCard;
+
+  /// Payment method `station_fuel_card`.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت سوخت جایگاه (نرخ آزاد)'**
+  String get fuelPaymentStationFuelCard;
+
+  /// Payment method `bank_card`.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت بانکی'**
+  String get fuelPaymentBankCard;
+
+  /// Payment method `cash`.
+  ///
+  /// In fa, this message translates to:
+  /// **'نقدی'**
+  String get fuelPaymentCash;
+
+  /// Label of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت (اختیاری)'**
+  String get fuelNotesLabel;
+
+  /// Placeholder of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مثال: استفاده از مکمل سوخت یا وضعیت پمپ...'**
+  String get fuelNotesHint;
+
+  /// Primary button of the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت سوخت‌گیری و ذخیره'**
+  String get fuelSubmit;
+
+  /// Secondary button of the fuel page.
+  ///
+  /// In fa, this message translates to:
+  /// **'انصراف و بازگشت'**
+  String get fuelCancel;
+
+  /// Snackbar after a fuel log is saved.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوخت‌گیری ثبت شد'**
+  String get fuelSaved;
+
+  /// Snackbar when saving the fuel log fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت سوخت‌گیری ممکن نشد'**
+  String get fuelSaveFailed;
+
+  /// Snackbar when the fuel log was rejected for invalid fields.
+  ///
+  /// In fa, this message translates to:
+  /// **'برخی مقادیر نامعتبر است، فرم را بررسی کنید'**
+  String get fuelSaveInvalid;
+
+  /// Error when the fill-up date is after now.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ و ساعت سوخت‌گیری نمی‌تواند در آینده باشد'**
+  String get fuelDateInFuture;
+
+  /// Inline error of the volume field.
+  ///
+  /// In fa, this message translates to:
+  /// **'حجم سوخت را وارد کنید (بیشتر از ۰ و حداکثر {max})'**
+  String fuelVolumeError(int max);
+
+  /// Inline error of the total cost field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مبلغ کل پرداختی را وارد کنید'**
+  String get fuelTotalCostError;
+
+  /// Inline error of the station field.
+  ///
+  /// In fa, this message translates to:
+  /// **'نام جایگاه حداکثر {max} حرف است'**
+  String fuelStationError(int max);
+
+  /// Inline error of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت حداکثر {max} حرف است'**
+  String fuelNotesError(int max);
+
+  /// Heading of the fuel section on the vehicle details page.
+  ///
+  /// In fa, this message translates to:
+  /// **'آخرین سوخت‌گیری‌ها'**
+  String get fuelSectionTitle;
+
+  /// Empty state of the fuel section.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز سوخت‌گیری برای این خودرو ثبت نشده است'**
+  String get fuelSectionEmpty;
+
+  /// Error of the fuel section.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت سوخت‌گیری‌ها ممکن نشد'**
+  String get fuelSectionLoadError;
+
+  /// Title of a fuel row: type, volume and unit.
+  ///
+  /// In fa, this message translates to:
+  /// **'{type} • {volume} {unit}'**
+  String fuelRowTitle(String type, String volume, String unit);
+
+  /// Economy badge of a fuel row.
+  ///
+  /// In fa, this message translates to:
+  /// **'{economy} {unit}/۱۰۰ ک‌م'**
+  String fuelRowEconomy(String economy, String unit);
+
+  /// App bar title and submit label of the new expense page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت هزینه'**
+  String get expensePageTitle;
+
+  /// Notice at the top of the expense page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کلیه ردیف‌های این بخش، ثبت دستی اطلاعات توسط کاربر است و ارتباط یا استعلام مستقیمی از سامانه‌های بیرونی انجام نمی‌شود.'**
+  String get expenseManualNotice;
+
+  /// Label of the category grid.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب سرفصل هزینه'**
+  String get expenseCategoryLabel;
+
+  /// Trailing hint of the category grid.
+  ///
+  /// In fa, this message translates to:
+  /// **'دسته‌بندی اصلی'**
+  String get expenseCategoryBadge;
+
+  /// Category `third_party_insurance`.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه شخص ثالث'**
+  String get expenseCategoryThirdPartyInsurance;
+
+  /// Category `body_insurance`.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه بدنه'**
+  String get expenseCategoryBodyInsurance;
+
+  /// Category `fine`.
+  ///
+  /// In fa, this message translates to:
+  /// **'جریمه رانندگی'**
+  String get expenseCategoryFine;
+
+  /// Category `toll`.
+  ///
+  /// In fa, this message translates to:
+  /// **'عوارض و طرح'**
+  String get expenseCategoryToll;
+
+  /// Category `inspection`.
+  ///
+  /// In fa, this message translates to:
+  /// **'معاینه فنی'**
+  String get expenseCategoryInspection;
+
+  /// Category `other`.
+  ///
+  /// In fa, this message translates to:
+  /// **'سایر هزینه‌ها'**
+  String get expenseCategoryOther;
+
+  /// Label of the amount field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مبلغ هزینه پرداخت‌شده'**
+  String get expenseAmountLabel;
+
+  /// Trailing hint of a required field.
+  ///
+  /// In fa, this message translates to:
+  /// **'الزامی'**
+  String get expenseRequired;
+
+  /// Chip that rounds the amount to the nearest 50,000.
+  ///
+  /// In fa, this message translates to:
+  /// **'رند کردن'**
+  String get expenseRoundAmount;
+
+  /// Label of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'عنوان هزینه'**
+  String get expenseTitleLabel;
+
+  /// Placeholder of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'عنوان یا سرفصل ثبت‌شده'**
+  String get expenseTitleHint;
+
+  /// Label of the reference number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره بیمه‌نامه یا کد یکتا / ارجاع'**
+  String get expenseReferenceLabel;
+
+  /// Placeholder of the reference number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'اختیاری - شماره سریال یا ارجاع'**
+  String get expenseReferenceHint;
+
+  /// Label of the paid date card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ پرداخت / صدور'**
+  String get expensePaidAtLabel;
+
+  /// Chip that opens the Jalali date picker on the expense page.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب تاریخ'**
+  String get expenseDatePick;
+
+  /// Title of the paid date picker sheet.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ پرداخت (تقویم جلالی)'**
+  String get expensePaidAtPickTitle;
+
+  /// Title of the expiry toggle card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تعیین موعد انقضا یا تمدید بعدی'**
+  String get expenseExpiryTitle;
+
+  /// Subtitle of the expiry toggle card.
+  ///
+  /// In fa, this message translates to:
+  /// **'جهت صدور یادآور دوره‌ای'**
+  String get expenseExpiryBody;
+
+  /// The expiry date when it is exactly one year after the paid date.
+  ///
+  /// In fa, this message translates to:
+  /// **'{date} (۱ سال بعد)'**
+  String expenseExpiryOneYear(String date);
+
+  /// Placeholder of the expiry row when no date is chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب تاریخ انقضا'**
+  String get expenseExpiryPick;
+
+  /// Title of the expiry date picker sheet.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ انقضا (تقویم جلالی)'**
+  String get expenseExpiryPickTitle;
+
+  /// Pill next to the expiry date: days from today.
+  ///
+  /// In fa, this message translates to:
+  /// **'{days, plural, =0{امروز} =1{۱ روز مانده} other{{days} روز مانده}}'**
+  String expenseDaysLeft(int days);
+
+  /// Label of the reminder checkbox.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال اعلان یادآور در روزهای ۷، ۱۵ و ۳۰ روز پیش از موعد'**
+  String get expenseReminderCheck;
+
+  /// Label of the attachment card.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیوست سند یا فیش پرداخت'**
+  String get expenseAttachmentLabel;
+
+  /// Trailing hint of the attachment card when a file is chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'۱ فایل پیوست شده'**
+  String get expenseAttachmentAttached;
+
+  /// Trailing hint of the attachment card when no file is chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'بدون پیوست'**
+  String get expenseAttachmentNone;
+
+  /// Tile that opens the file picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'افزودن سند یا فیش پرداخت'**
+  String get expenseAttachmentAdd;
+
+  /// Help line under the attachment card.
+  ///
+  /// In fa, this message translates to:
+  /// **'فرمت‌های مجاز: PDF ، JPG و PNG تا سقف ۱۰ مگابایت.'**
+  String get expenseAttachmentHelp;
+
+  /// Tooltip of the remove button of the attachment.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف فایل'**
+  String get expenseAttachmentRemove;
+
+  /// Second line of the attached file: size and kind.
+  ///
+  /// In fa, this message translates to:
+  /// **'{size} • {kind}'**
+  String expenseAttachmentMeta(String size, String kind);
+
+  /// Kind of a PDF attachment.
+  ///
+  /// In fa, this message translates to:
+  /// **'سند PDF'**
+  String get expenseAttachmentPdf;
+
+  /// Kind of an image attachment.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصویر'**
+  String get expenseAttachmentImage;
+
+  /// Error when the file picker fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب فایل ممکن نشد'**
+  String get expenseAttachmentPickFailed;
+
+  /// Error when the attachment has another type.
+  ///
+  /// In fa, this message translates to:
+  /// **'فقط فایل PDF، JPG یا PNG مجاز است'**
+  String get expenseAttachmentInvalid;
+
+  /// Error when the attachment is above the size limit.
+  ///
+  /// In fa, this message translates to:
+  /// **'حجم فایل بیشتر از {max} مگابایت است'**
+  String expenseAttachmentTooLarge(int max);
+
+  /// Label of the payment method buttons.
+  ///
+  /// In fa, this message translates to:
+  /// **'شیوه پرداخت'**
+  String get expensePaymentLabel;
+
+  /// Payment method `online`.
+  ///
+  /// In fa, this message translates to:
+  /// **'پرداخت اینترنتی'**
+  String get expensePaymentOnline;
+
+  /// Payment method `pos`.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت‌خوان / پوز'**
+  String get expensePaymentPos;
+
+  /// Label of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'واحد صادرکننده یا نمایندگی'**
+  String get expenseIssuerLabel;
+
+  /// Placeholder of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'نام نمایندگی یا مرکز معاینه'**
+  String get expenseIssuerHint;
+
+  /// Snackbar after an expense is saved.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه ثبت شد'**
+  String get expenseSaved;
+
+  /// Snackbar when the expense is saved and its attachment upload fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه ثبت شد، اما پیوست ذخیره نشد'**
+  String get expenseSavedAttachmentFailed;
+
+  /// Snackbar when saving the expense fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت هزینه ممکن نشد'**
+  String get expenseSaveFailed;
+
+  /// Snackbar when the expense was rejected for invalid fields.
+  ///
+  /// In fa, this message translates to:
+  /// **'برخی مقادیر نامعتبر است، فرم را بررسی کنید'**
+  String get expenseSaveInvalid;
+
+  /// Error when no category is chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرفصل هزینه را انتخاب کنید'**
+  String get expenseCategoryError;
+
+  /// Inline error of the amount field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مبلغ هزینه را وارد کنید'**
+  String get expenseAmountError;
+
+  /// Inline error of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'عنوان حداکثر {max} حرف است'**
+  String expenseTitleError(int max);
+
+  /// Inline error of the reference number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره حداکثر {max} حرف است'**
+  String expenseReferenceError(int max);
+
+  /// Error when the paid date is after today.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ پرداخت نمی‌تواند در آینده باشد'**
+  String get expensePaidAtError;
+
+  /// Error when the expiry is missing or not after the paid date.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ انقضا باید بعد از تاریخ پرداخت باشد'**
+  String get expenseExpiresAtError;
+
+  /// Inline error of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'نام صادرکننده حداکثر {max} حرف است'**
+  String expenseIssuerError(int max);
+
+  /// Heading of the expense section on the vehicle details page.
+  ///
+  /// In fa, this message translates to:
+  /// **'آخرین هزینه‌ها'**
+  String get expenseSectionTitle;
+
+  /// Empty state of the expense section.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز هزینه‌ای برای این خودرو ثبت نشده است'**
+  String get expenseSectionEmpty;
+
+  /// Error of the expense section.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت هزینه‌ها ممکن نشد'**
+  String get expenseSectionLoadError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

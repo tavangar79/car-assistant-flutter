@@ -7,6 +7,8 @@ import '../../features/auth/presentation/pages/otp_page.dart';
 import '../../features/auth/presentation/pages/phone_page.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/providers/otp_args.dart';
+import '../../features/expenses/presentation/pages/new_expense_page.dart';
+import '../../features/fuel/presentation/pages/new_fuel_page.dart';
 import '../../features/history/presentation/pages/history_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/intervals/presentation/pages/due_services_page.dart';
@@ -81,6 +83,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             _ => const [],
           },
         ),
+      ),
+      GoRoute(
+        path: '/vehicles/:id/fuel/new',
+        name: AppRoutes.newFuelName,
+        builder: (context, state) => NewFuelPage(vehicleId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/vehicles/:id/expenses/new',
+        name: AppRoutes.newExpenseName,
+        builder: (context, state) => NewExpensePage(vehicleId: state.pathParameters['id']!),
       ),
       // Before the shell too: opened above every tab right after an odometer update.
       GoRoute(

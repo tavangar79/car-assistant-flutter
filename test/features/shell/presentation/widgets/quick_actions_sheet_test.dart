@@ -43,6 +43,8 @@ void main() {
                   context,
                   onUpdateOdometer: (vehicle) => calls.add('odometer ${vehicle.id}'),
                   onAddService: (vehicle) => calls.add('service ${vehicle.id}'),
+                  onAddFuel: (vehicle) => calls.add('fuel ${vehicle.id}'),
+                  onAddExpense: (vehicle) => calls.add('expense ${vehicle.id}'),
                   onAddVehicle: () => calls.add('add vehicle'),
                 ),
                 child: const Text('open'),
@@ -100,37 +102,53 @@ void main() {
     expect(calls, ['service v1']);
   });
 
-  testWidgets('fuel and expense are disabled for now', (tester) async {
+  testWidgets('the fuel entry closes the sheet and opens the fuel page for the active vehicle', (
+    tester,
+  ) async {
     await openSheet(tester, [tara]);
 
-    for (final title in ['ثبت سوخت‌گیری', 'ثبت هزینه متفرقه']) {
-      await tester.tap(find.text(title));
-      await tester.pumpAndSettle();
-    }
+    await tester.tap(find.text('ثبت سوخت‌گیری'));
+    await tester.pumpAndSettle();
 
-    expect(find.byType(QuickActionsSheet), findsOneWidget);
-    expect(calls, isEmpty);
+    expect(find.byType(QuickActionsSheet), findsNothing);
+    expect(calls, ['fuel v1']);
   });
 
   testWidgets(
-    'without a vehicle the odometer and service entries are disabled; add vehicle works',
+    'the expense entry closes the sheet and opens the expense page for the active vehicle',
     (tester) async {
-      await openSheet(tester, []);
+      await openSheet(tester, [tara]);
 
-      expect(find.text('خودروی فعال'), findsNothing);
-      await tester.tap(find.text('بروزرسانی کیلومترشمار'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('ثبت سرویس و تعمیرات'));
-      await tester.pumpAndSettle();
-      expect(calls, isEmpty);
-
-      await tester.tap(find.text('افزودن خودروی جدید'));
+      await tester.tap(find.text('ثبت هزینه متفرقه'));
       await tester.pumpAndSettle();
 
       expect(find.byType(QuickActionsSheet), findsNothing);
-      expect(calls, ['add vehicle']);
+      expect(calls, ['expense v1']);
     },
   );
+
+  testWidgets('without a vehicle the odometer, service, fuel and expense entries are disabled; '
+      'add vehicle works', (tester) async {
+    await openSheet(tester, []);
+
+    expect(find.text('خودروی فعال'), findsNothing);
+    for (final title in [
+      'بروزرسانی کیلومترشمار',
+      'ثبت سرویس و تعمیرات',
+      'ثبت سوخت‌گیری',
+      'ثبت هزینه متفرقه',
+    ]) {
+      await tester.tap(find.text(title));
+      await tester.pumpAndSettle();
+    }
+    expect(calls, isEmpty);
+
+    await tester.tap(find.text('افزودن خودروی جدید'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(QuickActionsSheet), findsNothing);
+    expect(calls, ['add vehicle']);
+  });
 
   test('the active vehicle is the default one, else the first', () {
     final first = taraWith(id: 'v2', isDefault: false);

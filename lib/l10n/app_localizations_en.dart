@@ -1774,4 +1774,426 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get serviceSharedCardBody =>
       'The workshop and the invoice photo for every item of this visit';
+
+  @override
+  String get fuelPageTitle => 'Record fuel';
+
+  @override
+  String fuelLastFillFull(String date, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Last fill-up: $date • $kmString km (full tank)';
+  }
+
+  @override
+  String fuelLastFillPartial(String date, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Last fill-up: $date • $kmString km';
+  }
+
+  @override
+  String get fuelNoLastFill => 'No fill-up recorded yet';
+
+  @override
+  String get fuelDateLabel => 'Fill-up date';
+
+  @override
+  String get fuelDateOther => 'Pick another date';
+
+  @override
+  String get fuelDatePickTitle => 'Fill-up date (Jalali calendar)';
+
+  @override
+  String get fuelTimePickHelp => 'Fill-up time';
+
+  @override
+  String get fuelTimeHint => 'Change time';
+
+  @override
+  String get fuelOdometerLabel => 'Current odometer';
+
+  @override
+  String fuelOdometerPrevious(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Previous reading: $kmString';
+  }
+
+  @override
+  String fuelOdometerSinceLast(String diff) {
+    return '$diff km since the previous tank';
+  }
+
+  @override
+  String get fuelTypeLabel => 'Fuel type';
+
+  @override
+  String get fuelTypeRegular => 'Regular';
+
+  @override
+  String get fuelTypeSuper => 'Super';
+
+  @override
+  String get fuelTypeCng => 'CNG';
+
+  @override
+  String get fuelTypeLpg => 'LPG';
+
+  @override
+  String get fuelVolumeLabel => 'Volume';
+
+  @override
+  String get fuelUnitLitre => 'L';
+
+  @override
+  String get fuelUnitCubicMetre => 'm³';
+
+  @override
+  String get fuelTotalCostLabel => 'Total paid';
+
+  @override
+  String get fuelRateLabel => 'Computed rate:';
+
+  @override
+  String fuelRateValue(int amount, String unit) {
+    final intl.NumberFormat amountNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$amountString toman / $unit';
+  }
+
+  @override
+  String get fuelFullFillTitle => 'Tank filled completely (full tank)';
+
+  @override
+  String get fuelFullFillBody => 'Turn this on so the consumption per 100 km can be computed.';
+
+  @override
+  String get fuelEconomyTitle => 'Average consumption this period:';
+
+  @override
+  String fuelEconomyUnit(String unit) {
+    return '$unit per 100 km';
+  }
+
+  @override
+  String fuelEconomyBreakdown(int km, String volume, String unit) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString km driven on $volume $unit of fuel (since the previous full tank)';
+  }
+
+  @override
+  String get fuelEconomyDisclaimer => 'Without a full tank the figure would read “not computable”.';
+
+  @override
+  String get fuelEconomyUnavailable =>
+      'Needs a previous full tank of the same fuel type and a full tank now.';
+
+  @override
+  String get fuelStationLabel => 'Station';
+
+  @override
+  String get fuelPaymentLabel => 'Payment method and quota';
+
+  @override
+  String get fuelPaymentPick => 'Choose a payment method';
+
+  @override
+  String get fuelPaymentPersonalFuelCard => 'Station terminal (personal fuel card)';
+
+  @override
+  String get fuelPaymentStationFuelCard => 'Station fuel card (free rate)';
+
+  @override
+  String get fuelPaymentBankCard => 'Bank card';
+
+  @override
+  String get fuelPaymentCash => 'Cash';
+
+  @override
+  String get fuelNotesLabel => 'Notes (optional)';
+
+  @override
+  String get fuelNotesHint => 'e.g. fuel additive used, pump condition…';
+
+  @override
+  String get fuelSubmit => 'Save fill-up';
+
+  @override
+  String get fuelCancel => 'Cancel and go back';
+
+  @override
+  String get fuelSaved => 'Fill-up saved';
+
+  @override
+  String get fuelSaveFailed => 'Couldn\'t save the fill-up';
+
+  @override
+  String get fuelSaveInvalid => 'Some values are invalid, check the form';
+
+  @override
+  String get fuelDateInFuture => 'The fill-up date and time can\'t be in the future';
+
+  @override
+  String fuelVolumeError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Enter the volume (more than 0, at most $maxString)';
+  }
+
+  @override
+  String get fuelTotalCostError => 'Enter the total paid';
+
+  @override
+  String fuelStationError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The station name is at most $maxString characters';
+  }
+
+  @override
+  String fuelNotesError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Notes are at most $maxString characters';
+  }
+
+  @override
+  String get fuelSectionTitle => 'Latest fill-ups';
+
+  @override
+  String get fuelSectionEmpty => 'No fill-up recorded for this vehicle yet';
+
+  @override
+  String get fuelSectionLoadError => 'Couldn\'t load the fill-ups';
+
+  @override
+  String fuelRowTitle(String type, String volume, String unit) {
+    return '$type • $volume $unit';
+  }
+
+  @override
+  String fuelRowEconomy(String economy, String unit) {
+    return '$economy $unit/100 km';
+  }
+
+  @override
+  String get expensePageTitle => 'Record expense';
+
+  @override
+  String get expenseManualNotice =>
+      'Every entry here is typed in by you; nothing is looked up from external systems.';
+
+  @override
+  String get expenseCategoryLabel => 'Expense category';
+
+  @override
+  String get expenseCategoryBadge => 'Main category';
+
+  @override
+  String get expenseCategoryThirdPartyInsurance => 'Third-party insurance';
+
+  @override
+  String get expenseCategoryBodyInsurance => 'Body insurance';
+
+  @override
+  String get expenseCategoryFine => 'Traffic fine';
+
+  @override
+  String get expenseCategoryToll => 'Tolls and zone permits';
+
+  @override
+  String get expenseCategoryInspection => 'Inspection';
+
+  @override
+  String get expenseCategoryOther => 'Other expenses';
+
+  @override
+  String get expenseAmountLabel => 'Amount paid';
+
+  @override
+  String get expenseRequired => 'Required';
+
+  @override
+  String get expenseRoundAmount => 'Round';
+
+  @override
+  String get expenseTitleLabel => 'Title';
+
+  @override
+  String get expenseTitleHint => 'Title or heading';
+
+  @override
+  String get expenseReferenceLabel => 'Policy or reference number';
+
+  @override
+  String get expenseReferenceHint => 'Optional – serial or reference number';
+
+  @override
+  String get expensePaidAtLabel => 'Payment / issue date';
+
+  @override
+  String get expenseDatePick => 'Pick a date';
+
+  @override
+  String get expensePaidAtPickTitle => 'Payment date (Jalali calendar)';
+
+  @override
+  String get expenseExpiryTitle => 'Set the expiry or next renewal';
+
+  @override
+  String get expenseExpiryBody => 'For periodic reminders';
+
+  @override
+  String expenseExpiryOneYear(String date) {
+    return '$date (1 year later)';
+  }
+
+  @override
+  String get expenseExpiryPick => 'Pick the expiry date';
+
+  @override
+  String get expenseExpiryPickTitle => 'Expiry date (Jalali calendar)';
+
+  @override
+  String expenseDaysLeft(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$daysString days left',
+      one: '1 day left',
+      zero: 'today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get expenseReminderCheck => 'Send a reminder 7, 15 and 30 days before the date';
+
+  @override
+  String get expenseAttachmentLabel => 'Attach the document or receipt';
+
+  @override
+  String get expenseAttachmentAttached => '1 file attached';
+
+  @override
+  String get expenseAttachmentNone => 'No attachment';
+
+  @override
+  String get expenseAttachmentAdd => 'Add a document or receipt';
+
+  @override
+  String get expenseAttachmentHelp => 'Allowed: PDF, JPG and PNG up to 10 MB.';
+
+  @override
+  String get expenseAttachmentRemove => 'Remove file';
+
+  @override
+  String expenseAttachmentMeta(String size, String kind) {
+    return '$size • $kind';
+  }
+
+  @override
+  String get expenseAttachmentPdf => 'PDF document';
+
+  @override
+  String get expenseAttachmentImage => 'Image';
+
+  @override
+  String get expenseAttachmentPickFailed => 'Couldn\'t pick the file';
+
+  @override
+  String get expenseAttachmentInvalid => 'Only PDF, JPG or PNG files are allowed';
+
+  @override
+  String expenseAttachmentTooLarge(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The file is larger than $maxString MB';
+  }
+
+  @override
+  String get expensePaymentLabel => 'Payment method';
+
+  @override
+  String get expensePaymentOnline => 'Online payment';
+
+  @override
+  String get expensePaymentPos => 'Card terminal / POS';
+
+  @override
+  String get expenseIssuerLabel => 'Issuer or agency';
+
+  @override
+  String get expenseIssuerHint => 'Agency or inspection centre name';
+
+  @override
+  String get expenseSaved => 'Expense saved';
+
+  @override
+  String get expenseSavedAttachmentFailed => 'Expense saved, but the attachment was not';
+
+  @override
+  String get expenseSaveFailed => 'Couldn\'t save the expense';
+
+  @override
+  String get expenseSaveInvalid => 'Some values are invalid, check the form';
+
+  @override
+  String get expenseCategoryError => 'Choose a category';
+
+  @override
+  String get expenseAmountError => 'Enter the amount';
+
+  @override
+  String expenseTitleError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The title is at most $maxString characters';
+  }
+
+  @override
+  String expenseReferenceError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The number is at most $maxString characters';
+  }
+
+  @override
+  String get expensePaidAtError => 'The payment date can\'t be in the future';
+
+  @override
+  String get expenseExpiresAtError => 'The expiry must be after the payment date';
+
+  @override
+  String expenseIssuerError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The issuer is at most $maxString characters';
+  }
+
+  @override
+  String get expenseSectionTitle => 'Latest expenses';
+
+  @override
+  String get expenseSectionEmpty => 'No expense recorded for this vehicle yet';
+
+  @override
+  String get expenseSectionLoadError => 'Couldn\'t load the expenses';
 }
