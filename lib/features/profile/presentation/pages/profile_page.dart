@@ -12,9 +12,9 @@ import '../widgets/profile_identity_card.dart';
 import '../widgets/profile_menu_section.dart';
 import '../widgets/profile_stat_tile.dart';
 
-/// The Profile tab (Stitch `4b009228766f48859e449e996af538b9`): the identity card, the vehicle and
-/// service counters, the settings and legal rows (disabled until their pages exist), sign-out and
-/// the app version. The subscription card (T6.3) and the documents tile (Phase 5) come later.
+/// The Profile tab (Stitch `4b009228766f48859e449e996af538b9`): the identity card, the vehicle,
+/// service and document counters, the settings and legal rows (disabled until their pages exist),
+/// sign-out and the app version. The subscription card (T6.3) comes later.
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
@@ -76,7 +76,7 @@ class ProfilePage extends ConsumerWidget {
   }
 }
 
-/// "خودرو فعال" and "سرویس ثبت‌شده" from `GET /api/profile/stats`.
+/// "خودرو فعال", "سرویس ثبت‌شده" and "مدرک در کیف" from `GET /api/profile/stats`.
 class _Stats extends ConsumerWidget {
   const _Stats();
 
@@ -111,6 +111,14 @@ class _Stats extends ConsumerWidget {
                   icon: Icons.build_outlined,
                   count: stats.serviceCount,
                   label: l10n.profileStatServices,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: ProfileStatTile(
+                  icon: Icons.folder_shared_outlined,
+                  count: stats.documentCount,
+                  label: l10n.profileStatDocuments,
                 ),
               ),
             ],

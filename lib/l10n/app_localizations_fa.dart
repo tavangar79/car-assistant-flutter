@@ -2541,4 +2541,479 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get expenseSectionLoadError => 'دریافت هزینه‌ها ممکن نشد';
+
+  @override
+  String notificationsUnreadLabel(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'اعلانات، $countString خوانده‌نشده',
+      zero: 'اعلانات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notificationsTitle => 'صندوق اعلانات';
+
+  @override
+  String notificationsNewCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString اعلان جدید',
+      zero: 'اعلان جدیدی نیست',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notificationsReadAll => 'خواندن همه';
+
+  @override
+  String notificationsFilterAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'همه ($countString)';
+  }
+
+  @override
+  String get notificationsFilterService => 'سرویس و نگهداری';
+
+  @override
+  String get notificationsFilterDocuments => 'بیمه و اسناد';
+
+  @override
+  String get notificationsFilterSystem => 'سیستمی';
+
+  @override
+  String get notificationsEmptyTitle => 'اعلانی در این دسته‌بندی وجود ندارد';
+
+  @override
+  String get notificationsEmptyBody => 'تمام رویدادها و هشدارهای جدید در اینجا نمایش داده می‌شوند.';
+
+  @override
+  String get notificationsShowAll => 'مشاهده همه اعلان‌ها';
+
+  @override
+  String get notificationsRetention => 'تمامی اعلانات به مدت ۹۰ روز در تاریخچه حفظ می‌گردند';
+
+  @override
+  String get notificationsLoadError => 'دریافت اعلان‌ها ممکن نشد';
+
+  @override
+  String get notificationsActionFailed => 'انجام نشد، دوباره تلاش کنید';
+
+  @override
+  String notificationIntervalTitle(String subject, String vehicle) {
+    return 'موعد $subject $vehicle';
+  }
+
+  @override
+  String notificationIntervalMileage(int mileage) {
+    final intl.NumberFormat mileageNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String mileageString = mileageNumberFormat.format(mileage);
+
+    return 'کارکرد خودرو به $mileageString کیلومتر رسیده است.';
+  }
+
+  @override
+  String notificationIntervalRemaining(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'تنها $kmString کیلومتر تا سرویس باقی مانده است.';
+  }
+
+  @override
+  String notificationIntervalOverdueKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر از موعد گذشته است.';
+  }
+
+  @override
+  String notificationIntervalDueDate(String date) {
+    return 'موعد سرویس $date است.';
+  }
+
+  @override
+  String notificationIntervalOverdueDate(String date) {
+    return 'موعد سرویس $date گذشته است.';
+  }
+
+  @override
+  String get notificationAddService => 'ثبت سرویس';
+
+  @override
+  String notificationExpiryTitle(String subject) {
+    return 'سررسید $subject';
+  }
+
+  @override
+  String notificationExpiryBody(String subject, String vehicle, int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return '$subject خودرو $vehicle $daysString روز دیگر به اتمام می‌رسد.';
+  }
+
+  @override
+  String notificationExpiredBody(String subject, String vehicle) {
+    return '$subject خودرو $vehicle منقضی شده است.';
+  }
+
+  @override
+  String notificationDaysLeft(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return '$daysString روز باقیمانده';
+  }
+
+  @override
+  String get notificationExpired => 'منقضی شده';
+
+  @override
+  String get relativeJustNow => 'همین الان';
+
+  @override
+  String relativeMinutesAgo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString دقیقه پیش';
+  }
+
+  @override
+  String relativeHoursAgo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString ساعت پیش';
+  }
+
+  @override
+  String relativeYesterday(String time) {
+    return 'دیروز، $time';
+  }
+
+  @override
+  String get relativeLastWeek => 'هفته گذشته';
+
+  @override
+  String get documentsTitle => 'کیف مدارک خودرو';
+
+  @override
+  String get documentsVehicleSubtitle => 'کیف مدارک و یادآورهای هوشمند تمدید';
+
+  @override
+  String documentsSecureInfo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString مدرک ثبت‌شده به‌صورت رمزگذاری‌شده نگهداری می‌شوند.';
+  }
+
+  @override
+  String get documentsUploadTitle => 'بارگذاری مدرک جدید';
+
+  @override
+  String get documentsUploadBody =>
+      'تصویر یا فایل PDF (کارت خودرو، بیمه‌نامه، معاینه فنی، برگ سبز یا وکالت)';
+
+  @override
+  String get documentsUploadCamera => 'دوربین';
+
+  @override
+  String get documentsUploadGallery => 'گالری';
+
+  @override
+  String get documentsUploadPdf => 'فایل PDF';
+
+  @override
+  String documentsFilterAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'همه ($countString)';
+  }
+
+  @override
+  String documentsGroupInsurance(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'بیمه‌ها ($countString)';
+  }
+
+  @override
+  String documentsGroupInspection(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'معاینه فنی ($countString)';
+  }
+
+  @override
+  String documentsGroupIdentity(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'مدارک هویتی ($countString)';
+  }
+
+  @override
+  String get documentsEmpty => 'هنوز مدرکی برای این خودرو ثبت نشده است';
+
+  @override
+  String get documentsFilterEmpty => 'مدرکی در این دسته وجود ندارد';
+
+  @override
+  String get documentsLoadError => 'دریافت مدارک ممکن نشد';
+
+  @override
+  String get documentTypeThirdPartyInsurance => 'بیمه شخص ثالث';
+
+  @override
+  String get documentTypeBodyInsurance => 'بیمه بدنه';
+
+  @override
+  String get documentTypeInspection => 'معاینه فنی';
+
+  @override
+  String get documentTypeVehicleCard => 'کارت خودرو';
+
+  @override
+  String get documentTypeGreenSheet => 'برگ سبز (سند مالکیت)';
+
+  @override
+  String get documentTypePowerOfAttorney => 'وکالت‌نامه';
+
+  @override
+  String documentStatusExpired(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'منقضی شده — $daysString روز گذشته';
+  }
+
+  @override
+  String documentStatusDueSoon(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'موعد نزدیک — $daysString روز مانده';
+  }
+
+  @override
+  String documentStatusValid(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'معتبر — $daysString روز مانده';
+  }
+
+  @override
+  String get documentStatusPermanent => 'دائمی / بدون انقضا';
+
+  @override
+  String documentNumber(String number) {
+    return 'شماره: $number';
+  }
+
+  @override
+  String documentIssuedAt(String date) {
+    return 'صدور: $date';
+  }
+
+  @override
+  String documentExpiresAt(String date) {
+    return 'انقضا: $date';
+  }
+
+  @override
+  String get documentReminderOn => 'یادآور تمدید فعال است';
+
+  @override
+  String get documentViewFile => 'مشاهده اصل فایل';
+
+  @override
+  String get documentRenew => 'ثبت تمدید جدید';
+
+  @override
+  String get documentDetails => 'جزئیات';
+
+  @override
+  String documentImageCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString تصویر';
+  }
+
+  @override
+  String get documentFileOpenFailed => 'باز کردن فایل ممکن نشد';
+
+  @override
+  String get documentFormNewTitle => 'ثبت مدرک';
+
+  @override
+  String get documentFormEditTitle => 'ویرایش مدرک';
+
+  @override
+  String get documentTypeLabel => 'نوع مدرک';
+
+  @override
+  String get documentTitleLabel => 'عنوان مدرک';
+
+  @override
+  String get documentTitleHint => 'مثلاً گواهی معاینه فنی برتر';
+
+  @override
+  String get documentIssuerLabel => 'صادرکننده';
+
+  @override
+  String get documentIssuerHint => 'مثلاً بیمه ایران';
+
+  @override
+  String get documentNumberLabel => 'شماره مدرک / بیمه‌نامه';
+
+  @override
+  String get documentNumberHint => 'مثلاً ۱۲۴/۹۸۷۴۳۲';
+
+  @override
+  String get documentIssuedAtLabel => 'تاریخ صدور';
+
+  @override
+  String get documentIssuedAtPick => 'انتخاب تاریخ صدور';
+
+  @override
+  String get documentIssuedAtPickTitle => 'تاریخ صدور (تقویم جلالی)';
+
+  @override
+  String get documentIssuedAtClear => 'حذف تاریخ صدور';
+
+  @override
+  String get documentNotesLabel => 'یادداشت';
+
+  @override
+  String get documentNotesHint => 'توضیحات تکمیلی (اختیاری)';
+
+  @override
+  String get documentFilesLabel => 'فایل‌های مدرک';
+
+  @override
+  String documentFilesCount(int count, int max) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return '$countString از $maxString';
+  }
+
+  @override
+  String get documentFilesAdd => 'افزودن فایل';
+
+  @override
+  String documentFilesHelp(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'حداکثر $maxString فایل PDF، JPG یا PNG، هر کدام تا ۱۰ مگابایت.';
+  }
+
+  @override
+  String documentFileLimit(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'حداکثر $maxString فایل برای هر مدرک';
+  }
+
+  @override
+  String get documentSave => 'ذخیره مدرک';
+
+  @override
+  String get documentSaved => 'مدرک ذخیره شد';
+
+  @override
+  String get documentSavedFilesFailed => 'مدرک ذخیره شد، اما بارگذاری فایل انجام نشد';
+
+  @override
+  String get documentSaveInvalid => 'اطلاعات مدرک را بررسی کنید';
+
+  @override
+  String get documentSaveFailed => 'ذخیره مدرک ممکن نشد';
+
+  @override
+  String get documentTypeError => 'نوع مدرک را انتخاب کنید';
+
+  @override
+  String documentTitleError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'عنوان حداکثر $maxString حرف است';
+  }
+
+  @override
+  String documentIssuerError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'صادرکننده حداکثر $maxString حرف است';
+  }
+
+  @override
+  String documentNumberError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'شماره حداکثر $maxString حرف است';
+  }
+
+  @override
+  String documentNotesError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'یادداشت حداکثر $maxString حرف است';
+  }
+
+  @override
+  String get documentExpiresAtError => 'تاریخ انقضا را بعد از تاریخ صدور انتخاب کنید';
+
+  @override
+  String get documentDelete => 'حذف مدرک';
+
+  @override
+  String get documentDeleteConfirmTitle => 'این مدرک حذف شود؟';
+
+  @override
+  String get documentDeleteConfirmBody => 'مدرک و همه فایل‌های آن برای همیشه حذف می‌شوند.';
+
+  @override
+  String get documentDeleteCancel => 'انصراف';
+
+  @override
+  String get documentDeleted => 'مدرک حذف شد';
+
+  @override
+  String get documentDeleteFailed => 'حذف مدرک ممکن نشد';
+
+  @override
+  String get documentFileDeleteFailed => 'حذف فایل ممکن نشد';
+
+  @override
+  String get profileStatDocuments => 'مدرک در کیف';
 }

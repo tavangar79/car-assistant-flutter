@@ -3521,5 +3521,638 @@
   "expenseSectionLoadError": "دریافت هزینه‌ها ممکن نشد",
   "@expenseSectionLoadError": {
     "description": "Error of the expense section."
+  },
+  "notificationsUnreadLabel": "{count, plural, =0{اعلانات} other{اعلانات، {count} خوانده‌نشده}}",
+  "@notificationsUnreadLabel": {
+    "description": "Tooltip of the app-bar bell with the unread count.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationsTitle": "صندوق اعلانات",
+  "@notificationsTitle": {
+    "description": "Title of the notifications page."
+  },
+  "notificationsNewCount": "{count, plural, =0{اعلان جدیدی نیست} other{{count} اعلان جدید}}",
+  "@notificationsNewCount": {
+    "description": "Unread count line at the top of the notifications page.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationsReadAll": "خواندن همه",
+  "@notificationsReadAll": {
+    "description": "Button that marks every notification read."
+  },
+  "notificationsFilterAll": "همه ({count})",
+  "@notificationsFilterAll": {
+    "description": "Filter chip with every notification and its count.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationsFilterService": "سرویس و نگهداری",
+  "@notificationsFilterService": {
+    "description": "Filter chip of service reminders."
+  },
+  "notificationsFilterDocuments": "بیمه و اسناد",
+  "@notificationsFilterDocuments": {
+    "description": "Filter chip of expiry reminders."
+  },
+  "notificationsFilterSystem": "سیستمی",
+  "@notificationsFilterSystem": {
+    "description": "Filter chip of system notifications."
+  },
+  "notificationsEmptyTitle": "اعلانی در این دسته‌بندی وجود ندارد",
+  "@notificationsEmptyTitle": {
+    "description": "Title of the empty state of a filter."
+  },
+  "notificationsEmptyBody": "تمام رویدادها و هشدارهای جدید در اینجا نمایش داده می‌شوند.",
+  "@notificationsEmptyBody": {
+    "description": "Body of the empty state of a filter."
+  },
+  "notificationsShowAll": "مشاهده همه اعلان‌ها",
+  "@notificationsShowAll": {
+    "description": "Button of the empty state that selects the All chip."
+  },
+  "notificationsRetention": "تمامی اعلانات به مدت ۹۰ روز در تاریخچه حفظ می‌گردند",
+  "@notificationsRetention": {
+    "description": "Footer line of the notifications page."
+  },
+  "notificationsLoadError": "دریافت اعلان‌ها ممکن نشد",
+  "@notificationsLoadError": {
+    "description": "Load error of the notifications page."
+  },
+  "notificationsActionFailed": "انجام نشد، دوباره تلاش کنید",
+  "@notificationsActionFailed": {
+    "description": "Snackbar when marking notifications read fails."
+  },
+  "notificationIntervalTitle": "موعد {subject} {vehicle}",
+  "@notificationIntervalTitle": {
+    "description": "Title of a service reminder: the interval title and the vehicle name.",
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "vehicle": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationIntervalMileage": "کارکرد خودرو به {mileage} کیلومتر رسیده است.",
+  "@notificationIntervalMileage": {
+    "description": "First sentence of a service reminder.",
+    "placeholders": {
+      "mileage": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationIntervalRemaining": "تنها {km} کیلومتر تا سرویس باقی مانده است.",
+  "@notificationIntervalRemaining": {
+    "description": "Second sentence of a due-soon service reminder.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationIntervalOverdueKm": "{km} کیلومتر از موعد گذشته است.",
+  "@notificationIntervalOverdueKm": {
+    "description": "Second sentence of an overdue service reminder.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationIntervalDueDate": "موعد سرویس {date} است.",
+  "@notificationIntervalDueDate": {
+    "description": "Body of a date-only due-soon service reminder.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationIntervalOverdueDate": "موعد سرویس {date} گذشته است.",
+  "@notificationIntervalOverdueDate": {
+    "description": "Body of a date-only overdue service reminder.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationAddService": "ثبت سرویس",
+  "@notificationAddService": {
+    "description": "Action of a service reminder: opens the service wizard."
+  },
+  "notificationExpiryTitle": "سررسید {subject}",
+  "@notificationExpiryTitle": {
+    "description": "Title of an expiry reminder.",
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationExpiryBody": "{subject} خودرو {vehicle} {days} روز دیگر به اتمام می‌رسد.",
+  "@notificationExpiryBody": {
+    "description": "Body of an expiry reminder; days counted from today.",
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "vehicle": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationExpiredBody": "{subject} خودرو {vehicle} منقضی شده است.",
+  "@notificationExpiredBody": {
+    "description": "Body of an expiry reminder once the date has passed.",
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "vehicle": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationDaysLeft": "{days} روز باقیمانده",
+  "@notificationDaysLeft": {
+    "description": "Chip of an expiry reminder.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationExpired": "منقضی شده",
+  "@notificationExpired": {
+    "description": "Chip of an expiry reminder once the date has passed."
+  },
+  "relativeJustNow": "همین الان",
+  "@relativeJustNow": {
+    "description": "Relative time under a minute."
+  },
+  "relativeMinutesAgo": "{count} دقیقه پیش",
+  "@relativeMinutesAgo": {
+    "description": "Relative time in minutes.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count} ساعت پیش",
+  "@relativeHoursAgo": {
+    "description": "Relative time in hours (same day).",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "relativeYesterday": "دیروز، {time}",
+  "@relativeYesterday": {
+    "description": "Relative time for yesterday with the clock time.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "relativeLastWeek": "هفته گذشته",
+  "@relativeLastWeek": {
+    "description": "Relative time 7 to 13 days ago."
+  },
+  "documentsTitle": "کیف مدارک خودرو",
+  "@documentsTitle": {
+    "description": "Title of the documents page."
+  },
+  "documentsVehicleSubtitle": "کیف مدارک و یادآورهای هوشمند تمدید",
+  "@documentsVehicleSubtitle": {
+    "description": "Line under the vehicle name on the documents page."
+  },
+  "documentsSecureInfo": "{count} مدرک ثبت‌شده به‌صورت رمزگذاری‌شده نگهداری می‌شوند.",
+  "@documentsSecureInfo": {
+    "description": "Encryption note with the number of documents.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentsUploadTitle": "بارگذاری مدرک جدید",
+  "@documentsUploadTitle": {
+    "description": "Title of the upload card."
+  },
+  "documentsUploadBody": "تصویر یا فایل PDF (کارت خودرو، بیمه‌نامه، معاینه فنی، برگ سبز یا وکالت)",
+  "@documentsUploadBody": {
+    "description": "Body of the upload card."
+  },
+  "documentsUploadCamera": "دوربین",
+  "@documentsUploadCamera": {
+    "description": "Upload from the camera."
+  },
+  "documentsUploadGallery": "گالری",
+  "@documentsUploadGallery": {
+    "description": "Upload from the gallery."
+  },
+  "documentsUploadPdf": "فایل PDF",
+  "@documentsUploadPdf": {
+    "description": "Upload a PDF file."
+  },
+  "documentsFilterAll": "همه ({count})",
+  "@documentsFilterAll": {
+    "description": "Filter chip with every document.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentsGroupInsurance": "بیمه‌ها ({count})",
+  "@documentsGroupInsurance": {
+    "description": "Filter chip of insurance documents.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentsGroupInspection": "معاینه فنی ({count})",
+  "@documentsGroupInspection": {
+    "description": "Filter chip of inspection documents.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentsGroupIdentity": "مدارک هویتی ({count})",
+  "@documentsGroupIdentity": {
+    "description": "Filter chip of identity documents.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentsEmpty": "هنوز مدرکی برای این خودرو ثبت نشده است",
+  "@documentsEmpty": {
+    "description": "Empty documents list."
+  },
+  "documentsFilterEmpty": "مدرکی در این دسته وجود ندارد",
+  "@documentsFilterEmpty": {
+    "description": "Empty result of a filter chip."
+  },
+  "documentsLoadError": "دریافت مدارک ممکن نشد",
+  "@documentsLoadError": {
+    "description": "Load error of the documents page."
+  },
+  "documentTypeThirdPartyInsurance": "بیمه شخص ثالث",
+  "@documentTypeThirdPartyInsurance": {
+    "description": "Document type."
+  },
+  "documentTypeBodyInsurance": "بیمه بدنه",
+  "@documentTypeBodyInsurance": {
+    "description": "Document type."
+  },
+  "documentTypeInspection": "معاینه فنی",
+  "@documentTypeInspection": {
+    "description": "Document type."
+  },
+  "documentTypeVehicleCard": "کارت خودرو",
+  "@documentTypeVehicleCard": {
+    "description": "Document type."
+  },
+  "documentTypeGreenSheet": "برگ سبز (سند مالکیت)",
+  "@documentTypeGreenSheet": {
+    "description": "Document type."
+  },
+  "documentTypePowerOfAttorney": "وکالت‌نامه",
+  "@documentTypePowerOfAttorney": {
+    "description": "Document type."
+  },
+  "documentStatusExpired": "منقضی شده — {days} روز گذشته",
+  "@documentStatusExpired": {
+    "description": "Status pill of an expired document.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentStatusDueSoon": "موعد نزدیک — {days} روز مانده",
+  "@documentStatusDueSoon": {
+    "description": "Status pill of a document expiring within 15 days.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentStatusValid": "معتبر — {days} روز مانده",
+  "@documentStatusValid": {
+    "description": "Status pill of a valid document.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentStatusPermanent": "دائمی / بدون انقضا",
+  "@documentStatusPermanent": {
+    "description": "Status pill of a document without expiry."
+  },
+  "documentNumber": "شماره: {number}",
+  "@documentNumber": {
+    "description": "The document number on its card.",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "documentIssuedAt": "صدور: {date}",
+  "@documentIssuedAt": {
+    "description": "Issue date on a document card.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "documentExpiresAt": "انقضا: {date}",
+  "@documentExpiresAt": {
+    "description": "Expiry date on a document card.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "documentReminderOn": "یادآور تمدید فعال است",
+  "@documentReminderOn": {
+    "description": "Footer of a document card with a reminder."
+  },
+  "documentViewFile": "مشاهده اصل فایل",
+  "@documentViewFile": {
+    "description": "Opens the first file of a document."
+  },
+  "documentRenew": "ثبت تمدید جدید",
+  "@documentRenew": {
+    "description": "Opens the form for a renewal of an expired document."
+  },
+  "documentDetails": "جزئیات",
+  "@documentDetails": {
+    "description": "Semantics of the chevron of a document card."
+  },
+  "documentImageCount": "{count} تصویر",
+  "@documentImageCount": {
+    "description": "File badge of a document with several images.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentFileOpenFailed": "باز کردن فایل ممکن نشد",
+  "@documentFileOpenFailed": {
+    "description": "Snackbar when a file can't be loaded."
+  },
+  "documentFormNewTitle": "ثبت مدرک",
+  "@documentFormNewTitle": {
+    "description": "Title of the new document form and its submit button."
+  },
+  "documentFormEditTitle": "ویرایش مدرک",
+  "@documentFormEditTitle": {
+    "description": "Title of the edit document form."
+  },
+  "documentTypeLabel": "نوع مدرک",
+  "@documentTypeLabel": {
+    "description": "Label of the type grid."
+  },
+  "documentTitleLabel": "عنوان مدرک",
+  "@documentTitleLabel": {
+    "description": "Label of the title field."
+  },
+  "documentTitleHint": "مثلاً گواهی معاینه فنی برتر",
+  "@documentTitleHint": {
+    "description": "Hint of the title field."
+  },
+  "documentIssuerLabel": "صادرکننده",
+  "@documentIssuerLabel": {
+    "description": "Label of the issuer field."
+  },
+  "documentIssuerHint": "مثلاً بیمه ایران",
+  "@documentIssuerHint": {
+    "description": "Hint of the issuer field."
+  },
+  "documentNumberLabel": "شماره مدرک / بیمه‌نامه",
+  "@documentNumberLabel": {
+    "description": "Label of the number field."
+  },
+  "documentNumberHint": "مثلاً ۱۲۴/۹۸۷۴۳۲",
+  "@documentNumberHint": {
+    "description": "Hint of the number field."
+  },
+  "documentIssuedAtLabel": "تاریخ صدور",
+  "@documentIssuedAtLabel": {
+    "description": "Label of the issue date row."
+  },
+  "documentIssuedAtPick": "انتخاب تاریخ صدور",
+  "@documentIssuedAtPick": {
+    "description": "Issue date row before a date is chosen."
+  },
+  "documentIssuedAtPickTitle": "تاریخ صدور (تقویم جلالی)",
+  "@documentIssuedAtPickTitle": {
+    "description": "Title of the issue date picker."
+  },
+  "documentIssuedAtClear": "حذف تاریخ صدور",
+  "@documentIssuedAtClear": {
+    "description": "Clears the issue date."
+  },
+  "documentNotesLabel": "یادداشت",
+  "@documentNotesLabel": {
+    "description": "Label of the notes field."
+  },
+  "documentNotesHint": "توضیحات تکمیلی (اختیاری)",
+  "@documentNotesHint": {
+    "description": "Hint of the notes field."
+  },
+  "documentFilesLabel": "فایل‌های مدرک",
+  "@documentFilesLabel": {
+    "description": "Label of the files card."
+  },
+  "documentFilesCount": "{count} از {max}",
+  "@documentFilesCount": {
+    "description": "Number of files out of the maximum.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentFilesAdd": "افزودن فایل",
+  "@documentFilesAdd": {
+    "description": "Adds a file to the document."
+  },
+  "documentFilesHelp": "حداکثر {max} فایل PDF، JPG یا PNG، هر کدام تا ۱۰ مگابایت.",
+  "@documentFilesHelp": {
+    "description": "Help line of the files card.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentFileLimit": "حداکثر {max} فایل برای هر مدرک",
+  "@documentFileLimit": {
+    "description": "Error when too many files are attached.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentSave": "ذخیره مدرک",
+  "@documentSave": {
+    "description": "Submit button of the edit form."
+  },
+  "documentSaved": "مدرک ذخیره شد",
+  "@documentSaved": {
+    "description": "Snackbar after saving."
+  },
+  "documentSavedFilesFailed": "مدرک ذخیره شد، اما بارگذاری فایل انجام نشد",
+  "@documentSavedFilesFailed": {
+    "description": "Snackbar when the document is saved but a file is not."
+  },
+  "documentSaveInvalid": "اطلاعات مدرک را بررسی کنید",
+  "@documentSaveInvalid": {
+    "description": "Snackbar of a rejected document."
+  },
+  "documentSaveFailed": "ذخیره مدرک ممکن نشد",
+  "@documentSaveFailed": {
+    "description": "Snackbar of a failed save."
+  },
+  "documentTypeError": "نوع مدرک را انتخاب کنید",
+  "@documentTypeError": {
+    "description": "Error of the type grid."
+  },
+  "documentTitleError": "عنوان حداکثر {max} حرف است",
+  "@documentTitleError": {
+    "description": "Error of the title field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentIssuerError": "صادرکننده حداکثر {max} حرف است",
+  "@documentIssuerError": {
+    "description": "Error of the issuer field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentNumberError": "شماره حداکثر {max} حرف است",
+  "@documentNumberError": {
+    "description": "Error of the number field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentNotesError": "یادداشت حداکثر {max} حرف است",
+  "@documentNotesError": {
+    "description": "Error of the notes field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "documentExpiresAtError": "تاریخ انقضا را بعد از تاریخ صدور انتخاب کنید",
+  "@documentExpiresAtError": {
+    "description": "Error of the expiry row."
+  },
+  "documentDelete": "حذف مدرک",
+  "@documentDelete": {
+    "description": "Delete action of the edit form."
+  },
+  "documentDeleteConfirmTitle": "این مدرک حذف شود؟",
+  "@documentDeleteConfirmTitle": {
+    "description": "Title of the delete confirmation."
+  },
+  "documentDeleteConfirmBody": "مدرک و همه فایل‌های آن برای همیشه حذف می‌شوند.",
+  "@documentDeleteConfirmBody": {
+    "description": "Body of the delete confirmation."
+  },
+  "documentDeleteCancel": "انصراف",
+  "@documentDeleteCancel": {
+    "description": "Cancel of the delete confirmation."
+  },
+  "documentDeleted": "مدرک حذف شد",
+  "@documentDeleted": {
+    "description": "Snackbar after deleting."
+  },
+  "documentDeleteFailed": "حذف مدرک ممکن نشد",
+  "@documentDeleteFailed": {
+    "description": "Snackbar of a failed delete."
+  },
+  "documentFileDeleteFailed": "حذف فایل ممکن نشد",
+  "@documentFileDeleteFailed": {
+    "description": "Snackbar of a failed file removal."
+  },
+  "profileStatDocuments": "مدرک در کیف",
+  "@profileStatDocuments": {
+    "description": "Profile stat tile: documents across all vehicles."
   }
 }

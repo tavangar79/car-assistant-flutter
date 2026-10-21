@@ -2551,4 +2551,486 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get expenseSectionLoadError => 'Couldn\'t load the expenses';
+
+  @override
+  String notificationsUnreadLabel(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Notifications, $countString unread',
+      zero: 'Notifications',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String notificationsNewCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString new notifications',
+      one: '1 new notification',
+      zero: 'No new notifications',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notificationsReadAll => 'Mark all read';
+
+  @override
+  String notificationsFilterAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'All ($countString)';
+  }
+
+  @override
+  String get notificationsFilterService => 'Service & maintenance';
+
+  @override
+  String get notificationsFilterDocuments => 'Insurance & documents';
+
+  @override
+  String get notificationsFilterSystem => 'System';
+
+  @override
+  String get notificationsEmptyTitle => 'No notifications in this category';
+
+  @override
+  String get notificationsEmptyBody => 'New events and alerts show up here.';
+
+  @override
+  String get notificationsShowAll => 'Show all notifications';
+
+  @override
+  String get notificationsRetention => 'Notifications are kept for 90 days';
+
+  @override
+  String get notificationsLoadError => 'Couldn\'t load the notifications';
+
+  @override
+  String get notificationsActionFailed => 'That didn\'t work, try again';
+
+  @override
+  String notificationIntervalTitle(String subject, String vehicle) {
+    return '$subject due on $vehicle';
+  }
+
+  @override
+  String notificationIntervalMileage(int mileage) {
+    final intl.NumberFormat mileageNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String mileageString = mileageNumberFormat.format(mileage);
+
+    return 'The vehicle has reached $mileageString km.';
+  }
+
+  @override
+  String notificationIntervalRemaining(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Only $kmString km left until the service.';
+  }
+
+  @override
+  String notificationIntervalOverdueKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString km past due.';
+  }
+
+  @override
+  String notificationIntervalDueDate(String date) {
+    return 'The service is due on $date.';
+  }
+
+  @override
+  String notificationIntervalOverdueDate(String date) {
+    return 'The service was due on $date.';
+  }
+
+  @override
+  String get notificationAddService => 'Record service';
+
+  @override
+  String notificationExpiryTitle(String subject) {
+    return '$subject expiring';
+  }
+
+  @override
+  String notificationExpiryBody(String subject, String vehicle, int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return '$subject of $vehicle expires in $daysString days.';
+  }
+
+  @override
+  String notificationExpiredBody(String subject, String vehicle) {
+    return '$subject of $vehicle has expired.';
+  }
+
+  @override
+  String notificationDaysLeft(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return '$daysString days left';
+  }
+
+  @override
+  String get notificationExpired => 'Expired';
+
+  @override
+  String get relativeJustNow => 'Just now';
+
+  @override
+  String relativeMinutesAgo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString min ago';
+  }
+
+  @override
+  String relativeHoursAgo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString h ago';
+  }
+
+  @override
+  String relativeYesterday(String time) {
+    return 'Yesterday, $time';
+  }
+
+  @override
+  String get relativeLastWeek => 'Last week';
+
+  @override
+  String get documentsTitle => 'Vehicle documents';
+
+  @override
+  String get documentsVehicleSubtitle => 'Documents and renewal reminders';
+
+  @override
+  String documentsSecureInfo(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString documents are stored encrypted.',
+      one: '1 document is stored encrypted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get documentsUploadTitle => 'Upload a new document';
+
+  @override
+  String get documentsUploadBody =>
+      'A photo or PDF (vehicle card, insurance, inspection, ownership papers or power of attorney)';
+
+  @override
+  String get documentsUploadCamera => 'Camera';
+
+  @override
+  String get documentsUploadGallery => 'Gallery';
+
+  @override
+  String get documentsUploadPdf => 'PDF file';
+
+  @override
+  String documentsFilterAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'All ($countString)';
+  }
+
+  @override
+  String documentsGroupInsurance(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Insurance ($countString)';
+  }
+
+  @override
+  String documentsGroupInspection(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Inspection ($countString)';
+  }
+
+  @override
+  String documentsGroupIdentity(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Identity ($countString)';
+  }
+
+  @override
+  String get documentsEmpty => 'No document saved for this vehicle yet';
+
+  @override
+  String get documentsFilterEmpty => 'No document in this group';
+
+  @override
+  String get documentsLoadError => 'Couldn\'t load the documents';
+
+  @override
+  String get documentTypeThirdPartyInsurance => 'Third-party insurance';
+
+  @override
+  String get documentTypeBodyInsurance => 'Body insurance';
+
+  @override
+  String get documentTypeInspection => 'Technical inspection';
+
+  @override
+  String get documentTypeVehicleCard => 'Vehicle card';
+
+  @override
+  String get documentTypeGreenSheet => 'Ownership document';
+
+  @override
+  String get documentTypePowerOfAttorney => 'Power of attorney';
+
+  @override
+  String documentStatusExpired(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'Expired — $daysString days ago';
+  }
+
+  @override
+  String documentStatusDueSoon(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'Due soon — $daysString days left';
+  }
+
+  @override
+  String documentStatusValid(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'Valid — $daysString days left';
+  }
+
+  @override
+  String get documentStatusPermanent => 'Permanent / no expiry';
+
+  @override
+  String documentNumber(String number) {
+    return 'No.: $number';
+  }
+
+  @override
+  String documentIssuedAt(String date) {
+    return 'Issued: $date';
+  }
+
+  @override
+  String documentExpiresAt(String date) {
+    return 'Expires: $date';
+  }
+
+  @override
+  String get documentReminderOn => 'Renewal reminder is on';
+
+  @override
+  String get documentViewFile => 'View the file';
+
+  @override
+  String get documentRenew => 'Record a renewal';
+
+  @override
+  String get documentDetails => 'Details';
+
+  @override
+  String documentImageCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString images';
+  }
+
+  @override
+  String get documentFileOpenFailed => 'Couldn\'t open the file';
+
+  @override
+  String get documentFormNewTitle => 'Add document';
+
+  @override
+  String get documentFormEditTitle => 'Edit document';
+
+  @override
+  String get documentTypeLabel => 'Document type';
+
+  @override
+  String get documentTitleLabel => 'Title';
+
+  @override
+  String get documentTitleHint => 'e.g. Inspection certificate';
+
+  @override
+  String get documentIssuerLabel => 'Issuer';
+
+  @override
+  String get documentIssuerHint => 'e.g. Iran Insurance';
+
+  @override
+  String get documentNumberLabel => 'Document or policy number';
+
+  @override
+  String get documentNumberHint => 'e.g. 124/987432';
+
+  @override
+  String get documentIssuedAtLabel => 'Issue date';
+
+  @override
+  String get documentIssuedAtPick => 'Pick the issue date';
+
+  @override
+  String get documentIssuedAtPickTitle => 'Issue date (Jalali calendar)';
+
+  @override
+  String get documentIssuedAtClear => 'Clear the issue date';
+
+  @override
+  String get documentNotesLabel => 'Notes';
+
+  @override
+  String get documentNotesHint => 'Extra details (optional)';
+
+  @override
+  String get documentFilesLabel => 'Document files';
+
+  @override
+  String documentFilesCount(int count, int max) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return '$countString of $maxString';
+  }
+
+  @override
+  String get documentFilesAdd => 'Add a file';
+
+  @override
+  String documentFilesHelp(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Up to $maxString PDF, JPG or PNG files, 10 MB each.';
+  }
+
+  @override
+  String documentFileLimit(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'At most $maxString files per document';
+  }
+
+  @override
+  String get documentSave => 'Save document';
+
+  @override
+  String get documentSaved => 'Document saved';
+
+  @override
+  String get documentSavedFilesFailed => 'Document saved, but a file couldn\'t be uploaded';
+
+  @override
+  String get documentSaveInvalid => 'Check the document details';
+
+  @override
+  String get documentSaveFailed => 'Couldn\'t save the document';
+
+  @override
+  String get documentTypeError => 'Choose the document type';
+
+  @override
+  String documentTitleError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The title is at most $maxString characters';
+  }
+
+  @override
+  String documentIssuerError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The issuer is at most $maxString characters';
+  }
+
+  @override
+  String documentNumberError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'The number is at most $maxString characters';
+  }
+
+  @override
+  String documentNotesError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Notes are at most $maxString characters';
+  }
+
+  @override
+  String get documentExpiresAtError => 'Pick an expiry after the issue date';
+
+  @override
+  String get documentDelete => 'Delete document';
+
+  @override
+  String get documentDeleteConfirmTitle => 'Delete this document?';
+
+  @override
+  String get documentDeleteConfirmBody => 'The document and all its files are deleted for good.';
+
+  @override
+  String get documentDeleteCancel => 'Cancel';
+
+  @override
+  String get documentDeleted => 'Document deleted';
+
+  @override
+  String get documentDeleteFailed => 'Couldn\'t delete the document';
+
+  @override
+  String get documentFileDeleteFailed => 'Couldn\'t remove the file';
+
+  @override
+  String get profileStatDocuments => 'Documents in the wallet';
 }

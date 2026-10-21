@@ -4100,6 +4100,630 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'دریافت هزینه‌ها ممکن نشد'**
   String get expenseSectionLoadError;
+
+  /// Tooltip of the app-bar bell with the unread count.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count, plural, =0{اعلانات} other{اعلانات، {count} خوانده‌نشده}}'**
+  String notificationsUnreadLabel(int count);
+
+  /// Title of the notifications page.
+  ///
+  /// In fa, this message translates to:
+  /// **'صندوق اعلانات'**
+  String get notificationsTitle;
+
+  /// Unread count line at the top of the notifications page.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count, plural, =0{اعلان جدیدی نیست} other{{count} اعلان جدید}}'**
+  String notificationsNewCount(int count);
+
+  /// Button that marks every notification read.
+  ///
+  /// In fa, this message translates to:
+  /// **'خواندن همه'**
+  String get notificationsReadAll;
+
+  /// Filter chip with every notification and its count.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه ({count})'**
+  String notificationsFilterAll(int count);
+
+  /// Filter chip of service reminders.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرویس و نگهداری'**
+  String get notificationsFilterService;
+
+  /// Filter chip of expiry reminders.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه و اسناد'**
+  String get notificationsFilterDocuments;
+
+  /// Filter chip of system notifications.
+  ///
+  /// In fa, this message translates to:
+  /// **'سیستمی'**
+  String get notificationsFilterSystem;
+
+  /// Title of the empty state of a filter.
+  ///
+  /// In fa, this message translates to:
+  /// **'اعلانی در این دسته‌بندی وجود ندارد'**
+  String get notificationsEmptyTitle;
+
+  /// Body of the empty state of a filter.
+  ///
+  /// In fa, this message translates to:
+  /// **'تمام رویدادها و هشدارهای جدید در اینجا نمایش داده می‌شوند.'**
+  String get notificationsEmptyBody;
+
+  /// Button of the empty state that selects the All chip.
+  ///
+  /// In fa, this message translates to:
+  /// **'مشاهده همه اعلان‌ها'**
+  String get notificationsShowAll;
+
+  /// Footer line of the notifications page.
+  ///
+  /// In fa, this message translates to:
+  /// **'تمامی اعلانات به مدت ۹۰ روز در تاریخچه حفظ می‌گردند'**
+  String get notificationsRetention;
+
+  /// Load error of the notifications page.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت اعلان‌ها ممکن نشد'**
+  String get notificationsLoadError;
+
+  /// Snackbar when marking notifications read fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'انجام نشد، دوباره تلاش کنید'**
+  String get notificationsActionFailed;
+
+  /// Title of a service reminder: the interval title and the vehicle name.
+  ///
+  /// In fa, this message translates to:
+  /// **'موعد {subject} {vehicle}'**
+  String notificationIntervalTitle(String subject, String vehicle);
+
+  /// First sentence of a service reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارکرد خودرو به {mileage} کیلومتر رسیده است.'**
+  String notificationIntervalMileage(int mileage);
+
+  /// Second sentence of a due-soon service reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'تنها {km} کیلومتر تا سرویس باقی مانده است.'**
+  String notificationIntervalRemaining(int km);
+
+  /// Second sentence of an overdue service reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'{km} کیلومتر از موعد گذشته است.'**
+  String notificationIntervalOverdueKm(int km);
+
+  /// Body of a date-only due-soon service reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'موعد سرویس {date} است.'**
+  String notificationIntervalDueDate(String date);
+
+  /// Body of a date-only overdue service reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'موعد سرویس {date} گذشته است.'**
+  String notificationIntervalOverdueDate(String date);
+
+  /// Action of a service reminder: opens the service wizard.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت سرویس'**
+  String get notificationAddService;
+
+  /// Title of an expiry reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'سررسید {subject}'**
+  String notificationExpiryTitle(String subject);
+
+  /// Body of an expiry reminder; days counted from today.
+  ///
+  /// In fa, this message translates to:
+  /// **'{subject} خودرو {vehicle} {days} روز دیگر به اتمام می‌رسد.'**
+  String notificationExpiryBody(String subject, String vehicle, int days);
+
+  /// Body of an expiry reminder once the date has passed.
+  ///
+  /// In fa, this message translates to:
+  /// **'{subject} خودرو {vehicle} منقضی شده است.'**
+  String notificationExpiredBody(String subject, String vehicle);
+
+  /// Chip of an expiry reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'{days} روز باقیمانده'**
+  String notificationDaysLeft(int days);
+
+  /// Chip of an expiry reminder once the date has passed.
+  ///
+  /// In fa, this message translates to:
+  /// **'منقضی شده'**
+  String get notificationExpired;
+
+  /// Relative time under a minute.
+  ///
+  /// In fa, this message translates to:
+  /// **'همین الان'**
+  String get relativeJustNow;
+
+  /// Relative time in minutes.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} دقیقه پیش'**
+  String relativeMinutesAgo(int count);
+
+  /// Relative time in hours (same day).
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} ساعت پیش'**
+  String relativeHoursAgo(int count);
+
+  /// Relative time for yesterday with the clock time.
+  ///
+  /// In fa, this message translates to:
+  /// **'دیروز، {time}'**
+  String relativeYesterday(String time);
+
+  /// Relative time 7 to 13 days ago.
+  ///
+  /// In fa, this message translates to:
+  /// **'هفته گذشته'**
+  String get relativeLastWeek;
+
+  /// Title of the documents page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیف مدارک خودرو'**
+  String get documentsTitle;
+
+  /// Line under the vehicle name on the documents page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیف مدارک و یادآورهای هوشمند تمدید'**
+  String get documentsVehicleSubtitle;
+
+  /// Encryption note with the number of documents.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} مدرک ثبت‌شده به‌صورت رمزگذاری‌شده نگهداری می‌شوند.'**
+  String documentsSecureInfo(int count);
+
+  /// Title of the upload card.
+  ///
+  /// In fa, this message translates to:
+  /// **'بارگذاری مدرک جدید'**
+  String get documentsUploadTitle;
+
+  /// Body of the upload card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصویر یا فایل PDF (کارت خودرو، بیمه‌نامه، معاینه فنی، برگ سبز یا وکالت)'**
+  String get documentsUploadBody;
+
+  /// Upload from the camera.
+  ///
+  /// In fa, this message translates to:
+  /// **'دوربین'**
+  String get documentsUploadCamera;
+
+  /// Upload from the gallery.
+  ///
+  /// In fa, this message translates to:
+  /// **'گالری'**
+  String get documentsUploadGallery;
+
+  /// Upload a PDF file.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل PDF'**
+  String get documentsUploadPdf;
+
+  /// Filter chip with every document.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه ({count})'**
+  String documentsFilterAll(int count);
+
+  /// Filter chip of insurance documents.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه‌ها ({count})'**
+  String documentsGroupInsurance(int count);
+
+  /// Filter chip of inspection documents.
+  ///
+  /// In fa, this message translates to:
+  /// **'معاینه فنی ({count})'**
+  String documentsGroupInspection(int count);
+
+  /// Filter chip of identity documents.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدارک هویتی ({count})'**
+  String documentsGroupIdentity(int count);
+
+  /// Empty documents list.
+  ///
+  /// In fa, this message translates to:
+  /// **'هنوز مدرکی برای این خودرو ثبت نشده است'**
+  String get documentsEmpty;
+
+  /// Empty result of a filter chip.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرکی در این دسته وجود ندارد'**
+  String get documentsFilterEmpty;
+
+  /// Load error of the documents page.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت مدارک ممکن نشد'**
+  String get documentsLoadError;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه شخص ثالث'**
+  String get documentTypeThirdPartyInsurance;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه بدنه'**
+  String get documentTypeBodyInsurance;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'معاینه فنی'**
+  String get documentTypeInspection;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارت خودرو'**
+  String get documentTypeVehicleCard;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'برگ سبز (سند مالکیت)'**
+  String get documentTypeGreenSheet;
+
+  /// Document type.
+  ///
+  /// In fa, this message translates to:
+  /// **'وکالت‌نامه'**
+  String get documentTypePowerOfAttorney;
+
+  /// Status pill of an expired document.
+  ///
+  /// In fa, this message translates to:
+  /// **'منقضی شده — {days} روز گذشته'**
+  String documentStatusExpired(int days);
+
+  /// Status pill of a document expiring within 15 days.
+  ///
+  /// In fa, this message translates to:
+  /// **'موعد نزدیک — {days} روز مانده'**
+  String documentStatusDueSoon(int days);
+
+  /// Status pill of a valid document.
+  ///
+  /// In fa, this message translates to:
+  /// **'معتبر — {days} روز مانده'**
+  String documentStatusValid(int days);
+
+  /// Status pill of a document without expiry.
+  ///
+  /// In fa, this message translates to:
+  /// **'دائمی / بدون انقضا'**
+  String get documentStatusPermanent;
+
+  /// The document number on its card.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره: {number}'**
+  String documentNumber(String number);
+
+  /// Issue date on a document card.
+  ///
+  /// In fa, this message translates to:
+  /// **'صدور: {date}'**
+  String documentIssuedAt(String date);
+
+  /// Expiry date on a document card.
+  ///
+  /// In fa, this message translates to:
+  /// **'انقضا: {date}'**
+  String documentExpiresAt(String date);
+
+  /// Footer of a document card with a reminder.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآور تمدید فعال است'**
+  String get documentReminderOn;
+
+  /// Opens the first file of a document.
+  ///
+  /// In fa, this message translates to:
+  /// **'مشاهده اصل فایل'**
+  String get documentViewFile;
+
+  /// Opens the form for a renewal of an expired document.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت تمدید جدید'**
+  String get documentRenew;
+
+  /// Semantics of the chevron of a document card.
+  ///
+  /// In fa, this message translates to:
+  /// **'جزئیات'**
+  String get documentDetails;
+
+  /// File badge of a document with several images.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} تصویر'**
+  String documentImageCount(int count);
+
+  /// Snackbar when a file can't be loaded.
+  ///
+  /// In fa, this message translates to:
+  /// **'باز کردن فایل ممکن نشد'**
+  String get documentFileOpenFailed;
+
+  /// Title of the new document form and its submit button.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت مدرک'**
+  String get documentFormNewTitle;
+
+  /// Title of the edit document form.
+  ///
+  /// In fa, this message translates to:
+  /// **'ویرایش مدرک'**
+  String get documentFormEditTitle;
+
+  /// Label of the type grid.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوع مدرک'**
+  String get documentTypeLabel;
+
+  /// Label of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'عنوان مدرک'**
+  String get documentTitleLabel;
+
+  /// Hint of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مثلاً گواهی معاینه فنی برتر'**
+  String get documentTitleHint;
+
+  /// Label of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'صادرکننده'**
+  String get documentIssuerLabel;
+
+  /// Hint of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مثلاً بیمه ایران'**
+  String get documentIssuerHint;
+
+  /// Label of the number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره مدرک / بیمه‌نامه'**
+  String get documentNumberLabel;
+
+  /// Hint of the number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'مثلاً ۱۲۴/۹۸۷۴۳۲'**
+  String get documentNumberHint;
+
+  /// Label of the issue date row.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ صدور'**
+  String get documentIssuedAtLabel;
+
+  /// Issue date row before a date is chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب تاریخ صدور'**
+  String get documentIssuedAtPick;
+
+  /// Title of the issue date picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ صدور (تقویم جلالی)'**
+  String get documentIssuedAtPickTitle;
+
+  /// Clears the issue date.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف تاریخ صدور'**
+  String get documentIssuedAtClear;
+
+  /// Label of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت'**
+  String get documentNotesLabel;
+
+  /// Hint of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'توضیحات تکمیلی (اختیاری)'**
+  String get documentNotesHint;
+
+  /// Label of the files card.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل‌های مدرک'**
+  String get documentFilesLabel;
+
+  /// Number of files out of the maximum.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} از {max}'**
+  String documentFilesCount(int count, int max);
+
+  /// Adds a file to the document.
+  ///
+  /// In fa, this message translates to:
+  /// **'افزودن فایل'**
+  String get documentFilesAdd;
+
+  /// Help line of the files card.
+  ///
+  /// In fa, this message translates to:
+  /// **'حداکثر {max} فایل PDF، JPG یا PNG، هر کدام تا ۱۰ مگابایت.'**
+  String documentFilesHelp(int max);
+
+  /// Error when too many files are attached.
+  ///
+  /// In fa, this message translates to:
+  /// **'حداکثر {max} فایل برای هر مدرک'**
+  String documentFileLimit(int max);
+
+  /// Submit button of the edit form.
+  ///
+  /// In fa, this message translates to:
+  /// **'ذخیره مدرک'**
+  String get documentSave;
+
+  /// Snackbar after saving.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرک ذخیره شد'**
+  String get documentSaved;
+
+  /// Snackbar when the document is saved but a file is not.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرک ذخیره شد، اما بارگذاری فایل انجام نشد'**
+  String get documentSavedFilesFailed;
+
+  /// Snackbar of a rejected document.
+  ///
+  /// In fa, this message translates to:
+  /// **'اطلاعات مدرک را بررسی کنید'**
+  String get documentSaveInvalid;
+
+  /// Snackbar of a failed save.
+  ///
+  /// In fa, this message translates to:
+  /// **'ذخیره مدرک ممکن نشد'**
+  String get documentSaveFailed;
+
+  /// Error of the type grid.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوع مدرک را انتخاب کنید'**
+  String get documentTypeError;
+
+  /// Error of the title field.
+  ///
+  /// In fa, this message translates to:
+  /// **'عنوان حداکثر {max} حرف است'**
+  String documentTitleError(int max);
+
+  /// Error of the issuer field.
+  ///
+  /// In fa, this message translates to:
+  /// **'صادرکننده حداکثر {max} حرف است'**
+  String documentIssuerError(int max);
+
+  /// Error of the number field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره حداکثر {max} حرف است'**
+  String documentNumberError(int max);
+
+  /// Error of the notes field.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادداشت حداکثر {max} حرف است'**
+  String documentNotesError(int max);
+
+  /// Error of the expiry row.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ انقضا را بعد از تاریخ صدور انتخاب کنید'**
+  String get documentExpiresAtError;
+
+  /// Delete action of the edit form.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف مدرک'**
+  String get documentDelete;
+
+  /// Title of the delete confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'این مدرک حذف شود؟'**
+  String get documentDeleteConfirmTitle;
+
+  /// Body of the delete confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرک و همه فایل‌های آن برای همیشه حذف می‌شوند.'**
+  String get documentDeleteConfirmBody;
+
+  /// Cancel of the delete confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'انصراف'**
+  String get documentDeleteCancel;
+
+  /// Snackbar after deleting.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرک حذف شد'**
+  String get documentDeleted;
+
+  /// Snackbar of a failed delete.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف مدرک ممکن نشد'**
+  String get documentDeleteFailed;
+
+  /// Snackbar of a failed file removal.
+  ///
+  /// In fa, this message translates to:
+  /// **'حذف فایل ممکن نشد'**
+  String get documentFileDeleteFailed;
+
+  /// Profile stat tile: documents across all vehicles.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدرک در کیف'**
+  String get profileStatDocuments;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

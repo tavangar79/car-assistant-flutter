@@ -88,8 +88,9 @@ void main() {
     when(() => history.getHistory(any()))
         .thenAnswer((_) async => const Right(HistoryResult(entries: [])));
     when(() => dashboards.getDashboard()).thenAnswer((_) async => Right(homeDashboard()));
-    when(() => profile.getStats())
-        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0)));
+    when(() => profile.getStats()).thenAnswer(
+      (_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0, documentCount: 0)),
+    );
     when(() => services.getCatalog()).thenAnswer((_) async => const Right([]));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right(garage));
     for (final vehicle in garage) {

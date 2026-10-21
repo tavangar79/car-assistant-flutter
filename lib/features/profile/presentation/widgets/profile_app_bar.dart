@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../../../notifications/presentation/widgets/notification_bell_button.dart';
 
 /// Top bar of the Profile tab (Stitch "پروفایل"): the account avatar and "پروفایل" at the start,
 /// notifications at the end. 64px high.
@@ -47,18 +48,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      actions: [
-        IconButton(
-          tooltip: l10n.notifications,
-          // TODO(phase-5): open the notifications list.
-          onPressed: () {},
-          iconSize: 24,
-          constraints: const BoxConstraints.tightFor(width: 48, height: 48),
-          color: scheme.onSurfaceVariant,
-          icon: const Icon(Icons.notifications_outlined),
-        ),
-        const SizedBox(width: 12),
-      ],
+      actions: [const NotificationBellButton(), const SizedBox(width: 12)],
     );
   }
 }

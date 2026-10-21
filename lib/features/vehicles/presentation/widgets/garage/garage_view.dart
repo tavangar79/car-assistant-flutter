@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../odometer/presentation/widgets/odometer_sheet.dart';
+import '../../../../shell/presentation/widgets/quick_actions_sheet.dart';
 import '../../../domain/entities/vehicle.dart';
 import '../../providers/vehicle_providers.dart';
 import 'garage_header.dart';
@@ -48,7 +49,10 @@ class GarageView extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: 24),
-        const GarageToolsSection(),
+        GarageToolsSection(
+          onOpenDocuments: () =>
+              context.push(AppRoutes.documentsPath(QuickActionsSheet.activeVehicle(vehicles)!.id)),
+        ),
       ],
     );
   }

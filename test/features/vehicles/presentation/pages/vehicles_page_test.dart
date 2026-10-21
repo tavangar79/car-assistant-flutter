@@ -80,6 +80,10 @@ void main() {
         ),
         GoRoute(path: AppRoutes.addVehiclePath, builder: (context, state) => const Text('adding')),
         GoRoute(path: AppRoutes.historyPath, builder: (context, state) => const Text('history')),
+        GoRoute(
+          path: '/vehicles/:id/documents',
+          builder: (context, state) => Text('documents ${state.pathParameters['id']}'),
+        ),
       ],
     );
     addTearDown(router.dispose);
@@ -243,6 +247,16 @@ void main() {
 
     expect(find.byType(VehiclesPage), findsOneWidget);
     expect(find.byType(OdometerSheet), findsNothing);
+  });
+
+  testWidgets('the document wallet opens the default vehicle documents', (tester) async {
+    await openPage(tester);
+
+    await tester.ensureVisible(find.text('کیف مدارک و بیمه‌نامه‌ها'));
+    await tester.tap(find.text('کیف مدارک و بیمه‌نامه‌ها'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('documents v1'), findsOneWidget);
   });
 
   testWidgets('the header button adds a vehicle', (tester) async {

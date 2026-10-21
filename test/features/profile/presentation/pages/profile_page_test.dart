@@ -68,8 +68,9 @@ void main() {
     picker = FakeAvatarPicker(
       file: AvatarFile(bytes: _png, fileName: 'me.png'),
     );
-    when(() => profile.getStats())
-        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 2, serviceCount: 18)));
+    when(() => profile.getStats()).thenAnswer(
+      (_) async => const Right(ProfileStats(vehicleCount: 2, serviceCount: 18, documentCount: 5)),
+    );
     container = ProviderContainer(
       overrides: [
         authRepositoryProvider.overrideWithValue(auth),
@@ -118,7 +119,7 @@ void main() {
     expect(edit.onPressed, isNull);
   });
 
-  testWidgets('shows the vehicle and service counts, and no subscription or documents tile', (
+  testWidgets('shows the vehicle, service and document counts, and no subscription tile', (
     tester,
   ) async {
     await pumpPage(tester);
@@ -127,7 +128,8 @@ void main() {
     expect(find.text('خودرو فعال'), findsOneWidget);
     expect(find.text('۱۸'), findsOneWidget);
     expect(find.text('سرویس ثبت‌شده'), findsOneWidget);
-    expect(find.text('مدرک در کیف'), findsNothing);
+    expect(find.text('۵'), findsOneWidget);
+    expect(find.text('مدرک در کیف'), findsOneWidget);
     expect(find.text('اشتراک حرفه‌ای'), findsNothing);
   });
 
@@ -160,8 +162,9 @@ void main() {
 
     expect(find.text("Couldn't load your stats"), findsOneWidget);
 
-    when(() => profile.getStats())
-        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 1, serviceCount: 3)));
+    when(() => profile.getStats()).thenAnswer(
+      (_) async => const Right(ProfileStats(vehicleCount: 1, serviceCount: 3, documentCount: 0)),
+    );
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
 

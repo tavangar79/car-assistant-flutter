@@ -4,10 +4,13 @@ import '../../../../../core/theme/app_tones.dart';
 import '../../../../../l10n/app_localizations.dart';
 import 'garage_card.dart';
 
-/// "مدیریت و امکانات گاراژ": ownership transfer, the document wallet and the report export. Their
-/// pages don't exist yet, so the rows are shown disabled (and the wallet without a document count).
+/// "مدیریت و امکانات گاراژ": ownership transfer, the document wallet and the report export. The
+/// wallet opens [onOpenDocuments] (the active vehicle's documents); the other pages don't exist
+/// yet, so their rows are shown disabled.
 class GarageToolsSection extends StatelessWidget {
-  const GarageToolsSection({super.key});
+  const GarageToolsSection({super.key, required this.onOpenDocuments});
+
+  final VoidCallback onOpenDocuments;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +58,11 @@ class GarageToolsSection extends StatelessWidget {
                 body: l10n.garageToolTransferBody,
               ),
               divider,
-              // TODO(phase-5): open "کیف مدارک" and show the document count badge.
               _ToolRow(
                 icon: Icons.folder_shared_outlined,
                 title: l10n.garageToolDocumentsTitle,
                 body: l10n.garageToolDocumentsBody,
+                onTap: onOpenDocuments,
               ),
               divider,
               // TODO(phase-6): open "خروجی گزارش".
@@ -76,65 +79,70 @@ class GarageToolsSection extends StatelessWidget {
   }
 }
 
-/// A tool row: tinted icon tile, title, one-line description and chevron. Shown disabled until
-/// its page exists.
+/// A tool row: tinted icon tile, title, one-line description and chevron. Without [onTap] it is
+/// shown disabled (its page doesn't exist yet).
 class _ToolRow extends StatelessWidget {
-  const _ToolRow({required this.icon, required this.title, required this.body});
+  const _ToolRow({required this.icon, required this.title, required this.body, this.onTap});
 
   final IconData icon;
   final String title;
   final String body;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final tone = AppTones.of(context).neutral;
+    final enabled = onTap != null;
     return Semantics(
       button: true,
-      enabled: false,
-      hint: AppLocalizations.of(context).quickActionUnavailable,
+      enabled: enabled,
+      hint: enabled ? null : AppLocalizations.of(context).quickActionUnavailable,
       child: Opacity(
-        opacity: 0.45,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: tone.background,
-                  borderRadius: BorderRadius.circular(12),
+        opacity: enabled ? 1 : 0.45,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: tone.background,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(icon, size: 22, color: tone.foreground),
                 ),
-                child: Icon(icon, size: 22, color: tone.foreground),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: scheme.onSurface,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: scheme.onSurface,
+                        ),
                       ),
-                    ),
-                    Text(
-                      body,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall?.copyWith(color: scheme.secondary),
-                    ),
-                  ],
+                      Text(
+                        body,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(color: scheme.secondary),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              // chevron_right mirrors to point left (forward) in RTL.
-              Icon(Icons.chevron_right, size: 20, color: scheme.secondary),
-            ],
+                const SizedBox(width: 8),
+                // chevron_right mirrors to point left (forward) in RTL.
+                Icon(Icons.chevron_right, size: 20, color: scheme.secondary),
+              ],
+            ),
           ),
         ),
       ),

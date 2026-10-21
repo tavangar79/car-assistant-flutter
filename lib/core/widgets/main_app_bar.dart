@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../features/notifications/presentation/widgets/notification_bell_button.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Top bar shared by the tabs (Stitch "گاراژ خالی"): logo, [title] and an optional [subtitle] under
@@ -79,15 +80,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
     return [
-      IconButton(
-        tooltip: l10n.notifications,
-        // TODO(notifications): open the notifications list once it exists.
-        onPressed: () {},
-        iconSize: 22,
-        constraints: const BoxConstraints.tightFor(width: 48, height: 48),
-        color: scheme.onSurfaceVariant,
-        icon: const Icon(Icons.notifications_outlined),
-      ),
+      const NotificationBellButton(iconSize: 22),
       const SizedBox(width: 8),
       Semantics(
         label: l10n.accountLabel,

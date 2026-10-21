@@ -39,8 +39,9 @@ void main() {
     vehicles = MockVehicleRepository();
     auth = MockAuthRepository();
     profile = MockProfileRepository();
-    when(() => profile.getStats())
-        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0)));
+    when(() => profile.getStats()).thenAnswer(
+      (_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0, documentCount: 0)),
+    );
     when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([]));
   });
 

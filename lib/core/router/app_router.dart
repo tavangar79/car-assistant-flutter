@@ -7,6 +7,9 @@ import '../../features/auth/presentation/pages/otp_page.dart';
 import '../../features/auth/presentation/pages/phone_page.dart';
 import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/providers/otp_args.dart';
+import '../../features/documents/presentation/pages/document_form_page.dart';
+import '../../features/documents/presentation/pages/documents_page.dart';
+import '../../features/documents/presentation/providers/document_form_args.dart';
 import '../../features/expenses/presentation/pages/new_expense_page.dart';
 import '../../features/fuel/presentation/pages/new_fuel_page.dart';
 import '../../features/history/presentation/pages/history_filter_page.dart';
@@ -15,6 +18,7 @@ import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/intervals/presentation/pages/due_services_page.dart';
 import '../../features/intervals/presentation/pages/service_intervals_page.dart';
 import '../../features/intervals/presentation/widgets/due_success_card.dart';
+import '../../features/notifications/presentation/pages/notifications_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../features/services/presentation/pages/new_service_page.dart';
 import '../../features/services/presentation/pages/service_details_page.dart';
@@ -106,6 +110,37 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             _ => null,
           },
         ),
+      ),
+      // Before the shell too: opened from the garage tools and from the notifications.
+      GoRoute(
+        path: '/vehicles/:id/documents',
+        name: AppRoutes.documentsName,
+        builder: (context, state) => DocumentsPage(vehicleId: state.pathParameters['id']!),
+      ),
+      // Before the edit route, so `new` is not taken for a document id.
+      GoRoute(
+        path: '/vehicles/:id/documents/new',
+        name: AppRoutes.newDocumentName,
+        builder: (context, state) => DocumentFormPage(
+          vehicleId: state.pathParameters['id']!,
+          args: switch (state.extra) {
+            final DocumentFormArgs args => args,
+            _ => const DocumentFormArgs(),
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/vehicles/:id/documents/:documentId',
+        name: AppRoutes.editDocumentName,
+        builder: (context, state) => DocumentFormPage(
+          vehicleId: state.pathParameters['id']!,
+          documentId: state.pathParameters['documentId'],
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationsPath,
+        name: AppRoutes.notificationsName,
+        builder: (context, state) => const NotificationsPage(),
       ),
       // Before the shell, so `/history/filter` is not taken by the History tab.
       GoRoute(

@@ -16,11 +16,11 @@ class MockDio extends Mock implements Dio {}
 class MockProfileRepository extends Mock implements ProfileRepository {}
 
 void main() {
-  /// The `GET /api/profile/stats` sample of API-PHASE4.md T4.6.
+  /// The `GET /api/profile/stats` sample of API-PHASE5.md T5.3.
   final statsJson = <String, dynamic>{
-    'stats': {'vehicleCount': 2, 'serviceCount': 18},
+    'stats': {'vehicleCount': 2, 'serviceCount': 18, 'documentCount': 5},
   };
-  const stats = ProfileStats(vehicleCount: 2, serviceCount: 18);
+  const stats = ProfileStats(vehicleCount: 2, serviceCount: 18, documentCount: 5);
 
   test('ProfileStatsDto parses the contract sample', () {
     expect(ProfileStatsDto.fromEnvelope(statsJson).toEntity(), stats);

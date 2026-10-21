@@ -39,6 +39,25 @@ abstract final class AppRoutes {
   /// an odometer update. Optional `extra`: an `OdometerUpdateArgs` for the success header.
   static const dueName = 'due';
   static String duePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/due';
+
+  /// The document wallet of a vehicle: a full page above the tabs (no dock).
+  static const documentsName = 'documents';
+  static String documentsPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/documents';
+
+  /// Add a document: a full page above the tabs. Optional `extra`: a `DocumentFormArgs` (a picked
+  /// file, or the type and issuer of a renewal).
+  static const newDocumentName = 'newDocument';
+  static String newDocumentPath(String vehicleId) => '${documentsPath(vehicleId)}/new';
+
+  /// Edit a document (with delete): a full page above the tabs.
+  static const editDocumentName = 'editDocument';
+  static String editDocumentPath(String vehicleId, String documentId) =>
+      '${documentsPath(vehicleId)}/$documentId';
+
+  /// The notification inbox: a full page above the tabs, opened by the app-bar bell.
+  static const notificationsPath = '/notifications';
+  static const notificationsName = 'notifications';
+
   static const historyPath = '/history';
   static const historyName = 'history';
 
