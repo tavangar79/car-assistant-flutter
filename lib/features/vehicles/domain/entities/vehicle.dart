@@ -19,6 +19,7 @@ class Vehicle extends Equatable {
     this.color,
     this.isDefault = false,
     this.photoUrl,
+    this.createdAt,
   });
 
   final String id;
@@ -35,6 +36,10 @@ class Vehicle extends Equatable {
 
   /// Relative path of the photo (loading it needs the bearer token), or `null` when there is none.
   final String? photoUrl;
+
+  /// When the vehicle was added (the start of its history), or `null` when unknown. Informational
+  /// only, so it is left out of equality.
+  final DateTime? createdAt;
 
   @override
   List<Object?> get props => [

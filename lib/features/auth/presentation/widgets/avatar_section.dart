@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_tones.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../domain/entities/auth_failures.dart';
 import '../../domain/entities/avatar_file.dart';
 import '../providers/auth_providers.dart';
 import '../providers/avatar_picker.dart';
 import 'auth_error_text.dart';
+import 'avatar_options_sheet.dart';
 
 /// Optional profile photo: a circle with the photo or the [initials], and a camera button that
 /// picks a photo and uploads it right away (or removes the current one).
@@ -29,38 +29,15 @@ class _AvatarSectionState extends ConsumerState<AvatarSection> {
   bool _pickFailed = false;
 
   Future<void> _openOptions(bool hasPhoto) async {
-    final l10n = AppLocalizations.of(context);
-    final choice = await showModalBottomSheet<_AvatarAction>(
-      context: context,
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _OptionTile(
-              Icons.photo_library_outlined,
-              l10n.profileAvatarGallery,
-              _AvatarAction.gallery,
-            ),
-            _OptionTile(
-              Icons.photo_camera_outlined,
-              l10n.profileAvatarCamera,
-              _AvatarAction.camera,
-            ),
-            if (hasPhoto)
-              _OptionTile(Icons.delete_outline, l10n.profileAvatarRemove, _AvatarAction.remove),
-          ],
-        ),
-      ),
-    );
+    final choice = await AvatarOptionsSheet.show(context, hasPhoto: hasPhoto);
     switch (choice) {
       case null:
         return;
-      case _AvatarAction.remove:
+      case AvatarAction.remove:
         _remove();
-      case _AvatarAction.gallery:
+      case AvatarAction.gallery:
         _pickAndUpload(AvatarSource.gallery);
-      case _AvatarAction.camera:
+      case AvatarAction.camera:
         _pickAndUpload(AvatarSource.camera);
     }
   }
@@ -103,9 +80,7 @@ class _AvatarSectionState extends ConsumerState<AvatarSection> {
         ? l10n.profileAvatarPickFailed
         : switch (state.error) {
             null => null,
-            InvalidAvatarFailure() => l10n.profileAvatarInvalid,
-            AvatarTooLargeFailure() => l10n.profileAvatarTooLarge,
-            _ => l10n.authGenericError,
+            final error => AvatarOptionsSheet.failureMessage(error, l10n),
           };
     return Column(
       children: [
@@ -140,24 +115,6 @@ class _AvatarSectionState extends ConsumerState<AvatarSection> {
       ],
     );
   }
-}
-
-enum _AvatarAction { gallery, camera, remove }
-
-class _OptionTile extends StatelessWidget {
-  const _OptionTile(this.icon, this.label, this.action);
-
-  final IconData icon;
-  final String label;
-  final _AvatarAction action;
-
-  @override
-  Widget build(BuildContext context) => ListTile(
-    minTileHeight: 64,
-    leading: Icon(icon),
-    title: Text(label),
-    onTap: () => Navigator.of(context).pop(action),
-  );
 }
 
 class _AvatarCircle extends StatelessWidget {

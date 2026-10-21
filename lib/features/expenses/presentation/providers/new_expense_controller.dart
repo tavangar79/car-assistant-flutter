@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
+import '../../../history/presentation/providers/history_providers.dart';
 import '../../domain/entities/attachment_file.dart';
 import '../../domain/entities/create_expense_result.dart';
 import '../../domain/entities/expense_draft.dart';
@@ -30,6 +32,8 @@ class NewExpenseController extends AsyncNotifier<void> {
     switch (result) {
       case Right(value: final saved):
         ref.invalidate(expensesProvider(vehicleId));
+        ref.invalidate(dashboardProvider);
+        ref.invalidate(historyControllerProvider);
         state = const AsyncData(null);
         return saved;
       case Left(value: final failure):

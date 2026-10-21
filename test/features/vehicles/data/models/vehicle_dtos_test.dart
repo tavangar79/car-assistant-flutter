@@ -15,6 +15,7 @@ void main() {
       expect(dto.toEntity(), tara);
       expect(dto.createdAt, DateTime.utc(2026, 10, 17, 10));
       expect(dto.updatedAt, DateTime.utc(2026, 10, 17, 10));
+      expect(dto.toEntity().createdAt, DateTime.utc(2026, 10, 17, 10));
       expect(
         VehicleDto.fromJson(vehicleJson(photoUrl: '/api/vehicles/v1/photo?v=1')).photoUrl,
         '/api/vehicles/v1/photo?v=1',

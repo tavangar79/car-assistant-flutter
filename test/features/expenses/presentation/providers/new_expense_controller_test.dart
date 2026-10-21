@@ -6,6 +6,10 @@ import 'package:car_assistant/features/expenses/domain/entities/expense_failures
 import 'package:car_assistant/features/expenses/domain/entities/new_expense.dart';
 import 'package:car_assistant/features/expenses/domain/repositories/expense_repository.dart';
 import 'package:car_assistant/features/expenses/presentation/providers/expense_providers.dart';
+import 'package:car_assistant/features/history/domain/entities/history_query.dart';
+import 'package:car_assistant/features/history/domain/entities/history_result.dart';
+import 'package:car_assistant/features/history/domain/repositories/history_repository.dart';
+import 'package:car_assistant/features/history/presentation/providers/history_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -15,12 +19,16 @@ import '../../expense_fixtures.dart';
 
 class MockExpenseRepository extends Mock implements ExpenseRepository {}
 
+class MockHistoryRepository extends Mock implements HistoryRepository {}
+
 void main() {
   late MockExpenseRepository expenses;
+  late MockHistoryRepository history;
   late ProviderContainer container;
   const draft = ExpenseDraft(category: ExpenseCategory.fine, amount: 1200000);
 
   setUpAll(() {
+    registerFallbackValue(const HistoryQuery());
     registerFallbackValue(
       NewExpense(category: ExpenseCategory.other, amount: 1, paidAt: DateTime(2026)),
     );
@@ -29,9 +37,15 @@ void main() {
 
   setUp(() {
     expenses = MockExpenseRepository();
+    history = MockHistoryRepository();
+    when(() => history.getHistory(any()))
+        .thenAnswer((_) async => const Right(HistoryResult(entries: [])));
     when(() => expenses.getExpenses('v1')).thenAnswer((_) async => const Right([]));
     container = ProviderContainer.test(
-      overrides: [expenseRepositoryProvider.overrideWithValue(expenses)],
+      overrides: [
+        expenseRepositoryProvider.overrideWithValue(expenses),
+        historyRepositoryProvider.overrideWithValue(history),
+      ],
     );
     // Keep the auto-dispose providers alive for the whole test.
     container.listen(newExpenseControllerProvider, (_, _) {});
@@ -50,6 +64,17 @@ void main() {
 
     await container.read(expensesProvider('v1').future);
     verify(() => expenses.getExpenses('v1')).called(2);
+  });
+
+  test('saves and refreshes the loaded history', () async {
+    container.listen(historyControllerProvider, (_, _) {});
+    await container.read(historyControllerProvider.future);
+    when(() => expenses.createExpense('v1', any())).thenAnswer((_) async => Right(expense()));
+
+    await submit();
+
+    await container.read(historyControllerProvider.future);
+    verify(() => history.getHistory(any())).called(2);
   });
 
   test('passes the attachment to the use case', () async {

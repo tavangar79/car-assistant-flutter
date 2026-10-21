@@ -687,6 +687,402 @@ abstract class AppLocalizations {
   /// **'تاریخچه'**
   String get navHistory;
 
+  /// App bar vehicle chip of the history page when every vehicle is shown.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه خودروها'**
+  String get historyAllVehicles;
+
+  /// App bar vehicle chip of the history page when several vehicles are chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} خودرو'**
+  String historyVehicleCount(int count);
+
+  /// Title of the vehicle sheet of the history page, and the chip semantics label.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب خودرو'**
+  String get historyChooseVehicle;
+
+  /// Tooltip of the tune button of the history page.
+  ///
+  /// In fa, this message translates to:
+  /// **'فیلتر سوابق'**
+  String get historyFilterTooltip;
+
+  /// Second line of the vehicle ribbon of the history page.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدل {year} • کارکرد فعلی {km} کیلومتر'**
+  String historyVehicleMeta(String year, int km);
+
+  /// Vehicle ribbon title of the history page when every vehicle is shown.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه خودروهای گاراژ'**
+  String get historyGarageTitle;
+
+  /// Vehicle ribbon title of the history page when several vehicles are chosen.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} خودروی انتخاب‌شده'**
+  String historySelectedTitle(int count);
+
+  /// Vehicle ribbon second line when several vehicles are shown.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} خودروی ثبت‌شده'**
+  String historyGarageMeta(int count);
+
+  /// Summary card title for the current Jalali year.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع هزینه‌های سال {year}'**
+  String historySummaryYear(String year);
+
+  /// Summary card title for the last six months.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع هزینه‌های ۶ ماه اخیر'**
+  String get historySummarySixMonths;
+
+  /// Summary card title without a date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع هزینه‌ها'**
+  String get historySummaryAll;
+
+  /// Summary card title for a custom date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع هزینه‌های بازه انتخابی'**
+  String get historySummaryCustom;
+
+  /// Badge of the summary card: how many records match.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} مورد ثبت شده'**
+  String historySummaryCount(int count);
+
+  /// Currency unit after an amount.
+  ///
+  /// In fa, this message translates to:
+  /// **'تومان'**
+  String get historyToman;
+
+  /// Label of the service count tile.
+  ///
+  /// In fa, this message translates to:
+  /// **'خدمات و بازدید'**
+  String get historyServicesLabel;
+
+  /// Value of the service count tile.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} سرویس ثبت‌شده'**
+  String historyServicesValue(int count);
+
+  /// Label of the fuel volume tile.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع مصرف سوخت'**
+  String get historyFuelLabel;
+
+  /// Value of the fuel volume tile.
+  ///
+  /// In fa, this message translates to:
+  /// **'{volume} لیتر'**
+  String historyFuelValue(String volume);
+
+  /// Type tab: every record.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه موارد'**
+  String get historyTabAll;
+
+  /// Type tab: services.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرویس و تعمیر'**
+  String get historyTabService;
+
+  /// Type tab: fill-ups.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوخت‌گیری'**
+  String get historyTabFuel;
+
+  /// Type tab: expenses.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه‌های جاری'**
+  String get historyTabExpense;
+
+  /// Chip that keeps only records with an invoice or attachment.
+  ///
+  /// In fa, this message translates to:
+  /// **'فاکتوردار'**
+  String get historyInvoiceChip;
+
+  /// Export button (not available yet).
+  ///
+  /// In fa, this message translates to:
+  /// **'خروجی اکسل/PDF'**
+  String get historyExport;
+
+  /// Period chip: the current Jalali year.
+  ///
+  /// In fa, this message translates to:
+  /// **'سال جاری ({year})'**
+  String historyPeriodCurrentYear(String year);
+
+  /// Period chip: the last six months.
+  ///
+  /// In fa, this message translates to:
+  /// **'۶ ماه اخیر'**
+  String get historyPeriodSixMonths;
+
+  /// Period chip: no date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه زمان‌ها'**
+  String get historyPeriodAll;
+
+  /// Period chip: a chosen date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب دستی'**
+  String get historyPeriodCustom;
+
+  /// Count badge of a month group.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} مورد'**
+  String historyMonthCount(int count);
+
+  /// Mileage in a history row.
+  ///
+  /// In fa, this message translates to:
+  /// **'{km} کیلومتر'**
+  String historyRowKm(int km);
+
+  /// Fuel volume in a history row.
+  ///
+  /// In fa, this message translates to:
+  /// **'{volume} {unit}'**
+  String historyRowVolume(String volume, String unit);
+
+  /// Title of a full fill-up row.
+  ///
+  /// In fa, this message translates to:
+  /// **'{fuel} (باک پر)'**
+  String historyFullFill(String fuel);
+
+  /// Fuel economy chip of a fill-up row.
+  ///
+  /// In fa, this message translates to:
+  /// **'{value} لیتر / ۱۰۰ ک‌م'**
+  String historyEconomy(String value);
+
+  /// Badge of a service with an invoice.
+  ///
+  /// In fa, this message translates to:
+  /// **'فاکتور'**
+  String get historyInvoiceBadge;
+
+  /// Badge of an expense with an attachment.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیوست'**
+  String get historyAttachmentBadge;
+
+  /// Expiry line of an expense row.
+  ///
+  /// In fa, this message translates to:
+  /// **'پایان اعتبار: {date}'**
+  String historyExpiresAt(String date);
+
+  /// Footer at the end of the history.
+  ///
+  /// In fa, this message translates to:
+  /// **'شروع تاریخچه از تاریخ ثبت خودرو ({date})'**
+  String historyStart(String date);
+
+  /// Empty state of the history page.
+  ///
+  /// In fa, this message translates to:
+  /// **'سابقه‌ای با این فیلترها پیدا نشد'**
+  String get historyEmpty;
+
+  /// Load error of the history page.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت تاریخچه ممکن نشد'**
+  String get historyLoadError;
+
+  /// Error under the list when the next page fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت ادامه تاریخچه ممکن نشد'**
+  String get historyLoadMoreError;
+
+  /// App bar title of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'فیلتر سوابق'**
+  String get historyFilterTitle;
+
+  /// Badge of the filter page: how many filters are set.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} فیلتر فعال'**
+  String historyFilterActive(int count);
+
+  /// Resets the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'پاک کردن'**
+  String get historyFilterClear;
+
+  /// Close button of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'بستن'**
+  String get historyFilterClose;
+
+  /// Vehicle section title of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو'**
+  String get historyFilterVehicles;
+
+  /// Hint after the vehicle section title.
+  ///
+  /// In fa, this message translates to:
+  /// **'(محدوده جستجو)'**
+  String get historyFilterVehiclesHint;
+
+  /// Badge of the vehicle section.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب شده: {count} خودرو'**
+  String historyFilterSelectedVehicles(int count);
+
+  /// Mileage line of a vehicle card of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'آخرین پیمایش: {km} کیلومتر'**
+  String historyFilterMileage(int km);
+
+  /// Option of the filter page for every vehicle.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه خودروهای گاراژ'**
+  String get historyFilterAllVehicles;
+
+  /// Second line of the every-vehicle option.
+  ///
+  /// In fa, this message translates to:
+  /// **'نمایش جامع تمام {count} خودروی ثبت‌شده'**
+  String historyFilterAllVehiclesHint(int count);
+
+  /// Category section title of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'دسته‌بندی خدمات و هزینه‌ها'**
+  String get historyFilterCategories;
+
+  /// Selects every category.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب همه'**
+  String get historyFilterSelectAll;
+
+  /// Category tile for insurances, inspection, tolls and fines.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه‌های قانونی'**
+  String get historyCategoryLegal;
+
+  /// Second line of the legal costs tile.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه، معاینه، عوارض'**
+  String get historyCategoryLegalHint;
+
+  /// Attachment section title of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'اسناد و مدارک مالی'**
+  String get historyFilterDocuments;
+
+  /// Attachment-only switch of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'فقط سوابق دارای پیوست / فاکتور'**
+  String get historyFilterAttachmentsOnly;
+
+  /// Second line of the attachment-only switch.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصویر فاکتور رسمی، رسید پرداخت، ضمانت‌نامه'**
+  String get historyFilterAttachmentsHint;
+
+  /// Period section title of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازه زمانی ثبت'**
+  String get historyFilterPeriod;
+
+  /// Note next to the period section title.
+  ///
+  /// In fa, this message translates to:
+  /// **'تقویم جلالی'**
+  String get historyFilterCalendar;
+
+  /// The chosen custom date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'{from} تا {to}'**
+  String historyFilterRange(String from, String to);
+
+  /// Title of the start date picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'از تاریخ'**
+  String get historyFilterFrom;
+
+  /// Title of the end date picker.
+  ///
+  /// In fa, this message translates to:
+  /// **'تا تاریخ'**
+  String get historyFilterTo;
+
+  /// Confirm button of the date pickers.
+  ///
+  /// In fa, this message translates to:
+  /// **'تأیید تاریخ'**
+  String get historyFilterPickDate;
+
+  /// Label of the result count line.
+  ///
+  /// In fa, this message translates to:
+  /// **'تعداد نتایج منطبق با فیلترها:'**
+  String get historyFilterResults;
+
+  /// Value of the result count line.
+  ///
+  /// In fa, this message translates to:
+  /// **'{count} رکورد'**
+  String historyFilterResultsValue(int count);
+
+  /// Apply button of the filter page.
+  ///
+  /// In fa, this message translates to:
+  /// **'اعمال فیلتر'**
+  String get historyFilterApply;
+
   /// Profile tab label in the bottom dock and its app bar title.
   ///
   /// In fa, this message translates to:
@@ -1712,6 +2108,138 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'انتخاب خودرو و ثبت سریع کیلومترشمار فعلی'**
   String get homeUpdateOdometerHint;
+
+  /// Header of the selected month's breakdown in the Home spend chart.
+  ///
+  /// In fa, this message translates to:
+  /// **'{month} {year} (مجموع)'**
+  String homeSpendMonthTotal(String month, String year);
+
+  /// A toman amount in the Home dashboard.
+  ///
+  /// In fa, this message translates to:
+  /// **'{amount} تومان'**
+  String homeSpendAmount(String amount);
+
+  /// Error when the Home dashboard figures could not be loaded.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت خلاصه هزینه‌ها ممکن نشد'**
+  String get dashboardLoadError;
+
+  /// Profile card line: the Jalali month and year the account was created.
+  ///
+  /// In fa, this message translates to:
+  /// **'عضو رسمی از {month} {year}'**
+  String profileMemberSince(String month, String year);
+
+  /// Tooltip of the edit button on the profile card.
+  ///
+  /// In fa, this message translates to:
+  /// **'ویرایش پروفایل'**
+  String get profileEdit;
+
+  /// Profile stat tile: number of vehicles.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو فعال'**
+  String get profileStatVehicles;
+
+  /// Profile stat tile: number of service visits.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرویس ثبت‌شده'**
+  String get profileStatServices;
+
+  /// Error when the profile stats could not be loaded.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت آمار ممکن نشد'**
+  String get profileStatsLoadError;
+
+  /// Profile section title for settings rows.
+  ///
+  /// In fa, this message translates to:
+  /// **'تنظیمات و سامانه'**
+  String get profileSettingsSection;
+
+  /// Profile settings row title.
+  ///
+  /// In fa, this message translates to:
+  /// **'تنظیمات یادآورها'**
+  String get profileReminders;
+
+  /// Profile settings row subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'زمان‌بندی پیام‌های موعد تعویض و بیمه'**
+  String get profileRemindersHint;
+
+  /// Profile settings row title.
+  ///
+  /// In fa, this message translates to:
+  /// **'اطلاع‌رسانی پیامک'**
+  String get profileSms;
+
+  /// Profile settings row subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدیریت ارسال پیامک سرویس و سوخت'**
+  String get profileSmsHint;
+
+  /// Profile settings row title.
+  ///
+  /// In fa, this message translates to:
+  /// **'امنیت و رمز عبور'**
+  String get profileSecurity;
+
+  /// Profile settings row subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'ورود دوعاملی و احراز هویت بیومتریک'**
+  String get profileSecurityHint;
+
+  /// Profile section title for support and legal rows.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارتباطات و حقوقی'**
+  String get profileLegalSection;
+
+  /// Profile row title.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشتیبانی و تماس با ما'**
+  String get profileSupport;
+
+  /// Profile row subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'پاسخگویی آنلاین و ثبت تیکت پشتیبانی'**
+  String get profileSupportHint;
+
+  /// Profile row title.
+  ///
+  /// In fa, this message translates to:
+  /// **'قوانین و حریم خصوصی'**
+  String get profilePrivacy;
+
+  /// Profile row subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'شرایط استفاده و حفاظت از داده‌ها'**
+  String get profilePrivacyHint;
+
+  /// Sign-out button on the profile page.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروج از حساب کاربری'**
+  String get profileLogout;
+
+  /// App version line at the bottom of the profile page.
+  ///
+  /// In fa, this message translates to:
+  /// **'نسخه اپلیکیشن {version}'**
+  String profileAppVersion(String version);
 
   /// Tooltip of the history button in the Garage app bar.
   ///

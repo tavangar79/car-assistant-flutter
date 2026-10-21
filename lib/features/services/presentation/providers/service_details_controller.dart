@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
+import '../../../history/presentation/providers/history_providers.dart';
+import '../../../profile/presentation/providers/profile_providers.dart';
 import '../../../../core/error/failure.dart';
 import '../../../odometer/presentation/providers/odometer_providers.dart';
 import '../../../vehicles/presentation/providers/vehicle_providers.dart';
@@ -42,6 +45,9 @@ class ServiceDetailsController extends AsyncNotifier<void> {
         ref.invalidate(vehicleProvider(visit.vehicleId));
         ref.invalidate(vehiclesProvider);
         ref.invalidate(odometerReadingsProvider(visit.vehicleId));
+        ref.invalidate(dashboardProvider);
+        ref.invalidate(historyControllerProvider);
+        ref.invalidate(profileStatsProvider);
         state = const AsyncData(null);
         return true;
       case Left(value: final failure):

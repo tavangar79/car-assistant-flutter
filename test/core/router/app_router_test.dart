@@ -9,6 +9,9 @@ import 'package:car_assistant/features/auth/presentation/pages/otp_page.dart';
 import 'package:car_assistant/features/auth/presentation/pages/phone_page.dart';
 import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
 import 'package:car_assistant/features/home/presentation/pages/home_page.dart';
+import 'package:car_assistant/features/profile/domain/entities/profile_stats.dart';
+import 'package:car_assistant/features/profile/domain/repositories/profile_repository.dart';
+import 'package:car_assistant/features/profile/presentation/providers/profile_providers.dart';
 import 'package:car_assistant/features/splash/presentation/pages/splash_page.dart';
 import 'package:car_assistant/features/splash/presentation/providers/splash_providers.dart';
 import 'package:car_assistant/features/vehicles/domain/repositories/vehicle_repository.dart';
@@ -24,14 +27,20 @@ class MockVehicleRepository extends Mock implements VehicleRepository {}
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 
+class MockProfileRepository extends Mock implements ProfileRepository {}
+
 void main() {
   const delay = Duration(milliseconds: 500);
   late MockVehicleRepository vehicles;
   late MockAuthRepository auth;
+  late MockProfileRepository profile;
 
   setUp(() {
     vehicles = MockVehicleRepository();
     auth = MockAuthRepository();
+    profile = MockProfileRepository();
+    when(() => profile.getStats())
+        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0)));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([]));
   });
 
@@ -39,6 +48,7 @@ void main() {
     overrides: [
       vehicleRepositoryProvider.overrideWithValue(vehicles),
       authRepositoryProvider.overrideWithValue(auth),
+      profileRepositoryProvider.overrideWithValue(profile),
       splashDelayProvider.overrideWithValue(delay),
       packageInfoProvider.overrideWith(
         (ref) async => PackageInfo(
@@ -118,7 +128,8 @@ void main() {
 
     await tester.tap(find.text('پروفایل'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('خروج از حساب'));
+    await tester.scrollUntilVisible(find.text('خروج از حساب کاربری'), 200);
+    await tester.tap(find.text('خروج از حساب کاربری'));
     await tester.pumpAndSettle();
 
     verify(() => auth.clearSession()).called(1);
@@ -156,7 +167,8 @@ void main() {
 
     await tester.tap(find.text('پروفایل'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('خروج از حساب'));
+    await tester.scrollUntilVisible(find.text('خروج از حساب کاربری'), 200);
+    await tester.tap(find.text('خروج از حساب کاربری'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), phone);
     await tester.pump(); // the button enables once the number is valid

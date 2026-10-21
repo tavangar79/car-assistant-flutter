@@ -365,6 +365,287 @@ class AppLocalizationsFa extends AppLocalizations {
   String get navHistory => 'تاریخچه';
 
   @override
+  String get historyAllVehicles => 'همه خودروها';
+
+  @override
+  String historyVehicleCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString خودرو';
+  }
+
+  @override
+  String get historyChooseVehicle => 'انتخاب خودرو';
+
+  @override
+  String get historyFilterTooltip => 'فیلتر سوابق';
+
+  @override
+  String historyVehicleMeta(String year, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'مدل $year • کارکرد فعلی $kmString کیلومتر';
+  }
+
+  @override
+  String get historyGarageTitle => 'همه خودروهای گاراژ';
+
+  @override
+  String historySelectedTitle(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString خودروی انتخاب‌شده';
+  }
+
+  @override
+  String historyGarageMeta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString خودروی ثبت‌شده';
+  }
+
+  @override
+  String historySummaryYear(String year) {
+    return 'مجموع هزینه‌های سال $year';
+  }
+
+  @override
+  String get historySummarySixMonths => 'مجموع هزینه‌های ۶ ماه اخیر';
+
+  @override
+  String get historySummaryAll => 'مجموع هزینه‌ها';
+
+  @override
+  String get historySummaryCustom => 'مجموع هزینه‌های بازه انتخابی';
+
+  @override
+  String historySummaryCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString مورد ثبت شده';
+  }
+
+  @override
+  String get historyToman => 'تومان';
+
+  @override
+  String get historyServicesLabel => 'خدمات و بازدید';
+
+  @override
+  String historyServicesValue(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString سرویس ثبت‌شده';
+  }
+
+  @override
+  String get historyFuelLabel => 'مجموع مصرف سوخت';
+
+  @override
+  String historyFuelValue(String volume) {
+    return '$volume لیتر';
+  }
+
+  @override
+  String get historyTabAll => 'همه موارد';
+
+  @override
+  String get historyTabService => 'سرویس و تعمیر';
+
+  @override
+  String get historyTabFuel => 'سوخت‌گیری';
+
+  @override
+  String get historyTabExpense => 'هزینه‌های جاری';
+
+  @override
+  String get historyInvoiceChip => 'فاکتوردار';
+
+  @override
+  String get historyExport => 'خروجی اکسل/PDF';
+
+  @override
+  String historyPeriodCurrentYear(String year) {
+    return 'سال جاری ($year)';
+  }
+
+  @override
+  String get historyPeriodSixMonths => '۶ ماه اخیر';
+
+  @override
+  String get historyPeriodAll => 'همه زمان‌ها';
+
+  @override
+  String get historyPeriodCustom => 'انتخاب دستی';
+
+  @override
+  String historyMonthCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString مورد';
+  }
+
+  @override
+  String historyRowKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر';
+  }
+
+  @override
+  String historyRowVolume(String volume, String unit) {
+    return '$volume $unit';
+  }
+
+  @override
+  String historyFullFill(String fuel) {
+    return '$fuel (باک پر)';
+  }
+
+  @override
+  String historyEconomy(String value) {
+    return '$value لیتر / ۱۰۰ ک‌م';
+  }
+
+  @override
+  String get historyInvoiceBadge => 'فاکتور';
+
+  @override
+  String get historyAttachmentBadge => 'پیوست';
+
+  @override
+  String historyExpiresAt(String date) {
+    return 'پایان اعتبار: $date';
+  }
+
+  @override
+  String historyStart(String date) {
+    return 'شروع تاریخچه از تاریخ ثبت خودرو ($date)';
+  }
+
+  @override
+  String get historyEmpty => 'سابقه‌ای با این فیلترها پیدا نشد';
+
+  @override
+  String get historyLoadError => 'دریافت تاریخچه ممکن نشد';
+
+  @override
+  String get historyLoadMoreError => 'دریافت ادامه تاریخچه ممکن نشد';
+
+  @override
+  String get historyFilterTitle => 'فیلتر سوابق';
+
+  @override
+  String historyFilterActive(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString فیلتر فعال';
+  }
+
+  @override
+  String get historyFilterClear => 'پاک کردن';
+
+  @override
+  String get historyFilterClose => 'بستن';
+
+  @override
+  String get historyFilterVehicles => 'خودرو';
+
+  @override
+  String get historyFilterVehiclesHint => '(محدوده جستجو)';
+
+  @override
+  String historyFilterSelectedVehicles(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'انتخاب شده: $countString خودرو';
+  }
+
+  @override
+  String historyFilterMileage(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'آخرین پیمایش: $kmString کیلومتر';
+  }
+
+  @override
+  String get historyFilterAllVehicles => 'همه خودروهای گاراژ';
+
+  @override
+  String historyFilterAllVehiclesHint(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'نمایش جامع تمام $countString خودروی ثبت‌شده';
+  }
+
+  @override
+  String get historyFilterCategories => 'دسته‌بندی خدمات و هزینه‌ها';
+
+  @override
+  String get historyFilterSelectAll => 'انتخاب همه';
+
+  @override
+  String get historyCategoryLegal => 'هزینه‌های قانونی';
+
+  @override
+  String get historyCategoryLegalHint => 'بیمه، معاینه، عوارض';
+
+  @override
+  String get historyFilterDocuments => 'اسناد و مدارک مالی';
+
+  @override
+  String get historyFilterAttachmentsOnly => 'فقط سوابق دارای پیوست / فاکتور';
+
+  @override
+  String get historyFilterAttachmentsHint => 'تصویر فاکتور رسمی، رسید پرداخت، ضمانت‌نامه';
+
+  @override
+  String get historyFilterPeriod => 'بازه زمانی ثبت';
+
+  @override
+  String get historyFilterCalendar => 'تقویم جلالی';
+
+  @override
+  String historyFilterRange(String from, String to) {
+    return '$from تا $to';
+  }
+
+  @override
+  String get historyFilterFrom => 'از تاریخ';
+
+  @override
+  String get historyFilterTo => 'تا تاریخ';
+
+  @override
+  String get historyFilterPickDate => 'تأیید تاریخ';
+
+  @override
+  String get historyFilterResults => 'تعداد نتایج منطبق با فیلترها:';
+
+  @override
+  String historyFilterResultsValue(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString رکورد';
+  }
+
+  @override
+  String get historyFilterApply => 'اعمال فیلتر';
+
+  @override
   String get navProfile => 'پروفایل';
 
   @override
@@ -959,6 +1240,80 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get homeUpdateOdometerHint => 'انتخاب خودرو و ثبت سریع کیلومترشمار فعلی';
+
+  @override
+  String homeSpendMonthTotal(String month, String year) {
+    return '$month $year (مجموع)';
+  }
+
+  @override
+  String homeSpendAmount(String amount) {
+    return '$amount تومان';
+  }
+
+  @override
+  String get dashboardLoadError => 'دریافت خلاصه هزینه‌ها ممکن نشد';
+
+  @override
+  String profileMemberSince(String month, String year) {
+    return 'عضو رسمی از $month $year';
+  }
+
+  @override
+  String get profileEdit => 'ویرایش پروفایل';
+
+  @override
+  String get profileStatVehicles => 'خودرو فعال';
+
+  @override
+  String get profileStatServices => 'سرویس ثبت‌شده';
+
+  @override
+  String get profileStatsLoadError => 'دریافت آمار ممکن نشد';
+
+  @override
+  String get profileSettingsSection => 'تنظیمات و سامانه';
+
+  @override
+  String get profileReminders => 'تنظیمات یادآورها';
+
+  @override
+  String get profileRemindersHint => 'زمان‌بندی پیام‌های موعد تعویض و بیمه';
+
+  @override
+  String get profileSms => 'اطلاع‌رسانی پیامک';
+
+  @override
+  String get profileSmsHint => 'مدیریت ارسال پیامک سرویس و سوخت';
+
+  @override
+  String get profileSecurity => 'امنیت و رمز عبور';
+
+  @override
+  String get profileSecurityHint => 'ورود دوعاملی و احراز هویت بیومتریک';
+
+  @override
+  String get profileLegalSection => 'ارتباطات و حقوقی';
+
+  @override
+  String get profileSupport => 'پشتیبانی و تماس با ما';
+
+  @override
+  String get profileSupportHint => 'پاسخگویی آنلاین و ثبت تیکت پشتیبانی';
+
+  @override
+  String get profilePrivacy => 'قوانین و حریم خصوصی';
+
+  @override
+  String get profilePrivacyHint => 'شرایط استفاده و حفاظت از داده‌ها';
+
+  @override
+  String get profileLogout => 'خروج از حساب کاربری';
+
+  @override
+  String profileAppVersion(String version) {
+    return 'نسخه اپلیکیشن $version';
+  }
 
   @override
   String get garageHistoryTooltip => 'تاریخچه رویدادها';

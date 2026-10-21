@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
 import '../../../intervals/presentation/providers/interval_providers.dart';
 import '../../../vehicles/domain/entities/vehicle.dart';
 import '../../../vehicles/presentation/providers/vehicle_providers.dart';
@@ -28,6 +29,7 @@ class OdometerController extends AsyncNotifier<void> {
         ref.invalidate(vehicleProvider(vehicle.id));
         ref.invalidate(odometerReadingsProvider(vehicle.id));
         ref.invalidate(dueReportProvider(vehicle.id));
+        ref.invalidate(dashboardProvider);
         state = const AsyncData(null);
         return true;
       case Left(value: final failure):

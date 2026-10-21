@@ -41,6 +41,16 @@ abstract final class AppRoutes {
   static String duePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/due';
   static const historyPath = '/history';
   static const historyName = 'history';
+
+  /// The history filter: a full page above the tabs (no dock).
+  static const historyFilterPath = '/history/filter';
+  static const historyFilterName = 'historyFilter';
+
+  /// A service visit's details opened from the history, inside the History tab:
+  /// `/history/services/:vehicleId/:serviceId`.
+  static const historyServiceName = 'historyService';
+  static String historyServicePath(String vehicleId, String serviceId) =>
+      '$historyPath/services/$vehicleId/$serviceId';
   static const profilePath = '/profile';
   static const profileName = 'profile';
 

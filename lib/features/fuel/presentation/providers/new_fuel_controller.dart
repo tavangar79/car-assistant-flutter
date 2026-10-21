@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
+import '../../../history/presentation/providers/history_providers.dart';
 import '../../../intervals/presentation/providers/interval_providers.dart';
 import '../../../odometer/presentation/providers/odometer_providers.dart';
 import '../../../vehicles/domain/entities/vehicle.dart';
@@ -31,6 +33,8 @@ class NewFuelController extends AsyncNotifier<void> {
         ref.invalidate(vehiclesProvider);
         ref.invalidate(odometerReadingsProvider(vehicle.id));
         ref.invalidate(dueReportProvider(vehicle.id));
+        ref.invalidate(dashboardProvider);
+        ref.invalidate(historyControllerProvider);
         state = const AsyncData(null);
         return saved;
       case Left(value: final failure):

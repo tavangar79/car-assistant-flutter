@@ -9,6 +9,7 @@ import '../../features/auth/presentation/providers/auth_providers.dart';
 import '../../features/auth/presentation/providers/otp_args.dart';
 import '../../features/expenses/presentation/pages/new_expense_page.dart';
 import '../../features/fuel/presentation/pages/new_fuel_page.dart';
+import '../../features/history/presentation/pages/history_filter_page.dart';
 import '../../features/history/presentation/pages/history_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/intervals/presentation/pages/due_services_page.dart';
@@ -106,6 +107,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           },
         ),
       ),
+      // Before the shell, so `/history/filter` is not taken by the History tab.
+      GoRoute(
+        path: AppRoutes.historyFilterPath,
+        name: AppRoutes.historyFilterName,
+        builder: (context, state) => const HistoryFilterPage(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => AppShell(navigationShell: navigationShell),
         branches: [
@@ -139,7 +146,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          _tab(AppRoutes.historyPath, AppRoutes.historyName, const HistoryPage()),
+          _tab(
+            AppRoutes.historyPath,
+            AppRoutes.historyName,
+            const HistoryPage(),
+            routes: [
+              GoRoute(
+                path: 'services/:vehicleId/:serviceId',
+                name: AppRoutes.historyServiceName,
+                builder: (context, state) => ServiceDetailsPage(
+                  vehicleId: state.pathParameters['vehicleId']!,
+                  serviceId: state.pathParameters['serviceId']!,
+                ),
+              ),
+            ],
+          ),
           _tab(AppRoutes.profilePath, AppRoutes.profileName, const ProfilePage()),
         ],
       ),

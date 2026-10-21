@@ -73,5 +73,6 @@ class VehicleDto {
     color: VehicleColor.values.asNameMap()[color],
     isDefault: isDefault,
     photoUrl: photoUrl,
+    createdAt: createdAt,
   );
 }

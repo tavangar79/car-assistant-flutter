@@ -3,10 +3,21 @@ import 'package:car_assistant/core/widgets/main_app_bar.dart';
 import 'package:car_assistant/features/auth/domain/entities/user.dart';
 import 'package:car_assistant/features/auth/domain/repositories/auth_repository.dart';
 import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
+import 'package:car_assistant/features/history/domain/entities/history_query.dart';
+import 'package:car_assistant/features/history/domain/entities/history_result.dart';
+import 'package:car_assistant/features/history/domain/repositories/history_repository.dart';
 import 'package:car_assistant/features/history/presentation/pages/history_page.dart';
+import 'package:car_assistant/features/history/presentation/providers/history_providers.dart';
+import 'package:car_assistant/features/history/presentation/widgets/history_app_bar.dart';
 import 'package:car_assistant/features/home/presentation/pages/home_page.dart';
 import 'package:car_assistant/features/home/presentation/widgets/home_app_bar.dart';
+import 'package:car_assistant/features/dashboard/domain/repositories/dashboard_repository.dart';
+import 'package:car_assistant/features/dashboard/presentation/providers/dashboard_providers.dart';
+import 'package:car_assistant/features/profile/domain/entities/profile_stats.dart';
+import 'package:car_assistant/features/profile/domain/repositories/profile_repository.dart';
 import 'package:car_assistant/features/profile/presentation/pages/profile_page.dart';
+import 'package:car_assistant/features/profile/presentation/providers/profile_providers.dart';
+import 'package:car_assistant/features/profile/presentation/widgets/profile_app_bar.dart';
 import 'package:car_assistant/features/shell/presentation/pages/app_shell.dart';
 import 'package:car_assistant/features/shell/presentation/widgets/dock_item.dart';
 import 'package:car_assistant/features/shell/presentation/widgets/quick_actions_sheet.dart';
@@ -34,6 +45,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../../dashboard/dashboard_fixtures.dart';
 import '../../../intervals/interval_fixtures.dart' as due_fixtures;
 import '../../../vehicles/vehicle_fixtures.dart';
 
@@ -51,6 +63,12 @@ class MockFuelRepository extends Mock implements FuelRepository {}
 
 class MockExpenseRepository extends Mock implements ExpenseRepository {}
 
+class MockDashboardRepository extends Mock implements DashboardRepository {}
+
+class MockProfileRepository extends Mock implements ProfileRepository {}
+
+class MockHistoryRepository extends Mock implements HistoryRepository {}
+
 void main() {
   const delay = Duration(milliseconds: 10);
 
@@ -63,6 +81,15 @@ void main() {
     final intervals = MockIntervalRepository();
     final fuel = MockFuelRepository();
     final expenses = MockExpenseRepository();
+    final dashboards = MockDashboardRepository();
+    final profile = MockProfileRepository();
+    final history = MockHistoryRepository();
+    registerFallbackValue(const HistoryQuery());
+    when(() => history.getHistory(any()))
+        .thenAnswer((_) async => const Right(HistoryResult(entries: [])));
+    when(() => dashboards.getDashboard()).thenAnswer((_) async => Right(homeDashboard()));
+    when(() => profile.getStats())
+        .thenAnswer((_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0)));
     when(() => services.getCatalog()).thenAnswer((_) async => const Right([]));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right(garage));
     for (final vehicle in garage) {
@@ -95,6 +122,9 @@ void main() {
           intervalRepositoryProvider.overrideWithValue(intervals),
           fuelRepositoryProvider.overrideWithValue(fuel),
           expenseRepositoryProvider.overrideWithValue(expenses),
+          dashboardRepositoryProvider.overrideWithValue(dashboards),
+          profileRepositoryProvider.overrideWithValue(profile),
+          historyRepositoryProvider.overrideWithValue(history),
           authRepositoryProvider.overrideWithValue(auth),
           splashDelayProvider.overrideWithValue(delay),
           packageInfoProvider.overrideWith(
@@ -116,7 +146,9 @@ void main() {
   }
 
   Finder appBarTitle(String title) => find.descendant(
-    of: find.byWidgetPredicate((w) => w is MainAppBar || w is HomeAppBar),
+    of: find.byWidgetPredicate(
+      (w) => w is MainAppBar || w is HomeAppBar || w is ProfileAppBar || w is HistoryAppBar,
+    ),
     matching: find.text(title),
   );
 

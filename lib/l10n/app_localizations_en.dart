@@ -365,6 +365,287 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navHistory => 'History';
 
   @override
+  String get historyAllVehicles => 'All vehicles';
+
+  @override
+  String historyVehicleCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString vehicles';
+  }
+
+  @override
+  String get historyChooseVehicle => 'Choose a vehicle';
+
+  @override
+  String get historyFilterTooltip => 'Filter records';
+
+  @override
+  String historyVehicleMeta(String year, int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Model $year • current mileage $kmString km';
+  }
+
+  @override
+  String get historyGarageTitle => 'Every vehicle in the garage';
+
+  @override
+  String historySelectedTitle(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString chosen vehicles';
+  }
+
+  @override
+  String historyGarageMeta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString registered vehicles';
+  }
+
+  @override
+  String historySummaryYear(String year) {
+    return 'Total costs of $year';
+  }
+
+  @override
+  String get historySummarySixMonths => 'Total costs of the last 6 months';
+
+  @override
+  String get historySummaryAll => 'Total costs';
+
+  @override
+  String get historySummaryCustom => 'Total costs of the chosen range';
+
+  @override
+  String historySummaryCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString records';
+  }
+
+  @override
+  String get historyToman => 'Toman';
+
+  @override
+  String get historyServicesLabel => 'Services and visits';
+
+  @override
+  String historyServicesValue(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString services';
+  }
+
+  @override
+  String get historyFuelLabel => 'Total fuel';
+
+  @override
+  String historyFuelValue(String volume) {
+    return '$volume L';
+  }
+
+  @override
+  String get historyTabAll => 'All';
+
+  @override
+  String get historyTabService => 'Service & repair';
+
+  @override
+  String get historyTabFuel => 'Fuel';
+
+  @override
+  String get historyTabExpense => 'Expenses';
+
+  @override
+  String get historyInvoiceChip => 'With invoice';
+
+  @override
+  String get historyExport => 'Excel/PDF export';
+
+  @override
+  String historyPeriodCurrentYear(String year) {
+    return 'This year ($year)';
+  }
+
+  @override
+  String get historyPeriodSixMonths => 'Last 6 months';
+
+  @override
+  String get historyPeriodAll => 'All time';
+
+  @override
+  String get historyPeriodCustom => 'Custom';
+
+  @override
+  String historyMonthCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString items';
+  }
+
+  @override
+  String historyRowKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString km';
+  }
+
+  @override
+  String historyRowVolume(String volume, String unit) {
+    return '$volume $unit';
+  }
+
+  @override
+  String historyFullFill(String fuel) {
+    return '$fuel (full tank)';
+  }
+
+  @override
+  String historyEconomy(String value) {
+    return '$value L / 100 km';
+  }
+
+  @override
+  String get historyInvoiceBadge => 'Invoice';
+
+  @override
+  String get historyAttachmentBadge => 'Attachment';
+
+  @override
+  String historyExpiresAt(String date) {
+    return 'Valid until: $date';
+  }
+
+  @override
+  String historyStart(String date) {
+    return 'History starts when the vehicle was added ($date)';
+  }
+
+  @override
+  String get historyEmpty => 'No records match these filters';
+
+  @override
+  String get historyLoadError => 'Could not load the history';
+
+  @override
+  String get historyLoadMoreError => 'Could not load more records';
+
+  @override
+  String get historyFilterTitle => 'Filter records';
+
+  @override
+  String historyFilterActive(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString active';
+  }
+
+  @override
+  String get historyFilterClear => 'Clear';
+
+  @override
+  String get historyFilterClose => 'Close';
+
+  @override
+  String get historyFilterVehicles => 'Vehicle';
+
+  @override
+  String get historyFilterVehiclesHint => '(search scope)';
+
+  @override
+  String historyFilterSelectedVehicles(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Chosen: $countString';
+  }
+
+  @override
+  String historyFilterMileage(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'Last mileage: $kmString km';
+  }
+
+  @override
+  String get historyFilterAllVehicles => 'Every vehicle in the garage';
+
+  @override
+  String historyFilterAllVehiclesHint(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Show all $countString registered vehicles';
+  }
+
+  @override
+  String get historyFilterCategories => 'Service and expense categories';
+
+  @override
+  String get historyFilterSelectAll => 'Select all';
+
+  @override
+  String get historyCategoryLegal => 'Legal costs';
+
+  @override
+  String get historyCategoryLegalHint => 'Insurance, inspection, tolls';
+
+  @override
+  String get historyFilterDocuments => 'Financial documents';
+
+  @override
+  String get historyFilterAttachmentsOnly => 'Only records with an attachment / invoice';
+
+  @override
+  String get historyFilterAttachmentsHint => 'Invoice photo, receipt, warranty';
+
+  @override
+  String get historyFilterPeriod => 'Date range';
+
+  @override
+  String get historyFilterCalendar => 'Jalali calendar';
+
+  @override
+  String historyFilterRange(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String get historyFilterFrom => 'From';
+
+  @override
+  String get historyFilterTo => 'To';
+
+  @override
+  String get historyFilterPickDate => 'Confirm date';
+
+  @override
+  String get historyFilterResults => 'Matching records:';
+
+  @override
+  String historyFilterResultsValue(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString records';
+  }
+
+  @override
+  String get historyFilterApply => 'Apply filter';
+
+  @override
   String get navProfile => 'Profile';
 
   @override
@@ -970,6 +1251,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeUpdateOdometerHint => 'Pick a vehicle and quickly record its odometer';
+
+  @override
+  String homeSpendMonthTotal(String month, String year) {
+    return '$month $year (total)';
+  }
+
+  @override
+  String homeSpendAmount(String amount) {
+    return '$amount toman';
+  }
+
+  @override
+  String get dashboardLoadError => 'Couldn\'t load the dashboard';
+
+  @override
+  String profileMemberSince(String month, String year) {
+    return 'Member since $month $year';
+  }
+
+  @override
+  String get profileEdit => 'Edit profile';
+
+  @override
+  String get profileStatVehicles => 'Active vehicles';
+
+  @override
+  String get profileStatServices => 'Services recorded';
+
+  @override
+  String get profileStatsLoadError => 'Couldn\'t load your stats';
+
+  @override
+  String get profileSettingsSection => 'Settings';
+
+  @override
+  String get profileReminders => 'Reminder settings';
+
+  @override
+  String get profileRemindersHint => 'When to send due-service and insurance messages';
+
+  @override
+  String get profileSms => 'SMS notifications';
+
+  @override
+  String get profileSmsHint => 'Manage service and fuel text messages';
+
+  @override
+  String get profileSecurity => 'Security';
+
+  @override
+  String get profileSecurityHint => 'Two-factor sign-in and biometrics';
+
+  @override
+  String get profileLegalSection => 'Support & legal';
+
+  @override
+  String get profileSupport => 'Support & contact';
+
+  @override
+  String get profileSupportHint => 'Online help and support tickets';
+
+  @override
+  String get profilePrivacy => 'Terms & privacy';
+
+  @override
+  String get profilePrivacyHint => 'Terms of use and data protection';
+
+  @override
+  String get profileLogout => 'Sign out of your account';
+
+  @override
+  String profileAppVersion(String version) {
+    return 'App version $version';
+  }
 
   @override
   String get garageHistoryTooltip => 'Event history';

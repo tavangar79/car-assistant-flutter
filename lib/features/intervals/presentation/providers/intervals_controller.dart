@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/interval_setting.dart';
 import '../../domain/entities/service_interval.dart';
@@ -32,6 +33,7 @@ class IntervalsController extends AsyncNotifier<void> {
       case Right():
         ref.invalidate(serviceIntervalsProvider(vehicleId));
         ref.invalidate(dueReportProvider(vehicleId));
+        ref.invalidate(dashboardProvider);
         state = const AsyncData(null);
         return true;
       case Left(value: final failure):

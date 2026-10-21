@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../dashboard/presentation/providers/dashboard_providers.dart';
+import '../../../profile/presentation/providers/profile_providers.dart';
 import '../../domain/entities/add_vehicle_result.dart';
 import '../../domain/entities/vehicle_draft.dart';
 import '../../domain/entities/vehicle_photo.dart';
@@ -36,6 +38,8 @@ class AddVehicleController extends AsyncNotifier<void> {
       case Right(value: final saved):
         ref.invalidate(vehiclesProvider);
         ref.invalidate(vehicleProvider);
+        ref.invalidate(dashboardProvider);
+        ref.invalidate(profileStatsProvider);
         state = const AsyncData(null);
         return saved;
       case Left(value: final failure):

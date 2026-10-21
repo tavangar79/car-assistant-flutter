@@ -466,6 +466,402 @@
   "@navHistory": {
     "description": "History tab label in the bottom dock and its app bar title."
   },
+  "historyAllVehicles": "همه خودروها",
+  "@historyAllVehicles": {
+    "description": "App bar vehicle chip of the history page when every vehicle is shown."
+  },
+  "historyVehicleCount": "{count} خودرو",
+  "@historyVehicleCount": {
+    "description": "App bar vehicle chip of the history page when several vehicles are chosen.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyChooseVehicle": "انتخاب خودرو",
+  "@historyChooseVehicle": {
+    "description": "Title of the vehicle sheet of the history page, and the chip semantics label."
+  },
+  "historyFilterTooltip": "فیلتر سوابق",
+  "@historyFilterTooltip": {
+    "description": "Tooltip of the tune button of the history page."
+  },
+  "historyVehicleMeta": "مدل {year} • کارکرد فعلی {km} کیلومتر",
+  "@historyVehicleMeta": {
+    "description": "Second line of the vehicle ribbon of the history page.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      },
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyGarageTitle": "همه خودروهای گاراژ",
+  "@historyGarageTitle": {
+    "description": "Vehicle ribbon title of the history page when every vehicle is shown."
+  },
+  "historySelectedTitle": "{count} خودروی انتخاب‌شده",
+  "@historySelectedTitle": {
+    "description": "Vehicle ribbon title of the history page when several vehicles are chosen.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyGarageMeta": "{count} خودروی ثبت‌شده",
+  "@historyGarageMeta": {
+    "description": "Vehicle ribbon second line when several vehicles are shown.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historySummaryYear": "مجموع هزینه‌های سال {year}",
+  "@historySummaryYear": {
+    "description": "Summary card title for the current Jalali year.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "historySummarySixMonths": "مجموع هزینه‌های ۶ ماه اخیر",
+  "@historySummarySixMonths": {
+    "description": "Summary card title for the last six months."
+  },
+  "historySummaryAll": "مجموع هزینه‌ها",
+  "@historySummaryAll": {
+    "description": "Summary card title without a date range."
+  },
+  "historySummaryCustom": "مجموع هزینه‌های بازه انتخابی",
+  "@historySummaryCustom": {
+    "description": "Summary card title for a custom date range."
+  },
+  "historySummaryCount": "{count} مورد ثبت شده",
+  "@historySummaryCount": {
+    "description": "Badge of the summary card: how many records match.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyToman": "تومان",
+  "@historyToman": {
+    "description": "Currency unit after an amount."
+  },
+  "historyServicesLabel": "خدمات و بازدید",
+  "@historyServicesLabel": {
+    "description": "Label of the service count tile."
+  },
+  "historyServicesValue": "{count} سرویس ثبت‌شده",
+  "@historyServicesValue": {
+    "description": "Value of the service count tile.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFuelLabel": "مجموع مصرف سوخت",
+  "@historyFuelLabel": {
+    "description": "Label of the fuel volume tile."
+  },
+  "historyFuelValue": "{volume} لیتر",
+  "@historyFuelValue": {
+    "description": "Value of the fuel volume tile.",
+    "placeholders": {
+      "volume": {
+        "type": "String"
+      }
+    }
+  },
+  "historyTabAll": "همه موارد",
+  "@historyTabAll": {
+    "description": "Type tab: every record."
+  },
+  "historyTabService": "سرویس و تعمیر",
+  "@historyTabService": {
+    "description": "Type tab: services."
+  },
+  "historyTabFuel": "سوخت‌گیری",
+  "@historyTabFuel": {
+    "description": "Type tab: fill-ups."
+  },
+  "historyTabExpense": "هزینه‌های جاری",
+  "@historyTabExpense": {
+    "description": "Type tab: expenses."
+  },
+  "historyInvoiceChip": "فاکتوردار",
+  "@historyInvoiceChip": {
+    "description": "Chip that keeps only records with an invoice or attachment."
+  },
+  "historyExport": "خروجی اکسل/PDF",
+  "@historyExport": {
+    "description": "Export button (not available yet)."
+  },
+  "historyPeriodCurrentYear": "سال جاری ({year})",
+  "@historyPeriodCurrentYear": {
+    "description": "Period chip: the current Jalali year.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "historyPeriodSixMonths": "۶ ماه اخیر",
+  "@historyPeriodSixMonths": {
+    "description": "Period chip: the last six months."
+  },
+  "historyPeriodAll": "همه زمان‌ها",
+  "@historyPeriodAll": {
+    "description": "Period chip: no date range."
+  },
+  "historyPeriodCustom": "انتخاب دستی",
+  "@historyPeriodCustom": {
+    "description": "Period chip: a chosen date range."
+  },
+  "historyMonthCount": "{count} مورد",
+  "@historyMonthCount": {
+    "description": "Count badge of a month group.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyRowKm": "{km} کیلومتر",
+  "@historyRowKm": {
+    "description": "Mileage in a history row.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyRowVolume": "{volume} {unit}",
+  "@historyRowVolume": {
+    "description": "Fuel volume in a history row.",
+    "placeholders": {
+      "volume": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "historyFullFill": "{fuel} (باک پر)",
+  "@historyFullFill": {
+    "description": "Title of a full fill-up row.",
+    "placeholders": {
+      "fuel": {
+        "type": "String"
+      }
+    }
+  },
+  "historyEconomy": "{value} لیتر / ۱۰۰ ک‌م",
+  "@historyEconomy": {
+    "description": "Fuel economy chip of a fill-up row.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "historyInvoiceBadge": "فاکتور",
+  "@historyInvoiceBadge": {
+    "description": "Badge of a service with an invoice."
+  },
+  "historyAttachmentBadge": "پیوست",
+  "@historyAttachmentBadge": {
+    "description": "Badge of an expense with an attachment."
+  },
+  "historyExpiresAt": "پایان اعتبار: {date}",
+  "@historyExpiresAt": {
+    "description": "Expiry line of an expense row.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "historyStart": "شروع تاریخچه از تاریخ ثبت خودرو ({date})",
+  "@historyStart": {
+    "description": "Footer at the end of the history.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "historyEmpty": "سابقه‌ای با این فیلترها پیدا نشد",
+  "@historyEmpty": {
+    "description": "Empty state of the history page."
+  },
+  "historyLoadError": "دریافت تاریخچه ممکن نشد",
+  "@historyLoadError": {
+    "description": "Load error of the history page."
+  },
+  "historyLoadMoreError": "دریافت ادامه تاریخچه ممکن نشد",
+  "@historyLoadMoreError": {
+    "description": "Error under the list when the next page fails."
+  },
+  "historyFilterTitle": "فیلتر سوابق",
+  "@historyFilterTitle": {
+    "description": "App bar title of the filter page."
+  },
+  "historyFilterActive": "{count} فیلتر فعال",
+  "@historyFilterActive": {
+    "description": "Badge of the filter page: how many filters are set.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFilterClear": "پاک کردن",
+  "@historyFilterClear": {
+    "description": "Resets the filter page."
+  },
+  "historyFilterClose": "بستن",
+  "@historyFilterClose": {
+    "description": "Close button of the filter page."
+  },
+  "historyFilterVehicles": "خودرو",
+  "@historyFilterVehicles": {
+    "description": "Vehicle section title of the filter page."
+  },
+  "historyFilterVehiclesHint": "(محدوده جستجو)",
+  "@historyFilterVehiclesHint": {
+    "description": "Hint after the vehicle section title."
+  },
+  "historyFilterSelectedVehicles": "انتخاب شده: {count} خودرو",
+  "@historyFilterSelectedVehicles": {
+    "description": "Badge of the vehicle section.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFilterMileage": "آخرین پیمایش: {km} کیلومتر",
+  "@historyFilterMileage": {
+    "description": "Mileage line of a vehicle card of the filter page.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFilterAllVehicles": "همه خودروهای گاراژ",
+  "@historyFilterAllVehicles": {
+    "description": "Option of the filter page for every vehicle."
+  },
+  "historyFilterAllVehiclesHint": "نمایش جامع تمام {count} خودروی ثبت‌شده",
+  "@historyFilterAllVehiclesHint": {
+    "description": "Second line of the every-vehicle option.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFilterCategories": "دسته‌بندی خدمات و هزینه‌ها",
+  "@historyFilterCategories": {
+    "description": "Category section title of the filter page."
+  },
+  "historyFilterSelectAll": "انتخاب همه",
+  "@historyFilterSelectAll": {
+    "description": "Selects every category."
+  },
+  "historyCategoryLegal": "هزینه‌های قانونی",
+  "@historyCategoryLegal": {
+    "description": "Category tile for insurances, inspection, tolls and fines."
+  },
+  "historyCategoryLegalHint": "بیمه، معاینه، عوارض",
+  "@historyCategoryLegalHint": {
+    "description": "Second line of the legal costs tile."
+  },
+  "historyFilterDocuments": "اسناد و مدارک مالی",
+  "@historyFilterDocuments": {
+    "description": "Attachment section title of the filter page."
+  },
+  "historyFilterAttachmentsOnly": "فقط سوابق دارای پیوست / فاکتور",
+  "@historyFilterAttachmentsOnly": {
+    "description": "Attachment-only switch of the filter page."
+  },
+  "historyFilterAttachmentsHint": "تصویر فاکتور رسمی، رسید پرداخت، ضمانت‌نامه",
+  "@historyFilterAttachmentsHint": {
+    "description": "Second line of the attachment-only switch."
+  },
+  "historyFilterPeriod": "بازه زمانی ثبت",
+  "@historyFilterPeriod": {
+    "description": "Period section title of the filter page."
+  },
+  "historyFilterCalendar": "تقویم جلالی",
+  "@historyFilterCalendar": {
+    "description": "Note next to the period section title."
+  },
+  "historyFilterRange": "{from} تا {to}",
+  "@historyFilterRange": {
+    "description": "The chosen custom date range.",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "historyFilterFrom": "از تاریخ",
+  "@historyFilterFrom": {
+    "description": "Title of the start date picker."
+  },
+  "historyFilterTo": "تا تاریخ",
+  "@historyFilterTo": {
+    "description": "Title of the end date picker."
+  },
+  "historyFilterPickDate": "تأیید تاریخ",
+  "@historyFilterPickDate": {
+    "description": "Confirm button of the date pickers."
+  },
+  "historyFilterResults": "تعداد نتایج منطبق با فیلترها:",
+  "@historyFilterResults": {
+    "description": "Label of the result count line."
+  },
+  "historyFilterResultsValue": "{count} رکورد",
+  "@historyFilterResultsValue": {
+    "description": "Value of the result count line.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyFilterApply": "اعمال فیلتر",
+  "@historyFilterApply": {
+    "description": "Apply button of the filter page."
+  },
   "navProfile": "پروفایل",
   "@navProfile": {
     "description": "Profile tab label in the bottom dock and its app bar title."
@@ -1326,6 +1722,126 @@
   "homeUpdateOdometerHint": "انتخاب خودرو و ثبت سریع کیلومترشمار فعلی",
   "@homeUpdateOdometerHint": {
     "description": "Caption under the Home update-mileage button."
+  },
+  "homeSpendMonthTotal": "{month} {year} (مجموع)",
+  "@homeSpendMonthTotal": {
+    "description": "Header of the selected month's breakdown in the Home spend chart.",
+    "placeholders": {
+      "month": {
+        "type": "String",
+        "example": "آبان"
+      },
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۳"
+      }
+    }
+  },
+  "homeSpendAmount": "{amount} تومان",
+  "@homeSpendAmount": {
+    "description": "A toman amount in the Home dashboard.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "۴٬۸۵۰٬۰۰۰"
+      }
+    }
+  },
+  "dashboardLoadError": "دریافت خلاصه هزینه‌ها ممکن نشد",
+  "@dashboardLoadError": {
+    "description": "Error when the Home dashboard figures could not be loaded."
+  },
+  "profileMemberSince": "عضو رسمی از {month} {year}",
+  "@profileMemberSince": {
+    "description": "Profile card line: the Jalali month and year the account was created.",
+    "placeholders": {
+      "month": {
+        "type": "String",
+        "example": "فروردین"
+      },
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۲"
+      }
+    }
+  },
+  "profileEdit": "ویرایش پروفایل",
+  "@profileEdit": {
+    "description": "Tooltip of the edit button on the profile card."
+  },
+  "profileStatVehicles": "خودرو فعال",
+  "@profileStatVehicles": {
+    "description": "Profile stat tile: number of vehicles."
+  },
+  "profileStatServices": "سرویس ثبت‌شده",
+  "@profileStatServices": {
+    "description": "Profile stat tile: number of service visits."
+  },
+  "profileStatsLoadError": "دریافت آمار ممکن نشد",
+  "@profileStatsLoadError": {
+    "description": "Error when the profile stats could not be loaded."
+  },
+  "profileSettingsSection": "تنظیمات و سامانه",
+  "@profileSettingsSection": {
+    "description": "Profile section title for settings rows."
+  },
+  "profileReminders": "تنظیمات یادآورها",
+  "@profileReminders": {
+    "description": "Profile settings row title."
+  },
+  "profileRemindersHint": "زمان‌بندی پیام‌های موعد تعویض و بیمه",
+  "@profileRemindersHint": {
+    "description": "Profile settings row subtitle."
+  },
+  "profileSms": "اطلاع‌رسانی پیامک",
+  "@profileSms": {
+    "description": "Profile settings row title."
+  },
+  "profileSmsHint": "مدیریت ارسال پیامک سرویس و سوخت",
+  "@profileSmsHint": {
+    "description": "Profile settings row subtitle."
+  },
+  "profileSecurity": "امنیت و رمز عبور",
+  "@profileSecurity": {
+    "description": "Profile settings row title."
+  },
+  "profileSecurityHint": "ورود دوعاملی و احراز هویت بیومتریک",
+  "@profileSecurityHint": {
+    "description": "Profile settings row subtitle."
+  },
+  "profileLegalSection": "ارتباطات و حقوقی",
+  "@profileLegalSection": {
+    "description": "Profile section title for support and legal rows."
+  },
+  "profileSupport": "پشتیبانی و تماس با ما",
+  "@profileSupport": {
+    "description": "Profile row title."
+  },
+  "profileSupportHint": "پاسخگویی آنلاین و ثبت تیکت پشتیبانی",
+  "@profileSupportHint": {
+    "description": "Profile row subtitle."
+  },
+  "profilePrivacy": "قوانین و حریم خصوصی",
+  "@profilePrivacy": {
+    "description": "Profile row title."
+  },
+  "profilePrivacyHint": "شرایط استفاده و حفاظت از داده‌ها",
+  "@profilePrivacyHint": {
+    "description": "Profile row subtitle."
+  },
+  "profileLogout": "خروج از حساب کاربری",
+  "@profileLogout": {
+    "description": "Sign-out button on the profile page."
+  },
+  "profileAppVersion": "نسخه اپلیکیشن {version}",
+  "@profileAppVersion": {
+    "description": "App version line at the bottom of the profile page.",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "۱٫۰٫۰"
+      }
+    }
   },
   "garageHistoryTooltip": "تاریخچه رویدادها",
   "@garageHistoryTooltip": {
