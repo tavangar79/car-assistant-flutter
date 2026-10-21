@@ -5,11 +5,21 @@ import '../../../../../l10n/app_localizations.dart';
 import 'form_section_card.dart';
 
 /// Star tile, title, description and a switch that makes this the default vehicle.
+///
+/// When [locked] (editing the current default vehicle) the switch stays on and disabled, with a
+/// helper line saying the default changes by making another vehicle the default (Stitch edit
+/// screen `25ad5d184ff94cf2976c21640ca21f1f`).
 class DefaultVehicleToggle extends StatelessWidget {
-  const DefaultVehicleToggle({super.key, required this.value, required this.onChanged});
+  const DefaultVehicleToggle({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.locked = false,
+  });
 
   final bool value;
   final ValueChanged<bool> onChanged;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +56,28 @@ class DefaultVehicleToggle extends StatelessWidget {
                     l10n.vehicleDefaultBody,
                     style: theme.textTheme.bodySmall?.copyWith(color: tones.muted, height: 1.6),
                   ),
+                  if (locked) ...[
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Icon(Icons.info_outline, size: 16, color: tones.muted),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            l10n.vehicleDefaultLocked,
+                            style: theme.textTheme.bodySmall?.copyWith(color: tones.muted),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),
             const SizedBox(width: 16),
             Switch(
-              value: value,
-              onChanged: onChanged,
+              value: locked || value,
+              onChanged: locked ? null : onChanged,
               activeTrackColor: scheme.primary,
               activeThumbColor: scheme.onPrimary,
             ),

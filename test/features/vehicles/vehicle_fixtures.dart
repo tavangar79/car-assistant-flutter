@@ -44,21 +44,22 @@ const tara = Vehicle(
   isDefault: true,
 );
 
-/// [tara] with another id, nickname or photo.
-Vehicle taraWith({String id = 'v1', String? nickname, String? photoUrl}) => Vehicle(
-  id: id,
-  nickname: nickname ?? tara.nickname,
-  plate: tara.plate,
-  vin: tara.vin,
-  make: tara.make,
-  model: tara.model,
-  trim: tara.trim,
-  yearJalali: tara.yearJalali,
-  mileageKm: tara.mileageKm,
-  color: tara.color,
-  isDefault: tara.isDefault,
-  photoUrl: photoUrl,
-);
+/// [tara] with another id, nickname, photo or default flag.
+Vehicle taraWith({String id = 'v1', String? nickname, String? photoUrl, bool? isDefault}) =>
+    Vehicle(
+      id: id,
+      nickname: nickname ?? tara.nickname,
+      plate: tara.plate,
+      vin: tara.vin,
+      make: tara.make,
+      model: tara.model,
+      trim: tara.trim,
+      yearJalali: tara.yearJalali,
+      mileageKm: tara.mileageKm,
+      color: tara.color,
+      isDefault: isDefault ?? tara.isDefault,
+      photoUrl: photoUrl,
+    );
 
 final catalogJson = {
   'makes': [

@@ -10,9 +10,12 @@ import '../../domain/entities/catalog_make.dart';
 import '../../domain/entities/vehicle.dart';
 import '../../domain/repositories/vehicle_repository.dart';
 import '../../domain/usecases/add_vehicle.dart';
+import '../../domain/usecases/get_vehicle.dart';
 import '../../domain/usecases/get_vehicle_catalog.dart';
 import '../../domain/usecases/get_vehicle_photo.dart';
 import '../../domain/usecases/get_vehicles.dart';
+import '../../domain/usecases/set_default_vehicle.dart';
+import '../../domain/usecases/update_vehicle.dart';
 import 'add_vehicle_controller.dart';
 import 'vehicle_photo_picker.dart';
 
@@ -25,6 +28,10 @@ final vehicleRepositoryProvider = Provider<VehicleRepository>((ref) {
 
 final getVehiclesProvider = Provider<GetVehicles>((ref) {
   return GetVehicles(ref.watch(vehicleRepositoryProvider));
+});
+
+final getVehicleProvider = Provider<GetVehicle>((ref) {
+  return GetVehicle(ref.watch(vehicleRepositoryProvider));
 });
 
 final getVehicleCatalogProvider = Provider<GetVehicleCatalog>((ref) {
@@ -43,6 +50,15 @@ final addVehicleProvider = Provider<AddVehicle>((ref) {
   return AddVehicle(ref.watch(vehicleRepositoryProvider), currentJalaliYear: () => year);
 });
 
+final updateVehicleProvider = Provider<UpdateVehicle>((ref) {
+  final year = ref.watch(currentJalaliYearProvider);
+  return UpdateVehicle(ref.watch(vehicleRepositoryProvider), currentJalaliYear: () => year);
+});
+
+final setDefaultVehicleProvider = Provider<SetDefaultVehicle>((ref) {
+  return SetDefaultVehicle(ref.watch(vehicleRepositoryProvider));
+});
+
 final vehiclePhotoPickerProvider = Provider<VehiclePhotoPicker>(
   (ref) => const VehiclePhotoPicker(),
 );
@@ -52,6 +68,13 @@ final vehiclePhotoPickerProvider = Provider<VehiclePhotoPicker>(
 final vehiclesProvider = FutureProvider.autoDispose<List<Vehicle>>((ref) async {
   final vehicles = await ref.watch(getVehiclesProvider).call();
   return vehicles.getOrElse((failure) => throw failure);
+});
+
+/// One of the user's vehicles, by id (the vehicle details page). Invalidate it with
+/// [vehiclesProvider] after a write that changes the vehicle.
+final vehicleProvider = FutureProvider.autoDispose.family<Vehicle, String>((ref, id) async {
+  final vehicle = await ref.watch(getVehicleProvider).call(id);
+  return vehicle.getOrElse((failure) => throw failure);
 });
 
 /// The makes, models and trims for the vehicle form.
@@ -68,7 +91,7 @@ final vehiclePhotoBytesProvider = FutureProvider.autoDispose.family<Uint8List, S
   return (await ref.watch(getVehiclePhotoProvider).call(url)).getOrElse((failure) => throw failure);
 });
 
-/// State of the add-vehicle page: loading while saving, and the last error.
+/// State of the add / edit vehicle page: loading while saving, and the last error.
 final addVehicleControllerProvider = AsyncNotifierProvider.autoDispose<AddVehicleController, void>(
   AddVehicleController.new,
 );

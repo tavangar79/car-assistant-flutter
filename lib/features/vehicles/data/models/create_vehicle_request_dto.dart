@@ -1,7 +1,7 @@
 import '../../domain/entities/new_vehicle.dart';
 import 'plate_dto.dart';
 
-/// JSON body of `POST /api/vehicles`.
+/// JSON body of `POST /api/vehicles`, and of `PATCH /api/vehicles/:id` (all fields sent).
 class CreateVehicleRequestDto {
   const CreateVehicleRequestDto(this._vehicle);
 

@@ -8,18 +8,23 @@ import '../../../../core/utils/localize_digits.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// Bottom sheet with day / month / year wheels on the Jalali calendar. Dates outside
-/// [first]..[last] snap to the nearest end on confirm.
+/// [first]..[last] snap to the nearest end on confirm. [title] and [confirmLabel] default to the
+/// birth-date wording.
 class JalaliDatePickerSheet extends StatefulWidget {
   const JalaliDatePickerSheet({
     super.key,
     required this.initial,
     required this.first,
     required this.last,
+    this.title,
+    this.confirmLabel,
   });
 
   final DateTime initial;
   final DateTime first;
   final DateTime last;
+  final String? title;
+  final String? confirmLabel;
 
   /// Opens the sheet; returns the chosen Gregorian date (local midnight), or `null` if dismissed.
   static Future<DateTime?> show(
@@ -27,6 +32,8 @@ class JalaliDatePickerSheet extends StatefulWidget {
     required DateTime initial,
     required DateTime first,
     required DateTime last,
+    String? title,
+    String? confirmLabel,
   }) => showModalBottomSheet<DateTime>(
     context: context,
     isScrollControlled: true,
@@ -34,7 +41,13 @@ class JalaliDatePickerSheet extends StatefulWidget {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
     ),
-    builder: (_) => JalaliDatePickerSheet(initial: initial, first: first, last: last),
+    builder: (_) => JalaliDatePickerSheet(
+      initial: initial,
+      first: first,
+      last: last,
+      title: title,
+      confirmLabel: confirmLabel,
+    ),
   );
 
   @override
@@ -82,7 +95,10 @@ class _JalaliDatePickerSheetState extends State<JalaliDatePickerSheet> {
           children: [
             const _DragHandle(),
             const SizedBox(height: 12),
-            _SheetHeader(onClose: () => Navigator.of(context).pop()),
+            _SheetHeader(
+              title: widget.title ?? l10n.profilePickerTitle,
+              onClose: () => Navigator.of(context).pop(),
+            ),
             const SizedBox(height: 20),
             Row(
               children: [
@@ -144,7 +160,7 @@ class _JalaliDatePickerSheetState extends State<JalaliDatePickerSheet> {
                   child: FilledButton.icon(
                     onPressed: _confirm,
                     icon: const Icon(Icons.check, size: 18),
-                    label: Text(l10n.profilePickerConfirm),
+                    label: Text(widget.confirmLabel ?? l10n.profilePickerConfirm),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -183,8 +199,9 @@ class _DragHandle extends StatelessWidget {
 }
 
 class _SheetHeader extends StatelessWidget {
-  const _SheetHeader({required this.onClose});
+  const _SheetHeader({required this.title, required this.onClose});
 
+  final String title;
   final VoidCallback onClose;
 
   @override
@@ -197,7 +214,7 @@ class _SheetHeader extends StatelessWidget {
         const SizedBox(width: 8),
         Expanded(
           child: Text(
-            l10n.profilePickerTitle,
+            title,
             style: theme.textTheme.titleSmall?.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w700,

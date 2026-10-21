@@ -94,6 +94,28 @@ void main() {
     expect((await repository.getCatalog()).getOrElse((f) => throw f), catalog);
   });
 
+  group('getVehicle', () {
+    test('maps the vehicle', () async {
+      when(() => dio.get<Map<String, dynamic>>('/api/vehicles/v1'))
+          .thenAnswer((_) async => ok(vehicleJson()));
+
+      expect(await repository.getVehicle('v1'), const Right<Failure, Vehicle>(tara));
+    });
+
+    test('returns a Failure on 404', () async {
+      when(() => dio.get<Map<String, dynamic>>('/api/vehicles/v1')).thenAnswer(
+        (_) => httpError(404, {
+          'error': {'message': 'Vehicle not found'},
+        }),
+      );
+
+      expect(
+        await repository.getVehicle('v1'),
+        const Left<Failure, Vehicle>(Failure('HTTP 404: Vehicle not found')),
+      );
+    });
+  });
+
   group('createVehicle', () {
     void stubPost(Future<Response<Map<String, dynamic>>> Function() answer) {
       when(() => dio.post<Map<String, dynamic>>('/api/vehicles', data: any(named: 'data')))
@@ -176,6 +198,111 @@ void main() {
     });
   });
 
+  group('updateVehicle', () {
+    void stubPatch(Future<Response<Map<String, dynamic>>> Function() answer) {
+      when(() => dio.patch<Map<String, dynamic>>('/api/vehicles/v1', data: any(named: 'data')))
+          .thenAnswer((_) => answer());
+    }
+
+    test('PATCHes every field and returns the updated vehicle', () async {
+      stubPatch(() async => ok<Map<String, dynamic>>(vehicleJson()));
+
+      final result = await repository.updateVehicle('v1', newVehicle);
+
+      expect(result.getOrElse((f) => throw f), tara);
+      final body =
+          verify(
+                () => dio.patch<Map<String, dynamic>>(
+                  '/api/vehicles/v1',
+                  data: captureAny(named: 'data'),
+                ),
+              ).captured.single
+              as Map<String, dynamic>;
+      expect(body, {
+        'nickname': 'تارا',
+        'plate': {'twoDigits': '72', 'letter': 'ب', 'threeDigits': '345', 'provinceCode': '68'},
+        'vin': null,
+        'makeId': 'iran-khodro',
+        'modelId': 'tara',
+        'trimId': null,
+        'yearJalali': 1402,
+        'mileageKm': 34500,
+        'color': null,
+        'isDefault': false,
+      });
+    });
+
+    test('maps the dotted 400 details to form fields', () async {
+      stubPatch(
+        () => httpError(400, {
+          'error': {
+            'message': 'Validation failed',
+            'details': {
+              'plate.letter': ['Invalid letter'],
+            },
+          },
+        }),
+      );
+
+      expect(
+        await repository.updateVehicle('v1', newVehicle),
+        const Left<Failure, Vehicle>(
+          InvalidVehicleFailure({VehicleField.plate}, 'Validation failed'),
+        ),
+      );
+    });
+
+    test('maps 409 to PlateTakenFailure', () async {
+      stubPatch(
+        () => httpError(409, {
+          'error': {'message': 'Plate already registered'},
+        }),
+      );
+
+      expect(
+        await repository.updateVehicle('v1', newVehicle),
+        const Left<Failure, Vehicle>(PlateTakenFailure()),
+      );
+    });
+
+    test('maps 422 to VehicleRejectedFailure with the server message', () async {
+      stubPatch(
+        () => httpError(422, {
+          'error': {'message': 'A user must keep one default vehicle'},
+        }),
+      );
+
+      expect(
+        await repository.updateVehicle('v1', newVehicle),
+        const Left<Failure, Vehicle>(
+          VehicleRejectedFailure('A user must keep one default vehicle'),
+        ),
+      );
+    });
+
+    test('maps 404 to a generic Failure', () async {
+      stubPatch(
+        () => httpError(404, {
+          'error': {'message': 'Vehicle not found'},
+        }),
+      );
+
+      expect(
+        await repository.updateVehicle('v1', newVehicle),
+        const Left<Failure, Vehicle>(Failure('HTTP 404: Vehicle not found')),
+      );
+    });
+
+    test('returns NetworkFailure when offline', () async {
+      stubPatch(offline);
+
+      expect(
+        await repository.updateVehicle('v1', newVehicle),
+        const Left<Failure, Vehicle>(NetworkFailure()),
+      );
+    });
+  });
+
   group('uploadPhoto', () {
     void stubPut(Future<Response<Map<String, dynamic>>> Function() answer) {
       when(
@@ -236,6 +363,42 @@ void main() {
         await repository.uploadPhoto('v1', photo),
         const Left<Failure, Vehicle>(VehiclePhotoTooLargeFailure('File too large')),
       );
+    });
+  });
+
+  group('deletePhoto', () {
+    void stubDelete(Future<Response<Map<String, dynamic>>> Function() answer) {
+      when(() => dio.delete<Map<String, dynamic>>('/api/vehicles/v1/photo'))
+          .thenAnswer((_) => answer());
+    }
+
+    test('DELETEs the photo and returns the vehicle without it', () async {
+      stubDelete(() async => ok<Map<String, dynamic>>(vehicleJson()));
+
+      final result = await repository.deletePhoto('v1');
+
+      expect(result.getOrElse((f) => throw f), tara);
+      expect(tara.photoUrl, isNull);
+      verify(() => dio.delete<Map<String, dynamic>>('/api/vehicles/v1/photo')).called(1);
+    });
+
+    test('maps 404 to a generic Failure', () async {
+      stubDelete(
+        () => httpError(404, {
+          'error': {'message': 'Vehicle not found'},
+        }),
+      );
+
+      expect(
+        await repository.deletePhoto('v1'),
+        const Left<Failure, Vehicle>(Failure('HTTP 404: Vehicle not found')),
+      );
+    });
+
+    test('returns NetworkFailure when offline', () async {
+      stubDelete(offline);
+
+      expect(await repository.deletePhoto('v1'), const Left<Failure, Vehicle>(NetworkFailure()));
     });
   });
 

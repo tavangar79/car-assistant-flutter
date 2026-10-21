@@ -8,6 +8,29 @@ abstract final class AppRoutes {
   static const homeName = 'home';
   static const vehiclesPath = '/vehicles';
   static const vehiclesName = 'vehicles';
+
+  /// A vehicle's details, inside the Garage tab: `/vehicles/:id`.
+  static const vehicleDetailsName = 'vehicleDetails';
+  static String vehicleDetailsPath(String vehicleId) => '$vehiclesPath/$vehicleId';
+
+  /// A service visit's details, inside the Garage tab: `/vehicles/:id/services/:serviceId`.
+  static const serviceDetailsName = 'serviceDetails';
+  static String serviceDetailsPath(String vehicleId, String serviceId) =>
+      '${vehicleDetailsPath(vehicleId)}/services/$serviceId';
+
+  /// Record a service visit: a full page above the tabs (no dock). Optional `extra`:
+  /// a `List<String>` of item ids to preselect.
+  static const newServiceName = 'newService';
+  static String newServicePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/services/new';
+
+  /// The service intervals of a vehicle, inside the Garage tab: `/vehicles/:id/intervals`.
+  static const intervalsName = 'intervals';
+  static String intervalsPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/intervals';
+
+  /// The due services of a vehicle: a full page above the tabs (no dock), also opened right after
+  /// an odometer update. Optional `extra`: an `OdometerUpdateArgs` for the success header.
+  static const dueName = 'due';
+  static String duePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/due';
   static const historyPath = '/history';
   static const historyName = 'history';
   static const profilePath = '/profile';
@@ -16,6 +39,10 @@ abstract final class AppRoutes {
   /// Add a vehicle: a full page above the tabs (no dock).
   static const addVehiclePath = '/add-vehicle';
   static const addVehicleName = 'addVehicle';
+
+  /// Edit a vehicle: the add page, filled in. Needs the `Vehicle` as `extra`.
+  static const editVehiclePath = '/edit-vehicle';
+  static const editVehicleName = 'editVehicle';
 
   /// Phone entry. With [otpPath] it forms the sign-in flow.
   static const phonePath = '/login';

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/plate.dart';
+import '../../domain/entities/vehicle.dart';
 import '../../domain/entities/vehicle_color.dart';
 import '../../domain/entities/vehicle_draft.dart';
 import '../../domain/entities/vehicle_failures.dart';
@@ -25,10 +26,16 @@ import '../widgets/vehicle_form/vin_field.dart';
 import '../widgets/vehicle_form/year_field.dart';
 import '../widgets/vehicle_form/year_picker_sheet.dart';
 
-/// Adds a vehicle to the garage (Stitch screen `bfe6315dd49945ce98c66b6d32383bc3`).
-/// On save the garage list is refreshed and the page closes.
+/// Adds a vehicle to the garage, or edits [vehicle] when it is given (Stitch screen
+/// `bfe6315dd49945ce98c66b6d32383bc3`, "افزودن و ویرایش خودرو"). In edit mode the form starts
+/// filled with the vehicle (Stitch edit screen `25ad5d184ff94cf2976c21640ca21f1f`): the saved photo
+/// can be removed, and the current default vehicle keeps its default switch locked on. On save the
+/// garage list is refreshed and the page closes.
 class AddVehiclePage extends ConsumerStatefulWidget {
-  const AddVehiclePage({super.key});
+  const AddVehiclePage({super.key, this.vehicle});
+
+  /// The vehicle to edit, or `null` to add a new one.
+  final Vehicle? vehicle;
 
   @override
   ConsumerState<AddVehiclePage> createState() => _AddVehiclePageState();
@@ -50,8 +57,46 @@ class _AddVehiclePageState extends ConsumerState<AddVehiclePage> {
   bool _isDefault = true;
   VehiclePhoto? _photo;
 
+  /// The saved photo was removed; it is deleted on save unless a new [_photo] replaces it.
+  bool _savedPhotoRemoved = false;
+
   /// Fields changed since the last save attempt; their errors are hidden until the next one.
   Set<VehicleField> _edited = {};
+
+  bool _prefilled = false;
+
+  bool get _isEditing => widget.vehicle != null;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final vehicle = widget.vehicle;
+    if (vehicle == null || _prefilled) return;
+    _prefilled = true;
+    _prefill(vehicle, AppLocalizations.of(context).localeName);
+  }
+
+  /// Fills the form with [vehicle], digits written like the fields write them.
+  void _prefill(Vehicle vehicle, String locale) {
+    String digits(String value) => DigitsInputFormatter(locale: locale, maxDigits: 0).format(value);
+    _nickname.text = vehicle.nickname;
+    _plateTwo.text = digits(vehicle.plate.twoDigits);
+    _letter = vehicle.plate.letter;
+    _plateThree.text = digits(vehicle.plate.threeDigits);
+    _plateProvince.text = digits(vehicle.plate.provinceCode);
+    _vin.text = vehicle.vin ?? '';
+    _makeId = vehicle.make.id;
+    _modelId = vehicle.model.id;
+    _trimId = vehicle.trim?.id;
+    _year = vehicle.yearJalali;
+    _mileage.text = DigitsInputFormatter(
+      locale: locale,
+      maxDigits: 0,
+      grouped: true,
+    ).format('${vehicle.mileageKm}');
+    _color = vehicle.color;
+    _isDefault = vehicle.isDefault;
+  }
 
   @override
   void dispose() {
@@ -108,24 +153,31 @@ class _AddVehiclePageState extends ConsumerState<AddVehiclePage> {
     final navigator = Navigator.of(context);
     final result = await ref
         .read(addVehicleControllerProvider.notifier)
-        .save(_draft, photo: _photo);
+        .save(
+          _draft,
+          photo: _photo,
+          vehicleId: widget.vehicle?.id,
+          removePhoto: _savedPhotoRemoved,
+        );
     if (!mounted) return;
     if (result == null) {
       final failure = ref.read(addVehicleControllerProvider).error;
       messenger.showSnackBar(SnackBar(content: Text(_saveErrorMessage(failure, l10n))));
       return;
     }
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          result.photoFailure == null ? l10n.vehicleAdded : l10n.vehicleAddedPhotoFailed,
-        ),
-      ),
-    );
+    final photoFailed = result.photoFailure != null;
+    final message = switch ((_isEditing, photoFailed)) {
+      (false, false) => l10n.vehicleAdded,
+      (false, true) => l10n.vehicleAddedPhotoFailed,
+      (true, false) => l10n.vehicleUpdated,
+      (true, true) => l10n.vehicleUpdatedPhotoFailed,
+    };
+    messenger.showSnackBar(SnackBar(content: Text(message)));
     navigator.maybePop();
   }
 
   static String _saveErrorMessage(Object? failure, AppLocalizations l10n) => switch (failure) {
+    VehicleRejectedFailure() => l10n.vehicleDefaultLocked,
     InvalidVehicleFailure() ||
     PlateTakenFailure() ||
     InvalidVehiclePhotoFailure() ||
@@ -186,7 +238,10 @@ class _AddVehiclePageState extends ConsumerState<AddVehiclePage> {
           icon: const Icon(Icons.arrow_back),
         ),
         titleSpacing: 0,
-        title: Text(l10n.addVehicle, style: theme.textTheme.headlineMedium),
+        title: Text(
+          _isEditing ? l10n.editVehicle : l10n.addVehicle,
+          style: theme.textTheme.headlineMedium,
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -195,8 +250,12 @@ class _AddVehiclePageState extends ConsumerState<AddVehiclePage> {
           gap,
           VehiclePhotoField(
             photo: _photo,
+            photoUrl: _savedPhotoRemoved ? null : widget.vehicle?.photoUrl,
             error: error(VehicleField.photo),
-            onChanged: (photo) => _edit([VehicleField.photo], () => _photo = photo),
+            onChanged: (photo) => _edit([VehicleField.photo], () {
+              _photo = photo;
+              if (photo == null && widget.vehicle?.photoUrl != null) _savedPhotoRemoved = true;
+            }),
           ),
           gap,
           NicknameField(
@@ -259,12 +318,13 @@ class _AddVehiclePageState extends ConsumerState<AddVehiclePage> {
           gap,
           DefaultVehicleToggle(
             value: _isDefault,
+            locked: widget.vehicle?.isDefault ?? false,
             onChanged: (value) => setState(() => _isDefault = value),
           ),
         ],
       ),
       bottomNavigationBar: VehicleFormDock(
-        submitLabel: l10n.vehicleSave,
+        submitLabel: _isEditing ? l10n.vehicleSaveChanges : l10n.vehicleSave,
         saving: state.isLoading,
         onSubmit: _save,
         onCancel: () => Navigator.of(context).maybePop(),

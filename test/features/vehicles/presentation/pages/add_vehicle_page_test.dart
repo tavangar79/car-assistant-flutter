@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:car_assistant/core/error/network_failure.dart';
 import 'package:car_assistant/core/theme/app_theme.dart';
 import 'package:car_assistant/features/vehicles/domain/entities/new_vehicle.dart';
+import 'package:car_assistant/features/vehicles/domain/entities/vehicle.dart';
 import 'package:car_assistant/features/vehicles/domain/entities/vehicle_color.dart';
 import 'package:car_assistant/features/vehicles/domain/entities/vehicle_failures.dart';
 import 'package:car_assistant/features/vehicles/domain/entities/vehicle_field.dart';
@@ -57,7 +58,8 @@ void main() {
 
   /// Opens the page on top of a launcher, so popping it can be checked. The view is tall enough
   /// to build the whole form.
-  Future<void> openPage(WidgetTester tester, {double width = 800}) async {
+  /// With [vehicle] the page opens in edit mode.
+  Future<void> openPage(WidgetTester tester, {double width = 800, Vehicle? vehicle}) async {
     tester.view.physicalSize = Size(width, 4400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -77,9 +79,9 @@ void main() {
             builder: (context) => Scaffold(
               body: Center(
                 child: TextButton(
-                  onPressed: () =>
-                      Navigator.of(context)
-                          .push(MaterialPageRoute<void>(builder: (_) => const AddVehiclePage())),
+                  onPressed: () => Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute<void>(builder: (_) => AddVehiclePage(vehicle: vehicle))),
                   child: const Text('launcher'),
                 ),
               ),
@@ -327,6 +329,199 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(DropdownButtonFormField<String>), findsNWidgets(3));
+  });
+
+  group('edit mode', () {
+    testWidgets('starts filled with the vehicle, with the edit title and button', (tester) async {
+      await openPage(tester, vehicle: tara);
+
+      expect(find.text('ویرایش خودرو'), findsOneWidget);
+      expect(find.text('ذخیره تغییرات'), findsOneWidget);
+      expect(find.text('ثبت و افزودن به گاراژ'), findsNothing);
+      expect(tester.widget<TextField>(textField(0)).controller!.text, 'تارا اتوماتیک نقره‌ای');
+      expect(tester.widget<TextField>(textField(1)).controller!.text, '۷۲');
+      expect(tester.widget<TextField>(textField(2)).controller!.text, '۳۴۵');
+      expect(tester.widget<TextField>(textField(3)).controller!.text, '۶۸');
+      expect(tester.widget<TextField>(textField(4)).controller!.text, validVin);
+      expect(find.text('۳۴٬۵۰۰'), findsOneWidget);
+      expect(find.text('۱۴۰۲'), findsOneWidget);
+      expect(find.text('ایران خودرو'), findsOneWidget);
+      expect(find.text('V4 اتوماتیک - فول آپشن'), findsOneWidget);
+      expect(tester.widget<Switch>(find.byType(Switch)).value, isTrue);
+    });
+
+    testWidgets('saves the changes with PATCH, then closes', (tester) async {
+      when(() => repository.updateVehicle('v1', any()))
+          .thenAnswer((_) async => Right(taraWith(nickname: 'تارای من')));
+      await openPage(tester, vehicle: tara);
+
+      await tester.enterText(textField(0), 'تارای من');
+      await tester.enterText(textField(5), '40000');
+      await tester.tap(find.text('ذخیره تغییرات'));
+      await tester.pumpAndSettle();
+
+      final sent =
+          verify(() => repository.updateVehicle('v1', captureAny())).captured.single as NewVehicle;
+      expect(
+        sent,
+        const NewVehicle(
+          nickname: 'تارای من',
+          plate: plate,
+          vin: validVin,
+          makeId: 'iran-khodro',
+          modelId: 'tara',
+          trimId: 'tara-v4-at',
+          yearJalali: 1402,
+          mileageKm: 40000,
+          color: VehicleColor.white,
+          isDefault: true,
+        ),
+      );
+      verifyNever(() => repository.createVehicle(any()));
+      expect(find.byType(AddVehiclePage), findsNothing);
+      expect(find.text('تغییرات خودرو ذخیره شد'), findsOneWidget);
+    });
+
+    testWidgets('a taken plate (409) is shown on the plate and the page stays', (tester) async {
+      when(() => repository.updateVehicle('v1', any()))
+          .thenAnswer((_) async => const Left(PlateTakenFailure()));
+      await openPage(tester, vehicle: tara);
+
+      await tester.tap(find.text('ذخیره تغییرات'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('این پلاک قبلاً در گاراژ شما ثبت شده است'), findsOneWidget);
+      expect(find.byType(AddVehiclePage), findsOneWidget);
+    });
+
+    testWidgets('shows the saved photo until a new one is chosen', (tester) async {
+      const url = '/api/vehicles/v1/photo?v=1';
+      when(() => repository.fetchPhoto(url)).thenAnswer((_) async => Right(transparentPng));
+      await openPage(tester, vehicle: taraWith(photoUrl: url));
+
+      verify(() => repository.fetchPhoto(url)).called(1);
+      expect(find.text('تغییر تصویر'), findsOneWidget);
+      expect(find.text('بارگذاری یا عکاسی از خودرو'), findsNothing);
+    });
+  });
+
+  group('edit mode: saved photo', () {
+    const url = '/api/vehicles/v1/photo?v=1';
+    final withPhoto = taraWith(photoUrl: url);
+
+    setUp(() {
+      when(() => repository.fetchPhoto(url)).thenAnswer((_) async => Right(transparentPng));
+      when(() => repository.updateVehicle('v1', any())).thenAnswer((_) async => Right(withPhoto));
+    });
+
+    Future<void> removePhoto(WidgetTester tester) async {
+      await tester.tap(find.text('حذف تصویر'));
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> saveChanges(WidgetTester tester) async {
+      await tester.tap(find.text('ذخیره تغییرات'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('removing it shows the empty tile and deletes it after the PATCH', (tester) async {
+      when(() => repository.deletePhoto('v1')).thenAnswer((_) async => const Right(tara));
+      await openPage(tester, vehicle: withPhoto);
+
+      await removePhoto(tester);
+      expect(find.text('بارگذاری یا عکاسی از خودرو'), findsOneWidget);
+      expect(find.text('حذف تصویر'), findsNothing);
+      verifyNever(() => repository.deletePhoto(any()));
+      await saveChanges(tester);
+
+      verifyInOrder([
+        () => repository.updateVehicle('v1', any()),
+        () => repository.deletePhoto('v1'),
+      ]);
+      verifyNever(() => repository.uploadPhoto(any(), any()));
+      expect(find.byType(AddVehiclePage), findsNothing);
+      expect(find.text('تغییرات خودرو ذخیره شد'), findsOneWidget);
+    });
+
+    testWidgets('a new photo picked after removing it is uploaded, nothing deleted', (
+      tester,
+    ) async {
+      when(() => repository.uploadPhoto('v1', photo)).thenAnswer((_) async => Right(withPhoto));
+      await openPage(tester, vehicle: withPhoto);
+
+      await removePhoto(tester);
+      await tester.tap(find.text('بارگذاری یا عکاسی از خودرو'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('انتخاب فایل از گالری').last);
+      await tester.pumpAndSettle();
+      await saveChanges(tester);
+
+      verify(() => repository.uploadPhoto('v1', photo)).called(1);
+      verifyNever(() => repository.deletePhoto(any()));
+    });
+
+    testWidgets('a failed delete still saves the changes and says so', (tester) async {
+      when(() => repository.deletePhoto('v1'))
+          .thenAnswer((_) async => const Left(NetworkFailure()));
+      await openPage(tester, vehicle: withPhoto);
+
+      await removePhoto(tester);
+      await saveChanges(tester);
+
+      expect(find.byType(AddVehiclePage), findsNothing);
+      expect(find.text('تغییرات ذخیره شد، اما تصویر به‌روز نشد'), findsOneWidget);
+    });
+
+    testWidgets('keeping it sends no photo call', (tester) async {
+      await openPage(tester, vehicle: withPhoto);
+
+      await saveChanges(tester);
+
+      verifyNever(() => repository.deletePhoto(any()));
+      verifyNever(() => repository.uploadPhoto(any(), any()));
+    });
+  });
+
+  group('edit mode: default vehicle', () {
+    const lockedHelp = 'برای تغییر خودروی پیش‌فرض، خودروی دیگری را پیش‌فرض کنید.';
+
+    testWidgets('the default vehicle keeps its switch on and disabled, with the helper', (
+      tester,
+    ) async {
+      await openPage(tester, vehicle: tara);
+
+      final toggle = tester.widget<Switch>(find.byType(Switch));
+      expect(toggle.value, isTrue);
+      expect(toggle.onChanged, isNull);
+      expect(find.text(lockedHelp), findsOneWidget);
+    });
+
+    testWidgets('another vehicle can be made the default', (tester) async {
+      await openPage(tester, vehicle: taraWith(isDefault: false));
+
+      expect(find.text(lockedHelp), findsNothing);
+      await tester.tap(find.byType(Switch));
+      await tester.pumpAndSettle();
+      expect(tester.widget<Switch>(find.byType(Switch)).value, isTrue);
+    });
+
+    testWidgets('a 422 shows a localized message, not the server text, and keeps the page', (
+      tester,
+    ) async {
+      when(() => repository.updateVehicle('v1', any())).thenAnswer(
+        (_) async => const Left(VehicleRejectedFailure('Set another vehicle as default instead')),
+      );
+      await openPage(tester, vehicle: tara);
+
+      await tester.tap(find.text('ذخیره تغییرات'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Set another vehicle as default instead'), findsNothing);
+      // The helper under the locked switch plus the snackbar.
+      expect(find.text(lockedHelp), findsNWidgets(2));
+      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.byType(AddVehiclePage), findsOneWidget);
+    });
   });
 
   testWidgets('cancel closes the page without saving', (tester) async {

@@ -52,6 +52,12 @@ abstract final class AppColors {
   static const paintRed = Color(0xFFDC2626);
   static const paintBeige = amber600;
 
+  // Chart series: car identity in charts, fixed order (DESIGN.md), overflow is slate500
+  static const chartBlue = Color(0xFF2563EB);
+  static const chartCyan = Color(0xFF0891B2);
+  static const chartViolet = Color(0xFF7C3AED);
+  static const chartPink = Color(0xFFBE185D);
+
   // Error
   static const error = Color(0xFFBA1A1A);
   static const errorContainer = Color(0xFFFFDAD6);

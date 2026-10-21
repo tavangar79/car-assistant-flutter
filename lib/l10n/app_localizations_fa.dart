@@ -674,6 +674,9 @@ class AppLocalizationsFa extends AppLocalizations {
       'ثبت سریع سوخت، سرویس‌ها و داده‌های داشبورد به صورت خودکار برای این خودرو در اولویت قرار می‌گیرد.';
 
   @override
+  String get vehicleDefaultLocked => 'برای تغییر خودروی پیش‌فرض، خودروی دیگری را پیش‌فرض کنید.';
+
+  @override
   String get vehicleSave => 'ثبت و افزودن به گاراژ';
 
   @override
@@ -705,10 +708,1058 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String vehicleTileSubtitle(String make, String model, String plate) {
-    return '$make $model • $plate';
+  String get vehiclePlateLetterHint => 'حرف';
+
+  @override
+  String get editVehicle => 'ویرایش خودرو';
+
+  @override
+  String get vehicleOptions => 'تنظیمات خودرو';
+
+  @override
+  String get vehicleSaveChanges => 'ذخیره تغییرات';
+
+  @override
+  String get vehicleUpdated => 'تغییرات خودرو ذخیره شد';
+
+  @override
+  String get vehicleUpdatedPhotoFailed => 'تغییرات ذخیره شد، اما تصویر به‌روز نشد';
+
+  @override
+  String get odometerTitle => 'بروزرسانی کیلومترشمار';
+
+  @override
+  String get odometerSubtitle => 'تنظیم دقیق موعد سرویس‌ها و یادآورهای دوره‌ای';
+
+  @override
+  String get odometerClose => 'بستن';
+
+  @override
+  String get odometerPickVehicle => 'انتخاب خودرو';
+
+  @override
+  String get activeVehicleBadge => 'خودروی فعال';
+
+  @override
+  String get odometerCurrentLabel => 'کیلومترشمار فعلی';
+
+  @override
+  String odometerLastRecorded(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'آخرین ثبت: $kmString کیلومتر';
   }
 
   @override
-  String get vehiclePlateLetterHint => 'حرف';
+  String odometerDiff(String diff) {
+    return '$diff کیلومتر';
+  }
+
+  @override
+  String get odometerSinceLastUpdate => 'پیمایش از آخرین به‌روزرسانی';
+
+  @override
+  String odometerSinceLastUpdateOn(String date) {
+    return 'پیمایش از آخرین به‌روزرسانی ($date)';
+  }
+
+  @override
+  String get odometerReset => 'بازنشانی';
+
+  @override
+  String get odometerQuickAdjust => 'تنظیم سریع مقادیر رایج';
+
+  @override
+  String get odometerRecordedAtLabel => 'تاریخ و زمان ثبت';
+
+  @override
+  String odometerRecordedAtToday(String date, String time) {
+    return 'امروز، $date — $time';
+  }
+
+  @override
+  String odometerRecordedAtValue(String date, String time) {
+    return '$date — $time';
+  }
+
+  @override
+  String get odometerChangeDate => 'تغییر تاریخ';
+
+  @override
+  String get odometerSubmit => 'تأیید و ثبت کارکرد';
+
+  @override
+  String get odometerCancel => 'انصراف';
+
+  @override
+  String odometerBelowCurrent(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'کارکرد نمی‌تواند کمتر از آخرین ثبت ($kmString کیلومتر) باشد';
+  }
+
+  @override
+  String get odometerSaved => 'کارکرد با موفقیت ثبت شد';
+
+  @override
+  String get odometerSaveFailed => 'ثبت کارکرد ممکن نشد، دوباره تلاش کنید';
+
+  @override
+  String get vehicleDetailsTitle => 'جزئیات خودرو';
+
+  @override
+  String get vehicleDetailsLoadError => 'دریافت اطلاعات خودرو ممکن نشد';
+
+  @override
+  String get vehicleDetailsActive => 'فعال در گاراژ';
+
+  @override
+  String vehicleDetailsModelYear(String year) {
+    return 'مدل $year';
+  }
+
+  @override
+  String vehicleDetailsVin(String vin) {
+    return 'شاسی: $vin';
+  }
+
+  @override
+  String get vehicleDetailsMileageTitle => 'کارکرد فعلی خودرو';
+
+  @override
+  String get vehicleDetailsMileageBadge => 'مبنای یادآوری‌ها';
+
+  @override
+  String get vehicleDetailsUpdateMileage => 'بروزرسانی کیلومتر';
+
+  @override
+  String get vehicleDetailsDueTitle => 'وضعیت و سرویس‌های پیش‌رو';
+
+  @override
+  String get vehicleDetailsDueEmpty => 'هنوز موردی برای پیگیری ثبت نشده است';
+
+  @override
+  String get vehicleDetailsHistoryTitle => 'تاریخچه آخرین خدمات و سرویس‌ها';
+
+  @override
+  String get vehicleDetailsHistoryEmpty => 'هنوز سرویسی برای این خودرو ثبت نشده است';
+
+  @override
+  String get vehicleDetailsExport => 'دریافت کارنامه و گزارش فاکتورها (PDF)';
+
+  @override
+  String get quickActionsTitle => 'اقدامات سریع';
+
+  @override
+  String get quickActionsClose => 'بستن';
+
+  @override
+  String get quickActionsScope => 'عملیات برای این خودرو ثبت می‌شود';
+
+  @override
+  String get quickActionOdometerBody => 'تنظیم موعد دقیق یادآور سرویس‌ها بر اساس کارکرد';
+
+  @override
+  String get quickActionServiceTitle => 'ثبت سرویس و تعمیرات';
+
+  @override
+  String get quickActionServiceBody => 'تعویض روغن، لنت، فیلترها و فاکتور تعمیرگاه';
+
+  @override
+  String get quickActionFuelTitle => 'ثبت سوخت‌گیری';
+
+  @override
+  String get quickActionFuelBody => 'بنزین معمولی، سوپر یا گاز و محاسبه مصرف صدی';
+
+  @override
+  String get quickActionExpenseTitle => 'ثبت هزینه متفرقه';
+
+  @override
+  String get quickActionExpenseBody => 'بیمه شخص ثالث، عوارض، جریمه و معاینه فنی';
+
+  @override
+  String get quickActionAddVehicleTitle => 'افزودن خودروی جدید';
+
+  @override
+  String get quickActionAddVehicleBody => 'ثبت پلاک و باز کردن دفترچه هزینه ماشین جدید';
+
+  @override
+  String get quickActionGarageTag => 'گاراژ';
+
+  @override
+  String get quickActionUnavailable => 'به‌زودی';
+
+  @override
+  String get odometerPickDateTitle => 'تاریخ ثبت کارکرد (تقویم جلالی)';
+
+  @override
+  String get odometerPickDateConfirm => 'تأیید تاریخ';
+
+  @override
+  String get homeAppName => 'مدیریت خودرو';
+
+  @override
+  String get homeFleetManage => 'مدیریت';
+
+  @override
+  String get homeCostThisYear => 'هزینه کل امسال';
+
+  @override
+  String get currencyToman => 'تومان';
+
+  @override
+  String get homeCostFooter => 'فیلتر در تاریخچه ›';
+
+  @override
+  String get homeInvoicesTitle => 'فاکتورها';
+
+  @override
+  String get homeInvoicesUnit => 'ثبت‌شده';
+
+  @override
+  String get homeInvoicesFooter => 'مشاهده اسناد ›';
+
+  @override
+  String get homeAttentionTitle => 'نیازمند رسیدگی';
+
+  @override
+  String get homeAttentionUnit => 'مورد فوری';
+
+  @override
+  String get homeAttentionFooter => 'بررسی موارد ›';
+
+  @override
+  String get valueUnavailable => '—';
+
+  @override
+  String get notComputable => 'قابل محاسبه نیست';
+
+  @override
+  String homeSpendTitle(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'هزینه $countString ماه اخیر';
+  }
+
+  @override
+  String homeSpendRange(String from, String to, String year) {
+    return '$from — $to $year';
+  }
+
+  @override
+  String homeSpendRangeAcrossYears(String from, String fromYear, String to, String toYear) {
+    return '$from $fromYear — $to $toYear';
+  }
+
+  @override
+  String get homeSpendEmpty => 'هنوز هزینه‌ای ثبت نشده است';
+
+  @override
+  String get homeUpdateOdometerHint => 'انتخاب خودرو و ثبت سریع کیلومترشمار فعلی';
+
+  @override
+  String get garageHistoryTooltip => 'تاریخچه رویدادها';
+
+  @override
+  String get garageMyVehicles => 'خودروهای من';
+
+  @override
+  String garageActiveCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString خودرو فعال';
+  }
+
+  @override
+  String get garageDefaultBadge => 'خودروی پیش‌فرض';
+
+  @override
+  String get garageSetDefault => 'انتخاب به عنوان پیش‌فرض';
+
+  @override
+  String get garageSetDefaultError => 'تغییر خودروی پیش‌فرض ممکن نشد';
+
+  @override
+  String get garageOdometerLabel => 'کیلومترشمار فعلی';
+
+  @override
+  String garageLastReading(String when) {
+    return 'آخرین ثبت: $when';
+  }
+
+  @override
+  String relativeDaysAgo(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$daysString روز پیش',
+      one: 'دیروز',
+      zero: 'امروز',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get garageServiceStatusTitle => 'وضعیت سرویس‌ها';
+
+  @override
+  String get garageActionService => 'ثبت سرویس';
+
+  @override
+  String get garageActionOdometer => 'ثبت کیلومتر';
+
+  @override
+  String get garageActionRecords => 'دفترچه سوابق';
+
+  @override
+  String get garageToolsTitle => 'مدیریت و امکانات گاراژ';
+
+  @override
+  String get garageToolsSubtitle => 'خدمات اسناد و انتقال';
+
+  @override
+  String get garageToolTransferTitle => 'انتقال مالکیت خودرو';
+
+  @override
+  String get garageToolTransferBody => 'انتقال ایمن سوابق فنی به خریدار جدید بدون حذف داده‌ها';
+
+  @override
+  String get garageToolDocumentsTitle => 'کیف مدارک و بیمه‌نامه‌ها';
+
+  @override
+  String get garageToolDocumentsBody => 'کارت خودرو، برگ سبز، بیمه‌نامه ثالث و معاینه فنی';
+
+  @override
+  String get garageToolExportTitle => 'خروجی پرونده و گزارش رسمی';
+
+  @override
+  String get garageToolExportBody => 'شناسنامه سوابق تعمیرگاهی و هزینه‌ها جهت فروش و کارشناسی';
+
+  @override
+  String get serviceWizardTitle => 'ثبت سرویس جدید';
+
+  @override
+  String get serviceStep1Label => 'انتخاب اقلام';
+
+  @override
+  String get serviceStep2Label => 'زمان و کارکرد';
+
+  @override
+  String get serviceStep3Label => 'جزئیات و هزینه';
+
+  @override
+  String serviceStepNumber(int step) {
+    final intl.NumberFormat stepNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String stepString = stepNumberFormat.format(step);
+
+    return '$stepString';
+  }
+
+  @override
+  String serviceSelectedCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString مورد انتخاب شد';
+  }
+
+  @override
+  String get serviceClearAll => 'پاکسازی همه';
+
+  @override
+  String get serviceSearchHint => 'جستجوی سرویس (مثلاً: روغن، لنت، شمع...)';
+
+  @override
+  String get serviceSearchEmpty => 'سرویسی با این نام پیدا نشد';
+
+  @override
+  String get serviceCatalogLoadError => 'دریافت فهرست سرویس‌ها ممکن نشد';
+
+  @override
+  String get serviceFooterLabel => 'اقلام برگزیده برای ثبت:';
+
+  @override
+  String serviceFooterCount(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString سرویس انتخاب شده';
+  }
+
+  @override
+  String get serviceContinueStep2 => 'ادامه به گام دوم (زمان و کارکرد)';
+
+  @override
+  String get serviceSelectedItemsLabel => 'اقلام انتخاب‌شده برای فاکتور:';
+
+  @override
+  String get serviceEditItems => 'ویرایش اقلام';
+
+  @override
+  String get serviceOdometerTitle => 'کارکرد ثبت فاکتور';
+
+  @override
+  String get serviceOdometerBadge => 'مبنای استهلاک';
+
+  @override
+  String get serviceOdometerLabel => 'کیلومترشمار در زمان انجام سرویس';
+
+  @override
+  String serviceOdometerLastOn(int km, String date, String when) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'آخرین ثبت: $kmString کیلومتر ($date — $when)';
+  }
+
+  @override
+  String serviceOdometerDiff(String diff) {
+    return '$diff کیلومتر پیمایش';
+  }
+
+  @override
+  String get serviceQuickAdjust => 'تنظیم سریع بر اساس کارکرد:';
+
+  @override
+  String get serviceDateTitle => 'تاریخ ثبت فاکتور';
+
+  @override
+  String get serviceDateBadge => 'تقویم جلالی';
+
+  @override
+  String get serviceDateLabel => 'تاریخ انجام خدمات';
+
+  @override
+  String serviceDateValue(String weekday, String date) {
+    return '$weekday، $date';
+  }
+
+  @override
+  String jalaliWeekday(String day) {
+    String _temp0 = intl.Intl.selectLogic(day, {
+      '1': 'شنبه',
+      '2': 'یکشنبه',
+      '3': 'دوشنبه',
+      '4': 'سه‌شنبه',
+      '5': 'چهارشنبه',
+      '6': 'پنج‌شنبه',
+      '7': 'جمعه',
+      'other': '',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get serviceDateToday => 'امروز';
+
+  @override
+  String get serviceDateYesterday => 'دیروز';
+
+  @override
+  String get serviceDateLastWeek => 'هفته گذشته';
+
+  @override
+  String get serviceDatePick => 'انتخاب از تقویم';
+
+  @override
+  String get serviceDatePickTitle => 'تاریخ انجام خدمات (تقویم جلالی)';
+
+  @override
+  String get serviceStickerTitle => 'جزئیات برچسب سرویس (اختیاری)';
+
+  @override
+  String get serviceStickerBody =>
+      'جهت انطباق دقیق، می‌توانید کارکرد پیشنهادی سرویس بعدی درج‌شده روی برچسب تعویض‌روغنی را ثبت کنید.';
+
+  @override
+  String get serviceStickerKmLabel => 'پیشنهاد برچسب بعدی';
+
+  @override
+  String get serviceVisitTimeLabel => 'ساعت مراجعه';
+
+  @override
+  String get serviceVisitTimePickHelp => 'ساعت مراجعه';
+
+  @override
+  String get serviceSyncTitle => 'همگام‌سازی فاکتور و قطعات';
+
+  @override
+  String serviceSyncBody(String items) {
+    return 'این کارکرد و تاریخ به صورت مشترک به عنوان مبنای محاسبه تمام اقلام این فاکتور ($items) ثبت و در تاریخچه خودرو درج خواهند شد.';
+  }
+
+  @override
+  String get serviceContinueStep3 => 'ادامه به گام سوم (جزئیات و هزینه‌ها)';
+
+  @override
+  String get serviceBackToItems => 'بازگشت به انتخاب اقلام';
+
+  @override
+  String get serviceDateInFuture => 'تاریخ و ساعت سرویس نمی‌تواند در آینده باشد';
+
+  @override
+  String serviceKmValue(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر';
+  }
+
+  @override
+  String serviceItemIndex(int index, int count) {
+    final intl.NumberFormat indexNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String indexString = indexNumberFormat.format(index);
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'قلم $indexString از $countString';
+  }
+
+  @override
+  String get serviceRemoveItem => 'حذف سرویس';
+
+  @override
+  String get serviceCostLabel => 'مبلغ قطعه و اجرت تعویض';
+
+  @override
+  String get serviceBrandLabel => 'برند و مشخصات فنی قطعه';
+
+  @override
+  String get serviceWorkshopLabel => 'تعمیرگاه / اتوسرویس';
+
+  @override
+  String get serviceNotesLabel => 'یادداشت فنی و جزئیات';
+
+  @override
+  String get serviceInvoiceLabel => 'تصویر فاکتور و رسید سرویس';
+
+  @override
+  String get serviceInvoiceAttach => 'افزودن تصویر فاکتور';
+
+  @override
+  String serviceInvoiceAttached(String size) {
+    return '$size • الصاق شده';
+  }
+
+  @override
+  String get serviceInvoiceChange => 'تغییر تصویر';
+
+  @override
+  String get serviceInvoiceRemove => 'حذف تصویر';
+
+  @override
+  String get serviceInvoiceGallery => 'انتخاب از گالری';
+
+  @override
+  String get serviceInvoiceCamera => 'عکس‌برداری با دوربین';
+
+  @override
+  String get serviceInvoicePickFailed => 'انتخاب تصویر ممکن نشد';
+
+  @override
+  String serviceInvoiceTooLarge(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'حجم تصویر فاکتور بیشتر از $maxString مگابایت است';
+  }
+
+  @override
+  String get serviceInvoiceInvalid => 'تصویر فاکتور باید JPG، PNG یا WebP باشد';
+
+  @override
+  String megabytes(String size) {
+    return '$size مگابایت';
+  }
+
+  @override
+  String get serviceReminderTitle => 'یادآور موعد بعدی';
+
+  @override
+  String get serviceReminderHint => 'محاسبه بر اساس نخستین شرط';
+
+  @override
+  String get serviceReminderKmLabel => 'کارکرد مجاز بعدی';
+
+  @override
+  String get serviceReminderMonthsLabel => 'بازه زمانی مجاز';
+
+  @override
+  String get serviceReminderMonthsUnit => 'ماه بعد';
+
+  @override
+  String serviceReminderDueKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'سررسید: $kmString ک‌م';
+  }
+
+  @override
+  String serviceReminderDueDate(String month, String year) {
+    return 'سررسید: $month $year';
+  }
+
+  @override
+  String get serviceReminderNone => 'بدون یادآور';
+
+  @override
+  String get serviceAddAnotherItem => 'افزودن یک قلم سرویس دیگر به این فاکتور';
+
+  @override
+  String serviceTotalLabel(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'جمع کل فاکتور ($countString قلم)';
+  }
+
+  @override
+  String get serviceTotalHint => 'شامل اجرت و قطعات مصرفی';
+
+  @override
+  String get serviceSubmit => 'ثبت نهایی فاکتور و ذخیره سوابق';
+
+  @override
+  String get serviceSaving => 'در حال ثبت...';
+
+  @override
+  String serviceWorkshopError(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'نام تعمیرگاه را وارد کنید (حداکثر $maxString حرف)';
+  }
+
+  @override
+  String get serviceLineItemsError => 'مقادیر این قلم نامعتبر است، آن را بررسی کنید';
+
+  @override
+  String get serviceSaveInvalid => 'اطلاعات فاکتور نامعتبر است، فیلدها را بررسی کنید';
+
+  @override
+  String get serviceSaveFailed => 'ثبت سرویس ممکن نشد، دوباره تلاش کنید';
+
+  @override
+  String get serviceSaved => 'سرویس با موفقیت ثبت شد';
+
+  @override
+  String get serviceSavedInvoiceFailed => 'سرویس ثبت شد، اما بارگذاری تصویر فاکتور ناموفق بود';
+
+  @override
+  String get serviceDetailsEyebrow => 'ثبت مراجعات فنی';
+
+  @override
+  String get serviceDetailsTitle => 'جزئیات فاکتور سرویس';
+
+  @override
+  String get serviceDetailsOptions => 'گزینه‌های فاکتور';
+
+  @override
+  String get serviceDetailsDelete => 'حذف فاکتور';
+
+  @override
+  String get serviceDetailsDeleteConfirmTitle => 'حذف این فاکتور؟';
+
+  @override
+  String get serviceDetailsDeleteConfirmBody =>
+      'تمام اقلام و تصویر فاکتور حذف می‌شود. این کار قابل بازگشت نیست.';
+
+  @override
+  String get confirmDelete => 'حذف';
+
+  @override
+  String get serviceDetailsDateLabel => 'تاریخ مراجعه';
+
+  @override
+  String get serviceDetailsOdometerLabel => 'کیلومترشمار';
+
+  @override
+  String get serviceDetailsWorkshopLabel => 'تعمیرگاه / مرکز خدمات';
+
+  @override
+  String get serviceDetailsNotesLabel => 'یادداشت';
+
+  @override
+  String get serviceDetailsHeaderNote =>
+      'اطلاعات سربرگ فاکتور ثابت بوده و ردیف‌های ذیل قابل ویرایش هستند.';
+
+  @override
+  String serviceDetailsItemsTitle(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'اقلام انجام‌شده در این مراجعه ($countString مورد)';
+  }
+
+  @override
+  String get serviceDetailsEditItem => 'ویرایش قلم';
+
+  @override
+  String get serviceDetailsDeleteItem => 'حذف قلم';
+
+  @override
+  String serviceDetailsReminder(String value) {
+    return 'یادآور بعد: $value';
+  }
+
+  @override
+  String serviceDetailsReminderBoth(int km, String month, String year) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر ($month $year)';
+  }
+
+  @override
+  String serviceDetailsReminderDate(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get serviceDetailsAddItem => 'افزودن قلم جدید به این فاکتور';
+
+  @override
+  String get serviceDetailsInvoiceTitle => 'تصویر فیزیکی فاکتور / رسید';
+
+  @override
+  String serviceDetailsInvoiceUploaded(String date) {
+    return 'بارگذاری شده در $date';
+  }
+
+  @override
+  String get serviceDetailsInvoiceView => 'مشاهده در ابعاد کامل';
+
+  @override
+  String get serviceDetailsInvoiceEmpty => 'تصویری از فاکتور الصاق نشده است';
+
+  @override
+  String get serviceDetailsInvoiceAttach => 'الصاق تصویر فاکتور';
+
+  @override
+  String get serviceDetailsInvoiceLoadError => 'دریافت تصویر فاکتور ممکن نشد';
+
+  @override
+  String get serviceDetailsInvoiceSaved => 'تصویر فاکتور الصاق شد';
+
+  @override
+  String get serviceDetailsInvoiceSaveFailed => 'بارگذاری تصویر فاکتور ممکن نشد';
+
+  @override
+  String get serviceDetailsTotalTitle => 'جمع کل اقلام مصرفی و اجرت:';
+
+  @override
+  String get serviceDetailsTotalLabel => 'مبلغ نهایی فاکتور:';
+
+  @override
+  String get serviceDetailsPdf => 'دریافت فایل PDF فاکتور';
+
+  @override
+  String get serviceDetailsLoadError => 'دریافت اطلاعات فاکتور ممکن نشد';
+
+  @override
+  String get serviceDetailsLastItem =>
+      'آخرین قلم فاکتور را نمی‌توان حذف کرد؛ به‌جای آن کل فاکتور را حذف کنید';
+
+  @override
+  String serviceDetailsDeleteItemConfirmTitle(String item) {
+    return 'حذف قلم «$item»؟';
+  }
+
+  @override
+  String get serviceDetailsDeleteItemConfirmBody =>
+      'این قلم از فاکتور حذف و جمع کل بازمحاسبه می‌شود.';
+
+  @override
+  String get serviceDetailsUpdated => 'فاکتور به‌روزرسانی شد';
+
+  @override
+  String get serviceDetailsUpdateFailed => 'به‌روزرسانی فاکتور ممکن نشد';
+
+  @override
+  String get serviceDetailsDeleted => 'فاکتور حذف شد';
+
+  @override
+  String get serviceDetailsDeleteFailed => 'حذف فاکتور ممکن نشد';
+
+  @override
+  String get serviceEditorTitleEdit => 'ویرایش قلم';
+
+  @override
+  String get serviceEditorTitleAdd => 'افزودن قلم';
+
+  @override
+  String get serviceEditorSave => 'ذخیره قلم';
+
+  @override
+  String get serviceEditorPickItem => 'انتخاب سرویس';
+
+  @override
+  String get serviceEditorNoItemsLeft => 'همه اقلام فهرست در این فاکتور ثبت شده‌اند';
+
+  @override
+  String get serviceHistoryLoadError => 'دریافت تاریخچه سرویس‌ها ممکن نشد';
+
+  @override
+  String serviceHistoryMore(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'و $countString مورد دیگر';
+  }
+
+  @override
+  String serviceHistoryAmount(int amount) {
+    final intl.NumberFormat amountNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$amountString تومان';
+  }
+
+  @override
+  String get intervalsTitle => 'تنظیم دوره سرویس';
+
+  @override
+  String intervalsCurrentMileage(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'کارکرد فعلی: $kmString کیلومتر';
+  }
+
+  @override
+  String get intervalsSourceNote => 'تنظیمات براساس دفترچه راهنمای سازنده';
+
+  @override
+  String get intervalsResetAll => 'بازنشانی همه';
+
+  @override
+  String get intervalsResetAllConfirmTitle => 'بازنشانی همه دوره‌ها؟';
+
+  @override
+  String get intervalsResetAllConfirmBody =>
+      'همه دوره‌ها به پیش‌فرض کارخانه برمی‌گردند و مقادیر سفارشی حذف می‌شوند.';
+
+  @override
+  String get intervalsResetConfirm => 'بازنشانی';
+
+  @override
+  String get intervalsRuleTitle => 'قانون سررسید اولویت زمانی یا کارکرد';
+
+  @override
+  String get intervalsRuleBody =>
+      'شمارش معکوس و هشدارهای تعویض قطعات بر اساس هرکدام از شاخص‌ها (پیمایش کیلومتر یا سپری شدن ماه‌ها) که زودتر فرا برسد محاسبه و اعلام می‌گردد.';
+
+  @override
+  String intervalsDefault(int km, int months) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+    final intl.NumberFormat monthsNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String monthsString = monthsNumberFormat.format(months);
+
+    return 'پیش‌فرض کارخانه: $kmString کیلومتر / $monthsString ماه';
+  }
+
+  @override
+  String get intervalsResetRow => 'بازنشانی این مورد';
+
+  @override
+  String get intervalsMonthsUnit => 'ماه';
+
+  @override
+  String intervalsKmError(int min, int max) {
+    final intl.NumberFormat minNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String minString = minNumberFormat.format(min);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'کیلومتر را بین $minString تا $maxString وارد کنید';
+  }
+
+  @override
+  String intervalsMonthsError(int min, int max) {
+    final intl.NumberFormat minNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String minString = minNumberFormat.format(min);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'ماه را بین $minString تا $maxString وارد کنید';
+  }
+
+  @override
+  String get intervalsSave => 'ذخیره تنظیمات';
+
+  @override
+  String get intervalsSaved => 'تنظیمات دوره‌های سرویس با موفقیت ثبت شد';
+
+  @override
+  String get intervalsResetDone => 'تمام مقادیر به پیش‌فرض کارخانه بازگشتند';
+
+  @override
+  String get intervalsSaveInvalid => 'مقادیر دوره‌ها نامعتبر است، فیلدها را بررسی کنید';
+
+  @override
+  String get intervalsSaveFailed => 'ذخیره تنظیمات ممکن نشد، دوباره تلاش کنید';
+
+  @override
+  String get intervalsResetFailed => 'بازنشانی ممکن نشد، دوباره تلاش کنید';
+
+  @override
+  String get intervalsLoadError => 'دریافت دوره‌های سرویس ممکن نشد';
+
+  @override
+  String get dueTitle => 'سرویس‌های سررسید شده';
+
+  @override
+  String get dueSubtitle => 'وضعیت اقلام نیازمند اقدام فوری';
+
+  @override
+  String get dueSavedTitle => 'کیلومتر با موفقیت ثبت شد';
+
+  @override
+  String dueSavedDate(String date) {
+    return 'امروز، $date';
+  }
+
+  @override
+  String get dueNewMileageBadge => 'کارکرد جدید';
+
+  @override
+  String dueDelta(String delta) {
+    return '$delta کیلومتر نسبت به ثبت قبل';
+  }
+
+  @override
+  String get dueNoticeTitle => 'نیاز به بررسی دوره‌ای';
+
+  @override
+  String dueNoticeBodyAfterUpdate(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'با این کارکرد جدید، $countString سرویس خودرو به سررسید رسیده‌اند و نیازمند اقدام در تعمیرگاه هستند.';
+  }
+
+  @override
+  String dueNoticeBody(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString سرویس خودرو به سررسید رسیده‌اند و نیازمند اقدام در تعمیرگاه هستند.';
+  }
+
+  @override
+  String get dueListTitle => 'اقلام سررسید شده';
+
+  @override
+  String get dueListBasis => 'بر اساس پیمایش';
+
+  @override
+  String get dueStatusOverdue => 'رسیدگی فوری';
+
+  @override
+  String get dueStatusDueSoon => 'نزدیک به موعد';
+
+  @override
+  String get dueStatusUpcoming => 'اطلاعیه';
+
+  @override
+  String dueOverdueKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return '$kmString کیلومتر گذشته از موعد';
+  }
+
+  @override
+  String dueOverdueDays(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return '$daysString روز گذشته از موعد';
+  }
+
+  @override
+  String dueSoonKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'تنها $kmString کیلومتر مانده';
+  }
+
+  @override
+  String dueSoonDays(int days) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+
+    return 'تنها $daysString روز مانده';
+  }
+
+  @override
+  String dueUpcomingKm(int km, int months) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+    final intl.NumberFormat monthsNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String monthsString = monthsNumberFormat.format(months);
+
+    return '$kmString کیلومتر مانده (حدود $monthsString ماه)';
+  }
+
+  @override
+  String dueUpcomingDays(int days, int months) {
+    final intl.NumberFormat daysNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String daysString = daysNumberFormat.format(days);
+    final intl.NumberFormat monthsNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String monthsString = monthsNumberFormat.format(months);
+
+    return '$daysString روز مانده (حدود $monthsString ماه)';
+  }
+
+  @override
+  String dueAtKm(int km) {
+    final intl.NumberFormat kmNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String kmString = kmNumberFormat.format(km);
+
+    return 'مقرر: $kmString کیلومتر';
+  }
+
+  @override
+  String get dueActionOverdue => 'ثبت فاکتور این سرویس';
+
+  @override
+  String get dueActionRecord => 'ثبت این سرویس';
+
+  @override
+  String get dueArchiveTitle => 'بایگانی فاکتورها';
+
+  @override
+  String get dueArchiveBody => 'پس از انجام سرویس، اقلام را در یک فاکتور تجمیعی ثبت کنید.';
+
+  @override
+  String get dueConfirmBack => 'تأیید و بازگشت به داشبورد';
+
+  @override
+  String get dueRemindLater => 'بعداً یادآوری کن';
+
+  @override
+  String get dueEmpty => 'همه سرویس‌ها به‌موقع هستند';
+
+  @override
+  String get dueLoadError => 'دریافت وضعیت سرویس‌ها ممکن نشد';
+
+  @override
+  String get vehicleDetailsDueSettings => 'تنظیم';
+
+  @override
+  String get serviceSharedCardTitle => 'اطلاعات مشترک فاکتور';
+
+  @override
+  String get serviceSharedCardBody => 'تعمیرگاه و تصویر فاکتور برای همه اقلام این مراجعه';
 }

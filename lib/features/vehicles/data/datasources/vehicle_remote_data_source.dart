@@ -18,6 +18,11 @@ class VehicleRemoteDataSource {
     return response.data!.map((json) => VehicleDto.fromJson(json as Map<String, dynamic>)).toList();
   }
 
+  Future<VehicleDto> fetchVehicle(String vehicleId) async {
+    final response = await _dio.get<Map<String, dynamic>>('/api/vehicles/$vehicleId');
+    return VehicleDto.fromJson(response.data!);
+  }
+
   Future<VehicleCatalogDto> fetchCatalog() async {
     final response = await _dio.get<Map<String, dynamic>>('/api/vehicle-catalog');
     return VehicleCatalogDto.fromJson(response.data!);
@@ -25,6 +30,15 @@ class VehicleRemoteDataSource {
 
   Future<VehicleDto> createVehicle(CreateVehicleRequestDto request) async {
     final response = await _dio.post<Map<String, dynamic>>('/api/vehicles', data: request.toJson());
+    return VehicleDto.fromJson(response.data!);
+  }
+
+  /// Sends every field (the same body as [createVehicle]), so the vehicle matches the form.
+  Future<VehicleDto> updateVehicle(String vehicleId, CreateVehicleRequestDto request) async {
+    final response = await _dio.patch<Map<String, dynamic>>(
+      '/api/vehicles/$vehicleId',
+      data: request.toJson(),
+    );
     return VehicleDto.fromJson(response.data!);
   }
 
@@ -42,6 +56,12 @@ class VehicleRemoteDataSource {
       data: form,
       options: Options(contentType: Headers.multipartFormDataContentType),
     );
+    return VehicleDto.fromJson(response.data!);
+  }
+
+  /// Removes the photo of vehicle [vehicleId] and returns the vehicle without it.
+  Future<VehicleDto> deletePhoto(String vehicleId) async {
+    final response = await _dio.delete<Map<String, dynamic>>('/api/vehicles/$vehicleId/photo');
     return VehicleDto.fromJson(response.data!);
   }
 

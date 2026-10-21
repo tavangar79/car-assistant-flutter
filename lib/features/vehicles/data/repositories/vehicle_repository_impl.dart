@@ -4,6 +4,7 @@ import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/api_call.dart';
+import '../../../../core/network/api_error_dto.dart';
 import '../../domain/entities/catalog_make.dart';
 import '../../domain/entities/new_vehicle.dart';
 import '../../domain/entities/vehicle.dart';
@@ -24,21 +25,38 @@ class VehicleRepositoryImpl implements VehicleRepository {
       apiCall(() async => (await _remote.fetchVehicles()).map((dto) => dto.toEntity()).toList());
 
   @override
+  Future<Either<Failure, Vehicle>> getVehicle(String vehicleId) =>
+      apiCall(() async => (await _remote.fetchVehicle(vehicleId)).toEntity());
+
+  @override
   Future<Either<Failure, List<CatalogMake>>> getCatalog() =>
       apiCall(() async => (await _remote.fetchCatalog()).toEntity());
 
   @override
   Future<Either<Failure, Vehicle>> createVehicle(NewVehicle vehicle) => apiCall(
     () async => (await _remote.createVehicle(CreateVehicleRequestDto(vehicle))).toEntity(),
+    onStatus: _vehicleFailure,
+  );
+
+  @override
+  Future<Either<Failure, Vehicle>> updateVehicle(String vehicleId, NewVehicle vehicle) => apiCall(
+    () async =>
+        (await _remote.updateVehicle(vehicleId, CreateVehicleRequestDto(vehicle))).toEntity(),
     onStatus: (status, error) => switch (status) {
-      400 => InvalidVehicleFailure(
-        fieldsOf(error?.details.keys ?? const []),
-        error?.message ?? 'Invalid vehicle',
-      ),
-      409 => PlateTakenFailure(error?.message ?? 'Plate already registered'),
-      _ => null,
+      422 => VehicleRejectedFailure(error?.message ?? 'Vehicle update rejected'),
+      _ => _vehicleFailure(status, error),
     },
   );
+
+  /// The failure of a rejected create or update.
+  static Failure? _vehicleFailure(int status, ApiErrorDto? error) => switch (status) {
+    400 => InvalidVehicleFailure(
+      fieldsOf(error?.details.keys ?? const []),
+      error?.message ?? 'Invalid vehicle',
+    ),
+    409 => PlateTakenFailure(error?.message ?? 'Plate already registered'),
+    _ => null,
+  };
 
   @override
   Future<Either<Failure, Vehicle>> uploadPhoto(String vehicleId, VehiclePhoto photo) => apiCall(
@@ -49,6 +67,10 @@ class VehicleRepositoryImpl implements VehicleRepository {
       _ => null,
     },
   );
+
+  @override
+  Future<Either<Failure, Vehicle>> deletePhoto(String vehicleId) =>
+      apiCall(() async => (await _remote.deletePhoto(vehicleId)).toEntity());
 
   @override
   Future<Either<Failure, Uint8List>> fetchPhoto(String photoUrl) =>

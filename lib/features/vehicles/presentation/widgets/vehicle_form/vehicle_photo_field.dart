@@ -14,10 +14,20 @@ import 'form_section_card.dart';
 
 /// Optional vehicle photo: an upload tile that opens gallery / camera options, then shows the
 /// chosen [photo]. The photo is only kept locally; the page uploads it on save.
+/// In edit mode [photoUrl] is the saved photo, shown until a new one is chosen.
+/// While a photo is shown, a "remove photo" button under the tile reports `null` to [onChanged]
+/// (Stitch edit screen `25ad5d184ff94cf2976c21640ca21f1f`).
 class VehiclePhotoField extends ConsumerStatefulWidget {
-  const VehiclePhotoField({super.key, required this.photo, required this.onChanged, this.error});
+  const VehiclePhotoField({
+    super.key,
+    required this.photo,
+    required this.onChanged,
+    this.photoUrl,
+    this.error,
+  });
 
   final VehiclePhoto? photo;
+  final String? photoUrl;
   final ValueChanged<VehiclePhoto?> onChanged;
   final String? error;
 
@@ -43,8 +53,6 @@ class _VehiclePhotoFieldState extends ConsumerState<VehiclePhotoField> {
               _PhotoAction.gallery,
             ),
             _OptionTile(Icons.photo_camera_outlined, l10n.vehiclePhotoCamera, _PhotoAction.camera),
-            if (widget.photo != null)
-              _OptionTile(Icons.delete_outline, l10n.vehiclePhotoRemove, _PhotoAction.remove),
           ],
         ),
       ),
@@ -52,14 +60,16 @@ class _VehiclePhotoFieldState extends ConsumerState<VehiclePhotoField> {
     switch (choice) {
       case null:
         return;
-      case _PhotoAction.remove:
-        setState(() => _pickFailed = false);
-        widget.onChanged(null);
       case _PhotoAction.gallery:
         await _pick(PhotoSource.gallery);
       case _PhotoAction.camera:
         await _pick(PhotoSource.camera);
     }
+  }
+
+  void _remove() {
+    setState(() => _pickFailed = false);
+    widget.onChanged(null);
   }
 
   Future<void> _pick(PhotoSource source) async {
@@ -76,7 +86,9 @@ class _VehiclePhotoFieldState extends ConsumerState<VehiclePhotoField> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final error = _pickFailed ? l10n.vehiclePhotoPickFailed : widget.error;
-    final bytes = widget.photo?.bytes;
+    final url = widget.photoUrl;
+    final saved = url == null ? null : ref.watch(vehiclePhotoBytesProvider(url)).value;
+    final bytes = widget.photo?.bytes ?? saved;
     return FormSectionCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,6 +104,11 @@ class _VehiclePhotoFieldState extends ConsumerState<VehiclePhotoField> {
               child: bytes == null ? const _EmptyTile() : _Preview(bytes),
             ),
           ),
+          if (bytes != null)
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: _RemoveButton(onPressed: _remove),
+            ),
           if (error != null) ...[const SizedBox(height: 8), AuthErrorText(error)],
         ],
       ),
@@ -99,7 +116,29 @@ class _VehiclePhotoFieldState extends ConsumerState<VehiclePhotoField> {
   }
 }
 
-enum _PhotoAction { gallery, camera, remove }
+enum _PhotoAction { gallery, camera }
+
+/// "Remove photo": error-coloured text button with a `delete_outline` icon.
+class _RemoveButton extends StatelessWidget {
+  const _RemoveButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return TextButton.icon(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        minimumSize: const Size(48, 48),
+        foregroundColor: theme.colorScheme.error,
+        textStyle: theme.textTheme.labelMedium,
+      ),
+      icon: const Icon(Icons.delete_outline, size: 18),
+      label: Text(AppLocalizations.of(context).vehiclePhotoRemove),
+    );
+  }
+}
 
 class _OptionTile extends StatelessWidget {
   const _OptionTile(this.icon, this.label, this.action);

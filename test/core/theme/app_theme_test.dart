@@ -2,6 +2,7 @@ import 'package:car_assistant/app.dart';
 import 'package:car_assistant/core/router/app_router.dart';
 import 'package:car_assistant/core/theme/app_theme.dart';
 import 'package:car_assistant/core/theme/app_tones.dart';
+import 'package:car_assistant/core/theme/chart_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -64,5 +65,14 @@ void main() {
     expect(app.themeMode, ThemeMode.light);
     expect(app.darkTheme, isNull);
     expect(Theme.of(tester.element(find.byType(SizedBox).last)).brightness, Brightness.light);
+  });
+
+  test('carries the chart series in their fixed order, then the overflow color', () {
+    final palette = theme.extension<ChartPalette>()!;
+    expect(palette.colorAt(0), const Color(0xFF2563EB));
+    expect(palette.colorAt(1), const Color(0xFF0891B2));
+    expect(palette.colorAt(2), const Color(0xFF7C3AED));
+    expect(palette.colorAt(3), const Color(0xFFBE185D));
+    expect(palette.colorAt(4), const Color(0xFF64748B));
   });
 }

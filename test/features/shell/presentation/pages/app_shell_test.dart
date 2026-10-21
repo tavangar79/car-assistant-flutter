@@ -5,11 +5,21 @@ import 'package:car_assistant/features/auth/domain/repositories/auth_repository.
 import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
 import 'package:car_assistant/features/history/presentation/pages/history_page.dart';
 import 'package:car_assistant/features/home/presentation/pages/home_page.dart';
+import 'package:car_assistant/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:car_assistant/features/profile/presentation/pages/profile_page.dart';
 import 'package:car_assistant/features/shell/presentation/pages/app_shell.dart';
 import 'package:car_assistant/features/shell/presentation/widgets/dock_item.dart';
+import 'package:car_assistant/features/shell/presentation/widgets/quick_actions_sheet.dart';
 import 'package:car_assistant/features/splash/presentation/providers/splash_providers.dart';
+import 'package:car_assistant/features/odometer/domain/repositories/odometer_repository.dart';
+import 'package:car_assistant/features/odometer/presentation/providers/odometer_providers.dart';
+import 'package:car_assistant/features/intervals/domain/repositories/interval_repository.dart';
+import 'package:car_assistant/features/intervals/presentation/providers/interval_providers.dart';
+import 'package:car_assistant/features/services/domain/repositories/service_repository.dart';
+import 'package:car_assistant/features/services/presentation/providers/service_providers.dart';
+import 'package:car_assistant/features/vehicles/domain/entities/vehicle.dart';
 import 'package:car_assistant/features/vehicles/domain/repositories/vehicle_repository.dart';
+import 'package:car_assistant/features/vehicles/presentation/pages/vehicle_details_page.dart';
 import 'package:car_assistant/features/vehicles/presentation/pages/add_vehicle_page.dart';
 import 'package:car_assistant/features/vehicles/presentation/pages/vehicles_page.dart';
 import 'package:car_assistant/features/vehicles/presentation/providers/vehicle_providers.dart';
@@ -20,18 +30,38 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../../intervals/interval_fixtures.dart' as due_fixtures;
+import '../../../vehicles/vehicle_fixtures.dart';
+
 class MockVehicleRepository extends Mock implements VehicleRepository {}
 
 class MockAuthRepository extends Mock implements AuthRepository {}
+
+class MockOdometerRepository extends Mock implements OdometerRepository {}
+
+class MockServiceRepository extends Mock implements ServiceRepository {}
+
+class MockIntervalRepository extends Mock implements IntervalRepository {}
 
 void main() {
   const delay = Duration(milliseconds: 10);
 
   /// Starts the real app with a complete, signed-in user and an empty garage; ends on the shell.
-  Future<void> openShell(WidgetTester tester) async {
+  Future<void> openShell(WidgetTester tester, {List<Vehicle> garage = const []}) async {
     final vehicles = MockVehicleRepository();
     final auth = MockAuthRepository();
-    when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([]));
+    final odometer = MockOdometerRepository();
+    final services = MockServiceRepository();
+    final intervals = MockIntervalRepository();
+    when(() => services.getCatalog()).thenAnswer((_) async => const Right([]));
+    when(() => vehicles.getVehicles()).thenAnswer((_) async => Right(garage));
+    for (final vehicle in garage) {
+      when(() => vehicles.getVehicle(vehicle.id)).thenAnswer((_) async => Right(vehicle));
+      when(() => odometer.getReadings(vehicle.id)).thenAnswer((_) async => const Right([]));
+      when(() => services.getVisits(vehicle.id)).thenAnswer((_) async => const Right([]));
+      when(() => intervals.getDue(vehicle.id))
+          .thenAnswer((_) async => Right(due_fixtures.allOkReport));
+    }
     when(() => vehicles.getCatalog()).thenAnswer((_) async => const Right([]));
     when(() => auth.hasSession()).thenAnswer((_) async => true);
     when(() => auth.getCurrentUser()).thenAnswer(
@@ -48,6 +78,9 @@ void main() {
       ProviderScope(
         overrides: [
           vehicleRepositoryProvider.overrideWithValue(vehicles),
+          odometerRepositoryProvider.overrideWithValue(odometer),
+          serviceRepositoryProvider.overrideWithValue(services),
+          intervalRepositoryProvider.overrideWithValue(intervals),
           authRepositoryProvider.overrideWithValue(auth),
           splashDelayProvider.overrideWithValue(delay),
           packageInfoProvider.overrideWith(
@@ -68,8 +101,10 @@ void main() {
     expect(find.byType(AppShell), findsOneWidget);
   }
 
-  Finder appBarTitle(String title) =>
-      find.descendant(of: find.byType(MainAppBar), matching: find.text(title));
+  Finder appBarTitle(String title) => find.descendant(
+    of: find.byWidgetPredicate((w) => w is MainAppBar || w is HomeAppBar),
+    matching: find.text(title),
+  );
 
   Future<void> tapTab(WidgetTester tester, String label) async {
     await tester.tap(find.descendant(of: find.byType(DockItem), matching: find.text(label)));
@@ -149,12 +184,19 @@ void main() {
     expect(selected('گاراژ من'), isTrue);
   });
 
-  testWidgets('the dock add button opens the add-vehicle page above the tabs', (tester) async {
+  testWidgets('the dock add button opens quick actions; add vehicle opens its page', (
+    tester,
+  ) async {
     await openShell(tester);
 
     await tester.tap(find.byTooltip('ثبت سریع'));
     await tester.pumpAndSettle();
+    expect(find.byType(QuickActionsSheet), findsOneWidget);
 
+    await tester.tap(find.text('افزودن خودروی جدید'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(QuickActionsSheet), findsNothing);
     expect(find.byType(AddVehiclePage), findsOneWidget);
     expect(find.byType(DockItem), findsNothing);
 
@@ -170,5 +212,38 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(AddVehiclePage), findsOneWidget);
+  });
+
+  testWidgets(
+    'with vehicles, Home is the dashboard and a vehicle chip opens it in the Garage tab',
+    (tester) async {
+      await openShell(tester, garage: [tara]);
+      expect(find.text('هزینه کل امسال'), findsOneWidget);
+
+      await tester.tap(find.text('تارا اتوماتیک نقره‌ای').first);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(VehicleDetailsPage), findsOneWidget);
+      bool selected(String label) => tester
+          .widget<DockItem>(find.ancestor(of: find.text(label), matching: find.byType(DockItem)))
+          .selected;
+      expect(selected('گاراژ من'), isTrue);
+
+      await tester.tap(find.byTooltip('بازگشت'));
+      await tester.pumpAndSettle();
+      expect(find.byType(VehiclesPage), findsOneWidget);
+    },
+  );
+
+  testWidgets('tapping a garage vehicle opens its details inside the Garage tab', (tester) async {
+    await openShell(tester, garage: [tara]);
+    await tapTab(tester, 'گاراژ من');
+
+    await tester.tap(find.text('تارا اتوماتیک نقره‌ای'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(VehicleDetailsPage), findsOneWidget);
+    expect(find.byType(DockItem), findsNWidgets(4));
+    expect(find.text('جزئیات خودرو'), findsOneWidget);
   });
 }

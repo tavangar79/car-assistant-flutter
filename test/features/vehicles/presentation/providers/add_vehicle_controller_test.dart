@@ -50,8 +50,10 @@ void main() {
     container.listen(addVehicleControllerProvider, (_, _) {});
   });
 
-  Future<AddVehicleResult?> save(VehicleDraft draft, {VehiclePhoto? photo}) =>
-      container.read(addVehicleControllerProvider.notifier).save(draft, photo: photo);
+  Future<AddVehicleResult?> save(VehicleDraft draft, {VehiclePhoto? photo, String? vehicleId}) =>
+      container
+          .read(addVehicleControllerProvider.notifier)
+          .save(draft, photo: photo, vehicleId: vehicleId);
 
   Object? lastError() => container.read(addVehicleControllerProvider).error;
 
@@ -67,6 +69,31 @@ void main() {
     expect(result, const AddVehicleResult(tara));
     expect(container.read(addVehicleControllerProvider), const AsyncData<void>(null));
     expect(await container.read(vehiclesProvider.future), [tara]);
+  });
+
+  test('with a vehicle id, updates that vehicle and refreshes the garage list', () async {
+    final renamed = taraWith(nickname: 'تارای من');
+    when(() => repository.getVehicles()).thenAnswer((_) async => const Right([tara]));
+    container.listen(vehiclesProvider, (_, _) {});
+    await container.read(vehiclesProvider.future);
+    when(() => repository.updateVehicle('v1', any())).thenAnswer((_) async => Right(renamed));
+    when(() => repository.getVehicles()).thenAnswer((_) async => Right([renamed]));
+
+    final result = await save(validDraft, vehicleId: 'v1');
+
+    expect(result, AddVehicleResult(renamed));
+    verifyNever(() => repository.createVehicle(any()));
+    expect(container.read(addVehicleControllerProvider), const AsyncData<void>(null));
+    expect(await container.read(vehiclesProvider.future), [renamed]);
+  });
+
+  test('a failed update becomes the error state', () async {
+    when(() => repository.updateVehicle('v1', any()))
+        .thenAnswer((_) async => const Left(PlateTakenFailure()));
+
+    expect(await save(validDraft, vehicleId: 'v1'), isNull);
+
+    expect(lastError(), const PlateTakenFailure());
   });
 
   test('client validation fails without calling the server', () async {

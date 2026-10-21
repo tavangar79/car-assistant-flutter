@@ -880,6 +880,10 @@
   "@vehicleDefaultBody": {
     "description": "Description of the default-vehicle toggle."
   },
+  "vehicleDefaultLocked": "برای تغییر خودروی پیش‌فرض، خودروی دیگری را پیش‌فرض کنید.",
+  "@vehicleDefaultLocked": {
+    "description": "Helper under the disabled default switch when editing the current default vehicle."
+  },
   "vehicleSave": "ثبت و افزودن به گاراژ",
   "@vehicleSave": {
     "description": "Primary button of the add-vehicle form."
@@ -930,26 +934,1493 @@
       }
     }
   },
-  "vehicleTileSubtitle": "{make} {model} • {plate}",
-  "@vehicleTileSubtitle": {
-    "description": "Second line of a vehicle in the garage list.",
-    "placeholders": {
-      "make": {
-        "type": "String",
-        "example": "ایران خودرو"
-      },
-      "model": {
-        "type": "String",
-        "example": "تارا"
-      },
-      "plate": {
-        "type": "String",
-        "example": "۷۲ ب ۳۴۵ ایران ۶۸"
-      }
-    }
-  },
   "vehiclePlateLetterHint": "حرف",
   "@vehiclePlateLetterHint": {
     "description": "Shown in the plate letter picker before a letter is chosen."
+  },
+  "editVehicle": "ویرایش خودرو",
+  "@editVehicle": {
+    "description": "Title of the vehicle form in edit mode, and the edit item of a vehicle's options menu."
+  },
+  "vehicleOptions": "تنظیمات خودرو",
+  "@vehicleOptions": {
+    "description": "Tooltip of the options (more) button on a vehicle in the garage list."
+  },
+  "vehicleSaveChanges": "ذخیره تغییرات",
+  "@vehicleSaveChanges": {
+    "description": "Primary button of the vehicle form in edit mode."
+  },
+  "vehicleUpdated": "تغییرات خودرو ذخیره شد",
+  "@vehicleUpdated": {
+    "description": "Shown after an edited vehicle was saved."
+  },
+  "vehicleUpdatedPhotoFailed": "تغییرات ذخیره شد، اما تصویر به‌روز نشد",
+  "@vehicleUpdatedPhotoFailed": {
+    "description": "Shown when the vehicle changes were saved but uploading the new photo or removing the saved one failed."
+  },
+  "odometerTitle": "بروزرسانی کیلومترشمار",
+  "@odometerTitle": {
+    "description": "Title of the odometer sheet and of its quick-actions row."
+  },
+  "odometerSubtitle": "تنظیم دقیق موعد سرویس‌ها و یادآورهای دوره‌ای",
+  "@odometerSubtitle": {
+    "description": "Subtitle under the odometer sheet title."
+  },
+  "odometerClose": "بستن",
+  "@odometerClose": {
+    "description": "Tooltip of the close button of the odometer sheet."
+  },
+  "odometerPickVehicle": "انتخاب خودرو",
+  "@odometerPickVehicle": {
+    "description": "Label above the vehicle chips of the odometer sheet."
+  },
+  "activeVehicleBadge": "خودروی فعال",
+  "@activeVehicleBadge": {
+    "description": "Badge marking the active vehicle (odometer sheet, quick actions)."
+  },
+  "odometerCurrentLabel": "کیلومترشمار فعلی",
+  "@odometerCurrentLabel": {
+    "description": "Label of the odometer input."
+  },
+  "odometerLastRecorded": "آخرین ثبت: {km} کیلومتر",
+  "@odometerLastRecorded": {
+    "description": "The vehicle's current mileage above the odometer input.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "34500"
+      }
+    }
+  },
+  "odometerDiff": "{diff} کیلومتر",
+  "@odometerDiff": {
+    "description": "Distance between the typed value and the last reading. diff is signed and locale-formatted, e.g. +۳۵۰.",
+    "placeholders": {
+      "diff": {
+        "type": "String",
+        "example": "+۳۵۰"
+      }
+    }
+  },
+  "odometerSinceLastUpdate": "پیمایش از آخرین به‌روزرسانی",
+  "@odometerSinceLastUpdate": {
+    "description": "Shown after the distance when the vehicle has no reading yet."
+  },
+  "odometerSinceLastUpdateOn": "پیمایش از آخرین به‌روزرسانی ({date})",
+  "@odometerSinceLastUpdateOn": {
+    "description": "Shown after the distance, with the Jalali date of the latest reading.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "۲۴ آبان ۱۴۰۳"
+      }
+    }
+  },
+  "odometerReset": "بازنشانی",
+  "@odometerReset": {
+    "description": "Button that puts the last recorded mileage back in the odometer input."
+  },
+  "odometerQuickAdjust": "تنظیم سریع مقادیر رایج",
+  "@odometerQuickAdjust": {
+    "description": "Label above the quick-adjust buttons (+500, +1000, …)."
+  },
+  "odometerRecordedAtLabel": "تاریخ و زمان ثبت",
+  "@odometerRecordedAtLabel": {
+    "description": "Label of the reading date row."
+  },
+  "odometerRecordedAtToday": "امروز، {date} — {time}",
+  "@odometerRecordedAtToday": {
+    "description": "Reading date when it is today. date is Jalali in words, time is HH:mm in locale digits.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "۲۵ آبان ۱۴۰۳"
+      },
+      "time": {
+        "type": "String",
+        "example": "۱۸:۴۵"
+      }
+    }
+  },
+  "odometerRecordedAtValue": "{date} — {time}",
+  "@odometerRecordedAtValue": {
+    "description": "Reading date on an earlier day.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "۲۴ آبان ۱۴۰۳"
+      },
+      "time": {
+        "type": "String",
+        "example": "۱۸:۴۵"
+      }
+    }
+  },
+  "odometerChangeDate": "تغییر تاریخ",
+  "@odometerChangeDate": {
+    "description": "Button that opens the date picker of the reading."
+  },
+  "odometerSubmit": "تأیید و ثبت کارکرد",
+  "@odometerSubmit": {
+    "description": "Primary button of the odometer sheet."
+  },
+  "odometerCancel": "انصراف",
+  "@odometerCancel": {
+    "description": "Secondary button that closes the odometer sheet."
+  },
+  "odometerBelowCurrent": "کارکرد نمی‌تواند کمتر از آخرین ثبت ({km} کیلومتر) باشد",
+  "@odometerBelowCurrent": {
+    "description": "Error when the new reading is lower than the vehicle's current mileage.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "34500"
+      }
+    }
+  },
+  "odometerSaved": "کارکرد با موفقیت ثبت شد",
+  "@odometerSaved": {
+    "description": "Shown after a reading was saved."
+  },
+  "odometerSaveFailed": "ثبت کارکرد ممکن نشد، دوباره تلاش کنید",
+  "@odometerSaveFailed": {
+    "description": "Shown when saving a reading failed for another reason."
+  },
+  "vehicleDetailsTitle": "جزئیات خودرو",
+  "@vehicleDetailsTitle": {
+    "description": "App bar title of the vehicle details page."
+  },
+  "vehicleDetailsLoadError": "دریافت اطلاعات خودرو ممکن نشد",
+  "@vehicleDetailsLoadError": {
+    "description": "Shown when the vehicle details could not be loaded."
+  },
+  "vehicleDetailsActive": "فعال در گاراژ",
+  "@vehicleDetailsActive": {
+    "description": "Screen-reader label of the dot next to the default vehicle's name."
+  },
+  "vehicleDetailsModelYear": "مدل {year}",
+  "@vehicleDetailsModelYear": {
+    "description": "Model year in the vehicle summary. year uses locale digits.",
+    "placeholders": {
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۲"
+      }
+    }
+  },
+  "vehicleDetailsVin": "شاسی: {vin}",
+  "@vehicleDetailsVin": {
+    "description": "The vehicle's VIN in the summary card.",
+    "placeholders": {
+      "vin": {
+        "type": "String",
+        "example": "NAAM21CA9KK123456"
+      }
+    }
+  },
+  "vehicleDetailsMileageTitle": "کارکرد فعلی خودرو",
+  "@vehicleDetailsMileageTitle": {
+    "description": "Title of the mileage card."
+  },
+  "vehicleDetailsMileageBadge": "مبنای یادآوری‌ها",
+  "@vehicleDetailsMileageBadge": {
+    "description": "Small chip on the mileage card."
+  },
+  "vehicleDetailsUpdateMileage": "بروزرسانی کیلومتر",
+  "@vehicleDetailsUpdateMileage": {
+    "description": "Button on the mileage card that opens the odometer sheet."
+  },
+  "vehicleDetailsDueTitle": "وضعیت و سرویس‌های پیش‌رو",
+  "@vehicleDetailsDueTitle": {
+    "description": "Heading of the upcoming services section."
+  },
+  "vehicleDetailsDueEmpty": "هنوز موردی برای پیگیری ثبت نشده است",
+  "@vehicleDetailsDueEmpty": {
+    "description": "Empty state of the upcoming services section."
+  },
+  "vehicleDetailsHistoryTitle": "تاریخچه آخرین خدمات و سرویس‌ها",
+  "@vehicleDetailsHistoryTitle": {
+    "description": "Heading of the service history section."
+  },
+  "vehicleDetailsHistoryEmpty": "هنوز سرویسی برای این خودرو ثبت نشده است",
+  "@vehicleDetailsHistoryEmpty": {
+    "description": "Empty state of the service history section."
+  },
+  "vehicleDetailsExport": "دریافت کارنامه و گزارش فاکتورها (PDF)",
+  "@vehicleDetailsExport": {
+    "description": "Export button at the end of the vehicle details page (not available yet)."
+  },
+  "quickActionsTitle": "اقدامات سریع",
+  "@quickActionsTitle": {
+    "description": "Title of the quick actions sheet opened from the dock's add button."
+  },
+  "quickActionsClose": "بستن",
+  "@quickActionsClose": {
+    "description": "Tooltip of the close button of the quick actions sheet."
+  },
+  "quickActionsScope": "عملیات برای این خودرو ثبت می‌شود",
+  "@quickActionsScope": {
+    "description": "Line under the active vehicle in the quick actions sheet."
+  },
+  "quickActionOdometerBody": "تنظیم موعد دقیق یادآور سرویس‌ها بر اساس کارکرد",
+  "@quickActionOdometerBody": {
+    "description": "Description of the odometer row in quick actions."
+  },
+  "quickActionServiceTitle": "ثبت سرویس و تعمیرات",
+  "@quickActionServiceTitle": {
+    "description": "Service row title in quick actions."
+  },
+  "quickActionServiceBody": "تعویض روغن، لنت، فیلترها و فاکتور تعمیرگاه",
+  "@quickActionServiceBody": {
+    "description": "Service row description in quick actions."
+  },
+  "quickActionFuelTitle": "ثبت سوخت‌گیری",
+  "@quickActionFuelTitle": {
+    "description": "Fuel row title in quick actions."
+  },
+  "quickActionFuelBody": "بنزین معمولی، سوپر یا گاز و محاسبه مصرف صدی",
+  "@quickActionFuelBody": {
+    "description": "Fuel row description in quick actions."
+  },
+  "quickActionExpenseTitle": "ثبت هزینه متفرقه",
+  "@quickActionExpenseTitle": {
+    "description": "Expense row title in quick actions."
+  },
+  "quickActionExpenseBody": "بیمه شخص ثالث، عوارض، جریمه و معاینه فنی",
+  "@quickActionExpenseBody": {
+    "description": "Expense row description in quick actions."
+  },
+  "quickActionAddVehicleTitle": "افزودن خودروی جدید",
+  "@quickActionAddVehicleTitle": {
+    "description": "Add-vehicle row title in quick actions."
+  },
+  "quickActionAddVehicleBody": "ثبت پلاک و باز کردن دفترچه هزینه ماشین جدید",
+  "@quickActionAddVehicleBody": {
+    "description": "Add-vehicle row description in quick actions."
+  },
+  "quickActionGarageTag": "گاراژ",
+  "@quickActionGarageTag": {
+    "description": "Small tag next to the add-vehicle row title."
+  },
+  "quickActionUnavailable": "به‌زودی",
+  "@quickActionUnavailable": {
+    "description": "Screen-reader hint of a quick action that is not available yet."
+  },
+  "odometerPickDateTitle": "تاریخ ثبت کارکرد (تقویم جلالی)",
+  "@odometerPickDateTitle": {
+    "description": "Title of the date picker opened from the odometer sheet."
+  },
+  "odometerPickDateConfirm": "تأیید تاریخ",
+  "@odometerPickDateConfirm": {
+    "description": "Confirm button of the odometer date picker."
+  },
+  "homeAppName": "مدیریت خودرو",
+  "@homeAppName": {
+    "description": "Small app name above the Home title in the Home app bar."
+  },
+  "homeFleetManage": "مدیریت",
+  "@homeFleetManage": {
+    "description": "Link next to the Home garage strip that opens the Garage tab."
+  },
+  "homeCostThisYear": "هزینه کل امسال",
+  "@homeCostThisYear": {
+    "description": "Home summary tile: total spend this year."
+  },
+  "currencyToman": "تومان",
+  "@currencyToman": {
+    "description": "Currency unit, shown after an amount."
+  },
+  "homeCostFooter": "فیلتر در تاریخچه ›",
+  "@homeCostFooter": {
+    "description": "Link line of the Home total-cost tile."
+  },
+  "homeInvoicesTitle": "فاکتورها",
+  "@homeInvoicesTitle": {
+    "description": "Home summary tile: number of invoices."
+  },
+  "homeInvoicesUnit": "ثبت‌شده",
+  "@homeInvoicesUnit": {
+    "description": "Unit under the invoice count on Home."
+  },
+  "homeInvoicesFooter": "مشاهده اسناد ›",
+  "@homeInvoicesFooter": {
+    "description": "Link line of the Home invoices tile."
+  },
+  "homeAttentionTitle": "نیازمند رسیدگی",
+  "@homeAttentionTitle": {
+    "description": "Home summary tile: number of due items."
+  },
+  "homeAttentionUnit": "مورد فوری",
+  "@homeAttentionUnit": {
+    "description": "Unit under the due-item count on Home."
+  },
+  "homeAttentionFooter": "بررسی موارد ›",
+  "@homeAttentionFooter": {
+    "description": "Link line of the Home due-items tile."
+  },
+  "valueUnavailable": "—",
+  "@valueUnavailable": {
+    "description": "Shown in place of a number that can't be computed yet."
+  },
+  "notComputable": "قابل محاسبه نیست",
+  "@notComputable": {
+    "description": "Screen-reader text and message for a value that can't be computed."
+  },
+  "homeSpendTitle": "هزینه {count} ماه اخیر",
+  "@homeSpendTitle": {
+    "description": "Title of the Home spend chart.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "6"
+      }
+    }
+  },
+  "homeSpendRange": "{from} — {to} {year}",
+  "@homeSpendRange": {
+    "description": "Month range of the Home spend chart within one Jalali year.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "خرداد"
+      },
+      "to": {
+        "type": "String",
+        "example": "آبان"
+      },
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۳"
+      }
+    }
+  },
+  "homeSpendRangeAcrossYears": "{from} {fromYear} — {to} {toYear}",
+  "@homeSpendRangeAcrossYears": {
+    "description": "Month range of the Home spend chart across two Jalali years.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "آبان"
+      },
+      "fromYear": {
+        "type": "String",
+        "example": "۱۴۰۳"
+      },
+      "to": {
+        "type": "String",
+        "example": "فروردین"
+      },
+      "toYear": {
+        "type": "String",
+        "example": "۱۴۰۴"
+      }
+    }
+  },
+  "homeSpendEmpty": "هنوز هزینه‌ای ثبت نشده است",
+  "@homeSpendEmpty": {
+    "description": "Shown in the Home spend chart while there are no costs."
+  },
+  "homeUpdateOdometerHint": "انتخاب خودرو و ثبت سریع کیلومترشمار فعلی",
+  "@homeUpdateOdometerHint": {
+    "description": "Caption under the Home update-mileage button."
+  },
+  "garageHistoryTooltip": "تاریخچه رویدادها",
+  "@garageHistoryTooltip": {
+    "description": "Tooltip of the history button in the Garage app bar."
+  },
+  "garageMyVehicles": "خودروهای من",
+  "@garageMyVehicles": {
+    "description": "Heading above the vehicle cards in the Garage tab."
+  },
+  "garageActiveCount": "{count} خودرو فعال",
+  "@garageActiveCount": {
+    "description": "Badge next to the Garage heading with the number of vehicles.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "2"
+      }
+    }
+  },
+  "garageDefaultBadge": "خودروی پیش‌فرض",
+  "@garageDefaultBadge": {
+    "description": "Badge on the default vehicle's card."
+  },
+  "garageSetDefault": "انتخاب به عنوان پیش‌فرض",
+  "@garageSetDefault": {
+    "description": "Button on a vehicle card that makes it the default vehicle."
+  },
+  "garageSetDefaultError": "تغییر خودروی پیش‌فرض ممکن نشد",
+  "@garageSetDefaultError": {
+    "description": "Shown when setting the default vehicle fails."
+  },
+  "garageOdometerLabel": "کیلومترشمار فعلی",
+  "@garageOdometerLabel": {
+    "description": "Label of the mileage row on a garage vehicle card."
+  },
+  "garageLastReading": "آخرین ثبت: {when}",
+  "@garageLastReading": {
+    "description": "When the latest odometer reading was taken, on a garage vehicle card.",
+    "placeholders": {
+      "when": {
+        "type": "String",
+        "example": "دیروز"
+      }
+    }
+  },
+  "relativeDaysAgo": "{days, plural, =0{امروز} =1{دیروز} other{{days} روز پیش}}",
+  "@relativeDaysAgo": {
+    "description": "A past day relative to today.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern",
+        "example": "3"
+      }
+    }
+  },
+  "garageServiceStatusTitle": "وضعیت سرویس‌ها",
+  "@garageServiceStatusTitle": {
+    "description": "Title of the service status banner on a garage vehicle card."
+  },
+  "garageActionService": "ثبت سرویس",
+  "@garageActionService": {
+    "description": "Shortcut on a garage vehicle card."
+  },
+  "garageActionOdometer": "ثبت کیلومتر",
+  "@garageActionOdometer": {
+    "description": "Shortcut on a garage vehicle card that opens the odometer sheet."
+  },
+  "garageActionRecords": "دفترچه سوابق",
+  "@garageActionRecords": {
+    "description": "Shortcut on a garage vehicle card."
+  },
+  "garageToolsTitle": "مدیریت و امکانات گاراژ",
+  "@garageToolsTitle": {
+    "description": "Heading of the garage-level tools section."
+  },
+  "garageToolsSubtitle": "خدمات اسناد و انتقال",
+  "@garageToolsSubtitle": {
+    "description": "Caption next to the garage tools heading."
+  },
+  "garageToolTransferTitle": "انتقال مالکیت خودرو",
+  "@garageToolTransferTitle": {
+    "description": "Garage tool row title."
+  },
+  "garageToolTransferBody": "انتقال ایمن سوابق فنی به خریدار جدید بدون حذف داده‌ها",
+  "@garageToolTransferBody": {
+    "description": "Garage tool row description."
+  },
+  "garageToolDocumentsTitle": "کیف مدارک و بیمه‌نامه‌ها",
+  "@garageToolDocumentsTitle": {
+    "description": "Garage tool row title."
+  },
+  "garageToolDocumentsBody": "کارت خودرو، برگ سبز، بیمه‌نامه ثالث و معاینه فنی",
+  "@garageToolDocumentsBody": {
+    "description": "Garage tool row description."
+  },
+  "garageToolExportTitle": "خروجی پرونده و گزارش رسمی",
+  "@garageToolExportTitle": {
+    "description": "Garage tool row title."
+  },
+  "garageToolExportBody": "شناسنامه سوابق تعمیرگاهی و هزینه‌ها جهت فروش و کارشناسی",
+  "@garageToolExportBody": {
+    "description": "Garage tool row description."
+  },
+  "serviceWizardTitle": "ثبت سرویس جدید",
+  "@serviceWizardTitle": {
+    "description": "App bar title of the 3-step service wizard."
+  },
+  "serviceStep1Label": "انتخاب اقلام",
+  "@serviceStep1Label": {
+    "description": "Stepper label of step 1."
+  },
+  "serviceStep2Label": "زمان و کارکرد",
+  "@serviceStep2Label": {
+    "description": "Stepper label of step 2."
+  },
+  "serviceStep3Label": "جزئیات و هزینه",
+  "@serviceStep3Label": {
+    "description": "Stepper label of step 3."
+  },
+  "serviceStepNumber": "{step}",
+  "@serviceStepNumber": {
+    "description": "Step number inside the stepper circle, in locale digits.",
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceSelectedCount": "{count} مورد انتخاب شد",
+  "@serviceSelectedCount": {
+    "description": "Amber badge of step 1 with the number of selected items.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceClearAll": "پاکسازی همه",
+  "@serviceClearAll": {
+    "description": "Step 1 button that clears the selection."
+  },
+  "serviceSearchHint": "جستجوی سرویس (مثلاً: روغن، لنت، شمع...)",
+  "@serviceSearchHint": {
+    "description": "Placeholder of the step 1 search field."
+  },
+  "serviceSearchEmpty": "سرویسی با این نام پیدا نشد",
+  "@serviceSearchEmpty": {
+    "description": "Step 1 message when the search matches nothing."
+  },
+  "serviceCatalogLoadError": "دریافت فهرست سرویس‌ها ممکن نشد",
+  "@serviceCatalogLoadError": {
+    "description": "Error when the service catalog can't be loaded."
+  },
+  "serviceFooterLabel": "اقلام برگزیده برای ثبت:",
+  "@serviceFooterLabel": {
+    "description": "Label in the step 1 footer, before the count."
+  },
+  "serviceFooterCount": "{count} سرویس انتخاب شده",
+  "@serviceFooterCount": {
+    "description": "Count in the step 1 footer.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceContinueStep2": "ادامه به گام دوم (زمان و کارکرد)",
+  "@serviceContinueStep2": {
+    "description": "Primary button of step 1."
+  },
+  "serviceSelectedItemsLabel": "اقلام انتخاب‌شده برای فاکتور:",
+  "@serviceSelectedItemsLabel": {
+    "description": "Heading of the selected-items chips on step 2."
+  },
+  "serviceEditItems": "ویرایش اقلام",
+  "@serviceEditItems": {
+    "description": "Step 2 link back to step 1."
+  },
+  "serviceOdometerTitle": "کارکرد ثبت فاکتور",
+  "@serviceOdometerTitle": {
+    "description": "Heading of the odometer card on step 2."
+  },
+  "serviceOdometerBadge": "مبنای استهلاک",
+  "@serviceOdometerBadge": {
+    "description": "Badge next to the odometer card heading."
+  },
+  "serviceOdometerLabel": "کیلومترشمار در زمان انجام سرویس",
+  "@serviceOdometerLabel": {
+    "description": "Label over the odometer input on step 2."
+  },
+  "serviceOdometerLastOn": "آخرین ثبت: {km} کیلومتر ({date} — {when})",
+  "@serviceOdometerLastOn": {
+    "description": "Hint under the odometer input: the vehicle's last reading, its Jalali date and how long ago.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "date": {
+        "type": "String",
+        "example": "۲۴ آبان"
+      },
+      "when": {
+        "type": "String",
+        "example": "دیروز"
+      }
+    }
+  },
+  "serviceOdometerDiff": "{diff} کیلومتر پیمایش",
+  "@serviceOdometerDiff": {
+    "description": "Chip with the distance between the input and the last reading, signed.",
+    "placeholders": {
+      "diff": {
+        "type": "String",
+        "example": "+۳۵۰"
+      }
+    }
+  },
+  "serviceQuickAdjust": "تنظیم سریع بر اساس کارکرد:",
+  "@serviceQuickAdjust": {
+    "description": "Label over the quick-adjust buttons on step 2."
+  },
+  "serviceDateTitle": "تاریخ ثبت فاکتور",
+  "@serviceDateTitle": {
+    "description": "Heading of the date card on step 2."
+  },
+  "serviceDateBadge": "تقویم جلالی",
+  "@serviceDateBadge": {
+    "description": "Small label next to the date card heading."
+  },
+  "serviceDateLabel": "تاریخ انجام خدمات",
+  "@serviceDateLabel": {
+    "description": "Label over the chosen date on step 2."
+  },
+  "serviceDateValue": "{weekday}، {date}",
+  "@serviceDateValue": {
+    "description": "The chosen date with its weekday, e.g. جمعه، ۲۵ آبان ۱۴۰۳.",
+    "placeholders": {
+      "weekday": {
+        "type": "String",
+        "example": "جمعه"
+      },
+      "date": {
+        "type": "String",
+        "example": "۲۵ آبان ۱۴۰۳"
+      }
+    }
+  },
+  "jalaliWeekday": "{day, select, 1{شنبه} 2{یکشنبه} 3{دوشنبه} 4{سه‌شنبه} 5{چهارشنبه} 6{پنج‌شنبه} 7{جمعه} other{}}",
+  "@jalaliWeekday": {
+    "description": "Name of a weekday, 1 = Saturday … 7 = Friday (shamsi_date order).",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceDateToday": "امروز",
+  "@serviceDateToday": {
+    "description": "Date chip: today."
+  },
+  "serviceDateYesterday": "دیروز",
+  "@serviceDateYesterday": {
+    "description": "Date chip: yesterday."
+  },
+  "serviceDateLastWeek": "هفته گذشته",
+  "@serviceDateLastWeek": {
+    "description": "Date chip: seven days ago."
+  },
+  "serviceDatePick": "انتخاب از تقویم",
+  "@serviceDatePick": {
+    "description": "Date chip that opens the Jalali picker."
+  },
+  "serviceDatePickTitle": "تاریخ انجام خدمات (تقویم جلالی)",
+  "@serviceDatePickTitle": {
+    "description": "Title of the Jalali picker sheet on step 2."
+  },
+  "serviceStickerTitle": "جزئیات برچسب سرویس (اختیاری)",
+  "@serviceStickerTitle": {
+    "description": "Heading of the sticker card on step 2."
+  },
+  "serviceStickerBody": "جهت انطباق دقیق، می‌توانید کارکرد پیشنهادی سرویس بعدی درج‌شده روی برچسب تعویض‌روغنی را ثبت کنید.",
+  "@serviceStickerBody": {
+    "description": "Explanation in the sticker card."
+  },
+  "serviceStickerKmLabel": "پیشنهاد برچسب بعدی",
+  "@serviceStickerKmLabel": {
+    "description": "Label of the next-service km field (absolute km on the sticker)."
+  },
+  "serviceVisitTimeLabel": "ساعت مراجعه",
+  "@serviceVisitTimeLabel": {
+    "description": "Label of the visit time field."
+  },
+  "serviceVisitTimePickHelp": "ساعت مراجعه",
+  "@serviceVisitTimePickHelp": {
+    "description": "Title of the time picker dialog."
+  },
+  "serviceSyncTitle": "همگام‌سازی فاکتور و قطعات",
+  "@serviceSyncTitle": {
+    "description": "Heading of the info card at the end of step 2."
+  },
+  "serviceSyncBody": "این کارکرد و تاریخ به صورت مشترک به عنوان مبنای محاسبه تمام اقلام این فاکتور ({items}) ثبت و در تاریخچه خودرو درج خواهند شد.",
+  "@serviceSyncBody": {
+    "description": "Body of the info card; items is the selected item titles joined with و.",
+    "placeholders": {
+      "items": {
+        "type": "String",
+        "example": "روغن موتور و فیلتر روغن"
+      }
+    }
+  },
+  "serviceContinueStep3": "ادامه به گام سوم (جزئیات و هزینه‌ها)",
+  "@serviceContinueStep3": {
+    "description": "Primary button of step 2."
+  },
+  "serviceBackToItems": "بازگشت به انتخاب اقلام",
+  "@serviceBackToItems": {
+    "description": "Secondary button of step 2."
+  },
+  "serviceDateInFuture": "تاریخ و ساعت سرویس نمی‌تواند در آینده باشد",
+  "@serviceDateInFuture": {
+    "description": "Error when the visit date and time are after now (client check or a 400 on serviceDate)."
+  },
+  "serviceKmValue": "{km} کیلومتر",
+  "@serviceKmValue": {
+    "description": "A distance with its unit, e.g. in the step 3 summary pill.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceItemIndex": "قلم {index} از {count}",
+  "@serviceItemIndex": {
+    "description": "Position pill on a step 3 card.",
+    "placeholders": {
+      "index": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceRemoveItem": "حذف سرویس",
+  "@serviceRemoveItem": {
+    "description": "Tooltip of the delete button on a step 3 card."
+  },
+  "serviceCostLabel": "مبلغ قطعه و اجرت تعویض",
+  "@serviceCostLabel": {
+    "description": "Label of the cost field on step 3."
+  },
+  "serviceBrandLabel": "برند و مشخصات فنی قطعه",
+  "@serviceBrandLabel": {
+    "description": "Label of the brand field on step 3."
+  },
+  "serviceWorkshopLabel": "تعمیرگاه / اتوسرویس",
+  "@serviceWorkshopLabel": {
+    "description": "Label of the workshop field on step 3."
+  },
+  "serviceNotesLabel": "یادداشت فنی و جزئیات",
+  "@serviceNotesLabel": {
+    "description": "Label of the notes field on step 3."
+  },
+  "serviceInvoiceLabel": "تصویر فاکتور و رسید سرویس",
+  "@serviceInvoiceLabel": {
+    "description": "Label of the invoice attachment on the first step 3 card."
+  },
+  "serviceInvoiceAttach": "افزودن تصویر فاکتور",
+  "@serviceInvoiceAttach": {
+    "description": "Attachment tile when no invoice was picked yet."
+  },
+  "serviceInvoiceAttached": "{size} • الصاق شده",
+  "@serviceInvoiceAttached": {
+    "description": "Under the file name of the picked invoice.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "۱٫۴ مگابایت"
+      }
+    }
+  },
+  "serviceInvoiceChange": "تغییر تصویر",
+  "@serviceInvoiceChange": {
+    "description": "Tooltip of the change-invoice button."
+  },
+  "serviceInvoiceRemove": "حذف تصویر",
+  "@serviceInvoiceRemove": {
+    "description": "Tooltip of the remove-invoice button."
+  },
+  "serviceInvoiceGallery": "انتخاب از گالری",
+  "@serviceInvoiceGallery": {
+    "description": "Invoice source option."
+  },
+  "serviceInvoiceCamera": "عکس‌برداری با دوربین",
+  "@serviceInvoiceCamera": {
+    "description": "Invoice source option."
+  },
+  "serviceInvoicePickFailed": "انتخاب تصویر ممکن نشد",
+  "@serviceInvoicePickFailed": {
+    "description": "Error when the gallery or camera is unavailable."
+  },
+  "serviceInvoiceTooLarge": "حجم تصویر فاکتور بیشتر از {max} مگابایت است",
+  "@serviceInvoiceTooLarge": {
+    "description": "Error when the invoice is above the size limit.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceInvoiceInvalid": "تصویر فاکتور باید JPG، PNG یا WebP باشد",
+  "@serviceInvoiceInvalid": {
+    "description": "Error when the invoice is not an accepted image."
+  },
+  "megabytes": "{size} مگابایت",
+  "@megabytes": {
+    "description": "A file size in megabytes with one decimal, locale digits.",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "۱٫۴"
+      }
+    }
+  },
+  "serviceReminderTitle": "یادآور موعد بعدی",
+  "@serviceReminderTitle": {
+    "description": "Heading of the reminder box on a step 3 card."
+  },
+  "serviceReminderHint": "محاسبه بر اساس نخستین شرط",
+  "@serviceReminderHint": {
+    "description": "Hint next to the reminder heading."
+  },
+  "serviceReminderKmLabel": "کارکرد مجاز بعدی",
+  "@serviceReminderKmLabel": {
+    "description": "Label of the reminder km field (km after this visit)."
+  },
+  "serviceReminderMonthsLabel": "بازه زمانی مجاز",
+  "@serviceReminderMonthsLabel": {
+    "description": "Label of the reminder months field."
+  },
+  "serviceReminderMonthsUnit": "ماه بعد",
+  "@serviceReminderMonthsUnit": {
+    "description": "Unit after the reminder months field."
+  },
+  "serviceReminderDueKm": "سررسید: {km} ک‌م",
+  "@serviceReminderDueKm": {
+    "description": "The odometer at which the reminder is due.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceReminderDueDate": "سررسید: {month} {year}",
+  "@serviceReminderDueDate": {
+    "description": "The Jalali month and year at which the reminder is due.",
+    "placeholders": {
+      "month": {
+        "type": "String",
+        "example": "اردیبهشت"
+      },
+      "year": {
+        "type": "String",
+        "example": "۱۴۰۴"
+      }
+    }
+  },
+  "serviceReminderNone": "بدون یادآور",
+  "@serviceReminderNone": {
+    "description": "Shown in the reminder slots when nothing is set."
+  },
+  "serviceAddAnotherItem": "افزودن یک قلم سرویس دیگر به این فاکتور",
+  "@serviceAddAnotherItem": {
+    "description": "Button under the step 3 cards that returns to step 1."
+  },
+  "serviceTotalLabel": "جمع کل فاکتور ({count} قلم)",
+  "@serviceTotalLabel": {
+    "description": "Label of the running total in the step 3 footer.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceTotalHint": "شامل اجرت و قطعات مصرفی",
+  "@serviceTotalHint": {
+    "description": "Hint under the running total label."
+  },
+  "serviceSubmit": "ثبت نهایی فاکتور و ذخیره سوابق",
+  "@serviceSubmit": {
+    "description": "Primary button of step 3."
+  },
+  "serviceSaving": "در حال ثبت...",
+  "@serviceSaving": {
+    "description": "Primary button label while the visit is being saved."
+  },
+  "serviceWorkshopError": "نام تعمیرگاه را وارد کنید (حداکثر {max} حرف)",
+  "@serviceWorkshopError": {
+    "description": "Inline error of the workshop field.",
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceLineItemsError": "مقادیر این قلم نامعتبر است، آن را بررسی کنید",
+  "@serviceLineItemsError": {
+    "description": "Inline error on the step 3 cards when the line items are rejected."
+  },
+  "serviceSaveInvalid": "اطلاعات فاکتور نامعتبر است، فیلدها را بررسی کنید",
+  "@serviceSaveInvalid": {
+    "description": "Snackbar when the server rejects the visit (400)."
+  },
+  "serviceSaveFailed": "ثبت سرویس ممکن نشد، دوباره تلاش کنید",
+  "@serviceSaveFailed": {
+    "description": "Snackbar when saving the visit fails for another reason."
+  },
+  "serviceSaved": "سرویس با موفقیت ثبت شد",
+  "@serviceSaved": {
+    "description": "Snackbar after the visit is saved."
+  },
+  "serviceSavedInvoiceFailed": "سرویس ثبت شد، اما بارگذاری تصویر فاکتور ناموفق بود",
+  "@serviceSavedInvoiceFailed": {
+    "description": "Snackbar when the visit is saved but the invoice upload failed."
+  },
+  "serviceDetailsEyebrow": "ثبت مراجعات فنی",
+  "@serviceDetailsEyebrow": {
+    "description": "Small label over the service details title."
+  },
+  "serviceDetailsTitle": "جزئیات فاکتور سرویس",
+  "@serviceDetailsTitle": {
+    "description": "App bar title of the service details page."
+  },
+  "serviceDetailsOptions": "گزینه‌های فاکتور",
+  "@serviceDetailsOptions": {
+    "description": "Tooltip of the options menu on the service details page."
+  },
+  "serviceDetailsDelete": "حذف فاکتور",
+  "@serviceDetailsDelete": {
+    "description": "Menu entry that deletes the visit."
+  },
+  "serviceDetailsDeleteConfirmTitle": "حذف این فاکتور؟",
+  "@serviceDetailsDeleteConfirmTitle": {
+    "description": "Title of the delete-visit confirmation."
+  },
+  "serviceDetailsDeleteConfirmBody": "تمام اقلام و تصویر فاکتور حذف می‌شود. این کار قابل بازگشت نیست.",
+  "@serviceDetailsDeleteConfirmBody": {
+    "description": "Body of the delete-visit confirmation."
+  },
+  "confirmDelete": "حذف",
+  "@confirmDelete": {
+    "description": "Destructive confirm button."
+  },
+  "serviceDetailsDateLabel": "تاریخ مراجعه",
+  "@serviceDetailsDateLabel": {
+    "description": "Label of the visit date in the header card."
+  },
+  "serviceDetailsOdometerLabel": "کیلومترشمار",
+  "@serviceDetailsOdometerLabel": {
+    "description": "Label of the odometer chip in the header card."
+  },
+  "serviceDetailsWorkshopLabel": "تعمیرگاه / مرکز خدمات",
+  "@serviceDetailsWorkshopLabel": {
+    "description": "Label of the workshop in the header card."
+  },
+  "serviceDetailsNotesLabel": "یادداشت",
+  "@serviceDetailsNotesLabel": {
+    "description": "Label of the visit notes in the header card."
+  },
+  "serviceDetailsHeaderNote": "اطلاعات سربرگ فاکتور ثابت بوده و ردیف‌های ذیل قابل ویرایش هستند.",
+  "@serviceDetailsHeaderNote": {
+    "description": "Note under the header card."
+  },
+  "serviceDetailsItemsTitle": "اقلام انجام‌شده در این مراجعه ({count} مورد)",
+  "@serviceDetailsItemsTitle": {
+    "description": "Heading of the items section.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceDetailsEditItem": "ویرایش قلم",
+  "@serviceDetailsEditItem": {
+    "description": "Tooltip of the edit button on an item row."
+  },
+  "serviceDetailsDeleteItem": "حذف قلم",
+  "@serviceDetailsDeleteItem": {
+    "description": "Tooltip of the delete button on an item row."
+  },
+  "serviceDetailsReminder": "یادآور بعد: {value}",
+  "@serviceDetailsReminder": {
+    "description": "Reminder line of an item row.",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "۴۱٬۸۵۰ کیلومتر (اردیبهشت ۱۴۰۴)"
+      }
+    }
+  },
+  "serviceDetailsReminderBoth": "{km} کیلومتر ({month} {year})",
+  "@serviceDetailsReminderBoth": {
+    "description": "Reminder value with the due odometer and the due month.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceDetailsReminderDate": "{month} {year}",
+  "@serviceDetailsReminderDate": {
+    "description": "Reminder value with only the due month.",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceDetailsAddItem": "افزودن قلم جدید به این فاکتور",
+  "@serviceDetailsAddItem": {
+    "description": "Dashed button under the item rows."
+  },
+  "serviceDetailsInvoiceTitle": "تصویر فیزیکی فاکتور / رسید",
+  "@serviceDetailsInvoiceTitle": {
+    "description": "Heading of the invoice card."
+  },
+  "serviceDetailsInvoiceUploaded": "بارگذاری شده در {date}",
+  "@serviceDetailsInvoiceUploaded": {
+    "description": "Under the file name on the invoice image.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "۲۵ آبان ۱۴۰۳"
+      }
+    }
+  },
+  "serviceDetailsInvoiceView": "مشاهده در ابعاد کامل",
+  "@serviceDetailsInvoiceView": {
+    "description": "Button that opens the full-screen invoice viewer."
+  },
+  "serviceDetailsInvoiceEmpty": "تصویری از فاکتور الصاق نشده است",
+  "@serviceDetailsInvoiceEmpty": {
+    "description": "Invoice card body when there is no invoice."
+  },
+  "serviceDetailsInvoiceAttach": "الصاق تصویر فاکتور",
+  "@serviceDetailsInvoiceAttach": {
+    "description": "Button that attaches an invoice to a saved visit."
+  },
+  "serviceDetailsInvoiceLoadError": "دریافت تصویر فاکتور ممکن نشد",
+  "@serviceDetailsInvoiceLoadError": {
+    "description": "Invoice card body when the image can't be loaded."
+  },
+  "serviceDetailsInvoiceSaved": "تصویر فاکتور الصاق شد",
+  "@serviceDetailsInvoiceSaved": {
+    "description": "Snackbar after an invoice upload."
+  },
+  "serviceDetailsInvoiceSaveFailed": "بارگذاری تصویر فاکتور ممکن نشد",
+  "@serviceDetailsInvoiceSaveFailed": {
+    "description": "Snackbar when an invoice upload fails."
+  },
+  "serviceDetailsTotalTitle": "جمع کل اقلام مصرفی و اجرت:",
+  "@serviceDetailsTotalTitle": {
+    "description": "Heading of the totals card."
+  },
+  "serviceDetailsTotalLabel": "مبلغ نهایی فاکتور:",
+  "@serviceDetailsTotalLabel": {
+    "description": "Label before the final amount."
+  },
+  "serviceDetailsPdf": "دریافت فایل PDF فاکتور",
+  "@serviceDetailsPdf": {
+    "description": "Disabled footer button (export is not available yet)."
+  },
+  "serviceDetailsLoadError": "دریافت اطلاعات فاکتور ممکن نشد",
+  "@serviceDetailsLoadError": {
+    "description": "Error when the visit can't be loaded."
+  },
+  "serviceDetailsLastItem": "آخرین قلم فاکتور را نمی‌توان حذف کرد؛ به‌جای آن کل فاکتور را حذف کنید",
+  "@serviceDetailsLastItem": {
+    "description": "Snackbar when deleting the only item."
+  },
+  "serviceDetailsDeleteItemConfirmTitle": "حذف قلم «{item}»؟",
+  "@serviceDetailsDeleteItemConfirmTitle": {
+    "description": "Title of the delete-item confirmation.",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceDetailsDeleteItemConfirmBody": "این قلم از فاکتور حذف و جمع کل بازمحاسبه می‌شود.",
+  "@serviceDetailsDeleteItemConfirmBody": {
+    "description": "Body of the delete-item confirmation."
+  },
+  "serviceDetailsUpdated": "فاکتور به‌روزرسانی شد",
+  "@serviceDetailsUpdated": {
+    "description": "Snackbar after the items are saved."
+  },
+  "serviceDetailsUpdateFailed": "به‌روزرسانی فاکتور ممکن نشد",
+  "@serviceDetailsUpdateFailed": {
+    "description": "Snackbar when saving the items fails."
+  },
+  "serviceDetailsDeleted": "فاکتور حذف شد",
+  "@serviceDetailsDeleted": {
+    "description": "Snackbar after the visit is deleted."
+  },
+  "serviceDetailsDeleteFailed": "حذف فاکتور ممکن نشد",
+  "@serviceDetailsDeleteFailed": {
+    "description": "Snackbar when deleting the visit fails."
+  },
+  "serviceEditorTitleEdit": "ویرایش قلم",
+  "@serviceEditorTitleEdit": {
+    "description": "Title of the line-item editor sheet in edit mode."
+  },
+  "serviceEditorTitleAdd": "افزودن قلم",
+  "@serviceEditorTitleAdd": {
+    "description": "Title of the line-item editor sheet in add mode."
+  },
+  "serviceEditorSave": "ذخیره قلم",
+  "@serviceEditorSave": {
+    "description": "Primary button of the line-item editor sheet."
+  },
+  "serviceEditorPickItem": "انتخاب سرویس",
+  "@serviceEditorPickItem": {
+    "description": "Title of the item picker sheet."
+  },
+  "serviceEditorNoItemsLeft": "همه اقلام فهرست در این فاکتور ثبت شده‌اند",
+  "@serviceEditorNoItemsLeft": {
+    "description": "Item picker body when every catalog item is already in the visit."
+  },
+  "serviceHistoryLoadError": "دریافت تاریخچه سرویس‌ها ممکن نشد",
+  "@serviceHistoryLoadError": {
+    "description": "Error in the vehicle details history section."
+  },
+  "serviceHistoryMore": "و {count} مورد دیگر",
+  "@serviceHistoryMore": {
+    "description": "After the first item title of a history row.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "serviceHistoryAmount": "{amount} تومان",
+  "@serviceHistoryAmount": {
+    "description": "Total cost of a history row.",
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalsTitle": "تنظیم دوره سرویس",
+  "@intervalsTitle": {
+    "description": "App bar title of the service intervals page."
+  },
+  "intervalsCurrentMileage": "کارکرد فعلی: {km} کیلومتر",
+  "@intervalsCurrentMileage": {
+    "description": "Current mileage line under the vehicle name.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalsSourceNote": "تنظیمات براساس دفترچه راهنمای سازنده",
+  "@intervalsSourceNote": {
+    "description": "Note next to the reset-all button."
+  },
+  "intervalsResetAll": "بازنشانی همه",
+  "@intervalsResetAll": {
+    "description": "Button that resets every interval to the factory default."
+  },
+  "intervalsResetAllConfirmTitle": "بازنشانی همه دوره‌ها؟",
+  "@intervalsResetAllConfirmTitle": {
+    "description": "Title of the reset-all confirmation."
+  },
+  "intervalsResetAllConfirmBody": "همه دوره‌ها به پیش‌فرض کارخانه برمی‌گردند و مقادیر سفارشی حذف می‌شوند.",
+  "@intervalsResetAllConfirmBody": {
+    "description": "Body of the reset-all confirmation."
+  },
+  "intervalsResetConfirm": "بازنشانی",
+  "@intervalsResetConfirm": {
+    "description": "Confirm button of the reset-all dialog."
+  },
+  "intervalsRuleTitle": "قانون سررسید اولویت زمانی یا کارکرد",
+  "@intervalsRuleTitle": {
+    "description": "Heading of the info banner."
+  },
+  "intervalsRuleBody": "شمارش معکوس و هشدارهای تعویض قطعات بر اساس هرکدام از شاخص‌ها (پیمایش کیلومتر یا سپری شدن ماه‌ها) که زودتر فرا برسد محاسبه و اعلام می‌گردد.",
+  "@intervalsRuleBody": {
+    "description": "Body of the info banner."
+  },
+  "intervalsDefault": "پیش‌فرض کارخانه: {km} کیلومتر / {months} ماه",
+  "@intervalsDefault": {
+    "description": "Factory default line of an interval card.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "months": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalsResetRow": "بازنشانی این مورد",
+  "@intervalsResetRow": {
+    "description": "Tooltip of the per-card reset button."
+  },
+  "intervalsMonthsUnit": "ماه",
+  "@intervalsMonthsUnit": {
+    "description": "Unit after the months input."
+  },
+  "intervalsKmError": "کیلومتر را بین {min} تا {max} وارد کنید",
+  "@intervalsKmError": {
+    "description": "Inline error of the km input.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalsMonthsError": "ماه را بین {min} تا {max} وارد کنید",
+  "@intervalsMonthsError": {
+    "description": "Inline error of the months input.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "intervalsSave": "ذخیره تنظیمات",
+  "@intervalsSave": {
+    "description": "Primary button of the intervals page."
+  },
+  "intervalsSaved": "تنظیمات دوره‌های سرویس با موفقیت ثبت شد",
+  "@intervalsSaved": {
+    "description": "Snackbar after saving."
+  },
+  "intervalsResetDone": "تمام مقادیر به پیش‌فرض کارخانه بازگشتند",
+  "@intervalsResetDone": {
+    "description": "Snackbar after resetting all."
+  },
+  "intervalsSaveInvalid": "مقادیر دوره‌ها نامعتبر است، فیلدها را بررسی کنید",
+  "@intervalsSaveInvalid": {
+    "description": "Snackbar when the server rejects the values (400)."
+  },
+  "intervalsSaveFailed": "ذخیره تنظیمات ممکن نشد، دوباره تلاش کنید",
+  "@intervalsSaveFailed": {
+    "description": "Snackbar when saving fails."
+  },
+  "intervalsResetFailed": "بازنشانی ممکن نشد، دوباره تلاش کنید",
+  "@intervalsResetFailed": {
+    "description": "Snackbar when resetting fails."
+  },
+  "intervalsLoadError": "دریافت دوره‌های سرویس ممکن نشد",
+  "@intervalsLoadError": {
+    "description": "Error when the intervals can't be loaded."
+  },
+  "dueTitle": "سرویس‌های سررسید شده",
+  "@dueTitle": {
+    "description": "App bar title of the due page."
+  },
+  "dueSubtitle": "وضعیت اقلام نیازمند اقدام فوری",
+  "@dueSubtitle": {
+    "description": "App bar subtitle of the due page."
+  },
+  "dueSavedTitle": "کیلومتر با موفقیت ثبت شد",
+  "@dueSavedTitle": {
+    "description": "Heading of the success card after an odometer update."
+  },
+  "dueSavedDate": "امروز، {date}",
+  "@dueSavedDate": {
+    "description": "Date line of the success card.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dueNewMileageBadge": "کارکرد جدید",
+  "@dueNewMileageBadge": {
+    "description": "Badge next to the vehicle name in the success card."
+  },
+  "dueDelta": "{delta} کیلومتر نسبت به ثبت قبل",
+  "@dueDelta": {
+    "description": "Emerald chip with the signed distance since the previous reading.",
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "dueNoticeTitle": "نیاز به بررسی دوره‌ای",
+  "@dueNoticeTitle": {
+    "description": "Heading of the amber notice."
+  },
+  "dueNoticeBodyAfterUpdate": "با این کارکرد جدید، {count} سرویس خودرو به سررسید رسیده‌اند و نیازمند اقدام در تعمیرگاه هستند.",
+  "@dueNoticeBodyAfterUpdate": {
+    "description": "Body of the amber notice after an odometer update.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueNoticeBody": "{count} سرویس خودرو به سررسید رسیده‌اند و نیازمند اقدام در تعمیرگاه هستند.",
+  "@dueNoticeBody": {
+    "description": "Body of the amber notice when opened without an odometer update.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueListTitle": "اقلام سررسید شده",
+  "@dueListTitle": {
+    "description": "Heading of the due list."
+  },
+  "dueListBasis": "بر اساس پیمایش",
+  "@dueListBasis": {
+    "description": "Label at the end of the due list heading."
+  },
+  "dueStatusOverdue": "رسیدگی فوری",
+  "@dueStatusOverdue": {
+    "description": "Status badge: overdue."
+  },
+  "dueStatusDueSoon": "نزدیک به موعد",
+  "@dueStatusDueSoon": {
+    "description": "Status badge: due soon."
+  },
+  "dueStatusUpcoming": "اطلاعیه",
+  "@dueStatusUpcoming": {
+    "description": "Status badge: upcoming."
+  },
+  "dueOverdueKm": "{km} کیلومتر گذشته از موعد",
+  "@dueOverdueKm": {
+    "description": "Remaining line when past due by distance.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueOverdueDays": "{days} روز گذشته از موعد",
+  "@dueOverdueDays": {
+    "description": "Remaining line when past due by time.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueSoonKm": "تنها {km} کیلومتر مانده",
+  "@dueSoonKm": {
+    "description": "Remaining line when due soon by distance.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueSoonDays": "تنها {days} روز مانده",
+  "@dueSoonDays": {
+    "description": "Remaining line when due soon by time.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueUpcomingKm": "{km} کیلومتر مانده (حدود {months} ماه)",
+  "@dueUpcomingKm": {
+    "description": "Remaining line when upcoming by distance.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "months": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueUpcomingDays": "{days} روز مانده (حدود {months} ماه)",
+  "@dueUpcomingDays": {
+    "description": "Remaining line when upcoming by time.",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "months": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueAtKm": "مقرر: {km} کیلومتر",
+  "@dueAtKm": {
+    "description": "The odometer at which the item is due.",
+    "placeholders": {
+      "km": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dueActionOverdue": "ثبت فاکتور این سرویس",
+  "@dueActionOverdue": {
+    "description": "Action button of an overdue item."
+  },
+  "dueActionRecord": "ثبت این سرویس",
+  "@dueActionRecord": {
+    "description": "Action button of a due-soon or upcoming item."
+  },
+  "dueArchiveTitle": "بایگانی فاکتورها",
+  "@dueArchiveTitle": {
+    "description": "Heading of the archive hint card."
+  },
+  "dueArchiveBody": "پس از انجام سرویس، اقلام را در یک فاکتور تجمیعی ثبت کنید.",
+  "@dueArchiveBody": {
+    "description": "Body of the archive hint card."
+  },
+  "dueConfirmBack": "تأیید و بازگشت به داشبورد",
+  "@dueConfirmBack": {
+    "description": "Primary footer button of the due page."
+  },
+  "dueRemindLater": "بعداً یادآوری کن",
+  "@dueRemindLater": {
+    "description": "Secondary footer button of the due page."
+  },
+  "dueEmpty": "همه سرویس‌ها به‌موقع هستند",
+  "@dueEmpty": {
+    "description": "Due page body when every interval is ok."
+  },
+  "dueLoadError": "دریافت وضعیت سرویس‌ها ممکن نشد",
+  "@dueLoadError": {
+    "description": "Error when the due items can't be loaded."
+  },
+  "vehicleDetailsDueSettings": "تنظیم",
+  "@vehicleDetailsDueSettings": {
+    "description": "Action on the due section header that opens the intervals page."
+  },
+  "serviceSharedCardTitle": "اطلاعات مشترک فاکتور",
+  "@serviceSharedCardTitle": {
+    "description": "Heading of the shared card at the top of step 3."
+  },
+  "serviceSharedCardBody": "تعمیرگاه و تصویر فاکتور برای همه اقلام این مراجعه",
+  "@serviceSharedCardBody": {
+    "description": "Subtitle of the shared card at the top of step 3."
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 import 'app_tones.dart';
+import 'chart_palette.dart';
 import 'vehicle_palette.dart';
 
 /// The app's single theme: the light Stitch design system. The app always runs in light mode.
@@ -54,7 +55,7 @@ abstract final class AppTheme {
     const shape = RoundedRectangleBorder(borderRadius: radius);
     return ThemeData(
       colorScheme: scheme,
-      extensions: [tones, VehiclePalette.light],
+      extensions: [tones, VehiclePalette.light, ChartPalette.light],
       fontFamily: AppTextStyles.fontFamily,
       textTheme: AppTextStyles.textTheme,
       scaffoldBackgroundColor: scheme.surface,

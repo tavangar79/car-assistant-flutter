@@ -26,3 +26,9 @@ class InvalidVehiclePhotoFailure extends Failure {
 class VehiclePhotoTooLargeFailure extends Failure {
   const VehiclePhotoTooLargeFailure([super.message = 'Image too large']);
 }
+
+/// The server refused an update it understood (HTTP 422), e.g. unsetting the only default vehicle.
+/// [message] is the server's explanation, shown to the user as is.
+class VehicleRejectedFailure extends Failure {
+  const VehicleRejectedFailure(super.message);
+}

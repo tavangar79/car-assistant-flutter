@@ -1,4 +1,5 @@
 import 'package:car_assistant/features/vehicles/domain/repositories/vehicle_repository.dart';
+import 'package:car_assistant/features/vehicles/domain/usecases/get_vehicle.dart';
 import 'package:car_assistant/features/vehicles/domain/usecases/get_vehicle_catalog.dart';
 import 'package:car_assistant/features/vehicles/domain/usecases/get_vehicles.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,6 +22,12 @@ void main() {
     final result = await GetVehicles(repository).call();
 
     expect(result.getOrElse((f) => throw f), [tara, other]);
+  });
+
+  test('GetVehicle returns the vehicle', () async {
+    when(() => repository.getVehicle('v1')).thenAnswer((_) async => const Right(tara));
+
+    expect((await GetVehicle(repository).call('v1')).getOrElse((f) => throw f), tara);
   });
 
   test('GetVehicleCatalog returns the catalog', () async {
