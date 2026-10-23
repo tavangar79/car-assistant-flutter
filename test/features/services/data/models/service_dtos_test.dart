@@ -15,6 +15,14 @@ void main() {
     expect(ServiceCatalogDto.fromJson(catalogJson).toEntity(), serviceCatalog);
   });
 
+  test('ServiceItemDto reads disabled, defaulting to false when absent', () {
+    const json = {'id': 'engine_oil', 'title': 't', 'subtitle': 's', 'icon': 'oil_barrel'};
+
+    expect(ServiceItemDto.fromJson(json).toEntity().disabled, isFalse);
+    expect(ServiceItemDto.fromJson({...json, 'disabled': true}).toEntity().disabled, isTrue);
+    expect(ServiceItemDto.fromJson({...json, 'disabled': false}).toEntity().disabled, isFalse);
+  });
+
   test('ServiceVisitDto parses a visit without an invoice', () {
     expect(ServiceVisitDto.fromJson(visitJson()).toEntity(), visit());
   });

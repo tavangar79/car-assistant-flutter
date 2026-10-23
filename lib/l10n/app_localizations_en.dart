@@ -3033,4 +3033,523 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileStatDocuments => 'Documents in the wallet';
+
+  @override
+  String get reportExportTitle => 'Export report';
+
+  @override
+  String get reportScopeTitle => 'Report vehicles';
+
+  @override
+  String get reportScopeChangeable => 'Changeable';
+
+  @override
+  String reportScopeAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'All vehicles ($countString)';
+  }
+
+  @override
+  String get reportPeriodTitle => 'Report period';
+
+  @override
+  String get reportJalaliCalendar => 'Jalali calendar';
+
+  @override
+  String get reportPeriodThreeMonths => 'Last 3 months';
+
+  @override
+  String get reportPeriodSixMonths => 'Last 6 months';
+
+  @override
+  String reportPeriodCurrentYear(String year) {
+    return 'This year ($year)';
+  }
+
+  @override
+  String get reportPeriodAll => 'All records';
+
+  @override
+  String get reportFrom => 'From';
+
+  @override
+  String get reportTo => 'To';
+
+  @override
+  String get reportDateUnset => '—';
+
+  @override
+  String get reportContentTitle => 'Report content';
+
+  @override
+  String get reportSelectAll => 'Select all';
+
+  @override
+  String get reportContentServices => 'Services and repairs';
+
+  @override
+  String get reportContentServicesHint => 'Invoices, parts, workshop labour';
+
+  @override
+  String get reportContentFuel => 'Fill-ups';
+
+  @override
+  String get reportContentFuelHint => 'Litres, cost, stations and average economy';
+
+  @override
+  String get reportContentExpenses => 'Other expenses';
+
+  @override
+  String get reportContentExpensesHint => 'Insurance, annual toll, fines, inspection';
+
+  @override
+  String get reportContentImages => 'Invoice images';
+
+  @override
+  String get reportContentImagesHint => 'Append the document images at the end of the PDF';
+
+  @override
+  String get reportPreviewTitle => 'Export preview';
+
+  @override
+  String get reportPreviewIncludes => 'Includes';
+
+  @override
+  String get reportPreviewRecords => 'records';
+
+  @override
+  String get reportPreviewTotal => 'Total:';
+
+  @override
+  String get reportPreviewError => 'Couldn\'t load the preview';
+
+  @override
+  String get reportTooLarge => 'The report range is too large';
+
+  @override
+  String get reportNoContent => 'Choose at least one item';
+
+  @override
+  String get reportDownloadPdf => 'Download official PDF';
+
+  @override
+  String get reportDownloadCsv => 'Download spreadsheet (Excel / CSV)';
+
+  @override
+  String get reportPdfDone => 'The official PDF was created.';
+
+  @override
+  String get reportCsvDone => 'The spreadsheet is ready.';
+
+  @override
+  String get reportExportFailed => 'Couldn\'t create the report file';
+
+  @override
+  String get reportToastClose => 'Close';
+
+  @override
+  String get reportTypeService => 'Service';
+
+  @override
+  String get reportTypeFuel => 'Fuel';
+
+  @override
+  String get reportTypeExpense => 'Expense';
+
+  @override
+  String get reportColumnDate => 'Date';
+
+  @override
+  String get reportColumnVehicle => 'Vehicle';
+
+  @override
+  String get reportColumnPlate => 'Plate';
+
+  @override
+  String get reportColumnType => 'Type';
+
+  @override
+  String get reportColumnDescription => 'Description';
+
+  @override
+  String get reportColumnKm => 'Km';
+
+  @override
+  String get reportColumnAmount => 'Amount (toman)';
+
+  @override
+  String get reportTotalRow => 'Total';
+
+  @override
+  String reportPdfRange(String from, String to) {
+    return 'Report range: $from to $to';
+  }
+
+  @override
+  String reportPdfVehicles(String vehicles) {
+    return 'Vehicles: $vehicles';
+  }
+
+  @override
+  String reportPdfGeneratedAt(String date) {
+    return 'Generated: $date';
+  }
+
+  @override
+  String get reportPdfEntryCount => 'Records';
+
+  @override
+  String get reportPdfTotalCost => 'Total cost';
+
+  @override
+  String get reportPdfServiceCount => 'Services';
+
+  @override
+  String get reportPdfFuelVolume => 'Fuel (litres)';
+
+  @override
+  String reportPdfToman(String amount) {
+    return '$amount toman';
+  }
+
+  @override
+  String get reportPdfOtherFiles => 'Other attached files';
+
+  @override
+  String get plansTitle => 'Subscription and plans';
+
+  @override
+  String get plansHeroBadge => 'Transparent, no commitment, cancel any time';
+
+  @override
+  String get plansHeroTitle => 'Plans and subscriptions';
+
+  @override
+  String get plansHeroBody =>
+      'Unlimited tools to track costs and technical records and raise your car\'s value';
+
+  @override
+  String get plansMonthly => 'Monthly';
+
+  @override
+  String get plansYearly => 'Yearly';
+
+  @override
+  String get plansYearlyDiscount => '20% off';
+
+  @override
+  String get plansPerMonth => 'toman / month';
+
+  @override
+  String get plansPerYear => 'toman / year';
+
+  @override
+  String get plansCurrent => 'Your current plan';
+
+  @override
+  String get plansBasicTag => 'Standard start';
+
+  @override
+  String get plansBasicName => 'Basic (always free)';
+
+  @override
+  String get plansBasicFeature1 => 'Up to 1 vehicle in the garage';
+
+  @override
+  String get plansBasicFeature2 => 'Unlimited services and fill-ups';
+
+  @override
+  String get plansBasicFeature3 => 'In-app reminders (no SMS)';
+
+  @override
+  String get plansBasicFeature4 => 'Simple text report export';
+
+  @override
+  String get plansProBadge => 'Our pick';
+
+  @override
+  String get plansProTag => 'Owners\' favourite';
+
+  @override
+  String get plansProName => 'Pro (Plus)';
+
+  @override
+  String get plansProMonthlyNote => 'Billed monthly, no commitment';
+
+  @override
+  String plansProYearlyNote(String amount) {
+    return 'Same as $amount toman a month (20% saving)';
+  }
+
+  @override
+  String get plansProFeature1 => 'Up to 3 vehicles in one garage';
+
+  @override
+  String get plansProFeature2 => 'SMS reminders for insurance, inspection and services';
+
+  @override
+  String get plansProFeature3 => 'Vehicle health record export (official PDF and Excel)';
+
+  @override
+  String get plansProFeature4 => 'Unlimited document wallet in secure cloud storage';
+
+  @override
+  String get plansProFeature5 => 'Hand the service records to the buyer when selling';
+
+  @override
+  String get plansProCta => 'Choose and upgrade to Pro';
+
+  @override
+  String get plansMasterTag => 'Fleet and family';
+
+  @override
+  String get plansMasterName => 'Unlimited garage';
+
+  @override
+  String get plansMasterMonthlyNote => 'For collectors and multi-vehicle managers';
+
+  @override
+  String plansMasterYearlyNote(String amount) {
+    return 'Same as $amount toman a month with full priority';
+  }
+
+  @override
+  String get plansMasterFeature1 => 'Unlimited vehicles in the main panel';
+
+  @override
+  String get plansMasterFeature2 => 'SMS reminders to several numbers (drivers)';
+
+  @override
+  String get plansMasterFeature3 => 'Dedicated instant phone support';
+
+  @override
+  String get plansMasterFeature4 => 'Full financial export for tax and insurance';
+
+  @override
+  String get plansMasterCta => 'Choose the unlimited plan';
+
+  @override
+  String get plansGuaranteeTitle => 'Transparency and satisfaction guarantee';
+
+  @override
+  String get plansGuaranteeBody =>
+      'There is no unwanted auto-renewal. Within 7 days of buying a subscription, if you are not fully satisfied, the payment is refunded to your bank account, no questions asked.';
+
+  @override
+  String get plansSecurePayment => 'Secure Shaparak payment gateway';
+
+  @override
+  String get plansSupport => 'Support 7 days a week';
+
+  @override
+  String get profilePlanTitle => 'Basic plan';
+
+  @override
+  String get profilePlanBadge => 'Free';
+
+  @override
+  String get profilePlanHint => 'Your current plan • always free';
+
+  @override
+  String get profilePlanUpgrade => 'Upgrade or renew';
+
+  @override
+  String get vehicleTransfer => 'Transfer ownership';
+
+  @override
+  String get transferTitle => 'Transfer vehicle ownership';
+
+  @override
+  String get transferActiveInGarage => 'Active in garage';
+
+  @override
+  String get transferMileage => 'Current mileage:';
+
+  @override
+  String get transferKm => 'km';
+
+  @override
+  String get transferPhoneTitle => 'New owner\'s (buyer\'s) mobile number';
+
+  @override
+  String get transferPhoneHint =>
+      'The request shows up in this number\'s account and completes once the buyer accepts.';
+
+  @override
+  String get transferPhoneLabel => 'Buyer\'s mobile number';
+
+  @override
+  String get transferPhoneNote =>
+      'The new owner needs an account with this mobile number, or has to sign up with it, to see the request.';
+
+  @override
+  String get transferItemsTitle => 'What moves to the new owner';
+
+  @override
+  String get transferItemServices => 'Full service records and invoices';
+
+  @override
+  String get transferItemServicesHint => 'Every workshop visit, the parts used and replaced';
+
+  @override
+  String get transferItemIntervals => 'Service intervals and current mileage';
+
+  @override
+  String get transferItemIntervalsHint => 'Maintenance intervals: oil, timing belt and filters';
+
+  @override
+  String get transferItemDocuments => 'Technical documents and active warranty';
+
+  @override
+  String get transferItemDocumentsHint => 'Official invoices and remaining warranty terms';
+
+  @override
+  String get transferItemFuel => 'Fuel cost history';
+
+  @override
+  String get transferItemFuelHint => 'Average economy per 100 km and the fuel types';
+
+  @override
+  String get transferItemPrivate =>
+      'The previous owner\'s identity and private documents (not transferred)';
+
+  @override
+  String get transferItemPrivateHint =>
+      'ID card images, personal ownership papers and bank records are removed automatically.';
+
+  @override
+  String get transferRulesTitle => 'Privacy and record-keeping rules';
+
+  @override
+  String get transferRulesIntro => 'Once the buyer accepts the transfer:';
+
+  @override
+  String get transferRule1 =>
+      'This vehicle leaves your garage and you lose all access to it right away.';
+
+  @override
+  String get transferRule2 =>
+      'Before sending, export a PDF or Excel copy of the records from the «Export report» page if you need one.';
+
+  @override
+  String get transferRule2Link => 'Open the report export';
+
+  @override
+  String get transferRule3 =>
+      'The new owner can never change or delete the records from your ownership.';
+
+  @override
+  String get transferConsent =>
+      'I confirm the buyer\'s number and hand over full control of the vehicle\'s records and invoices.';
+
+  @override
+  String get transferSubmit => 'Confirm and send the transfer request';
+
+  @override
+  String get transferBack => 'Cancel and back to the garage';
+
+  @override
+  String get transferConfirmTitle => 'Send the transfer request?';
+
+  @override
+  String transferConfirmBody(String vehicle, String phone) {
+    return '«$vehicle» leaves your garage once the owner of $phone accepts.';
+  }
+
+  @override
+  String get transferConfirmSend => 'Send request';
+
+  @override
+  String get transferSent => 'Transfer request sent';
+
+  @override
+  String get transferInvalidPhone => 'The mobile number is not valid';
+
+  @override
+  String get transferSelf => 'You can\'t transfer a vehicle to your own number';
+
+  @override
+  String get transferAlreadyPending => 'This vehicle already has a pending transfer';
+
+  @override
+  String get transferFailed => 'Couldn\'t send the request';
+
+  @override
+  String get transferPendingTitle => 'Transfer waiting for the buyer';
+
+  @override
+  String transferPendingPhone(String phone) {
+    return 'Buyer\'s number: $phone';
+  }
+
+  @override
+  String transferPendingDate(String date) {
+    return 'Sent on: $date';
+  }
+
+  @override
+  String get transferCancelRequest => 'Cancel request';
+
+  @override
+  String get transferCancelled => 'Transfer request cancelled';
+
+  @override
+  String get transferCancelFailed => 'Couldn\'t cancel the request';
+
+  @override
+  String get transfersLoadError => 'Couldn\'t load the transfer requests';
+
+  @override
+  String get incomingTransferTitle => 'Vehicle transfer request';
+
+  @override
+  String incomingTransferBody(String sender, String vehicle) {
+    return '$sender wants to move «$vehicle» to your garage.';
+  }
+
+  @override
+  String get incomingTransferUnknownSender => 'A user';
+
+  @override
+  String get incomingTransferReview => 'Review';
+
+  @override
+  String get incomingTransferSheetTitle => 'Ownership transfer to you';
+
+  @override
+  String incomingTransferFrom(String sender) {
+    return 'From: $sender';
+  }
+
+  @override
+  String incomingTransferMileage(String km) {
+    return 'Mileage: $km km';
+  }
+
+  @override
+  String get incomingTransferNote =>
+      'Accepting moves the vehicle and its records to your garage. The previous owner\'s records can\'t be edited.';
+
+  @override
+  String get incomingTransferAccept => 'Accept';
+
+  @override
+  String get incomingTransferReject => 'Reject';
+
+  @override
+  String get incomingTransferAccepted => 'The vehicle was added to your garage';
+
+  @override
+  String get incomingTransferRejected => 'Transfer request rejected';
+
+  @override
+  String get incomingTransferFailed => 'Couldn\'t complete the request';
+
+  @override
+  String get recordLockedLabel => 'Previous owner';
+
+  @override
+  String get recordLockedHint => 'This record belongs to the previous owner and can\'t be edited';
 }

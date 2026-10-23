@@ -7,6 +7,7 @@ class ServiceItem extends Equatable {
     required this.title,
     required this.subtitle,
     required this.icon,
+    this.disabled = false,
   });
 
   final String id;
@@ -16,6 +17,10 @@ class ServiceItem extends Equatable {
   /// The Material Symbols name of the icon, e.g. `oil_barrel`.
   final String icon;
 
+  /// Disabled for the vehicle the catalog was loaded for: it can't be added to a visit, but old
+  /// visits still show its title.
+  final bool disabled;
+
   @override
-  List<Object?> get props => [id, title, subtitle, icon];
+  List<Object?> get props => [id, title, subtitle, icon, disabled];
 }

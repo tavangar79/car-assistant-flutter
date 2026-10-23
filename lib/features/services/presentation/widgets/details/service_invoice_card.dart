@@ -17,7 +17,9 @@ class ServiceInvoiceCard extends ConsumerWidget {
   const ServiceInvoiceCard({super.key, required this.visit, required this.onAttach});
 
   final ServiceVisit visit;
-  final VoidCallback onAttach;
+
+  /// `null` disables attaching (a locked record).
+  final VoidCallback? onAttach;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -99,7 +101,8 @@ class ServiceInvoiceCard extends ConsumerWidget {
 class _EmptyInvoice extends StatelessWidget {
   const _EmptyInvoice({required this.onAttach});
 
-  final VoidCallback onAttach;
+  /// `null` disables attaching (a locked record).
+  final VoidCallback? onAttach;
 
   @override
   Widget build(BuildContext context) {

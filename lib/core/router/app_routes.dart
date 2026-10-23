@@ -31,6 +31,10 @@ abstract final class AppRoutes {
   static const newExpenseName = 'newExpense';
   static String newExpensePath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/expenses/new';
 
+  /// Transfer a vehicle to another user: a full page above the tabs (no dock).
+  static const transferName = 'transfer';
+  static String transferPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/transfer';
+
   /// The service intervals of a vehicle, inside the Garage tab: `/vehicles/:id/intervals`.
   static const intervalsName = 'intervals';
   static String intervalsPath(String vehicleId) => '${vehicleDetailsPath(vehicleId)}/intervals';
@@ -70,6 +74,20 @@ abstract final class AppRoutes {
   static const historyServiceName = 'historyService';
   static String historyServicePath(String vehicleId, String serviceId) =>
       '$historyPath/services/$vehicleId/$serviceId';
+
+  /// The report export: a full page above the tabs (no dock). Optional `?vehicleId=` preselects
+  /// that vehicle.
+  static const reportExportPath = '/reports/export';
+  static const reportExportName = 'reportExport';
+  static String reportExportLocation([String? vehicleId]) => Uri(
+    path: reportExportPath,
+    queryParameters: vehicleId == null ? null : {'vehicleId': vehicleId},
+  ).toString();
+
+  /// The subscription plans: a full page above the tabs, opened from the profile.
+  static const plansPath = '/plans';
+  static const plansName = 'plans';
+
   static const profilePath = '/profile';
   static const profileName = 'profile';
 

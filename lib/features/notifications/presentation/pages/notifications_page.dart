@@ -7,6 +7,7 @@ import '../../../../core/theme/app_tones.dart';
 import '../../../../core/widgets/load_error_view.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../odometer/presentation/providers/odometer_providers.dart';
+import '../../../transfers/presentation/widgets/incoming_transfers.dart';
 import '../../../vehicles/domain/entities/vehicle.dart';
 import '../../../vehicles/presentation/providers/vehicle_providers.dart';
 import '../../domain/entities/app_notification.dart';
@@ -124,6 +125,8 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
       child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         children: [
+          // Pinned: incoming ownership transfers.
+          const IncomingTransfers(padding: EdgeInsets.only(top: 8, bottom: 16)),
           _UnreadHeader(
             unreadCount: inbox.unreadCount,
             onReadAll: inbox.unreadCount > 0 ? _readAll : null,

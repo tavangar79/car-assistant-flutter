@@ -609,7 +609,7 @@
   },
   "historyExport": "خروجی اکسل/PDF",
   "@historyExport": {
-    "description": "Export button (not available yet)."
+    "description": "Export button of the history page; opens the report export."
   },
   "historyPeriodCurrentYear": "سال جاری ({year})",
   "@historyPeriodCurrentYear": {
@@ -1546,7 +1546,7 @@
   },
   "vehicleDetailsExport": "دریافت کارنامه و گزارش فاکتورها (PDF)",
   "@vehicleDetailsExport": {
-    "description": "Export button at the end of the vehicle details page (not available yet)."
+    "description": "Export button at the end of the vehicle details page; opens the report export."
   },
   "quickActionsTitle": "اقدامات سریع",
   "@quickActionsTitle": {
@@ -4154,5 +4154,721 @@
   "profileStatDocuments": "مدرک در کیف",
   "@profileStatDocuments": {
     "description": "Profile stat tile: documents across all vehicles."
+  },
+  "reportExportTitle": "خروجی گزارش",
+  "@reportExportTitle": {
+    "description": "Title of the report export page."
+  },
+  "reportScopeTitle": "دامنه خودروی گزارش",
+  "@reportScopeTitle": {
+    "description": "Heading of the vehicle scope card."
+  },
+  "reportScopeChangeable": "قابل تغییر",
+  "@reportScopeChangeable": {
+    "description": "Chip next to the vehicle scope heading."
+  },
+  "reportScopeAll": "همه خودروها ({count})",
+  "@reportScopeAll": {
+    "description": "Scope segment for every vehicle of the garage.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportPeriodTitle": "بازه زمانی گزارش",
+  "@reportPeriodTitle": {
+    "description": "Heading of the date range card."
+  },
+  "reportJalaliCalendar": "تقویم جلالی",
+  "@reportJalaliCalendar": {
+    "description": "Note next to the date range heading."
+  },
+  "reportPeriodThreeMonths": "۳ ماه اخیر",
+  "@reportPeriodThreeMonths": {
+    "description": "Quick range pill."
+  },
+  "reportPeriodSixMonths": "۶ ماه گذشته",
+  "@reportPeriodSixMonths": {
+    "description": "Quick range pill."
+  },
+  "reportPeriodCurrentYear": "سال جاری ({year})",
+  "@reportPeriodCurrentYear": {
+    "description": "Quick range pill with the current Jalali year.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPeriodAll": "کل سوابق",
+  "@reportPeriodAll": {
+    "description": "Quick range pill without a start date; also the PDF range start."
+  },
+  "reportFrom": "از تاریخ",
+  "@reportFrom": {
+    "description": "Label of the start date field."
+  },
+  "reportTo": "تا تاریخ",
+  "@reportTo": {
+    "description": "Label of the end date field."
+  },
+  "reportDateUnset": "—",
+  "@reportDateUnset": {
+    "description": "Date field value when the range has no start."
+  },
+  "reportContentTitle": "محتوای گزارش خروجی",
+  "@reportContentTitle": {
+    "description": "Heading of the content card."
+  },
+  "reportSelectAll": "انتخاب همه",
+  "@reportSelectAll": {
+    "description": "Toggles every content box."
+  },
+  "reportContentServices": "سرویس‌ها و تعمیرات",
+  "@reportContentServices": {
+    "description": "Content box: service visits."
+  },
+  "reportContentServicesHint": "فاکتورها، قطعات مصرفی، اجرت تعمیرگاه",
+  "@reportContentServicesHint": {
+    "description": "Subtitle of the services box."
+  },
+  "reportContentFuel": "سوابق سوخت‌گیری",
+  "@reportContentFuel": {
+    "description": "Content box: fuel logs."
+  },
+  "reportContentFuelHint": "لیتر، هزینه، جایگاه‌ها و محاسبه مصرف میانگین",
+  "@reportContentFuelHint": {
+    "description": "Subtitle of the fuel box."
+  },
+  "reportContentExpenses": "هزینه‌های جانبی",
+  "@reportContentExpenses": {
+    "description": "Content box: expenses."
+  },
+  "reportContentExpensesHint": "بیمه شخص ثالث، عوارض سالیانه، خلافی، معاینه فنی",
+  "@reportContentExpensesHint": {
+    "description": "Subtitle of the expenses box."
+  },
+  "reportContentImages": "تصاویر پیوست فاکتورها",
+  "@reportContentImages": {
+    "description": "Content box: append attachment images to the PDF; also the PDF attachments heading."
+  },
+  "reportContentImagesHint": "ضمیمه کردن تصاویر مدارک در انتهای فایل PDF",
+  "@reportContentImagesHint": {
+    "description": "Subtitle of the images box."
+  },
+  "reportPreviewTitle": "پیش‌نمایش خروجی مدنظر",
+  "@reportPreviewTitle": {
+    "description": "Label of the preview card."
+  },
+  "reportPreviewIncludes": "شامل",
+  "@reportPreviewIncludes": {
+    "description": "Preview line, before the record count."
+  },
+  "reportPreviewRecords": "رکورد ثبت‌شده",
+  "@reportPreviewRecords": {
+    "description": "Preview line, after the record count."
+  },
+  "reportPreviewTotal": "مجموع:",
+  "@reportPreviewTotal": {
+    "description": "Preview line, before the total cost."
+  },
+  "reportPreviewError": "محاسبه پیش‌نمایش ممکن نشد",
+  "@reportPreviewError": {
+    "description": "Preview card when the report request fails."
+  },
+  "reportTooLarge": "بازه گزارش بیش از حد بزرگ است",
+  "@reportTooLarge": {
+    "description": "Preview card when the server refuses a too-large report (422)."
+  },
+  "reportNoContent": "حداقل یک مورد را برای گزارش انتخاب کنید",
+  "@reportNoContent": {
+    "description": "Preview card when no content box is checked."
+  },
+  "reportDownloadPdf": "دریافت خروجی PDF رسمی",
+  "@reportDownloadPdf": {
+    "description": "PDF download button."
+  },
+  "reportDownloadCsv": "دریافت فایل اکسل (Excel / CSV)",
+  "@reportDownloadCsv": {
+    "description": "CSV download button."
+  },
+  "reportPdfDone": "فایل PDF رسمی سوابق با موفقیت ایجاد شد.",
+  "@reportPdfDone": {
+    "description": "Toast after a PDF export."
+  },
+  "reportCsvDone": "فایل اکسل محاسباتی آماده بارگیری گردید.",
+  "@reportCsvDone": {
+    "description": "Toast after a CSV export."
+  },
+  "reportExportFailed": "ساخت فایل گزارش ممکن نشد",
+  "@reportExportFailed": {
+    "description": "Snackbar when building or saving the file fails."
+  },
+  "reportToastClose": "بستن",
+  "@reportToastClose": {
+    "description": "Close button of the export toast."
+  },
+  "reportTypeService": "سرویس",
+  "@reportTypeService": {
+    "description": "CSV/PDF type column: service visit."
+  },
+  "reportTypeFuel": "سوخت",
+  "@reportTypeFuel": {
+    "description": "CSV/PDF type column: fill-up."
+  },
+  "reportTypeExpense": "هزینه",
+  "@reportTypeExpense": {
+    "description": "CSV/PDF type column: expense."
+  },
+  "reportColumnDate": "تاریخ",
+  "@reportColumnDate": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnVehicle": "خودرو",
+  "@reportColumnVehicle": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnPlate": "پلاک",
+  "@reportColumnPlate": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnType": "نوع",
+  "@reportColumnType": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnDescription": "شرح",
+  "@reportColumnDescription": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnKm": "کیلومتر",
+  "@reportColumnKm": {
+    "description": "CSV/PDF column."
+  },
+  "reportColumnAmount": "مبلغ (تومان)",
+  "@reportColumnAmount": {
+    "description": "CSV/PDF column."
+  },
+  "reportTotalRow": "جمع کل",
+  "@reportTotalRow": {
+    "description": "Last CSV row and PDF table total row."
+  },
+  "reportPdfRange": "بازه گزارش: {from} تا {to}",
+  "@reportPdfRange": {
+    "description": "PDF header: the Jalali date range.",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPdfVehicles": "خودرو: {vehicles}",
+  "@reportPdfVehicles": {
+    "description": "PDF header: the vehicle nicknames.",
+    "placeholders": {
+      "vehicles": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPdfGeneratedAt": "تاریخ تهیه: {date}",
+  "@reportPdfGeneratedAt": {
+    "description": "PDF header: the creation date.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPdfEntryCount": "تعداد رکورد",
+  "@reportPdfEntryCount": {
+    "description": "PDF summary label."
+  },
+  "reportPdfTotalCost": "مجموع هزینه",
+  "@reportPdfTotalCost": {
+    "description": "PDF summary label."
+  },
+  "reportPdfServiceCount": "تعداد سرویس",
+  "@reportPdfServiceCount": {
+    "description": "PDF summary label."
+  },
+  "reportPdfFuelVolume": "سوخت (لیتر)",
+  "@reportPdfFuelVolume": {
+    "description": "PDF summary label."
+  },
+  "reportPdfToman": "{amount} تومان",
+  "@reportPdfToman": {
+    "description": "PDF summary amount.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPdfOtherFiles": "سایر فایل‌های پیوست",
+  "@reportPdfOtherFiles": {
+    "description": "PDF heading of the non-image attachments."
+  },
+  "plansTitle": "اشتراک و پلن‌ها",
+  "@plansTitle": {
+    "description": "Title of the plans page."
+  },
+  "plansHeroBadge": "شفاف، بدون تعهد و قابل لغو در هر زمان",
+  "@plansHeroBadge": {
+    "description": "Badge of the plans hero banner."
+  },
+  "plansHeroTitle": "پلن‌ها و اشتراک‌ها",
+  "@plansHeroTitle": {
+    "description": "Title of the plans hero banner."
+  },
+  "plansHeroBody": "امکانات نامحدود برای ثبت دقیق هزینه‌ها، سوابق فنی و ارتقای ارزش خودرو",
+  "@plansHeroBody": {
+    "description": "Body of the plans hero banner."
+  },
+  "plansMonthly": "ماهانه",
+  "@plansMonthly": {
+    "description": "Billing toggle: monthly."
+  },
+  "plansYearly": "سالیانه",
+  "@plansYearly": {
+    "description": "Billing toggle: yearly."
+  },
+  "plansYearlyDiscount": "۲۰٪ تخفیف",
+  "@plansYearlyDiscount": {
+    "description": "Discount chip of the yearly toggle."
+  },
+  "plansPerMonth": "تومان / ماهانه",
+  "@plansPerMonth": {
+    "description": "Price unit, monthly."
+  },
+  "plansPerYear": "تومان / سالانه",
+  "@plansPerYear": {
+    "description": "Price unit, yearly."
+  },
+  "plansCurrent": "پلن فعلی شما",
+  "@plansCurrent": {
+    "description": "Disabled button of the current plan."
+  },
+  "plansBasicTag": "شروع استاندارد",
+  "@plansBasicTag": {
+    "description": "Tag of the basic plan."
+  },
+  "plansBasicName": "پایه (همیشه رایگان)",
+  "@plansBasicName": {
+    "description": "Name of the basic plan."
+  },
+  "plansBasicFeature1": "حداکثر ۱ خودرو در گاراژ",
+  "@plansBasicFeature1": {
+    "description": "Basic plan feature."
+  },
+  "plansBasicFeature2": "ثبت نامحدود سرویس و سوخت",
+  "@plansBasicFeature2": {
+    "description": "Basic plan feature."
+  },
+  "plansBasicFeature3": "یادآور درون‌برنامه‌ای (بدون پیامک)",
+  "@plansBasicFeature3": {
+    "description": "Basic plan feature."
+  },
+  "plansBasicFeature4": "خروجی گزارش ساده متنی",
+  "@plansBasicFeature4": {
+    "description": "Basic plan feature."
+  },
+  "plansProBadge": "پیشنهاد ما",
+  "@plansProBadge": {
+    "description": "Badge above the pro plan card."
+  },
+  "plansProTag": "بیشترین انتخاب مالکان",
+  "@plansProTag": {
+    "description": "Tag of the pro plan."
+  },
+  "plansProName": "حرفه‌ای (پلاس)",
+  "@plansProName": {
+    "description": "Name of the pro plan."
+  },
+  "plansProMonthlyNote": "تسویه‌حساب ماهانه بدون تعهد زمانی",
+  "@plansProMonthlyNote": {
+    "description": "Pro plan subtitle, monthly."
+  },
+  "plansProYearlyNote": "معادل {amount} تومان در ماه (۲۰٪ صرفه‌جویی)",
+  "@plansProYearlyNote": {
+    "description": "Pro plan subtitle, yearly.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "plansProFeature1": "مدیریت همزمان تا ۳ خودرو در یک گاراژ",
+  "@plansProFeature1": {
+    "description": "Pro plan feature."
+  },
+  "plansProFeature2": "یادآور پیامکی تمدید بیمه، معاینه و سرویس دوره",
+  "@plansProFeature2": {
+    "description": "Pro plan feature."
+  },
+  "plansProFeature3": "خروجی شناسنامه سلامت فنی خودرو (PDF رسمی و اکسل)",
+  "@plansProFeature3": {
+    "description": "Pro plan feature."
+  },
+  "plansProFeature4": "کیف مدارک نامحدود با فضای امن ابری",
+  "@plansProFeature4": {
+    "description": "Pro plan feature."
+  },
+  "plansProFeature5": "انتقال دیجیتال سوابق سرویس به خریدار هنگام فروش",
+  "@plansProFeature5": {
+    "description": "Pro plan feature."
+  },
+  "plansProCta": "انتخاب و ارتقا به حرفه‌ای",
+  "@plansProCta": {
+    "description": "Upgrade button of the pro plan."
+  },
+  "plansMasterTag": "ناوگان و خانواده",
+  "@plansMasterTag": {
+    "description": "Tag of the unlimited plan."
+  },
+  "plansMasterName": "گاراژ نامحدود",
+  "@plansMasterName": {
+    "description": "Name of the unlimited plan."
+  },
+  "plansMasterMonthlyNote": "برای مجموعه‌داران و مدیران چند خودرو",
+  "@plansMasterMonthlyNote": {
+    "description": "Unlimited plan subtitle, monthly."
+  },
+  "plansMasterYearlyNote": "معادل {amount} تومان در ماه با اولویت کامل",
+  "@plansMasterYearlyNote": {
+    "description": "Unlimited plan subtitle, yearly.",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "plansMasterFeature1": "خودرو نامحدود در پنل اصلی",
+  "@plansMasterFeature1": {
+    "description": "Unlimited plan feature."
+  },
+  "plansMasterFeature2": "ارسال پیامک یادآور به چند شماره مجزا (رانندگان)",
+  "@plansMasterFeature2": {
+    "description": "Unlimited plan feature."
+  },
+  "plansMasterFeature3": "پشتیبانی تلفنی اختصاصی و آنی",
+  "@plansMasterFeature3": {
+    "description": "Unlimited plan feature."
+  },
+  "plansMasterFeature4": "خروجی مالی جامع برای امور مالیاتی و بیمه",
+  "@plansMasterFeature4": {
+    "description": "Unlimited plan feature."
+  },
+  "plansMasterCta": "انتخاب پلن نامحدود",
+  "@plansMasterCta": {
+    "description": "Upgrade button of the unlimited plan."
+  },
+  "plansGuaranteeTitle": "تضمین شفافیت و رضایت",
+  "@plansGuaranteeTitle": {
+    "description": "Heading of the guarantee card."
+  },
+  "plansGuaranteeBody": "تمدید خودکار ناخواسته در این سیستم وجود ندارد. تا ۷ روز پس از خرید اشتراک، در صورت عدم رضایت کامل، وجه پرداختی بدون پرسش به حساب بانکی شما بازگردانده می‌شود.",
+  "@plansGuaranteeBody": {
+    "description": "Body of the guarantee card."
+  },
+  "plansSecurePayment": "درگاه پرداخت امن شاپرک",
+  "@plansSecurePayment": {
+    "description": "Guarantee card note."
+  },
+  "plansSupport": "پشتیبانی ۷ روز هفته",
+  "@plansSupport": {
+    "description": "Guarantee card note."
+  },
+  "profilePlanTitle": "اشتراک پایه",
+  "@profilePlanTitle": {
+    "description": "Profile subscription card: the current plan."
+  },
+  "profilePlanBadge": "رایگان",
+  "@profilePlanBadge": {
+    "description": "Profile subscription card: the plan chip."
+  },
+  "profilePlanHint": "پلن فعلی شما • همیشه رایگان",
+  "@profilePlanHint": {
+    "description": "Profile subscription card: subtitle."
+  },
+  "profilePlanUpgrade": "ارتقا یا تمدید",
+  "@profilePlanUpgrade": {
+    "description": "Profile subscription card: opens the plans page."
+  },
+  "vehicleTransfer": "انتقال مالکیت",
+  "@vehicleTransfer": {
+    "description": "Vehicle options menu: opens the ownership transfer page."
+  },
+  "transferTitle": "انتقال مالکیت خودرو",
+  "@transferTitle": {
+    "description": "Title of the transfer page."
+  },
+  "transferActiveInGarage": "فعال در گاراژ",
+  "@transferActiveInGarage": {
+    "description": "Chip on the vehicle card of the transfer page."
+  },
+  "transferMileage": "کارکرد جاری:",
+  "@transferMileage": {
+    "description": "Mileage label on the vehicle card of the transfer page."
+  },
+  "transferKm": "کیلومتر",
+  "@transferKm": {
+    "description": "Unit after the mileage."
+  },
+  "transferPhoneTitle": "شماره تلفن همراه مالک جدید (خریدار)",
+  "@transferPhoneTitle": {
+    "description": "Heading of the phone card."
+  },
+  "transferPhoneHint": "درخواست انتقال در حساب کاربری این شماره نمایش داده می‌شود و پس از تایید خریدار انجام می‌شود.",
+  "@transferPhoneHint": {
+    "description": "Subtitle of the phone card (replaces Stitch's SMS sentence: no SMS is sent)."
+  },
+  "transferPhoneLabel": "شماره همراه خریدار",
+  "@transferPhoneLabel": {
+    "description": "Semantics label of the phone field."
+  },
+  "transferPhoneNote": "مالک جدید باید در سامانه «مدیریت خودرو» با همین شماره همراه حساب کاربری داشته باشد یا ثبت‌نام کند تا درخواست را ببیند.",
+  "@transferPhoneNote": {
+    "description": "Info note under the phone field (Stitch's note without the SMS part)."
+  },
+  "transferItemsTitle": "اقلامی که به مالک جدید منتقل می‌شوند",
+  "@transferItemsTitle": {
+    "description": "Heading of the transferred items card."
+  },
+  "transferItemServices": "سوابق کامل سرویس‌ها و فاکتورها",
+  "@transferItemServices": {
+    "description": "Transferred item."
+  },
+  "transferItemServicesHint": "تمام جزئیات مراجعات به تعمیرگاه، قطعات مصرفی و تعویض‌شده",
+  "@transferItemServicesHint": {
+    "description": "Transferred item hint."
+  },
+  "transferItemIntervals": "دوره‌های سرویس و کیلومتر جاری",
+  "@transferItemIntervals": {
+    "description": "Transferred item."
+  },
+  "transferItemIntervalsHint": "فواصل استاندارد نگهداری، روغن موتور، تسمه‌تایم و فیلترها",
+  "@transferItemIntervalsHint": {
+    "description": "Transferred item hint."
+  },
+  "transferItemDocuments": "تصاویر اسناد فنی و گارانتی فعال",
+  "@transferItemDocuments": {
+    "description": "Transferred item."
+  },
+  "transferItemDocumentsHint": "فاکتورهای رسمی و مهلت‌های باقی‌مانده از دفترچه گارانتی",
+  "@transferItemDocumentsHint": {
+    "description": "Transferred item hint."
+  },
+  "transferItemFuel": "تاریخچه هزینه‌های سوخت",
+  "@transferItemFuel": {
+    "description": "Transferred item."
+  },
+  "transferItemFuelHint": "گزارش میانگین مصرف در هر ۱۰۰ کیلومتر و نوع سوخت ثبت‌شده",
+  "@transferItemFuelHint": {
+    "description": "Transferred item hint."
+  },
+  "transferItemPrivate": "مدارک هویتی و خصوصی مالک پیشین (منتقل نمی‌شود)",
+  "@transferItemPrivate": {
+    "description": "Item that is not transferred."
+  },
+  "transferItemPrivateHint": "تصویر کارت ملی، اسناد مالکیت شخصی و تراکنش‌های بانکی به صورت خودکار حذف می‌گردند.",
+  "@transferItemPrivateHint": {
+    "description": "Hint of the item that is not transferred."
+  },
+  "transferRulesTitle": "قوانین حفظ حریم خصوصی و نگهداری سوابق",
+  "@transferRulesTitle": {
+    "description": "Heading of the rules card."
+  },
+  "transferRulesIntro": "پس از تایید و پذیرش نهایی انتقال توسط خریدار:",
+  "@transferRulesIntro": {
+    "description": "Intro of the rules."
+  },
+  "transferRule1": "این خودرو از گاراژ فعال شما خارج شده و کلیه دسترسی‌های مدیریتی و ویرایش آن بلافاصله سلب خواهد شد.",
+  "@transferRule1": {
+    "description": "Rule 1."
+  },
+  "transferRule2": "پیش از ارسال درخواست، در صورت نیاز از صفحه «خروجی گزارش» یک نسخه PDF یا اکسل از سوابق تهیه کنید.",
+  "@transferRule2": {
+    "description": "Rule 2."
+  },
+  "transferRule2Link": "رفتن به خروجی گزارش",
+  "@transferRule2Link": {
+    "description": "Link under rule 2 to the report export page."
+  },
+  "transferRule3": "مالک جدید به هیچ عنوان امکان تغییر، دستکاری یا حذف اطلاعات ثبت‌شده در دوران مالکیت شما را نخواهد داشت.",
+  "@transferRule3": {
+    "description": "Rule 3."
+  },
+  "transferConsent": "صحت شماره تلفن همراه خریدار و واگذاری کامل کنترل فنی و فاکتورهای خودرو را تایید می‌نمایم.",
+  "@transferConsent": {
+    "description": "Consent checkbox."
+  },
+  "transferSubmit": "تایید نهایی و ارسال درخواست انتقال",
+  "@transferSubmit": {
+    "description": "Submit button."
+  },
+  "transferBack": "انصراف و بازگشت به گاراژ",
+  "@transferBack": {
+    "description": "Secondary button."
+  },
+  "transferConfirmTitle": "درخواست انتقال ارسال شود؟",
+  "@transferConfirmTitle": {
+    "description": "Title of the final confirmation."
+  },
+  "transferConfirmBody": "«{vehicle}» پس از تایید صاحب شماره {phone} از گاراژ شما خارج می‌شود.",
+  "@transferConfirmBody": {
+    "description": "Body of the final confirmation.",
+    "placeholders": {
+      "vehicle": {
+        "type": "String"
+      },
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "transferConfirmSend": "ارسال درخواست",
+  "@transferConfirmSend": {
+    "description": "Confirm button of the final confirmation."
+  },
+  "transferSent": "درخواست انتقال ارسال شد",
+  "@transferSent": {
+    "description": "Snackbar after sending."
+  },
+  "transferInvalidPhone": "شماره همراه معتبر نیست",
+  "@transferInvalidPhone": {
+    "description": "Snackbar for an invalid phone (400)."
+  },
+  "transferSelf": "نمی‌توانید خودرو را به شماره خودتان منتقل کنید",
+  "@transferSelf": {
+    "description": "Snackbar for a self transfer (422)."
+  },
+  "transferAlreadyPending": "برای این خودرو یک درخواست انتقال در انتظار وجود دارد",
+  "@transferAlreadyPending": {
+    "description": "Snackbar for a duplicate request (409)."
+  },
+  "transferFailed": "ارسال درخواست ممکن نشد",
+  "@transferFailed": {
+    "description": "Snackbar for another failure."
+  },
+  "transferPendingTitle": "درخواست انتقال در انتظار تایید خریدار",
+  "@transferPendingTitle": {
+    "description": "Heading of the pending transfer card."
+  },
+  "transferPendingPhone": "شماره خریدار: {phone}",
+  "@transferPendingPhone": {
+    "description": "Pending transfer: the phone.",
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "transferPendingDate": "تاریخ ارسال: {date}",
+  "@transferPendingDate": {
+    "description": "Pending transfer: the date.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "transferCancelRequest": "لغو درخواست",
+  "@transferCancelRequest": {
+    "description": "Cancels the pending transfer."
+  },
+  "transferCancelled": "درخواست انتقال لغو شد",
+  "@transferCancelled": {
+    "description": "Snackbar after cancelling."
+  },
+  "transferCancelFailed": "لغو درخواست ممکن نشد",
+  "@transferCancelFailed": {
+    "description": "Snackbar of a failed cancel."
+  },
+  "transfersLoadError": "بارگذاری درخواست‌های انتقال ممکن نشد",
+  "@transfersLoadError": {
+    "description": "Error of the transfers load."
+  },
+  "incomingTransferTitle": "درخواست انتقال خودرو",
+  "@incomingTransferTitle": {
+    "description": "Banner and card title for an incoming transfer."
+  },
+  "incomingTransferBody": "{sender} می‌خواهد «{vehicle}» را به گاراژ شما منتقل کند.",
+  "@incomingTransferBody": {
+    "description": "Banner and card body.",
+    "placeholders": {
+      "sender": {
+        "type": "String"
+      },
+      "vehicle": {
+        "type": "String"
+      }
+    }
+  },
+  "incomingTransferUnknownSender": "یک کاربر",
+  "@incomingTransferUnknownSender": {
+    "description": "Sender when the seller has no name."
+  },
+  "incomingTransferReview": "بررسی",
+  "@incomingTransferReview": {
+    "description": "Opens the incoming transfer sheet."
+  },
+  "incomingTransferSheetTitle": "انتقال مالکیت به شما",
+  "@incomingTransferSheetTitle": {
+    "description": "Title of the incoming transfer sheet."
+  },
+  "incomingTransferFrom": "فرستنده: {sender}",
+  "@incomingTransferFrom": {
+    "description": "Sheet: the seller.",
+    "placeholders": {
+      "sender": {
+        "type": "String"
+      }
+    }
+  },
+  "incomingTransferMileage": "کارکرد: {km} کیلومتر",
+  "@incomingTransferMileage": {
+    "description": "Sheet: the vehicle mileage.",
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "incomingTransferNote": "با پذیرش، خودرو و سوابق آن به گاراژ شما منتقل می‌شود. سوابق مالک قبلی قابل ویرایش نیستند.",
+  "@incomingTransferNote": {
+    "description": "Sheet: what accepting does."
+  },
+  "incomingTransferAccept": "پذیرش",
+  "@incomingTransferAccept": {
+    "description": "Sheet: accept."
+  },
+  "incomingTransferReject": "رد درخواست",
+  "@incomingTransferReject": {
+    "description": "Sheet: reject."
+  },
+  "incomingTransferAccepted": "خودرو به گاراژ شما اضافه شد",
+  "@incomingTransferAccepted": {
+    "description": "Snackbar after accepting."
+  },
+  "incomingTransferRejected": "درخواست انتقال رد شد",
+  "@incomingTransferRejected": {
+    "description": "Snackbar after rejecting."
+  },
+  "incomingTransferFailed": "انجام درخواست ممکن نشد",
+  "@incomingTransferFailed": {
+    "description": "Snackbar of a failed accept or reject."
+  },
+  "recordLockedLabel": "مالک قبلی",
+  "@recordLockedLabel": {
+    "description": "Chip on a record from before the ownership transfer."
+  },
+  "recordLockedHint": "این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست",
+  "@recordLockedHint": {
+    "description": "Note on a locked record."
   }
 }

@@ -12,6 +12,7 @@ import '../../domain/entities/service_line_item.dart';
 import '../../domain/entities/service_visit.dart';
 import '../providers/service_providers.dart';
 import '../widgets/details/line_item_editor_sheet.dart';
+import '../../../../core/widgets/locked_record_note.dart';
 import '../widgets/details/service_header_card.dart';
 import '../widgets/details/service_invoice_card.dart';
 import '../widgets/details/service_item_picker_sheet.dart';
@@ -20,7 +21,8 @@ import '../widgets/details/service_total_card.dart';
 import '../widgets/wizard/invoice_attachment_field.dart';
 
 /// "جزئیات فاکتور سرویس" (Stitch `ca8a1402532c42dcb345e55f5e855068`): the read-only header, the
-/// editable items, the invoice photo and the totals. The app bar menu deletes the visit.
+/// editable items (read-only when disabled for the vehicle), the invoice photo and the totals.
+/// The app bar menu deletes the visit.
 /// Payment method, tracking code, print, share and PDF are not in the API: the PDF button is
 /// shown disabled and the rest left out.
 class ServiceDetailsPage extends ConsumerWidget {
@@ -211,7 +213,7 @@ class ServiceDetailsPage extends ConsumerWidget {
           ],
         ),
         actions: [
-          if (visit.hasValue)
+          if (visit.value case final loaded? when !loaded.locked)
             PopupMenuButton<VoidCallback>(
               tooltip: l10n.serviceDetailsOptions,
               icon: const Icon(Icons.more_vert),
@@ -299,7 +301,10 @@ class _Body extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final catalog = ref.watch(serviceCatalogProvider).value ?? const <ServiceCategory>[];
+    final vehicleCatalog = ref.watch(vehicleServiceCatalogProvider(visit.vehicleId));
+    final catalog = vehicleCatalog.value ?? const <ServiceCategory>[];
+    // Titles of items the vehicle's catalog no longer has.
+    final titles = ref.watch(serviceCatalogProvider).value ?? const <ServiceCategory>[];
     // Keeps the suggestions warm for the line-item editor.
     ref.watch(serviceSuggestionsProvider);
     final vehicle = ref.watch(vehicleProvider(visit.vehicleId)).value;
@@ -310,6 +315,7 @@ class _Body extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
           children: [
             ServiceHeaderCard(visit: visit, vehicle: vehicle),
+            if (visit.locked) ...[const SizedBox(height: 12), const LockedRecordNote()],
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -326,33 +332,51 @@ class _Body extends ConsumerWidget {
               if (index > 0) const SizedBox(height: 12),
               Builder(
                 builder: (context) {
-                  final item = findServiceItem(catalog, line.itemId);
+                  final vehicleItem = findServiceItem(catalog, line.itemId);
+                  final item = vehicleItem ?? findServiceItem(titles, line.itemId);
                   final title = item?.title ?? line.itemId;
+                  // Read-only (still deletable) when the item is disabled for this vehicle or
+                  // no longer in its catalog.
+                  final readOnly =
+                      vehicleCatalog.hasValue && (vehicleItem == null || vehicleItem.disabled);
                   return ServiceLineRow(
                     line: line,
                     item: item,
                     index: index,
                     baseKm: visit.odometerKm,
                     baseDate: baseDate,
-                    onEdit: item == null || busy ? () {} : () => onEditLine(item, line),
-                    onDelete: busy ? () {} : () => onDeleteLine(line, title),
+                    onEdit: visit.locked || readOnly
+                        ? null
+                        : vehicleItem == null || busy
+                        ? () {}
+                        : () => onEditLine(vehicleItem, line),
+                    onDelete: visit.locked
+                        ? null
+                        : busy
+                        ? () {}
+                        : () => onDeleteLine(line, title),
                   );
                 },
               ),
             ],
-            const SizedBox(height: 12),
-            OutlinedButton.icon(
-              onPressed: catalog.isEmpty || busy ? null : () => onAddLine(catalog),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size.fromHeight(48),
-                backgroundColor: scheme.surfaceContainerLowest.withValues(alpha: 0.8),
-                side: BorderSide(color: scheme.outlineVariant),
+            if (!visit.locked) ...[
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: catalog.isEmpty || busy ? null : () => onAddLine(catalog),
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                  backgroundColor: scheme.surfaceContainerLowest.withValues(alpha: 0.8),
+                  side: BorderSide(color: scheme.outlineVariant),
+                ),
+                icon: const Icon(Icons.add_circle_outline, size: 20),
+                label: Text(l10n.serviceDetailsAddItem),
               ),
-              icon: const Icon(Icons.add_circle_outline, size: 20),
-              label: Text(l10n.serviceDetailsAddItem),
-            ),
+            ],
             const SizedBox(height: 16),
-            ServiceInvoiceCard(visit: visit, onAttach: busy ? () {} : onAttachInvoice),
+            ServiceInvoiceCard(
+              visit: visit,
+              onAttach: visit.locked ? null : (busy ? () {} : onAttachInvoice),
+            ),
             const SizedBox(height: 16),
             ServiceTotalCard(totalCost: visit.totalCost),
           ],

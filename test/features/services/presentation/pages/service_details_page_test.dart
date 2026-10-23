@@ -1,4 +1,5 @@
 import 'package:car_assistant/core/theme/app_theme.dart';
+import 'package:car_assistant/features/services/domain/entities/service_category.dart';
 import 'package:car_assistant/features/services/domain/entities/service_line_item.dart';
 import 'package:car_assistant/features/services/domain/entities/service_suggestions.dart';
 import 'package:car_assistant/features/services/domain/entities/service_visit_update.dart';
@@ -10,6 +11,7 @@ import 'package:car_assistant/features/services/presentation/widgets/details/ser
 import 'package:car_assistant/features/vehicles/domain/repositories/vehicle_repository.dart';
 import 'package:car_assistant/features/vehicles/presentation/providers/vehicle_providers.dart';
 import 'package:car_assistant/l10n/app_localizations.dart';
+import 'package:car_assistant/features/services/data/models/service_visit_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,7 +36,8 @@ void main() {
     services = MockServiceRepository();
     when(() => vehicles.getVehicle('v1')).thenAnswer((_) async => const Right(tara));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([tara]));
-    when(() => services.getCatalog()).thenAnswer((_) async => const Right(serviceCatalog));
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right(serviceCatalog));
     when(() => services.getSuggestions()).thenAnswer(
       (_) async => const Right(
         ServiceSuggestions(
@@ -115,6 +118,27 @@ void main() {
       matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
     );
     expect(tester.widget<ButtonStyleButton>(pdf).onPressed, isNull);
+  });
+
+  testWidgets('a locked visit (previous owner) is read-only with the "مالک قبلی" note', (
+    tester,
+  ) async {
+    final locked = ServiceVisitDto.fromJson({...visitJson(), 'locked': true}).toEntity();
+    when(() => services.getVisit('v1', 's1')).thenAnswer((_) async => Right(locked));
+
+    await openPage(tester);
+
+    expect(find.text('مالک قبلی'), findsOneWidget);
+    expect(find.text('این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست'), findsOneWidget);
+    expect(find.byIcon(Icons.edit_outlined), findsNothing);
+    expect(find.byIcon(Icons.delete_outline), findsNothing);
+    expect(find.byIcon(Icons.more_vert), findsNothing);
+    expect(find.text('افزودن قلم جدید به این فاکتور'), findsNothing);
+    final attach = find.ancestor(
+      of: find.text('الصاق تصویر فاکتور'),
+      matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+    );
+    expect(tester.widget<ButtonStyleButton>(attach).onPressed, isNull);
   });
 
   testWidgets('shows the invoice with its size and opens the full-size viewer', (tester) async {
@@ -220,6 +244,43 @@ void main() {
       filterLine,
       ServiceLineItem(itemId: 'front_brake_pads', cost: 950000),
     ]);
+  });
+
+  testWidgets('an item disabled for the vehicle is read-only but deletable, and not offered', (
+    tester,
+  ) async {
+    when(() => services.getCatalog(vehicleId: 'v1'))
+        .thenAnswer((_) async => Right(catalogWithDisabled({'oil_filter', 'front_brake_pads'})));
+    await openPage(tester);
+
+    // The disabled filter keeps its title and cost, loses edit, keeps delete.
+    expect(find.text('فیلتر روغن'), findsOneWidget);
+    expect(find.text('۲۸۰٬۰۰۰'), findsOneWidget);
+    expect(find.byTooltip('ویرایش قلم'), findsOneWidget); // engine oil only
+    expect(find.byTooltip('حذف قلم'), findsNWidgets(2));
+
+    await tapText(tester, 'افزودن قلم جدید به این فاکتور');
+    final sheet = find.byType(ServiceItemPickerSheet);
+    expect(find.descendant(of: sheet, matching: find.text('لنت ترمز جلو')), findsNothing);
+    expect(find.text('همه اقلام فهرست در این فاکتور ثبت شده‌اند'), findsOneWidget);
+  });
+
+  testWidgets('an item missing from the vehicle catalog takes its title from the lookup', (
+    tester,
+  ) async {
+    // The vehicle's catalog no longer has the oil filter; the title lookup still does.
+    when(() => services.getCatalog(vehicleId: 'v1')).thenAnswer(
+      (_) async => const Right([
+        ServiceCategory(id: 'fluids', title: 'روغن و مایعات مصرفی', items: [engineOil]),
+      ]),
+    );
+    await openPage(tester);
+
+    verify(() => services.getCatalog()).called(greaterThan(0));
+    expect(find.text('فیلتر روغن'), findsOneWidget);
+    expect(find.text('oil_filter'), findsNothing);
+    expect(find.byTooltip('ویرایش قلم'), findsOneWidget); // engine oil only
+    expect(find.byTooltip('حذف قلم'), findsNWidgets(2));
   });
 
   testWidgets('the menu deletes the visit after confirming and leaves the page', (tester) async {

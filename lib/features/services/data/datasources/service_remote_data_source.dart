@@ -19,8 +19,13 @@ class ServiceRemoteDataSource {
 
   static String _visit(String vehicleId, String serviceId) => '${_visits(vehicleId)}/$serviceId';
 
-  Future<ServiceCatalogDto> fetchCatalog() async {
-    final response = await _dio.get<Map<String, dynamic>>('/api/service-items');
+  /// With [vehicleId], the catalog resolved for that vehicle (disabled items included); without
+  /// it, the title lookup of every known item.
+  Future<ServiceCatalogDto> fetchCatalog({String? vehicleId}) async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/api/service-items',
+      queryParameters: vehicleId == null ? null : {'vehicleId': vehicleId},
+    );
     return ServiceCatalogDto.fromJson(response.data!);
   }
 

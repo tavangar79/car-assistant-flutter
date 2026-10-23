@@ -70,7 +70,9 @@ class _ServiceDetailsStepState extends ConsumerState<ServiceDetailsStep> {
     final now = ref.watch(clockProvider)();
     final state = ref.watch(serviceWizardProvider(widget.args));
     final draft = state.draft;
-    final catalog = ref.watch(serviceCatalogProvider).value ?? const <ServiceCategory>[];
+    final catalog =
+        ref.watch(vehicleServiceCatalogProvider(widget.args.vehicleId)).value ??
+        const <ServiceCategory>[];
     final suggestions = ref.watch(serviceSuggestionsProvider).value ?? ServiceSuggestions.empty;
     final items = [for (final id in draft.itemIds) ?findServiceItem(catalog, id)];
     final baseKm = draft.odometerKm ?? widget.vehicle.mileageKm;

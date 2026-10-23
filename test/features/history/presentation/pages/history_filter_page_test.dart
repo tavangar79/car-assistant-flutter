@@ -44,7 +44,8 @@ void main() {
     final services = MockServiceRepository();
     when(() => history.getHistory(any())).thenAnswer((_) async => Right(historyResult()));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right([tara, peugeot]));
-    when(() => services.getCatalog()).thenAnswer((_) async => const Right(serviceCatalog));
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right(serviceCatalog));
     container = ProviderContainer(
       overrides: [
         historyRepositoryProvider.overrideWithValue(history),

@@ -91,7 +91,8 @@ void main() {
     when(() => profile.getStats()).thenAnswer(
       (_) async => const Right(ProfileStats(vehicleCount: 0, serviceCount: 0, documentCount: 0)),
     );
-    when(() => services.getCatalog()).thenAnswer((_) async => const Right([]));
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right([]));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right(garage));
     for (final vehicle in garage) {
       when(() => vehicles.getVehicle(vehicle.id)).thenAnswer((_) async => Right(vehicle));

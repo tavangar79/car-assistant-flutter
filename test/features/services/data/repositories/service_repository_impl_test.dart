@@ -79,6 +79,48 @@ void main() {
     expect((await repository.getCatalog()).getOrElse((f) => throw f), serviceCatalog);
   });
 
+  test('getCatalog for a vehicle sends ?vehicleId= and maps disabled items', () async {
+    when(
+      () =>
+          dio.get<Map<String, dynamic>>('/api/service-items', queryParameters: {'vehicleId': 'v1'}),
+    ).thenAnswer(
+      (_) async => ok({
+        'categories': [
+          {
+            'id': 'fluids',
+            'title': 'روغن و مایعات مصرفی',
+            'items': [
+              {
+                'id': 'engine_oil',
+                'title': 'روغن موتور',
+                'subtitle': 'تعویض و فلاش',
+                'icon': 'oil_barrel',
+                'disabled': true,
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    final catalog = (await repository.getCatalog(vehicleId: 'v1')).getOrElse((f) => throw f);
+
+    expect(catalog.single.items.single.disabled, isTrue);
+  });
+
+  test('getCatalog maps a 404 for a foreign vehicle to a failure', () async {
+    when(
+      () =>
+          dio.get<Map<String, dynamic>>('/api/service-items', queryParameters: {'vehicleId': 'v9'}),
+    ).thenAnswer(
+      (_) => httpError(404, {
+        'error': {'message': 'not found'},
+      }),
+    );
+
+    expect((await repository.getCatalog(vehicleId: 'v9')).isLeft(), isTrue);
+  });
+
   test('getVisits maps the services envelope', () async {
     when(() => dio.get<Map<String, dynamic>>('/api/vehicles/v1/services')).thenAnswer(
       (_) async => ok({

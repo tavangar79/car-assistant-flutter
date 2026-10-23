@@ -6,6 +6,7 @@ import '../../../../core/router/app_routes.dart';
 import '../../../../core/widgets/load_error_view.dart';
 import '../../../../core/widgets/main_app_bar.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../transfers/presentation/widgets/incoming_transfers.dart';
 import '../providers/vehicle_providers.dart';
 import '../widgets/empty_garage.dart';
 import '../widgets/garage/garage_view.dart';
@@ -41,15 +42,24 @@ class VehiclesPage extends ConsumerWidget {
               title: l10n.navGarage,
               subtitle: count == null ? null : l10n.garageVehicleCount(count),
             ),
-      body: vehicles.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) => LoadErrorView(
-          message: l10n.vehiclesLoadError,
-          onRetry: () => ref.invalidate(vehiclesProvider),
-        ),
-        data: (items) => items.isEmpty
-            ? EmptyGarage(onAddVehicle: () => context.push(AppRoutes.addVehiclePath))
-            : GarageView(vehicles: items),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Incoming ownership transfers, also on an empty garage (a new buyer).
+          const IncomingTransfers(padding: EdgeInsets.fromLTRB(16, 16, 16, 0)),
+          Expanded(
+            child: vehicles.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (_, _) => LoadErrorView(
+                message: l10n.vehiclesLoadError,
+                onRetry: () => ref.invalidate(vehiclesProvider),
+              ),
+              data: (items) => items.isEmpty
+                  ? EmptyGarage(onAddVehicle: () => context.push(AppRoutes.addVehiclePath))
+                  : GarageView(vehicles: items),
+            ),
+          ),
+        ],
       ),
     );
   }

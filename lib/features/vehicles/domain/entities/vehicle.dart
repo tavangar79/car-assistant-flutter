@@ -20,6 +20,7 @@ class Vehicle extends Equatable {
     this.isDefault = false,
     this.photoUrl,
     this.createdAt,
+    this.ownedSince,
   });
 
   final String id;
@@ -40,6 +41,10 @@ class Vehicle extends Equatable {
   /// When the vehicle was added (the start of its history), or `null` when unknown. Informational
   /// only, so it is left out of equality.
   final DateTime? createdAt;
+
+  /// When the current owner got the vehicle by an ownership transfer, or `null` when they added
+  /// it. Records created before it are locked. Informational only, so it is left out of equality.
+  final DateTime? ownedSince;
 
   @override
   List<Object?> get props => [

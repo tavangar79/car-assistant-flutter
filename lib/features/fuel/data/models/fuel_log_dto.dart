@@ -19,6 +19,7 @@ class FuelLogDto {
     required this.economy,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
   });
 
   factory FuelLogDto.fromJson(Map<String, dynamic> json) => FuelLogDto(
@@ -36,6 +37,8 @@ class FuelLogDto {
     economy: (json['economy'] as num?)?.toDouble(),
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
+    // Phase 6; absent from older servers.
+    locked: json['locked'] as bool? ?? false,
   );
 
   final String id;
@@ -52,6 +55,7 @@ class FuelLogDto {
   final double? economy;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool locked;
 
   FuelLog toEntity() => FuelLog(
     id: id,
@@ -71,5 +75,6 @@ class FuelLogDto {
     economy: economy,
     createdAt: createdAt,
     updatedAt: updatedAt,
+    locked: locked,
   );
 }

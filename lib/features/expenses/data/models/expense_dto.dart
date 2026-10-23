@@ -21,6 +21,7 @@ class ExpenseDto {
     required this.attachmentUrl,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
   });
 
   factory ExpenseDto.fromJson(Map<String, dynamic> json) => ExpenseDto(
@@ -45,6 +46,8 @@ class ExpenseDto {
     attachmentUrl: json['attachmentUrl'] as String?,
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
+    // Phase 6; absent from older servers.
+    locked: json['locked'] as bool? ?? false,
   );
 
   final String id;
@@ -62,6 +65,7 @@ class ExpenseDto {
   final String? attachmentUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool locked;
 
   Expense toEntity() => Expense(
     id: id,
@@ -82,6 +86,7 @@ class ExpenseDto {
     attachmentUrl: attachmentUrl,
     createdAt: createdAt,
     updatedAt: updatedAt,
+    locked: locked,
   );
 }
 

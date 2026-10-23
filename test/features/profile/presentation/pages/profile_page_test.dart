@@ -119,7 +119,7 @@ void main() {
     expect(edit.onPressed, isNull);
   });
 
-  testWidgets('shows the vehicle, service and document counts, and no subscription tile', (
+  testWidgets('shows the basic plan card, and the vehicle, service and document counts', (
     tester,
   ) async {
     await pumpPage(tester);
@@ -131,6 +131,8 @@ void main() {
     expect(find.text('۵'), findsOneWidget);
     expect(find.text('مدرک در کیف'), findsOneWidget);
     expect(find.text('اشتراک حرفه‌ای'), findsNothing);
+    expect(find.text('اشتراک پایه'), findsOneWidget);
+    expect(find.text('ارتقا یا تمدید'), findsOneWidget);
   });
 
   testWidgets('settings and legal rows are shown disabled; the version line is localized', (

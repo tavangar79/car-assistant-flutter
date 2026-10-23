@@ -2,8 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entities/invoice_file.dart';
+import '../../domain/entities/service_category.dart';
 import '../../domain/entities/service_line_draft.dart';
 import '../../domain/entities/service_visit_draft.dart';
+import 'service_providers.dart';
 
 /// What opens the wizard: the vehicle and the items preselected (e.g. from the due list).
 class ServiceWizardArgs extends Equatable {
@@ -41,8 +43,28 @@ class ServiceWizard extends Notifier<ServiceWizardState> {
   final ServiceWizardArgs args;
 
   @override
-  ServiceWizardState build() =>
-      ServiceWizardState(draft: ServiceVisitDraft(itemIds: args.preselectedItemIds));
+  ServiceWizardState build() {
+    // Once the vehicle's catalog loads, drop preselected items it disables or doesn't have.
+    ref.listen(vehicleServiceCatalogProvider(args.vehicleId), (_, next) {
+      if (next.value case final catalog?) _keepAvailable(catalog);
+    });
+    final loaded = ref.read(vehicleServiceCatalogProvider(args.vehicleId)).value;
+    final ids = loaded == null
+        ? args.preselectedItemIds
+        : availableIds(args.preselectedItemIds, loaded);
+    return ServiceWizardState(draft: ServiceVisitDraft(itemIds: ids));
+  }
+
+  /// [ids] without the items [catalog] disables or doesn't have, in their order.
+  static List<String> availableIds(List<String> ids, List<ServiceCategory> catalog) => [
+    for (final id in ids)
+      if (findServiceItem(catalog, id) case final item? when !item.disabled) id,
+  ];
+
+  void _keepAvailable(List<ServiceCategory> catalog) {
+    final ids = availableIds(_draft.itemIds, catalog);
+    if (ids.length != _draft.itemIds.length) _update(_draft.copyWith(itemIds: ids));
+  }
 
   ServiceVisitDraft get _draft => state.draft;
 

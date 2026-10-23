@@ -13,7 +13,9 @@ import 'package:car_assistant/features/services/domain/entities/service_visit_dr
 import 'package:car_assistant/features/services/domain/entities/service_visit_update.dart';
 import 'package:car_assistant/features/services/domain/repositories/service_repository.dart';
 import 'package:car_assistant/features/services/domain/entities/service_suggestions.dart';
+import 'package:car_assistant/features/services/domain/entities/service_category.dart';
 import 'package:car_assistant/features/services/domain/usecases/create_service_visit.dart';
+import 'package:car_assistant/features/services/domain/usecases/get_service_catalog.dart';
 import 'package:car_assistant/features/services/domain/usecases/get_service_suggestions.dart';
 import 'package:car_assistant/features/services/domain/usecases/update_service_line_items.dart';
 import 'package:car_assistant/features/services/domain/usecases/upload_service_invoice.dart';
@@ -167,6 +169,21 @@ void main() {
         const Left<Failure, CreateServiceResult>(ServiceRejectedFailure('future')),
       );
     });
+  });
+
+  test('GetServiceCatalog passes the vehicle id through (null for the title lookup)', () async {
+    when(() => repository.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right(serviceCatalog));
+    final getCatalog = GetServiceCatalog(repository);
+
+    expect(
+      await getCatalog(vehicleId: 'v1'),
+      const Right<Failure, List<ServiceCategory>>(serviceCatalog),
+    );
+    await getCatalog();
+
+    verify(() => repository.getCatalog(vehicleId: 'v1')).called(1);
+    verify(() => repository.getCatalog()).called(1);
   });
 
   test('GetServiceSuggestions passes the repository result through', () async {

@@ -79,6 +79,11 @@ class HistoryPage extends ConsumerWidget {
               periodLabel: periodChipLabel(filter, now, l10n),
               onToggleAttachments: notifier.toggleAttachmentsOnly,
               onPeriodTap: () => context.push(AppRoutes.historyFilterPath),
+              onExport: () => context.push(
+                AppRoutes.reportExportLocation(
+                  filter.vehicleIds.length == 1 ? filter.vehicleIds.single : null,
+                ),
+              ),
             ),
             const SizedBox(height: 12),
             ..._records(context, ref, history, shown),

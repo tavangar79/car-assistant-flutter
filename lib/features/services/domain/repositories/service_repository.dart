@@ -12,8 +12,9 @@ import '../entities/service_visit_update.dart';
 
 /// Contract owned by the domain layer; implemented in the data layer.
 abstract interface class ServiceRepository {
-  /// The static service catalog, in screen order.
-  Future<Either<Failure, List<ServiceCategory>>> getCatalog();
+  /// The service catalog, in screen order. With [vehicleId] it is resolved for that vehicle and
+  /// includes its disabled items; without it, it is a title lookup of every known item.
+  Future<Either<Failure, List<ServiceCategory>>> getCatalog({String? vehicleId});
 
   /// The workshops and brands of the caller's earlier visits, most recent first.
   Future<Either<Failure, ServiceSuggestions>> getSuggestions();

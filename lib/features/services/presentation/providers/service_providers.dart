@@ -69,11 +69,20 @@ final getServiceInvoiceProvider = Provider<GetServiceInvoice>((ref) {
 
 final invoicePickerProvider = Provider<InvoicePicker>((ref) => const InvoicePicker());
 
-/// The static service catalog, in screen order.
+/// The title lookup of every known service item, in screen order. Used where only titles are
+/// needed (history, reports, vehicle history).
 final serviceCatalogProvider = FutureProvider.autoDispose<List<ServiceCategory>>((ref) async {
   final catalog = await ref.watch(getServiceCatalogProvider).call();
   return catalog.getOrElse((failure) => throw failure);
 });
+
+/// The catalog resolved for one vehicle, disabled items included (`ServiceItem.disabled`). Used
+/// by the wizard and the visit details, which must not offer disabled items.
+final vehicleServiceCatalogProvider = FutureProvider.autoDispose
+    .family<List<ServiceCategory>, String>((ref, vehicleId) async {
+      final catalog = await ref.watch(getServiceCatalogProvider).call(vehicleId: vehicleId);
+      return catalog.getOrElse((failure) => throw failure);
+    });
 
 /// The workshops and brands of earlier visits, for the autocomplete fields. Invalidated after
 /// a visit is created or changed.

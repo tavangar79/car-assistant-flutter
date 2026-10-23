@@ -16,6 +16,7 @@ class ServiceVisit extends Equatable {
     required this.totalCost,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
     this.notes,
     this.invoice,
     this.invoiceUrl,
@@ -38,6 +39,9 @@ class ServiceVisit extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  /// Created before the current owner got the vehicle (ownership transfer): read-only.
+  final bool locked;
+
   bool get hasInvoice => invoice != null;
 
   @override
@@ -54,5 +58,6 @@ class ServiceVisit extends Equatable {
     invoiceUrl,
     createdAt,
     updatedAt,
+    locked,
   ];
 }

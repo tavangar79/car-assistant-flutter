@@ -17,6 +17,7 @@ class ServiceVisitDto {
     required this.invoiceUrl,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
   });
 
   factory ServiceVisitDto.fromJson(Map<String, dynamic> json) => ServiceVisitDto(
@@ -37,6 +38,8 @@ class ServiceVisitDto {
     invoiceUrl: json['invoiceUrl'] as String?,
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
+    // Phase 6; absent from older servers.
+    locked: json['locked'] as bool? ?? false,
   );
 
   final String id;
@@ -51,6 +54,7 @@ class ServiceVisitDto {
   final String? invoiceUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool locked;
 
   ServiceVisit toEntity() => ServiceVisit(
     id: id,
@@ -65,6 +69,7 @@ class ServiceVisitDto {
     invoiceUrl: invoiceUrl,
     createdAt: createdAt,
     updatedAt: updatedAt,
+    locked: locked,
   );
 }
 

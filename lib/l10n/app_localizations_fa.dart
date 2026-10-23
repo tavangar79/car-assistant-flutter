@@ -3016,4 +3016,523 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get profileStatDocuments => 'مدرک در کیف';
+
+  @override
+  String get reportExportTitle => 'خروجی گزارش';
+
+  @override
+  String get reportScopeTitle => 'دامنه خودروی گزارش';
+
+  @override
+  String get reportScopeChangeable => 'قابل تغییر';
+
+  @override
+  String reportScopeAll(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'همه خودروها ($countString)';
+  }
+
+  @override
+  String get reportPeriodTitle => 'بازه زمانی گزارش';
+
+  @override
+  String get reportJalaliCalendar => 'تقویم جلالی';
+
+  @override
+  String get reportPeriodThreeMonths => '۳ ماه اخیر';
+
+  @override
+  String get reportPeriodSixMonths => '۶ ماه گذشته';
+
+  @override
+  String reportPeriodCurrentYear(String year) {
+    return 'سال جاری ($year)';
+  }
+
+  @override
+  String get reportPeriodAll => 'کل سوابق';
+
+  @override
+  String get reportFrom => 'از تاریخ';
+
+  @override
+  String get reportTo => 'تا تاریخ';
+
+  @override
+  String get reportDateUnset => '—';
+
+  @override
+  String get reportContentTitle => 'محتوای گزارش خروجی';
+
+  @override
+  String get reportSelectAll => 'انتخاب همه';
+
+  @override
+  String get reportContentServices => 'سرویس‌ها و تعمیرات';
+
+  @override
+  String get reportContentServicesHint => 'فاکتورها، قطعات مصرفی، اجرت تعمیرگاه';
+
+  @override
+  String get reportContentFuel => 'سوابق سوخت‌گیری';
+
+  @override
+  String get reportContentFuelHint => 'لیتر، هزینه، جایگاه‌ها و محاسبه مصرف میانگین';
+
+  @override
+  String get reportContentExpenses => 'هزینه‌های جانبی';
+
+  @override
+  String get reportContentExpensesHint => 'بیمه شخص ثالث، عوارض سالیانه، خلافی، معاینه فنی';
+
+  @override
+  String get reportContentImages => 'تصاویر پیوست فاکتورها';
+
+  @override
+  String get reportContentImagesHint => 'ضمیمه کردن تصاویر مدارک در انتهای فایل PDF';
+
+  @override
+  String get reportPreviewTitle => 'پیش‌نمایش خروجی مدنظر';
+
+  @override
+  String get reportPreviewIncludes => 'شامل';
+
+  @override
+  String get reportPreviewRecords => 'رکورد ثبت‌شده';
+
+  @override
+  String get reportPreviewTotal => 'مجموع:';
+
+  @override
+  String get reportPreviewError => 'محاسبه پیش‌نمایش ممکن نشد';
+
+  @override
+  String get reportTooLarge => 'بازه گزارش بیش از حد بزرگ است';
+
+  @override
+  String get reportNoContent => 'حداقل یک مورد را برای گزارش انتخاب کنید';
+
+  @override
+  String get reportDownloadPdf => 'دریافت خروجی PDF رسمی';
+
+  @override
+  String get reportDownloadCsv => 'دریافت فایل اکسل (Excel / CSV)';
+
+  @override
+  String get reportPdfDone => 'فایل PDF رسمی سوابق با موفقیت ایجاد شد.';
+
+  @override
+  String get reportCsvDone => 'فایل اکسل محاسباتی آماده بارگیری گردید.';
+
+  @override
+  String get reportExportFailed => 'ساخت فایل گزارش ممکن نشد';
+
+  @override
+  String get reportToastClose => 'بستن';
+
+  @override
+  String get reportTypeService => 'سرویس';
+
+  @override
+  String get reportTypeFuel => 'سوخت';
+
+  @override
+  String get reportTypeExpense => 'هزینه';
+
+  @override
+  String get reportColumnDate => 'تاریخ';
+
+  @override
+  String get reportColumnVehicle => 'خودرو';
+
+  @override
+  String get reportColumnPlate => 'پلاک';
+
+  @override
+  String get reportColumnType => 'نوع';
+
+  @override
+  String get reportColumnDescription => 'شرح';
+
+  @override
+  String get reportColumnKm => 'کیلومتر';
+
+  @override
+  String get reportColumnAmount => 'مبلغ (تومان)';
+
+  @override
+  String get reportTotalRow => 'جمع کل';
+
+  @override
+  String reportPdfRange(String from, String to) {
+    return 'بازه گزارش: $from تا $to';
+  }
+
+  @override
+  String reportPdfVehicles(String vehicles) {
+    return 'خودرو: $vehicles';
+  }
+
+  @override
+  String reportPdfGeneratedAt(String date) {
+    return 'تاریخ تهیه: $date';
+  }
+
+  @override
+  String get reportPdfEntryCount => 'تعداد رکورد';
+
+  @override
+  String get reportPdfTotalCost => 'مجموع هزینه';
+
+  @override
+  String get reportPdfServiceCount => 'تعداد سرویس';
+
+  @override
+  String get reportPdfFuelVolume => 'سوخت (لیتر)';
+
+  @override
+  String reportPdfToman(String amount) {
+    return '$amount تومان';
+  }
+
+  @override
+  String get reportPdfOtherFiles => 'سایر فایل‌های پیوست';
+
+  @override
+  String get plansTitle => 'اشتراک و پلن‌ها';
+
+  @override
+  String get plansHeroBadge => 'شفاف، بدون تعهد و قابل لغو در هر زمان';
+
+  @override
+  String get plansHeroTitle => 'پلن‌ها و اشتراک‌ها';
+
+  @override
+  String get plansHeroBody =>
+      'امکانات نامحدود برای ثبت دقیق هزینه‌ها، سوابق فنی و ارتقای ارزش خودرو';
+
+  @override
+  String get plansMonthly => 'ماهانه';
+
+  @override
+  String get plansYearly => 'سالیانه';
+
+  @override
+  String get plansYearlyDiscount => '۲۰٪ تخفیف';
+
+  @override
+  String get plansPerMonth => 'تومان / ماهانه';
+
+  @override
+  String get plansPerYear => 'تومان / سالانه';
+
+  @override
+  String get plansCurrent => 'پلن فعلی شما';
+
+  @override
+  String get plansBasicTag => 'شروع استاندارد';
+
+  @override
+  String get plansBasicName => 'پایه (همیشه رایگان)';
+
+  @override
+  String get plansBasicFeature1 => 'حداکثر ۱ خودرو در گاراژ';
+
+  @override
+  String get plansBasicFeature2 => 'ثبت نامحدود سرویس و سوخت';
+
+  @override
+  String get plansBasicFeature3 => 'یادآور درون‌برنامه‌ای (بدون پیامک)';
+
+  @override
+  String get plansBasicFeature4 => 'خروجی گزارش ساده متنی';
+
+  @override
+  String get plansProBadge => 'پیشنهاد ما';
+
+  @override
+  String get plansProTag => 'بیشترین انتخاب مالکان';
+
+  @override
+  String get plansProName => 'حرفه‌ای (پلاس)';
+
+  @override
+  String get plansProMonthlyNote => 'تسویه‌حساب ماهانه بدون تعهد زمانی';
+
+  @override
+  String plansProYearlyNote(String amount) {
+    return 'معادل $amount تومان در ماه (۲۰٪ صرفه‌جویی)';
+  }
+
+  @override
+  String get plansProFeature1 => 'مدیریت همزمان تا ۳ خودرو در یک گاراژ';
+
+  @override
+  String get plansProFeature2 => 'یادآور پیامکی تمدید بیمه، معاینه و سرویس دوره';
+
+  @override
+  String get plansProFeature3 => 'خروجی شناسنامه سلامت فنی خودرو (PDF رسمی و اکسل)';
+
+  @override
+  String get plansProFeature4 => 'کیف مدارک نامحدود با فضای امن ابری';
+
+  @override
+  String get plansProFeature5 => 'انتقال دیجیتال سوابق سرویس به خریدار هنگام فروش';
+
+  @override
+  String get plansProCta => 'انتخاب و ارتقا به حرفه‌ای';
+
+  @override
+  String get plansMasterTag => 'ناوگان و خانواده';
+
+  @override
+  String get plansMasterName => 'گاراژ نامحدود';
+
+  @override
+  String get plansMasterMonthlyNote => 'برای مجموعه‌داران و مدیران چند خودرو';
+
+  @override
+  String plansMasterYearlyNote(String amount) {
+    return 'معادل $amount تومان در ماه با اولویت کامل';
+  }
+
+  @override
+  String get plansMasterFeature1 => 'خودرو نامحدود در پنل اصلی';
+
+  @override
+  String get plansMasterFeature2 => 'ارسال پیامک یادآور به چند شماره مجزا (رانندگان)';
+
+  @override
+  String get plansMasterFeature3 => 'پشتیبانی تلفنی اختصاصی و آنی';
+
+  @override
+  String get plansMasterFeature4 => 'خروجی مالی جامع برای امور مالیاتی و بیمه';
+
+  @override
+  String get plansMasterCta => 'انتخاب پلن نامحدود';
+
+  @override
+  String get plansGuaranteeTitle => 'تضمین شفافیت و رضایت';
+
+  @override
+  String get plansGuaranteeBody =>
+      'تمدید خودکار ناخواسته در این سیستم وجود ندارد. تا ۷ روز پس از خرید اشتراک، در صورت عدم رضایت کامل، وجه پرداختی بدون پرسش به حساب بانکی شما بازگردانده می‌شود.';
+
+  @override
+  String get plansSecurePayment => 'درگاه پرداخت امن شاپرک';
+
+  @override
+  String get plansSupport => 'پشتیبانی ۷ روز هفته';
+
+  @override
+  String get profilePlanTitle => 'اشتراک پایه';
+
+  @override
+  String get profilePlanBadge => 'رایگان';
+
+  @override
+  String get profilePlanHint => 'پلن فعلی شما • همیشه رایگان';
+
+  @override
+  String get profilePlanUpgrade => 'ارتقا یا تمدید';
+
+  @override
+  String get vehicleTransfer => 'انتقال مالکیت';
+
+  @override
+  String get transferTitle => 'انتقال مالکیت خودرو';
+
+  @override
+  String get transferActiveInGarage => 'فعال در گاراژ';
+
+  @override
+  String get transferMileage => 'کارکرد جاری:';
+
+  @override
+  String get transferKm => 'کیلومتر';
+
+  @override
+  String get transferPhoneTitle => 'شماره تلفن همراه مالک جدید (خریدار)';
+
+  @override
+  String get transferPhoneHint =>
+      'درخواست انتقال در حساب کاربری این شماره نمایش داده می‌شود و پس از تایید خریدار انجام می‌شود.';
+
+  @override
+  String get transferPhoneLabel => 'شماره همراه خریدار';
+
+  @override
+  String get transferPhoneNote =>
+      'مالک جدید باید در سامانه «مدیریت خودرو» با همین شماره همراه حساب کاربری داشته باشد یا ثبت‌نام کند تا درخواست را ببیند.';
+
+  @override
+  String get transferItemsTitle => 'اقلامی که به مالک جدید منتقل می‌شوند';
+
+  @override
+  String get transferItemServices => 'سوابق کامل سرویس‌ها و فاکتورها';
+
+  @override
+  String get transferItemServicesHint => 'تمام جزئیات مراجعات به تعمیرگاه، قطعات مصرفی و تعویض‌شده';
+
+  @override
+  String get transferItemIntervals => 'دوره‌های سرویس و کیلومتر جاری';
+
+  @override
+  String get transferItemIntervalsHint =>
+      'فواصل استاندارد نگهداری، روغن موتور، تسمه‌تایم و فیلترها';
+
+  @override
+  String get transferItemDocuments => 'تصاویر اسناد فنی و گارانتی فعال';
+
+  @override
+  String get transferItemDocumentsHint => 'فاکتورهای رسمی و مهلت‌های باقی‌مانده از دفترچه گارانتی';
+
+  @override
+  String get transferItemFuel => 'تاریخچه هزینه‌های سوخت';
+
+  @override
+  String get transferItemFuelHint => 'گزارش میانگین مصرف در هر ۱۰۰ کیلومتر و نوع سوخت ثبت‌شده';
+
+  @override
+  String get transferItemPrivate => 'مدارک هویتی و خصوصی مالک پیشین (منتقل نمی‌شود)';
+
+  @override
+  String get transferItemPrivateHint =>
+      'تصویر کارت ملی، اسناد مالکیت شخصی و تراکنش‌های بانکی به صورت خودکار حذف می‌گردند.';
+
+  @override
+  String get transferRulesTitle => 'قوانین حفظ حریم خصوصی و نگهداری سوابق';
+
+  @override
+  String get transferRulesIntro => 'پس از تایید و پذیرش نهایی انتقال توسط خریدار:';
+
+  @override
+  String get transferRule1 =>
+      'این خودرو از گاراژ فعال شما خارج شده و کلیه دسترسی‌های مدیریتی و ویرایش آن بلافاصله سلب خواهد شد.';
+
+  @override
+  String get transferRule2 =>
+      'پیش از ارسال درخواست، در صورت نیاز از صفحه «خروجی گزارش» یک نسخه PDF یا اکسل از سوابق تهیه کنید.';
+
+  @override
+  String get transferRule2Link => 'رفتن به خروجی گزارش';
+
+  @override
+  String get transferRule3 =>
+      'مالک جدید به هیچ عنوان امکان تغییر، دستکاری یا حذف اطلاعات ثبت‌شده در دوران مالکیت شما را نخواهد داشت.';
+
+  @override
+  String get transferConsent =>
+      'صحت شماره تلفن همراه خریدار و واگذاری کامل کنترل فنی و فاکتورهای خودرو را تایید می‌نمایم.';
+
+  @override
+  String get transferSubmit => 'تایید نهایی و ارسال درخواست انتقال';
+
+  @override
+  String get transferBack => 'انصراف و بازگشت به گاراژ';
+
+  @override
+  String get transferConfirmTitle => 'درخواست انتقال ارسال شود؟';
+
+  @override
+  String transferConfirmBody(String vehicle, String phone) {
+    return '«$vehicle» پس از تایید صاحب شماره $phone از گاراژ شما خارج می‌شود.';
+  }
+
+  @override
+  String get transferConfirmSend => 'ارسال درخواست';
+
+  @override
+  String get transferSent => 'درخواست انتقال ارسال شد';
+
+  @override
+  String get transferInvalidPhone => 'شماره همراه معتبر نیست';
+
+  @override
+  String get transferSelf => 'نمی‌توانید خودرو را به شماره خودتان منتقل کنید';
+
+  @override
+  String get transferAlreadyPending => 'برای این خودرو یک درخواست انتقال در انتظار وجود دارد';
+
+  @override
+  String get transferFailed => 'ارسال درخواست ممکن نشد';
+
+  @override
+  String get transferPendingTitle => 'درخواست انتقال در انتظار تایید خریدار';
+
+  @override
+  String transferPendingPhone(String phone) {
+    return 'شماره خریدار: $phone';
+  }
+
+  @override
+  String transferPendingDate(String date) {
+    return 'تاریخ ارسال: $date';
+  }
+
+  @override
+  String get transferCancelRequest => 'لغو درخواست';
+
+  @override
+  String get transferCancelled => 'درخواست انتقال لغو شد';
+
+  @override
+  String get transferCancelFailed => 'لغو درخواست ممکن نشد';
+
+  @override
+  String get transfersLoadError => 'بارگذاری درخواست‌های انتقال ممکن نشد';
+
+  @override
+  String get incomingTransferTitle => 'درخواست انتقال خودرو';
+
+  @override
+  String incomingTransferBody(String sender, String vehicle) {
+    return '$sender می‌خواهد «$vehicle» را به گاراژ شما منتقل کند.';
+  }
+
+  @override
+  String get incomingTransferUnknownSender => 'یک کاربر';
+
+  @override
+  String get incomingTransferReview => 'بررسی';
+
+  @override
+  String get incomingTransferSheetTitle => 'انتقال مالکیت به شما';
+
+  @override
+  String incomingTransferFrom(String sender) {
+    return 'فرستنده: $sender';
+  }
+
+  @override
+  String incomingTransferMileage(String km) {
+    return 'کارکرد: $km کیلومتر';
+  }
+
+  @override
+  String get incomingTransferNote =>
+      'با پذیرش، خودرو و سوابق آن به گاراژ شما منتقل می‌شود. سوابق مالک قبلی قابل ویرایش نیستند.';
+
+  @override
+  String get incomingTransferAccept => 'پذیرش';
+
+  @override
+  String get incomingTransferReject => 'رد درخواست';
+
+  @override
+  String get incomingTransferAccepted => 'خودرو به گاراژ شما اضافه شد';
+
+  @override
+  String get incomingTransferRejected => 'درخواست انتقال رد شد';
+
+  @override
+  String get incomingTransferFailed => 'انجام درخواست ممکن نشد';
+
+  @override
+  String get recordLockedLabel => 'مالک قبلی';
+
+  @override
+  String get recordLockedHint => 'این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست';
 }

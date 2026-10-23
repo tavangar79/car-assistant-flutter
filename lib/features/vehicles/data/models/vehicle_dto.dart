@@ -20,6 +20,7 @@ class VehicleDto {
     required this.photoUrl,
     required this.createdAt,
     required this.updatedAt,
+    this.ownedSince,
   });
 
   factory VehicleDto.fromJson(Map<String, dynamic> json) => VehicleDto(
@@ -40,6 +41,10 @@ class VehicleDto {
     photoUrl: json['photoUrl'] as String?,
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
+    ownedSince: switch (json['ownedSince']) {
+      final String date => DateTime.parse(date),
+      _ => null,
+    },
   );
 
   final String id;
@@ -58,6 +63,7 @@ class VehicleDto {
   final String? photoUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final DateTime? ownedSince;
 
   Vehicle toEntity() => Vehicle(
     id: id,
@@ -74,5 +80,6 @@ class VehicleDto {
     isDefault: isDefault,
     photoUrl: photoUrl,
     createdAt: createdAt,
+    ownedSince: ownedSince,
   );
 }

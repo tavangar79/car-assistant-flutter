@@ -48,6 +48,7 @@ class VehicleDetailsPage extends ConsumerWidget {
           if (vehicle.value case final loaded?)
             VehicleOptionsMenu(
               onEdit: () => context.push(AppRoutes.editVehiclePath, extra: loaded),
+              onTransfer: () => context.push(AppRoutes.transferPath(loaded.id)),
             ),
           Semantics(
             label: l10n.accountLabel,
@@ -117,9 +118,8 @@ class _DetailsBody extends ConsumerWidget {
         gap,
         ExpenseSection(vehicleId: vehicle.id),
         const SizedBox(height: 4),
-        // The report export comes with the services; until then the button is shown disabled.
         TextButton.icon(
-          onPressed: null,
+          onPressed: () => context.push(AppRoutes.reportExportLocation(vehicle.id)),
           style: TextButton.styleFrom(
             minimumSize: const Size.fromHeight(48),
             backgroundColor: Theme.of(context).colorScheme.surfaceContainer,

@@ -46,7 +46,8 @@ void main() {
     services = MockServiceRepository();
     when(() => vehicles.getVehicle('v1')).thenAnswer((_) async => const Right(tara));
     when(() => odometer.getReadings('v1')).thenAnswer((_) async => const Right([]));
-    when(() => services.getCatalog()).thenAnswer((_) async => const Right(serviceCatalog));
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right(serviceCatalog));
     when(() => services.getSuggestions())
         .thenAnswer((_) async => const Right(ServiceSuggestions.empty));
   });
@@ -146,6 +147,33 @@ void main() {
       await tester.enterText(find.byType(TextField), 'xyz');
       await tester.pumpAndSettle();
       expect(find.text('سرویسی با این نام پیدا نشد'), findsOneWidget);
+    });
+
+    testWidgets('loads the catalog for the vehicle and hides its disabled items', (tester) async {
+      when(() => services.getCatalog(vehicleId: 'v1'))
+          .thenAnswer((_) async => Right(catalogWithDisabled({'front_brake_pads'})));
+
+      await openPage(tester);
+
+      verify(() => services.getCatalog(vehicleId: 'v1')).called(1);
+      expect(find.text('روغن موتور'), findsOneWidget);
+      expect(find.text('لنت ترمز جلو'), findsNothing);
+      // A category left without enabled items is hidden too.
+      expect(find.text('ترمز و ایمنی'), findsNothing);
+    });
+
+    testWidgets('preselected items disabled or missing for the vehicle are dropped', (
+      tester,
+    ) async {
+      when(() => services.getCatalog(vehicleId: 'v1'))
+          .thenAnswer((_) async => Right(catalogWithDisabled({'front_brake_pads'})));
+
+      await openPage(tester, preselected: ['engine_oil', 'front_brake_pads', 'retired_item']);
+
+      expect(find.text('۱ مورد انتخاب شد'), findsOneWidget);
+      await tapText(tester, 'ادامه به گام دوم (زمان و کارکرد)');
+      expect(find.text('روغن موتور'), findsWidgets);
+      expect(find.text('لنت ترمز جلو'), findsNothing);
     });
 
     testWidgets('preselected items are ticked', (tester) async {

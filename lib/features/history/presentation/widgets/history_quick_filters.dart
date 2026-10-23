@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// The sub-filters under the type tabs: the "فاکتوردار" toggle chip, the period chip (opens the
-/// filter page) and the export action, disabled until the export exists.
+/// filter page) and the export action (opens the report export).
 class HistoryQuickFilters extends StatelessWidget {
   const HistoryQuickFilters({
     super.key,
@@ -11,12 +11,14 @@ class HistoryQuickFilters extends StatelessWidget {
     required this.periodLabel,
     required this.onToggleAttachments,
     required this.onPeriodTap,
+    required this.onExport,
   });
 
   final bool attachmentsOnly;
   final String periodLabel;
   final VoidCallback onToggleAttachments;
   final VoidCallback onPeriodTap;
+  final VoidCallback onExport;
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +70,8 @@ class HistoryQuickFilters extends StatelessWidget {
             ),
           ),
         ),
-        // TODO(T6.1): enable once the Excel/PDF export exists.
         TextButton.icon(
-          onPressed: null,
+          onPressed: onExport,
           style: TextButton.styleFrom(
             minimumSize: const Size(48, 48),
             padding: const EdgeInsets.symmetric(horizontal: 8),

@@ -125,7 +125,9 @@ class _ServiceTimeStepState extends ConsumerState<ServiceTimeStep> {
     final tones = AppTones.of(context);
     final now = ref.watch(clockProvider)();
     final draft = ref.watch(serviceWizardProvider(widget.args)).draft;
-    final catalog = ref.watch(serviceCatalogProvider).value ?? const <ServiceCategory>[];
+    final catalog =
+        ref.watch(vehicleServiceCatalogProvider(widget.args.vehicleId)).value ??
+        const <ServiceCategory>[];
     final items = [for (final id in draft.itemIds) ?findServiceItem(catalog, id)];
     final readings = ref.watch(odometerReadingsProvider(widget.vehicle.id)).value;
     final date = draft.serviceDate(now);

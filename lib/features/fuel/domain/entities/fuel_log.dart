@@ -17,6 +17,7 @@ class FuelLog extends Equatable {
     required this.isFullFill,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
     this.station,
     this.paymentMethod,
     this.notes,
@@ -42,6 +43,9 @@ class FuelLog extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  /// Created before the current owner got the vehicle (ownership transfer): read-only.
+  final bool locked;
+
   @override
   List<Object?> get props => [
     id,
@@ -58,5 +62,6 @@ class FuelLog extends Equatable {
     economy,
     createdAt,
     updatedAt,
+    locked,
   ];
 }

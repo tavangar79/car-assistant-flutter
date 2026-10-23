@@ -67,6 +67,25 @@ const serviceCatalog = [
   ServiceCategory(id: 'brakes', title: 'ترمز و ایمنی', items: [frontBrakePads]),
 ];
 
+/// [serviceCatalog] as resolved for a vehicle on which the items [disabledIds] are disabled.
+List<ServiceCategory> catalogWithDisabled(Set<String> disabledIds) => [
+  for (final category in serviceCatalog)
+    ServiceCategory(
+      id: category.id,
+      title: category.title,
+      items: [
+        for (final item in category.items)
+          ServiceItem(
+            id: item.id,
+            title: item.title,
+            subtitle: item.subtitle,
+            icon: item.icon,
+            disabled: disabledIds.contains(item.id),
+          ),
+      ],
+    ),
+];
+
 const oilLineJson = {
   'itemId': 'engine_oil',
   'brand': 'بهران رانا 5W-40',

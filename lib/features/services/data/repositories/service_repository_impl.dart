@@ -24,8 +24,8 @@ class ServiceRepositoryImpl implements ServiceRepository {
   final ServiceRemoteDataSource _remote;
 
   @override
-  Future<Either<Failure, List<ServiceCategory>>> getCatalog() =>
-      apiCall(() async => (await _remote.fetchCatalog()).toEntity());
+  Future<Either<Failure, List<ServiceCategory>>> getCatalog({String? vehicleId}) =>
+      apiCall(() async => (await _remote.fetchCatalog(vehicleId: vehicleId)).toEntity());
 
   @override
   Future<Either<Failure, ServiceSuggestions>> getSuggestions() =>

@@ -35,14 +35,13 @@ class _ServiceItemsStepState extends ConsumerState<ServiceItemsStep> {
     super.dispose();
   }
 
-  /// The categories whose items match the search, without the empty ones.
+  /// The categories with their enabled items that match the search, without the empty ones.
   static List<ServiceCategory> filter(List<ServiceCategory> categories, String query) {
     final needle = query.trim();
-    if (needle.isEmpty) return categories;
     return [
       for (final category in categories)
-        if (category.items.where((item) => _matches(item, needle)).toList() case final items
-            when items.isNotEmpty)
+        if (category.items.where((item) => !item.disabled && _matches(item, needle)).toList()
+            case final items when items.isNotEmpty)
           ServiceCategory(id: category.id, title: category.title, items: items),
     ];
   }
@@ -59,7 +58,7 @@ class _ServiceItemsStepState extends ConsumerState<ServiceItemsStep> {
     final selected = ref.watch(
       serviceWizardProvider(widget.args).select((state) => state.draft.itemIds),
     );
-    final catalog = ref.watch(serviceCatalogProvider);
+    final catalog = ref.watch(vehicleServiceCatalogProvider(widget.args.vehicleId));
     return Column(
       children: [
         Expanded(
@@ -133,7 +132,8 @@ class _ServiceItemsStepState extends ConsumerState<ServiceItemsStep> {
                   padding: const EdgeInsets.symmetric(vertical: 24),
                   child: LoadErrorView(
                     message: l10n.serviceCatalogLoadError,
-                    onRetry: () => ref.invalidate(serviceCatalogProvider),
+                    onRetry: () =>
+                        ref.invalidate(vehicleServiceCatalogProvider(widget.args.vehicleId)),
                   ),
                 ),
                 data: (categories) {

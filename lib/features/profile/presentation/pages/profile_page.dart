@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/utils/format_version.dart';
 import '../../../../core/widgets/load_error_view.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -10,11 +12,12 @@ import '../providers/profile_providers.dart';
 import '../widgets/profile_app_bar.dart';
 import '../widgets/profile_identity_card.dart';
 import '../widgets/profile_menu_section.dart';
+import '../widgets/profile_plan_card.dart';
 import '../widgets/profile_stat_tile.dart';
 
-/// The Profile tab (Stitch `4b009228766f48859e449e996af538b9`): the identity card, the vehicle,
-/// service and document counters, the settings and legal rows (disabled until their pages exist),
-/// sign-out and the app version. The subscription card (T6.3) comes later.
+/// The Profile tab (Stitch `4b009228766f48859e449e996af538b9`): the identity card, the subscription
+/// card (opens the plans page), the vehicle, service and document counters, the settings and legal
+/// rows (disabled until their pages exist), sign-out and the app version.
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
@@ -31,6 +34,8 @@ class ProfilePage extends ConsumerWidget {
             // TODO(profile-edit): open an edit flow once one exists; the complete-profile page is
             // only reachable while the profile is incomplete.
             ProfileIdentityCard(user: user, onEdit: null),
+          const SizedBox(height: 16),
+          ProfilePlanCard(onUpgrade: () => context.push(AppRoutes.plansPath)),
           const SizedBox(height: 16),
           const _Stats(),
           const SizedBox(height: 24),

@@ -29,8 +29,10 @@ class ServiceLineRow extends StatelessWidget {
   final int index;
   final int baseKm;
   final DateTime baseDate;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
+
+  /// `null` hides the button (a locked record, or an item disabled for the vehicle).
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   /// The reminder text, or `null` when the item has none.
   static String? reminderOf(
@@ -96,18 +98,20 @@ class ServiceLineRow extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(
-                tooltip: l10n.serviceDetailsEditItem,
-                onPressed: onEdit,
-                color: scheme.secondary,
-                icon: const Icon(Icons.edit_outlined, size: 20),
-              ),
-              IconButton(
-                tooltip: l10n.serviceDetailsDeleteItem,
-                onPressed: onDelete,
-                color: scheme.error,
-                icon: const Icon(Icons.delete_outline, size: 20),
-              ),
+              if (onEdit != null)
+                IconButton(
+                  tooltip: l10n.serviceDetailsEditItem,
+                  onPressed: onEdit,
+                  color: scheme.secondary,
+                  icon: const Icon(Icons.edit_outlined, size: 20),
+                ),
+              if (onDelete != null)
+                IconButton(
+                  tooltip: l10n.serviceDetailsDeleteItem,
+                  onPressed: onDelete,
+                  color: scheme.error,
+                  icon: const Icon(Icons.delete_outline, size: 20),
+                ),
             ],
           ),
           const SizedBox(height: 12),

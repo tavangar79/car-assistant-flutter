@@ -60,7 +60,8 @@ void main() {
     services = MockServiceRepository();
     opened = [];
     when(() => vehicles.getVehicles()).thenAnswer((_) async => Right([addedTara]));
-    when(() => services.getCatalog()).thenAnswer((_) async => const Right(serviceCatalog));
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
+        .thenAnswer((_) async => const Right(serviceCatalog));
     stubFirstPage(Right(historyResult()));
     when(() => history.getHistory(any(that: _withCursor('c1'))))
         .thenAnswer((_) async => const Right(HistoryResult(entries: [])));
@@ -88,6 +89,13 @@ void main() {
           builder: (context, state) {
             opened.add('filter');
             return page('filter');
+          },
+        ),
+        GoRoute(
+          path: AppRoutes.reportExportPath,
+          builder: (context, state) {
+            opened.add('report:${state.uri.queryParameters['vehicleId']}');
+            return page('report');
           },
         ),
         GoRoute(
@@ -151,6 +159,13 @@ void main() {
     expect(find.text('۱ مورد'), findsNWidgets(3));
     // Service: item titles from the catalog, mileage, workshop and the invoice badge.
     expect(find.text('روغن موتور، فیلتر روغن'), findsOneWidget);
+    // Titles come from the vehicle-independent title lookup (no vehicleId).
+    verify(() => services.getCatalog()).called(greaterThan(0));
+    verifyNever(
+      () => services.getCatalog(
+        vehicleId: any(named: 'vehicleId', that: isNotNull),
+      ),
+    );
     expect(find.text('۲۸ مهر ۱۴۰۵ • ۳۴٬۸۵۰ کیلومتر'), findsOneWidget);
     expect(find.text('فاکتور'), findsOneWidget);
     // Fuel: full fill, volume and economy.
@@ -159,11 +174,16 @@ void main() {
     // Expense: its title, issuer, expiry and attachment badge.
     expect(find.text('تمدید بیمه‌نامه شخص ثالث ۱۲ ماهه ایران'), findsOneWidget);
     expect(find.text('پیوست'), findsOneWidget);
-    // The export is not available yet.
-    expect(
-      tester.widget<TextButton>(find.widgetWithText(TextButton, 'خروجی اکسل/PDF')).onPressed,
-      isNull,
-    );
+  });
+
+  testWidgets('the export button opens the report export for the chosen vehicle', (tester) async {
+    await openPage(tester);
+    container.read(historyFilterProvider.notifier).setVehicles({tara.id});
+    await tester.pumpAndSettle();
+
+    await tapText(tester, 'خروجی اکسل/PDF');
+
+    expect(opened, ['report:${tara.id}']);
   });
 
   testWidgets('loads the next page at the end, then shows when the history starts', (tester) async {

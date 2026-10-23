@@ -19,11 +19,14 @@ import '../../features/intervals/presentation/pages/due_services_page.dart';
 import '../../features/intervals/presentation/pages/service_intervals_page.dart';
 import '../../features/intervals/presentation/widgets/due_success_card.dart';
 import '../../features/notifications/presentation/pages/notifications_page.dart';
+import '../../features/plans/presentation/pages/plans_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/reports/presentation/pages/report_export_page.dart';
 import '../../features/services/presentation/pages/new_service_page.dart';
 import '../../features/services/presentation/pages/service_details_page.dart';
 import '../../features/shell/presentation/pages/app_shell.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/transfers/presentation/pages/transfer_page.dart';
 import '../../features/vehicles/presentation/pages/add_vehicle_page.dart';
 import '../../features/vehicles/presentation/pages/vehicle_details_page.dart';
 import '../../features/vehicles/domain/entities/vehicle.dart';
@@ -138,6 +141,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
+        path: '/vehicles/:id/transfer',
+        name: AppRoutes.transferName,
+        builder: (context, state) => TransferPage(vehicleId: state.pathParameters['id']!),
+      ),
+      GoRoute(
         path: AppRoutes.notificationsPath,
         name: AppRoutes.notificationsName,
         builder: (context, state) => const NotificationsPage(),
@@ -147,6 +155,17 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.historyFilterPath,
         name: AppRoutes.historyFilterName,
         builder: (context, state) => const HistoryFilterPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.reportExportPath,
+        name: AppRoutes.reportExportName,
+        builder: (context, state) =>
+            ReportExportPage(vehicleId: state.uri.queryParameters['vehicleId']),
+      ),
+      GoRoute(
+        path: AppRoutes.plansPath,
+        name: AppRoutes.plansName,
+        builder: (context, state) => const PlansPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => AppShell(navigationShell: navigationShell),

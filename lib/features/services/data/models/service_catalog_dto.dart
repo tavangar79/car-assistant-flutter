@@ -1,8 +1,8 @@
 import '../../domain/entities/service_category.dart';
 import '../../domain/entities/service_item.dart';
 
-/// Body of `GET /api/service-items`: `{ categories: [ { id, title, items: [ { id, title, subtitle,
-/// icon } ] } ] }`.
+/// Body of `GET /api/service-items[?vehicleId=]`: `{ categories: [ { id, title, items: [ { id,
+/// title, subtitle, icon, disabled } ] } ] }`.
 class ServiceCatalogDto {
   const ServiceCatalogDto({required this.categories});
 
@@ -42,6 +42,7 @@ class ServiceItemDto {
     required this.title,
     required this.subtitle,
     required this.icon,
+    required this.disabled,
   });
 
   factory ServiceItemDto.fromJson(Map<String, dynamic> json) => ServiceItemDto(
@@ -49,12 +50,15 @@ class ServiceItemDto {
     title: json['title'] as String,
     subtitle: json['subtitle'] as String,
     icon: json['icon'] as String,
+    disabled: json['disabled'] as bool? ?? false,
   );
 
   final String id;
   final String title;
   final String subtitle;
   final String icon;
+  final bool disabled;
 
-  ServiceItem toEntity() => ServiceItem(id: id, title: title, subtitle: subtitle, icon: icon);
+  ServiceItem toEntity() =>
+      ServiceItem(id: id, title: title, subtitle: subtitle, icon: icon, disabled: disabled);
 }

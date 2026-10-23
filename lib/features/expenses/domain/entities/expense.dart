@@ -15,6 +15,7 @@ class Expense extends Equatable {
     required this.expiryReminder,
     required this.createdAt,
     required this.updatedAt,
+    this.locked = false,
     this.title,
     this.referenceNumber,
     this.expiresAt,
@@ -48,6 +49,9 @@ class Expense extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  /// Created before the current owner got the vehicle (ownership transfer): read-only.
+  final bool locked;
+
   bool get hasAttachment => attachment != null;
 
   @override
@@ -67,5 +71,6 @@ class Expense extends Equatable {
     attachmentUrl,
     createdAt,
     updatedAt,
+    locked,
   ];
 }

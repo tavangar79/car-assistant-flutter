@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// The `more_vert` options of a vehicle (Stitch open menu `bd81cbb1ef6f4257a92913f4822158fc`) with
-/// the edit action. Used by the garage list and the vehicle details page.
+/// the edit action and, when [onTransfer] is set, "انتقال مالکیت". Used by the garage list and
+/// the vehicle details page.
 class VehicleOptionsMenu extends StatelessWidget {
-  const VehicleOptionsMenu({super.key, required this.onEdit});
+  const VehicleOptionsMenu({super.key, required this.onEdit, this.onTransfer});
 
   final VoidCallback onEdit;
+  final VoidCallback? onTransfer;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,25 @@ class VehicleOptionsMenu extends StatelessWidget {
             ],
           ),
         ),
+        if (onTransfer case final onTransfer?)
+          PopupMenuItem(
+            value: onTransfer,
+            height: 48,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Icon(Icons.swap_horiz, size: 20, color: scheme.secondary),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    l10n.vehicleTransfer,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.labelMedium?.copyWith(color: scheme.onSurface),
+                  ),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }

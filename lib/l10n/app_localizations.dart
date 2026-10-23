@@ -825,7 +825,7 @@ abstract class AppLocalizations {
   /// **'فاکتوردار'**
   String get historyInvoiceChip;
 
-  /// Export button (not available yet).
+  /// Export button of the history page; opens the report export.
   ///
   /// In fa, this message translates to:
   /// **'خروجی اکسل/PDF'**
@@ -1899,7 +1899,7 @@ abstract class AppLocalizations {
   /// **'هنوز سرویسی برای این خودرو ثبت نشده است'**
   String get vehicleDetailsHistoryEmpty;
 
-  /// Export button at the end of the vehicle details page (not available yet).
+  /// Export button at the end of the vehicle details page; opens the report export.
   ///
   /// In fa, this message translates to:
   /// **'دریافت کارنامه و گزارش فاکتورها (PDF)'**
@@ -4724,6 +4724,960 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'مدرک در کیف'**
   String get profileStatDocuments;
+
+  /// Title of the report export page.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروجی گزارش'**
+  String get reportExportTitle;
+
+  /// Heading of the vehicle scope card.
+  ///
+  /// In fa, this message translates to:
+  /// **'دامنه خودروی گزارش'**
+  String get reportScopeTitle;
+
+  /// Chip next to the vehicle scope heading.
+  ///
+  /// In fa, this message translates to:
+  /// **'قابل تغییر'**
+  String get reportScopeChangeable;
+
+  /// Scope segment for every vehicle of the garage.
+  ///
+  /// In fa, this message translates to:
+  /// **'همه خودروها ({count})'**
+  String reportScopeAll(int count);
+
+  /// Heading of the date range card.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازه زمانی گزارش'**
+  String get reportPeriodTitle;
+
+  /// Note next to the date range heading.
+  ///
+  /// In fa, this message translates to:
+  /// **'تقویم جلالی'**
+  String get reportJalaliCalendar;
+
+  /// Quick range pill.
+  ///
+  /// In fa, this message translates to:
+  /// **'۳ ماه اخیر'**
+  String get reportPeriodThreeMonths;
+
+  /// Quick range pill.
+  ///
+  /// In fa, this message translates to:
+  /// **'۶ ماه گذشته'**
+  String get reportPeriodSixMonths;
+
+  /// Quick range pill with the current Jalali year.
+  ///
+  /// In fa, this message translates to:
+  /// **'سال جاری ({year})'**
+  String reportPeriodCurrentYear(String year);
+
+  /// Quick range pill without a start date; also the PDF range start.
+  ///
+  /// In fa, this message translates to:
+  /// **'کل سوابق'**
+  String get reportPeriodAll;
+
+  /// Label of the start date field.
+  ///
+  /// In fa, this message translates to:
+  /// **'از تاریخ'**
+  String get reportFrom;
+
+  /// Label of the end date field.
+  ///
+  /// In fa, this message translates to:
+  /// **'تا تاریخ'**
+  String get reportTo;
+
+  /// Date field value when the range has no start.
+  ///
+  /// In fa, this message translates to:
+  /// **'—'**
+  String get reportDateUnset;
+
+  /// Heading of the content card.
+  ///
+  /// In fa, this message translates to:
+  /// **'محتوای گزارش خروجی'**
+  String get reportContentTitle;
+
+  /// Toggles every content box.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب همه'**
+  String get reportSelectAll;
+
+  /// Content box: service visits.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرویس‌ها و تعمیرات'**
+  String get reportContentServices;
+
+  /// Subtitle of the services box.
+  ///
+  /// In fa, this message translates to:
+  /// **'فاکتورها، قطعات مصرفی، اجرت تعمیرگاه'**
+  String get reportContentServicesHint;
+
+  /// Content box: fuel logs.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوابق سوخت‌گیری'**
+  String get reportContentFuel;
+
+  /// Subtitle of the fuel box.
+  ///
+  /// In fa, this message translates to:
+  /// **'لیتر، هزینه، جایگاه‌ها و محاسبه مصرف میانگین'**
+  String get reportContentFuelHint;
+
+  /// Content box: expenses.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه‌های جانبی'**
+  String get reportContentExpenses;
+
+  /// Subtitle of the expenses box.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیمه شخص ثالث، عوارض سالیانه، خلافی، معاینه فنی'**
+  String get reportContentExpensesHint;
+
+  /// Content box: append attachment images to the PDF; also the PDF attachments heading.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصاویر پیوست فاکتورها'**
+  String get reportContentImages;
+
+  /// Subtitle of the images box.
+  ///
+  /// In fa, this message translates to:
+  /// **'ضمیمه کردن تصاویر مدارک در انتهای فایل PDF'**
+  String get reportContentImagesHint;
+
+  /// Label of the preview card.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیش‌نمایش خروجی مدنظر'**
+  String get reportPreviewTitle;
+
+  /// Preview line, before the record count.
+  ///
+  /// In fa, this message translates to:
+  /// **'شامل'**
+  String get reportPreviewIncludes;
+
+  /// Preview line, after the record count.
+  ///
+  /// In fa, this message translates to:
+  /// **'رکورد ثبت‌شده'**
+  String get reportPreviewRecords;
+
+  /// Preview line, before the total cost.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع:'**
+  String get reportPreviewTotal;
+
+  /// Preview card when the report request fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'محاسبه پیش‌نمایش ممکن نشد'**
+  String get reportPreviewError;
+
+  /// Preview card when the server refuses a too-large report (422).
+  ///
+  /// In fa, this message translates to:
+  /// **'بازه گزارش بیش از حد بزرگ است'**
+  String get reportTooLarge;
+
+  /// Preview card when no content box is checked.
+  ///
+  /// In fa, this message translates to:
+  /// **'حداقل یک مورد را برای گزارش انتخاب کنید'**
+  String get reportNoContent;
+
+  /// PDF download button.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت خروجی PDF رسمی'**
+  String get reportDownloadPdf;
+
+  /// CSV download button.
+  ///
+  /// In fa, this message translates to:
+  /// **'دریافت فایل اکسل (Excel / CSV)'**
+  String get reportDownloadCsv;
+
+  /// Toast after a PDF export.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل PDF رسمی سوابق با موفقیت ایجاد شد.'**
+  String get reportPdfDone;
+
+  /// Toast after a CSV export.
+  ///
+  /// In fa, this message translates to:
+  /// **'فایل اکسل محاسباتی آماده بارگیری گردید.'**
+  String get reportCsvDone;
+
+  /// Snackbar when building or saving the file fails.
+  ///
+  /// In fa, this message translates to:
+  /// **'ساخت فایل گزارش ممکن نشد'**
+  String get reportExportFailed;
+
+  /// Close button of the export toast.
+  ///
+  /// In fa, this message translates to:
+  /// **'بستن'**
+  String get reportToastClose;
+
+  /// CSV/PDF type column: service visit.
+  ///
+  /// In fa, this message translates to:
+  /// **'سرویس'**
+  String get reportTypeService;
+
+  /// CSV/PDF type column: fill-up.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوخت'**
+  String get reportTypeFuel;
+
+  /// CSV/PDF type column: expense.
+  ///
+  /// In fa, this message translates to:
+  /// **'هزینه'**
+  String get reportTypeExpense;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ'**
+  String get reportColumnDate;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو'**
+  String get reportColumnVehicle;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'پلاک'**
+  String get reportColumnPlate;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'نوع'**
+  String get reportColumnType;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'شرح'**
+  String get reportColumnDescription;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیلومتر'**
+  String get reportColumnKm;
+
+  /// CSV/PDF column.
+  ///
+  /// In fa, this message translates to:
+  /// **'مبلغ (تومان)'**
+  String get reportColumnAmount;
+
+  /// Last CSV row and PDF table total row.
+  ///
+  /// In fa, this message translates to:
+  /// **'جمع کل'**
+  String get reportTotalRow;
+
+  /// PDF header: the Jalali date range.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازه گزارش: {from} تا {to}'**
+  String reportPdfRange(String from, String to);
+
+  /// PDF header: the vehicle nicknames.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو: {vehicles}'**
+  String reportPdfVehicles(String vehicles);
+
+  /// PDF header: the creation date.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ تهیه: {date}'**
+  String reportPdfGeneratedAt(String date);
+
+  /// PDF summary label.
+  ///
+  /// In fa, this message translates to:
+  /// **'تعداد رکورد'**
+  String get reportPdfEntryCount;
+
+  /// PDF summary label.
+  ///
+  /// In fa, this message translates to:
+  /// **'مجموع هزینه'**
+  String get reportPdfTotalCost;
+
+  /// PDF summary label.
+  ///
+  /// In fa, this message translates to:
+  /// **'تعداد سرویس'**
+  String get reportPdfServiceCount;
+
+  /// PDF summary label.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوخت (لیتر)'**
+  String get reportPdfFuelVolume;
+
+  /// PDF summary amount.
+  ///
+  /// In fa, this message translates to:
+  /// **'{amount} تومان'**
+  String reportPdfToman(String amount);
+
+  /// PDF heading of the non-image attachments.
+  ///
+  /// In fa, this message translates to:
+  /// **'سایر فایل‌های پیوست'**
+  String get reportPdfOtherFiles;
+
+  /// Title of the plans page.
+  ///
+  /// In fa, this message translates to:
+  /// **'اشتراک و پلن‌ها'**
+  String get plansTitle;
+
+  /// Badge of the plans hero banner.
+  ///
+  /// In fa, this message translates to:
+  /// **'شفاف، بدون تعهد و قابل لغو در هر زمان'**
+  String get plansHeroBadge;
+
+  /// Title of the plans hero banner.
+  ///
+  /// In fa, this message translates to:
+  /// **'پلن‌ها و اشتراک‌ها'**
+  String get plansHeroTitle;
+
+  /// Body of the plans hero banner.
+  ///
+  /// In fa, this message translates to:
+  /// **'امکانات نامحدود برای ثبت دقیق هزینه‌ها، سوابق فنی و ارتقای ارزش خودرو'**
+  String get plansHeroBody;
+
+  /// Billing toggle: monthly.
+  ///
+  /// In fa, this message translates to:
+  /// **'ماهانه'**
+  String get plansMonthly;
+
+  /// Billing toggle: yearly.
+  ///
+  /// In fa, this message translates to:
+  /// **'سالیانه'**
+  String get plansYearly;
+
+  /// Discount chip of the yearly toggle.
+  ///
+  /// In fa, this message translates to:
+  /// **'۲۰٪ تخفیف'**
+  String get plansYearlyDiscount;
+
+  /// Price unit, monthly.
+  ///
+  /// In fa, this message translates to:
+  /// **'تومان / ماهانه'**
+  String get plansPerMonth;
+
+  /// Price unit, yearly.
+  ///
+  /// In fa, this message translates to:
+  /// **'تومان / سالانه'**
+  String get plansPerYear;
+
+  /// Disabled button of the current plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'پلن فعلی شما'**
+  String get plansCurrent;
+
+  /// Tag of the basic plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'شروع استاندارد'**
+  String get plansBasicTag;
+
+  /// Name of the basic plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'پایه (همیشه رایگان)'**
+  String get plansBasicName;
+
+  /// Basic plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'حداکثر ۱ خودرو در گاراژ'**
+  String get plansBasicFeature1;
+
+  /// Basic plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'ثبت نامحدود سرویس و سوخت'**
+  String get plansBasicFeature2;
+
+  /// Basic plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآور درون‌برنامه‌ای (بدون پیامک)'**
+  String get plansBasicFeature3;
+
+  /// Basic plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروجی گزارش ساده متنی'**
+  String get plansBasicFeature4;
+
+  /// Badge above the pro plan card.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیشنهاد ما'**
+  String get plansProBadge;
+
+  /// Tag of the pro plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'بیشترین انتخاب مالکان'**
+  String get plansProTag;
+
+  /// Name of the pro plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'حرفه‌ای (پلاس)'**
+  String get plansProName;
+
+  /// Pro plan subtitle, monthly.
+  ///
+  /// In fa, this message translates to:
+  /// **'تسویه‌حساب ماهانه بدون تعهد زمانی'**
+  String get plansProMonthlyNote;
+
+  /// Pro plan subtitle, yearly.
+  ///
+  /// In fa, this message translates to:
+  /// **'معادل {amount} تومان در ماه (۲۰٪ صرفه‌جویی)'**
+  String plansProYearlyNote(String amount);
+
+  /// Pro plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدیریت همزمان تا ۳ خودرو در یک گاراژ'**
+  String get plansProFeature1;
+
+  /// Pro plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'یادآور پیامکی تمدید بیمه، معاینه و سرویس دوره'**
+  String get plansProFeature2;
+
+  /// Pro plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروجی شناسنامه سلامت فنی خودرو (PDF رسمی و اکسل)'**
+  String get plansProFeature3;
+
+  /// Pro plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیف مدارک نامحدود با فضای امن ابری'**
+  String get plansProFeature4;
+
+  /// Pro plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال دیجیتال سوابق سرویس به خریدار هنگام فروش'**
+  String get plansProFeature5;
+
+  /// Upgrade button of the pro plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب و ارتقا به حرفه‌ای'**
+  String get plansProCta;
+
+  /// Tag of the unlimited plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'ناوگان و خانواده'**
+  String get plansMasterTag;
+
+  /// Name of the unlimited plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'گاراژ نامحدود'**
+  String get plansMasterName;
+
+  /// Unlimited plan subtitle, monthly.
+  ///
+  /// In fa, this message translates to:
+  /// **'برای مجموعه‌داران و مدیران چند خودرو'**
+  String get plansMasterMonthlyNote;
+
+  /// Unlimited plan subtitle, yearly.
+  ///
+  /// In fa, this message translates to:
+  /// **'معادل {amount} تومان در ماه با اولویت کامل'**
+  String plansMasterYearlyNote(String amount);
+
+  /// Unlimited plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو نامحدود در پنل اصلی'**
+  String get plansMasterFeature1;
+
+  /// Unlimited plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال پیامک یادآور به چند شماره مجزا (رانندگان)'**
+  String get plansMasterFeature2;
+
+  /// Unlimited plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشتیبانی تلفنی اختصاصی و آنی'**
+  String get plansMasterFeature3;
+
+  /// Unlimited plan feature.
+  ///
+  /// In fa, this message translates to:
+  /// **'خروجی مالی جامع برای امور مالیاتی و بیمه'**
+  String get plansMasterFeature4;
+
+  /// Upgrade button of the unlimited plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتخاب پلن نامحدود'**
+  String get plansMasterCta;
+
+  /// Heading of the guarantee card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تضمین شفافیت و رضایت'**
+  String get plansGuaranteeTitle;
+
+  /// Body of the guarantee card.
+  ///
+  /// In fa, this message translates to:
+  /// **'تمدید خودکار ناخواسته در این سیستم وجود ندارد. تا ۷ روز پس از خرید اشتراک، در صورت عدم رضایت کامل، وجه پرداختی بدون پرسش به حساب بانکی شما بازگردانده می‌شود.'**
+  String get plansGuaranteeBody;
+
+  /// Guarantee card note.
+  ///
+  /// In fa, this message translates to:
+  /// **'درگاه پرداخت امن شاپرک'**
+  String get plansSecurePayment;
+
+  /// Guarantee card note.
+  ///
+  /// In fa, this message translates to:
+  /// **'پشتیبانی ۷ روز هفته'**
+  String get plansSupport;
+
+  /// Profile subscription card: the current plan.
+  ///
+  /// In fa, this message translates to:
+  /// **'اشتراک پایه'**
+  String get profilePlanTitle;
+
+  /// Profile subscription card: the plan chip.
+  ///
+  /// In fa, this message translates to:
+  /// **'رایگان'**
+  String get profilePlanBadge;
+
+  /// Profile subscription card: subtitle.
+  ///
+  /// In fa, this message translates to:
+  /// **'پلن فعلی شما • همیشه رایگان'**
+  String get profilePlanHint;
+
+  /// Profile subscription card: opens the plans page.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارتقا یا تمدید'**
+  String get profilePlanUpgrade;
+
+  /// Vehicle options menu: opens the ownership transfer page.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال مالکیت'**
+  String get vehicleTransfer;
+
+  /// Title of the transfer page.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال مالکیت خودرو'**
+  String get transferTitle;
+
+  /// Chip on the vehicle card of the transfer page.
+  ///
+  /// In fa, this message translates to:
+  /// **'فعال در گاراژ'**
+  String get transferActiveInGarage;
+
+  /// Mileage label on the vehicle card of the transfer page.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارکرد جاری:'**
+  String get transferMileage;
+
+  /// Unit after the mileage.
+  ///
+  /// In fa, this message translates to:
+  /// **'کیلومتر'**
+  String get transferKm;
+
+  /// Heading of the phone card.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره تلفن همراه مالک جدید (خریدار)'**
+  String get transferPhoneTitle;
+
+  /// Subtitle of the phone card (replaces Stitch's SMS sentence: no SMS is sent).
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال در حساب کاربری این شماره نمایش داده می‌شود و پس از تایید خریدار انجام می‌شود.'**
+  String get transferPhoneHint;
+
+  /// Semantics label of the phone field.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره همراه خریدار'**
+  String get transferPhoneLabel;
+
+  /// Info note under the phone field (Stitch's note without the SMS part).
+  ///
+  /// In fa, this message translates to:
+  /// **'مالک جدید باید در سامانه «مدیریت خودرو» با همین شماره همراه حساب کاربری داشته باشد یا ثبت‌نام کند تا درخواست را ببیند.'**
+  String get transferPhoneNote;
+
+  /// Heading of the transferred items card.
+  ///
+  /// In fa, this message translates to:
+  /// **'اقلامی که به مالک جدید منتقل می‌شوند'**
+  String get transferItemsTitle;
+
+  /// Transferred item.
+  ///
+  /// In fa, this message translates to:
+  /// **'سوابق کامل سرویس‌ها و فاکتورها'**
+  String get transferItemServices;
+
+  /// Transferred item hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'تمام جزئیات مراجعات به تعمیرگاه، قطعات مصرفی و تعویض‌شده'**
+  String get transferItemServicesHint;
+
+  /// Transferred item.
+  ///
+  /// In fa, this message translates to:
+  /// **'دوره‌های سرویس و کیلومتر جاری'**
+  String get transferItemIntervals;
+
+  /// Transferred item hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'فواصل استاندارد نگهداری، روغن موتور، تسمه‌تایم و فیلترها'**
+  String get transferItemIntervalsHint;
+
+  /// Transferred item.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصاویر اسناد فنی و گارانتی فعال'**
+  String get transferItemDocuments;
+
+  /// Transferred item hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'فاکتورهای رسمی و مهلت‌های باقی‌مانده از دفترچه گارانتی'**
+  String get transferItemDocumentsHint;
+
+  /// Transferred item.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخچه هزینه‌های سوخت'**
+  String get transferItemFuel;
+
+  /// Transferred item hint.
+  ///
+  /// In fa, this message translates to:
+  /// **'گزارش میانگین مصرف در هر ۱۰۰ کیلومتر و نوع سوخت ثبت‌شده'**
+  String get transferItemFuelHint;
+
+  /// Item that is not transferred.
+  ///
+  /// In fa, this message translates to:
+  /// **'مدارک هویتی و خصوصی مالک پیشین (منتقل نمی‌شود)'**
+  String get transferItemPrivate;
+
+  /// Hint of the item that is not transferred.
+  ///
+  /// In fa, this message translates to:
+  /// **'تصویر کارت ملی، اسناد مالکیت شخصی و تراکنش‌های بانکی به صورت خودکار حذف می‌گردند.'**
+  String get transferItemPrivateHint;
+
+  /// Heading of the rules card.
+  ///
+  /// In fa, this message translates to:
+  /// **'قوانین حفظ حریم خصوصی و نگهداری سوابق'**
+  String get transferRulesTitle;
+
+  /// Intro of the rules.
+  ///
+  /// In fa, this message translates to:
+  /// **'پس از تایید و پذیرش نهایی انتقال توسط خریدار:'**
+  String get transferRulesIntro;
+
+  /// Rule 1.
+  ///
+  /// In fa, this message translates to:
+  /// **'این خودرو از گاراژ فعال شما خارج شده و کلیه دسترسی‌های مدیریتی و ویرایش آن بلافاصله سلب خواهد شد.'**
+  String get transferRule1;
+
+  /// Rule 2.
+  ///
+  /// In fa, this message translates to:
+  /// **'پیش از ارسال درخواست، در صورت نیاز از صفحه «خروجی گزارش» یک نسخه PDF یا اکسل از سوابق تهیه کنید.'**
+  String get transferRule2;
+
+  /// Link under rule 2 to the report export page.
+  ///
+  /// In fa, this message translates to:
+  /// **'رفتن به خروجی گزارش'**
+  String get transferRule2Link;
+
+  /// Rule 3.
+  ///
+  /// In fa, this message translates to:
+  /// **'مالک جدید به هیچ عنوان امکان تغییر، دستکاری یا حذف اطلاعات ثبت‌شده در دوران مالکیت شما را نخواهد داشت.'**
+  String get transferRule3;
+
+  /// Consent checkbox.
+  ///
+  /// In fa, this message translates to:
+  /// **'صحت شماره تلفن همراه خریدار و واگذاری کامل کنترل فنی و فاکتورهای خودرو را تایید می‌نمایم.'**
+  String get transferConsent;
+
+  /// Submit button.
+  ///
+  /// In fa, this message translates to:
+  /// **'تایید نهایی و ارسال درخواست انتقال'**
+  String get transferSubmit;
+
+  /// Secondary button.
+  ///
+  /// In fa, this message translates to:
+  /// **'انصراف و بازگشت به گاراژ'**
+  String get transferBack;
+
+  /// Title of the final confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال ارسال شود؟'**
+  String get transferConfirmTitle;
+
+  /// Body of the final confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'«{vehicle}» پس از تایید صاحب شماره {phone} از گاراژ شما خارج می‌شود.'**
+  String transferConfirmBody(String vehicle, String phone);
+
+  /// Confirm button of the final confirmation.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال درخواست'**
+  String get transferConfirmSend;
+
+  /// Snackbar after sending.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال ارسال شد'**
+  String get transferSent;
+
+  /// Snackbar for an invalid phone (400).
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره همراه معتبر نیست'**
+  String get transferInvalidPhone;
+
+  /// Snackbar for a self transfer (422).
+  ///
+  /// In fa, this message translates to:
+  /// **'نمی‌توانید خودرو را به شماره خودتان منتقل کنید'**
+  String get transferSelf;
+
+  /// Snackbar for a duplicate request (409).
+  ///
+  /// In fa, this message translates to:
+  /// **'برای این خودرو یک درخواست انتقال در انتظار وجود دارد'**
+  String get transferAlreadyPending;
+
+  /// Snackbar for another failure.
+  ///
+  /// In fa, this message translates to:
+  /// **'ارسال درخواست ممکن نشد'**
+  String get transferFailed;
+
+  /// Heading of the pending transfer card.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال در انتظار تایید خریدار'**
+  String get transferPendingTitle;
+
+  /// Pending transfer: the phone.
+  ///
+  /// In fa, this message translates to:
+  /// **'شماره خریدار: {phone}'**
+  String transferPendingPhone(String phone);
+
+  /// Pending transfer: the date.
+  ///
+  /// In fa, this message translates to:
+  /// **'تاریخ ارسال: {date}'**
+  String transferPendingDate(String date);
+
+  /// Cancels the pending transfer.
+  ///
+  /// In fa, this message translates to:
+  /// **'لغو درخواست'**
+  String get transferCancelRequest;
+
+  /// Snackbar after cancelling.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال لغو شد'**
+  String get transferCancelled;
+
+  /// Snackbar of a failed cancel.
+  ///
+  /// In fa, this message translates to:
+  /// **'لغو درخواست ممکن نشد'**
+  String get transferCancelFailed;
+
+  /// Error of the transfers load.
+  ///
+  /// In fa, this message translates to:
+  /// **'بارگذاری درخواست‌های انتقال ممکن نشد'**
+  String get transfersLoadError;
+
+  /// Banner and card title for an incoming transfer.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال خودرو'**
+  String get incomingTransferTitle;
+
+  /// Banner and card body.
+  ///
+  /// In fa, this message translates to:
+  /// **'{sender} می‌خواهد «{vehicle}» را به گاراژ شما منتقل کند.'**
+  String incomingTransferBody(String sender, String vehicle);
+
+  /// Sender when the seller has no name.
+  ///
+  /// In fa, this message translates to:
+  /// **'یک کاربر'**
+  String get incomingTransferUnknownSender;
+
+  /// Opens the incoming transfer sheet.
+  ///
+  /// In fa, this message translates to:
+  /// **'بررسی'**
+  String get incomingTransferReview;
+
+  /// Title of the incoming transfer sheet.
+  ///
+  /// In fa, this message translates to:
+  /// **'انتقال مالکیت به شما'**
+  String get incomingTransferSheetTitle;
+
+  /// Sheet: the seller.
+  ///
+  /// In fa, this message translates to:
+  /// **'فرستنده: {sender}'**
+  String incomingTransferFrom(String sender);
+
+  /// Sheet: the vehicle mileage.
+  ///
+  /// In fa, this message translates to:
+  /// **'کارکرد: {km} کیلومتر'**
+  String incomingTransferMileage(String km);
+
+  /// Sheet: what accepting does.
+  ///
+  /// In fa, this message translates to:
+  /// **'با پذیرش، خودرو و سوابق آن به گاراژ شما منتقل می‌شود. سوابق مالک قبلی قابل ویرایش نیستند.'**
+  String get incomingTransferNote;
+
+  /// Sheet: accept.
+  ///
+  /// In fa, this message translates to:
+  /// **'پذیرش'**
+  String get incomingTransferAccept;
+
+  /// Sheet: reject.
+  ///
+  /// In fa, this message translates to:
+  /// **'رد درخواست'**
+  String get incomingTransferReject;
+
+  /// Snackbar after accepting.
+  ///
+  /// In fa, this message translates to:
+  /// **'خودرو به گاراژ شما اضافه شد'**
+  String get incomingTransferAccepted;
+
+  /// Snackbar after rejecting.
+  ///
+  /// In fa, this message translates to:
+  /// **'درخواست انتقال رد شد'**
+  String get incomingTransferRejected;
+
+  /// Snackbar of a failed accept or reject.
+  ///
+  /// In fa, this message translates to:
+  /// **'انجام درخواست ممکن نشد'**
+  String get incomingTransferFailed;
+
+  /// Chip on a record from before the ownership transfer.
+  ///
+  /// In fa, this message translates to:
+  /// **'مالک قبلی'**
+  String get recordLockedLabel;
+
+  /// Note on a locked record.
+  ///
+  /// In fa, this message translates to:
+  /// **'این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست'**
+  String get recordLockedHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

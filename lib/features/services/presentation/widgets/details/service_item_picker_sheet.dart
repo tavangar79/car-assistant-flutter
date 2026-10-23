@@ -6,7 +6,8 @@ import '../../../domain/entities/service_category.dart';
 import '../../../domain/entities/service_item.dart';
 import '../service_icon_tile.dart';
 
-/// "انتخاب سرویس": the catalog items not yet on the visit, grouped by category, as 64dp rows.
+/// "انتخاب سرویس": the enabled catalog items not yet on the visit, grouped by category, as 64dp
+/// rows.
 /// Returns the chosen item, or `null` when dismissed.
 class ServiceItemPickerSheet extends StatelessWidget {
   const ServiceItemPickerSheet({super.key, required this.categories, required this.excludeIds});
@@ -38,8 +39,8 @@ class ServiceItemPickerSheet extends StatelessWidget {
     final tones = AppTones.of(context);
     final groups = [
       for (final category in categories)
-        if (category.items.where((item) => !excludeIds.contains(item.id)).toList() case final items
-            when items.isNotEmpty)
+        if (category.items.where((item) => !item.disabled && !excludeIds.contains(item.id)).toList()
+            case final items when items.isNotEmpty)
           (category.title, items),
     ];
     return DraggableScrollableSheet(

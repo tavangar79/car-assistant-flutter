@@ -64,7 +64,7 @@ void main() {
     when(() => vehicles.getVehicle('v1')).thenAnswer((_) async => const Right(tara));
     when(() => vehicles.getVehicles()).thenAnswer((_) async => const Right([tara]));
     when(() => odometer.getReadings('v1')).thenAnswer((_) async => const Right([]));
-    when(() => services.getCatalog())
+    when(() => services.getCatalog(vehicleId: any(named: 'vehicleId')))
         .thenAnswer((_) async => const Right(services_fixtures.serviceCatalog));
     when(() => services.getVisits('v1')).thenAnswer((_) async => const Right([]));
   });
@@ -91,6 +91,14 @@ void main() {
           builder: (context, state) => Text('service ${state.pathParameters['serviceId']}'),
         ),
         GoRoute(path: '/vehicles/:id/due', builder: (context, state) => const Text('due page')),
+        GoRoute(
+          path: '/vehicles/:id/transfer',
+          builder: (context, state) => Text('transfer ${state.pathParameters['id']}'),
+        ),
+        GoRoute(
+          path: AppRoutes.reportExportPath,
+          builder: (context, state) => Text('report ${state.uri.queryParameters['vehicleId']}'),
+        ),
         GoRoute(
           path: '/vehicles/:id/intervals',
           builder: (context, state) => const Text('intervals page'),
@@ -146,11 +154,27 @@ void main() {
     expect(find.text('هنوز سوخت‌گیری برای این خودرو ثبت نشده است'), findsOneWidget);
     expect(find.text('آخرین هزینه‌ها'), findsOneWidget);
     expect(find.text('هنوز هزینه‌ای برای این خودرو ثبت نشده است'), findsOneWidget);
-    final export = find.ancestor(
-      of: find.text('دریافت کارنامه و گزارش فاکتورها (PDF)'),
-      matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
-    );
-    expect(tester.widget<ButtonStyleButton>(export).onPressed, isNull);
+  });
+
+  testWidgets('the options menu opens the ownership transfer', (tester) async {
+    await openPage(tester);
+
+    await tester.tap(find.byIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('انتقال مالکیت'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('transfer v1'), findsOneWidget);
+  });
+
+  testWidgets('the report button opens the report export for this vehicle', (tester) async {
+    await openPage(tester);
+
+    await tester.ensureVisible(find.text('دریافت کارنامه و گزارش فاکتورها (PDF)'));
+    await tester.tap(find.text('دریافت کارنامه و گزارش فاکتورها (PDF)'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('report v1'), findsOneWidget);
   });
 
   testWidgets('lists the pending due items; tapping one opens the due page', (tester) async {
