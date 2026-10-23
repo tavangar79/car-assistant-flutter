@@ -24,16 +24,11 @@ const _args = OtpArgs(phone: _phone, resendInSeconds: 45, codeLength: 5);
 
 void main() {
   late MockAuthRepository repository;
-  late ProviderContainer container;
 
-  setUp(() {
-    repository = MockAuthRepository();
-    container = ProviderContainer(
-      overrides: [authRepositoryProvider.overrideWithValue(repository)],
-    );
-  });
+  setUp(() => repository = MockAuthRepository());
 
-  tearDown(() => container.dispose());
+  ProviderContainer containerOf(WidgetTester tester) =>
+      ProviderScope.containerOf(tester.element(find.byType(OtpPage)));
 
   Future<void> pumpPage(WidgetTester tester, {OtpArgs args = _args}) async {
     tester.view
@@ -41,8 +36,8 @@ void main() {
       ..devicePixelRatio = 3;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(
-      UncontrolledProviderScope(
-        container: container,
+      ProviderScope(
+        overrides: [authRepositoryProvider.overrideWithValue(repository)],
         child: MaterialApp(
           theme: AppTheme.light,
           locale: const Locale('fa'),
@@ -98,7 +93,7 @@ void main() {
     await tester.pump();
 
     verify(() => repository.verifyOtp(phone: _phone, code: '12345')).called(1);
-    expect(container.read(authStatusProvider), AuthStatus.signedIn);
+    expect(containerOf(tester).read(authStatusProvider), AuthStatus.signedIn);
   });
 
   testWidgets('shows a wrong code error and clears the boxes', (tester) async {

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +6,7 @@ import '../../../../core/router/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/auth_providers.dart';
 import '../providers/otp_args.dart';
+import '../providers/otp_state.dart';
 import '../widgets/auth_error_text.dart';
 import '../widgets/auth_failure_message.dart';
 import '../widgets/auth_scaffold.dart';
@@ -21,6 +20,8 @@ import '../widgets/resend_card.dart';
 
 /// Enter the SMS code (Stitch screen `8e8f9a27ae4f4dcfbfe34140a8f9942a`).
 /// On success the router guard moves on to the home tab.
+///
+/// The view: renders [otpViewModelProvider] and forwards user events to it.
 class OtpPage extends ConsumerStatefulWidget {
   const OtpPage({super.key, required this.args});
 
@@ -32,71 +33,36 @@ class OtpPage extends ConsumerStatefulWidget {
 
 class _OtpPageState extends ConsumerState<OtpPage> {
   final _code = TextEditingController();
-  Timer? _timer;
-  late int _secondsLeft;
-  bool _resending = false;
 
   @override
   void initState() {
     super.initState();
-    _code.addListener(() => setState(() {}));
-    _startCountdown(widget.args.resendInSeconds);
+    _code.addListener(
+      () => ref.read(otpViewModelProvider(widget.args).notifier).codeChanged(_code.text),
+    );
   }
 
-  /// go_router can reuse this state when a new code is requested for another number,
-  /// so start over: empty boxes, no old error, and the new countdown.
+  /// go_router can reuse this state when a new code is requested for another number. The new
+  /// args get a fresh view model; only the boxes need emptying.
   @override
   void didUpdateWidget(OtpPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.args == oldWidget.args) return;
-    _code.clear();
-    _resending = false;
-    // Riverpod forbids invalidating while the tree builds, so drop the old error right after.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) ref.invalidate(otpControllerProvider);
-    });
-    _startCountdown(widget.args.resendInSeconds);
+    if (widget.args != oldWidget.args) _code.clear();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     _code.dispose();
     super.dispose();
   }
 
-  void _startCountdown(int seconds) {
-    _timer?.cancel();
-    setState(() => _secondsLeft = seconds < 0 ? 0 : seconds);
-    if (_secondsLeft == 0) return;
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() => _secondsLeft--);
-      if (_secondsLeft <= 0) timer.cancel();
-    });
-  }
-
-  bool get _isComplete => _code.text.length == widget.args.codeLength;
-
-  Future<void> _verify() async {
-    if (ref.read(otpControllerProvider).isLoading) return;
-    final ok = await ref
-        .read(otpControllerProvider.notifier)
-        .verify(phone: widget.args.phone, code: _code.text);
-    if (!ok && mounted) _code.clear();
-  }
-
   Future<void> _resend() async {
     final args = widget.args;
-    setState(() => _resending = true);
-    final seconds = await ref.read(otpControllerProvider.notifier).resend(args.phone);
+    final sent = await ref.read(otpViewModelProvider(args).notifier).resend();
     // Ignore a late answer for a number the user has since changed.
-    if (!mounted || args != widget.args) return;
-    setState(() => _resending = false);
-    if (seconds != null) _startCountdown(seconds);
-    if (!ref.read(otpControllerProvider).hasError) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).authCodeResent)));
-    }
+    if (!sent || !mounted || args != widget.args) return;
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).authCodeResent)));
   }
 
   void _back() {
@@ -110,9 +76,15 @@ class _OtpPageState extends ConsumerState<OtpPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final state = ref.watch(otpControllerProvider);
-    final error = state.hasError ? authFailureMessage(state.error!, l10n) : null;
-    final verifying = state.isLoading && !_resending;
+    final provider = otpViewModelProvider(widget.args);
+    final viewModel = ref.read(provider.notifier);
+    final state = ref.watch(provider);
+    // Keep the boxes in step when the view model clears the code (after a failed attempt).
+    ref.listen<OtpState>(provider, (_, next) {
+      if (next.code.isEmpty && _code.text.isNotEmpty) _code.clear();
+    });
+    final failure = state.failure;
+    final error = failure == null ? null : authFailureMessage(failure, l10n);
     return AuthScaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
@@ -128,20 +100,24 @@ class _OtpPageState extends ConsumerState<OtpPage> {
             OtpCodeInput(
               length: widget.args.codeLength,
               controller: _code,
-              hasError: error != null && _code.text.isEmpty,
-              onCompleted: (_) => _verify(),
+              hasError: state.showsCodeError,
+              onCompleted: (_) => viewModel.verify(),
             ),
             if (error != null) ...[const SizedBox(height: 10), AuthErrorText(error)],
             const SizedBox(height: 16),
-            ResendCard(secondsLeft: _secondsLeft, loading: _resending, onResend: _resend),
+            ResendCard(
+              secondsLeft: state.secondsLeft,
+              loading: state.isResending,
+              onResend: _resend,
+            ),
           ],
         ),
       ),
       dock: BottomActionDock(
         child: PrimaryCtaButton(
           label: l10n.authVerify,
-          loading: verifying,
-          onPressed: _isComplete ? _verify : null,
+          loading: state.isVerifying,
+          onPressed: state.isComplete ? viewModel.verify : null,
         ),
       ),
     );

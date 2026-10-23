@@ -21,8 +21,11 @@ import 'avatar_controller.dart';
 import 'avatar_picker.dart';
 import 'complete_profile_controller.dart';
 import 'current_user_notifier.dart';
-import 'otp_controller.dart';
-import 'phone_controller.dart';
+import 'otp_args.dart';
+import 'otp_state.dart';
+import 'otp_view_model.dart';
+import 'phone_state.dart';
+import 'phone_view_model.dart';
 
 // Dependency wiring for the auth feature. Override [authRepositoryProvider]
 // (or [tokenStorageProvider]) in tests to avoid real HTTP and secure storage.
@@ -77,14 +80,14 @@ final authStatusProvider = NotifierProvider<AuthStatusNotifier, AuthStatus>(Auth
 /// The signed-in user (phone, profile), or `null` when signed out or not loaded yet.
 final currentUserProvider = NotifierProvider<CurrentUserNotifier, User?>(CurrentUserNotifier.new);
 
-/// State of the phone page: loading while a code is requested, and the last error.
-final phoneControllerProvider = AsyncNotifierProvider.autoDispose<PhoneController, void>(
-  PhoneController.new,
+/// View model of the phone page: the typed number, loading while a code is requested, and the last error.
+final phoneViewModelProvider = NotifierProvider.autoDispose<PhoneViewModel, PhoneState>(
+  PhoneViewModel.new,
 );
 
-/// State of the code page: loading while verifying or resending, and the last error.
-final otpControllerProvider = AsyncNotifierProvider.autoDispose<OtpController, void>(
-  OtpController.new,
+/// View model of the code page, one per [OtpArgs]: the typed code, the countdown, loading and the last error.
+final otpViewModelProvider = NotifierProvider.autoDispose.family<OtpViewModel, OtpState, OtpArgs>(
+  OtpViewModel.new,
 );
 
 /// State of the complete-profile page: loading while saving, and the last error.
