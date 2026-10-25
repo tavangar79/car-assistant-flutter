@@ -123,6 +123,12 @@ abstract class AppLocalizations {
   /// **'در حال دریافت اطلاعات...'**
   String get splashLoading;
 
+  /// Shown on the splash screen when the server cannot be reached (offline or backend down), above the retry button.
+  ///
+  /// In fa, this message translates to:
+  /// **'اتصال به سرور برقرار نشد. اینترنت خود را بررسی کنید و دوباره تلاش کنید.'**
+  String get splashConnectionError;
+
   /// Footer slogan on the splash screen.
   ///
   /// In fa, this message translates to:

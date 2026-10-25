@@ -1,4 +1,6 @@
+import 'package:car_assistant/core/error/network_failure.dart';
 import 'package:car_assistant/core/theme/app_theme.dart';
+import 'package:car_assistant/features/auth/domain/entities/user.dart';
 import 'package:car_assistant/features/auth/domain/repositories/auth_repository.dart';
 import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
 import 'package:car_assistant/features/splash/presentation/pages/splash_page.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -20,6 +23,13 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 
 const _delay = Duration(seconds: 2);
 
+final _user = User(
+  id: 'u1',
+  phone: '09121234567',
+  createdAt: DateTime.utc(2026),
+  isProfileComplete: true,
+);
+
 PackageInfo _packageInfo(String version) => PackageInfo(
   appName: 'car_assistant',
   packageName: 'car_assistant',
@@ -27,18 +37,22 @@ PackageInfo _packageInfo(String version) => PackageInfo(
   buildNumber: '1',
 );
 
-Widget _app({Future<PackageInfo> Function()? packageInfo, Locale locale = const Locale('fa')}) {
+Widget _app({
+  Future<PackageInfo> Function()? packageInfo,
+  Locale locale = const Locale('fa'),
+  MockAuthRepository? auth,
+}) {
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashPage()),
       GoRoute(path: '/home', builder: (context, state) => const Text('home')),
     ],
   );
-  final auth = MockAuthRepository();
-  when(auth.hasSession).thenAnswer((_) async => false);
+  final repository = auth ?? MockAuthRepository();
+  if (auth == null) when(repository.hasSession).thenAnswer((_) async => false);
   return ProviderScope(
     overrides: [
-      authRepositoryProvider.overrideWithValue(auth),
+      authRepositoryProvider.overrideWithValue(repository),
       splashDelayProvider.overrideWithValue(_delay),
       packageInfoProvider.overrideWith(
         (ref) => packageInfo?.call() ?? Future.value(_packageInfo('1.0.0')),
@@ -138,5 +152,42 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(SplashPage), findsNothing);
     expect(find.text('home'), findsOneWidget);
+  });
+
+  group('when the server is unreachable', () {
+    late MockAuthRepository auth;
+
+    setUp(() {
+      auth = MockAuthRepository();
+      when(auth.hasSession).thenAnswer((_) async => true);
+      when(auth.getCurrentUser).thenAnswer((_) async => const Left(NetworkFailure()));
+    });
+
+    testWidgets('shows a connection error and stays on splash', (tester) async {
+      await tester.pumpWidget(_app(auth: auth, locale: const Locale('en')));
+      await tester.pump(_delay);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SplashPage), findsOneWidget);
+      expect(find.text('home'), findsNothing);
+      expect(find.byType(SplashLoadingBar), findsNothing);
+      expect(
+        find.text("Can't reach the server. Check your connection and try again."),
+        findsOneWidget,
+      );
+      expect(find.widgetWithText(FilledButton, 'Retry'), findsOneWidget);
+    });
+
+    testWidgets('retry goes home once the server is back', (tester) async {
+      await tester.pumpWidget(_app(auth: auth, locale: const Locale('en')));
+      await tester.pump(_delay);
+      await tester.pumpAndSettle();
+
+      when(auth.getCurrentUser).thenAnswer((_) async => Right(_user));
+      await tester.tap(find.text('Retry'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('home'), findsOneWidget);
+    });
   });
 }

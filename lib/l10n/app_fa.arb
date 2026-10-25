@@ -20,6 +20,10 @@
   "@splashLoading": {
     "description": "Shown under the splash loading bar."
   },
+  "splashConnectionError": "اتصال به سرور برقرار نشد. اینترنت خود را بررسی کنید و دوباره تلاش کنید.",
+  "@splashConnectionError": {
+    "description": "Shown on the splash screen when the server cannot be reached (offline or backend down), above the retry button."
+  },
   "splashFooter": "اطلاعات خودرو، همیشه در دسترس شما",
   "@splashFooter": {
     "description": "Footer slogan on the splash screen."

@@ -15,7 +15,7 @@ class LoadErrorView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(message),
+          Text(message, textAlign: TextAlign.center),
           const SizedBox(height: 16),
           FilledButton(onPressed: onRetry, child: Text(AppLocalizations.of(context).retry)),
         ],

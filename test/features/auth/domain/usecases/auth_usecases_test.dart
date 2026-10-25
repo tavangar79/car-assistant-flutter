@@ -87,7 +87,7 @@ void main() {
     test('is signed out without a token', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => false);
 
-      expect((await CheckSession(repository)()).signedIn, isFalse);
+      expect(await CheckSession(repository)(), const Right<Failure, User?>(null));
       verifyNever(() => repository.getCurrentUser());
     });
 
@@ -95,7 +95,7 @@ void main() {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
       when(() => repository.getCurrentUser()).thenAnswer((_) async => Right(user));
 
-      expect(await CheckSession(repository)(), (signedIn: true, user: user));
+      expect(await CheckSession(repository)(), Right<Failure, User?>(user));
     });
 
     test('clears the token and signs out on 401', () async {
@@ -104,24 +104,25 @@ void main() {
           .thenAnswer((_) async => const Left(UnauthorizedFailure()));
       when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
 
-      expect((await CheckSession(repository)()).signedIn, isFalse);
+      expect(await CheckSession(repository)(), const Right<Failure, User?>(null));
       verify(() => repository.clearSession()).called(1);
     });
 
-    test('keeps the session when offline', () async {
+    test('fails and keeps the token when offline', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
       when(() => repository.getCurrentUser()).thenAnswer((_) async => const Left(NetworkFailure()));
 
-      expect((await CheckSession(repository)()).signedIn, isTrue);
+      expect(await CheckSession(repository)(), const Left<Failure, User?>(NetworkFailure()));
       verifyNever(() => repository.clearSession());
     });
 
-    test('keeps the session on other server errors', () async {
+    test('fails and keeps the token on other server errors', () async {
       when(() => repository.hasSession()).thenAnswer((_) async => true);
       when(() => repository.getCurrentUser())
           .thenAnswer((_) async => const Left(Failure('HTTP 500')));
 
-      expect((await CheckSession(repository)()).signedIn, isTrue);
+      expect(await CheckSession(repository)(), const Left<Failure, User?>(Failure('HTTP 500')));
+      verifyNever(() => repository.clearSession());
     });
   });
 

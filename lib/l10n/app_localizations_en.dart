@@ -25,6 +25,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashLoading => 'Loading your data...';
 
   @override
+  String get splashConnectionError =>
+      'Can\'t reach the server. Check your connection and try again.';
+
+  @override
   String get splashFooter => 'Your car\'s info, always at hand';
 
   @override

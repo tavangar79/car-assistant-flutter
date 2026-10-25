@@ -25,6 +25,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get splashLoading => 'در حال دریافت اطلاعات...';
 
   @override
+  String get splashConnectionError =>
+      'اتصال به سرور برقرار نشد. اینترنت خود را بررسی کنید و دوباره تلاش کنید.';
+
+  @override
   String get splashFooter => 'اطلاعات خودرو، همیشه در دسترس شما';
 
   @override

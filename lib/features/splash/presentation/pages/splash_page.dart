@@ -1,60 +1,43 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../auth/presentation/providers/auth_providers.dart';
 import '../providers/splash_providers.dart';
+import '../providers/splash_view_model.dart';
 import '../../../../core/widgets/grid_background.dart';
+import '../../../../core/widgets/load_error_view.dart';
 import '../widgets/splash_emblem.dart';
 import '../widgets/splash_loading_bar.dart';
 import '../widgets/version_badge.dart';
 
-/// Branded launch screen. Restores the session, then after at least [splashDelayProvider] moves
-/// to the home tab; the router guard sends signed-out users to the phone page instead.
-class SplashPage extends ConsumerStatefulWidget {
+/// The view of [SplashViewModel]: renders its status and moves to the home tab once it is done;
+/// the router guard sends signed-out users to the phone page instead. When the server cannot be
+/// reached it shows a connection error with a retry button and stays here.
+class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});
 
   @override
-  ConsumerState<SplashPage> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends ConsumerState<SplashPage> {
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    final delay = Completer<void>();
-    _timer = Timer(ref.read(splashDelayProvider), delay.complete);
-    final session = ref.read(authStatusProvider.notifier).restore();
-    Future.wait([delay.future, session]).then((_) {
-      if (mounted) context.go(AppRoutes.homePath);
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(splashViewModelProvider, (_, status) {
+      if (status == SplashStatus.done) context.go(AppRoutes.homePath);
     });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
+    final failed = ref.watch(splashViewModelProvider) == SplashStatus.failed;
+    final retry = ref.read(splashViewModelProvider.notifier).retry;
+    return Scaffold(
       body: GridBackground(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _Header(),
-                Expanded(child: Center(child: _Brand())),
-                _Footer(),
+                const _Header(),
+                Expanded(
+                  child: Center(child: _Brand(onRetry: failed ? retry : null)),
+                ),
+                const _Footer(),
               ],
             ),
           ),
@@ -88,8 +71,11 @@ class _Header extends StatelessWidget {
   }
 }
 
+/// The emblem and headline, then a loading bar, or a connection error when [onRetry] is set.
 class _Brand extends StatelessWidget {
-  const _Brand();
+  const _Brand({this.onRetry});
+
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -124,22 +110,25 @@ class _Brand extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-          SizedBox(
-            width: 192,
-            child: Column(
-              children: [
-                const SplashLoadingBar(),
-                const SizedBox(height: 12),
-                Text(
-                  l10n.splashLoading,
-                  style: text.bodySmall!.copyWith(
-                    height: 16 / 12,
-                    color: scheme.onSurfaceVariant.withValues(alpha: 0.66), // slate-500 on navy
+          if (onRetry case final onRetry?)
+            LoadErrorView(message: l10n.splashConnectionError, onRetry: onRetry)
+          else
+            SizedBox(
+              width: 192,
+              child: Column(
+                children: [
+                  const SplashLoadingBar(),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.splashLoading,
+                    style: text.bodySmall!.copyWith(
+                      height: 16 / 12,
+                      color: scheme.onSurfaceVariant.withValues(alpha: 0.66), // slate-500 on navy
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

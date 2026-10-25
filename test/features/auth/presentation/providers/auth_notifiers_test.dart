@@ -1,4 +1,5 @@
 import 'package:car_assistant/core/error/failure.dart';
+import 'package:car_assistant/core/error/network_failure.dart';
 import 'package:car_assistant/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:car_assistant/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_failures.dart';
@@ -65,6 +66,14 @@ void main() {
       await container.read(authStatusProvider.notifier).restore();
 
       expect(container.read(authStatusProvider), AuthStatus.signedOut);
+    });
+
+    test('stays unknown and reports a failure when the server is unreachable', () async {
+      when(() => repository.hasSession()).thenAnswer((_) async => true);
+      when(() => repository.getCurrentUser()).thenAnswer((_) async => const Left(NetworkFailure()));
+
+      expect(await container.read(authStatusProvider.notifier).restore(), isFalse);
+      expect(container.read(authStatusProvider), AuthStatus.unknown);
     });
 
     test('logout clears the session and signs out', () async {

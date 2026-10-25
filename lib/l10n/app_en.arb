@@ -5,6 +5,7 @@
   "splashHeadline": "Car Management",
   "splashDescription": "One ledger for your car's expenses, services and documents",
   "splashLoading": "Loading your data...",
+  "splashConnectionError": "Can't reach the server. Check your connection and try again.",
   "splashFooter": "Your car's info, always at hand",
   "splashLogoLabel": "Car Management app logo",
   "versionLabel": "Version",

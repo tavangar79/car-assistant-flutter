@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../domain/entities/user.dart';
 import 'auth_providers.dart';
@@ -18,24 +19,26 @@ class AuthStatusNotifier extends Notifier<AuthStatus> {
   @override
   AuthStatus build() => AuthStatus.unknown;
 
-  /// Checks the stored session (called once by the splash screen).
-  Future<void> restore() async {
-    final session = await ref.read(checkSessionProvider).call();
-    if (session.signedIn) {
-      signIn(session.user);
-    } else {
-      ref.read(currentUserProvider.notifier).set(null);
-      state = AuthStatus.signedOut;
+  /// Checks the stored session (called by the splash screen). Returns `false` when the server could
+  /// not be reached; the status then stays [AuthStatus.unknown] so the splash can offer a retry.
+  Future<bool> restore() async {
+    final result = await ref.read(checkSessionProvider).call();
+    switch (result) {
+      case Left():
+        return false;
+      case Right(value: final user?):
+        signIn(user);
+      case Right():
+        ref.read(currentUserProvider.notifier).set(null);
+        state = AuthStatus.signedOut;
     }
+    return true;
   }
 
-  /// Signs [user] in, or updates it (e.g. after saving the profile). A `null` user means signed in
-  /// while the server could not be reached; the profile check then waits for the next start.
-  void signIn(User? user) {
+  /// Signs [user] in, or updates it (e.g. after saving the profile).
+  void signIn(User user) {
     ref.read(currentUserProvider.notifier).set(user);
-    state = user != null && !user.isProfileComplete
-        ? AuthStatus.profileIncomplete
-        : AuthStatus.signedIn;
+    state = user.isProfileComplete ? AuthStatus.signedIn : AuthStatus.profileIncomplete;
   }
 
   /// Signs out even when the token cannot be removed: the repository has then already made it
