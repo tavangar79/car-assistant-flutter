@@ -22,7 +22,7 @@ by the car-assistant manager repo, whose CTO sends tasks with an API contract.
 ## Commands
 | Task         | Command                                                              |
 |--------------|----------------------------------------------------------------------|
-| Run          | `flutter run --dart-define=API_BASE_URL=http://10.0.2.2:3000` (Android emulator) |
+| Run          | `flutter run --dart-define=API_BASE_URL=http://10.0.2.2:4000` (Android emulator) |
 | Analyze      | `flutter analyze`                                                    |
 | Test         | `flutter test`                                                       |
 | Format       | `dart format lib test`                                               |
