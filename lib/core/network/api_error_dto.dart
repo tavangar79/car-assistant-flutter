@@ -19,6 +19,12 @@ class ApiErrorDto {
   final String message;
   final Map<String, dynamic> details;
 
+  /// `details.code` of a 403 for a blocked account.
+  static const userBlockedCode = 'user_blocked';
+
+  /// Whether this is the "account blocked" error (`details.code == "user_blocked"`).
+  bool get isUserBlocked => details['code'] == userBlockedCode;
+
   /// `details.retryAfterSeconds` of a 429 response. Any JSON number is accepted.
   int? get retryAfterSeconds => switch (details['retryAfterSeconds']) {
     final num seconds => seconds.toInt(),

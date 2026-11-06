@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:car_assistant/core/error/failure.dart';
 import 'package:car_assistant/core/error/network_failure.dart';
+import 'package:car_assistant/core/error/user_blocked_failure.dart';
 import 'package:car_assistant/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:car_assistant/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_failures.dart';
@@ -29,6 +30,7 @@ const _userJson = {
   'avatarUrl': null,
   'isProfileComplete': true,
 };
+const _blockedMessage = 'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.';
 final _user = User(id: 'u1', phone: _phone, createdAt: DateTime.utc(2026), isProfileComplete: true);
 
 Response<Map<String, dynamic>> _ok(Map<String, dynamic> data) =>
@@ -109,6 +111,20 @@ void main() {
       }
     });
 
+    test('maps 403 user_blocked to UserBlockedFailure with the server message', () async {
+      stubPost(
+        '/api/auth/otp/request',
+        () => Future.error(
+          _httpError(403, message: _blockedMessage, details: {'code': 'user_blocked'}),
+        ),
+      );
+
+      expect(
+        await repository.requestOtp(_phone),
+        const Left<Failure, OtpRequest>(UserBlockedFailure(_blockedMessage)),
+      );
+    });
+
     test('maps an unexpected status to a generic Failure with the server message', () async {
       stubPost('/api/auth/otp/request', () => Future.error(_httpError(500, message: 'boom')));
 
@@ -163,6 +179,24 @@ void main() {
       }
       expect(storage.token, isNull);
     });
+
+    test(
+      'maps 403 user_blocked to UserBlockedFailure, not a wrong code, and stores nothing',
+      () async {
+        stubPost(
+          '/api/auth/otp/verify',
+          () => Future.error(
+            _httpError(403, message: _blockedMessage, details: {'code': 'user_blocked'}),
+          ),
+        );
+
+        expect(
+          await repository.verifyOtp(phone: _phone, code: '12345'),
+          const Left<Failure, AuthResult>(UserBlockedFailure(_blockedMessage)),
+        );
+        expect(storage.token, isNull);
+      },
+    );
 
     test('maps 429 to TooManyRequestsFailure', () async {
       stubPost(

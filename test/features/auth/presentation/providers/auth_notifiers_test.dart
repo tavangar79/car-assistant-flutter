@@ -1,8 +1,15 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:car_assistant/core/error/failure.dart';
 import 'package:car_assistant/core/error/network_failure.dart';
+import 'package:car_assistant/core/error/user_blocked_failure.dart';
+import 'package:car_assistant/core/network/dio_provider.dart';
+import 'package:car_assistant/core/storage/token_storage_provider.dart';
 import 'package:car_assistant/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:car_assistant/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_failures.dart';
+import 'package:car_assistant/features/auth/domain/entities/auth_result.dart';
 import 'package:car_assistant/features/auth/domain/entities/user.dart';
 import 'package:car_assistant/features/auth/domain/repositories/auth_repository.dart';
 import 'package:car_assistant/features/auth/presentation/providers/auth_providers.dart';
@@ -189,4 +196,86 @@ void main() {
     expect(real.read(authStatusProvider), AuthStatus.signedOut);
     expect(storage.token, isNull);
   });
+
+  group('blocked account', () {
+    const message = 'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.';
+
+    test(
+      'handleBlocked keeps the message, forgets the user and the token, from any state',
+      () async {
+        when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
+        container.read(authStatusProvider.notifier).signIn(user);
+
+        await container.read(authStatusProvider.notifier).handleBlocked(message);
+
+        expect(container.read(authStatusProvider), AuthStatus.blocked);
+        expect(container.read(blockedMessageProvider), message);
+        expect(container.read(currentUserProvider), isNull);
+        verify(() => repository.clearSession()).called(1);
+      },
+    );
+
+    test('leaveBlocked goes back to signed out and clears the message', () async {
+      when(() => repository.clearSession()).thenAnswer((_) async => const Right(unit));
+      await container.read(authStatusProvider.notifier).handleBlocked(message);
+
+      container.read(authStatusProvider.notifier).leaveBlocked();
+
+      expect(container.read(authStatusProvider), AuthStatus.signedOut);
+      expect(container.read(blockedMessageProvider), isNull);
+    });
+
+    test('restore treats a blocked account as a known session (no retry)', () async {
+      when(() => repository.hasSession()).thenAnswer((_) async => true);
+      when(() => repository.getCurrentUser())
+          .thenAnswer((_) async => const Left(UserBlockedFailure(message)));
+
+      expect(await container.read(authStatusProvider.notifier).restore(), isTrue);
+    });
+
+    test('the app Dio: a 403 user_blocked on verify clears the token and blocks', () async {
+      final storage = FakeTokenStorage()..token = 'stale';
+      final real = ProviderContainer.test(
+        overrides: [tokenStorageProvider.overrideWithValue(storage)],
+      );
+      final dio = real.read(dioProvider)..httpClientAdapter = _BlockedAdapter(message);
+
+      final result = await real.read(authRepositoryProvider).verifyOtp(phone: phone, code: '12345');
+      await pumpEventQueue();
+
+      expect(result, const Left<Failure, AuthResult>(UserBlockedFailure(message)));
+      expect(real.read(authStatusProvider), AuthStatus.blocked);
+      expect(real.read(blockedMessageProvider), message);
+      expect(storage.token, isNull);
+      dio.close();
+    });
+  });
+}
+
+/// Answers every request with the backend's 403 `user_blocked` body.
+class _BlockedAdapter implements HttpClientAdapter {
+  _BlockedAdapter(this.message);
+
+  final String message;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async => ResponseBody.fromString(
+    jsonEncode({
+      'error': {
+        'message': message,
+        'details': {'code': 'user_blocked'},
+      },
+    }),
+    403,
+    headers: {
+      Headers.contentTypeHeader: [Headers.jsonContentType],
+    },
+  );
+
+  @override
+  void close({bool force = false}) {}
 }

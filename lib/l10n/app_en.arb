@@ -1005,5 +1005,8 @@
   "incomingTransferRejected": "Transfer request rejected",
   "incomingTransferFailed": "Couldn't complete the request",
   "recordLockedLabel": "Previous owner",
-  "recordLockedHint": "This record belongs to the previous owner and can't be edited"
+  "recordLockedHint": "This record belongs to the previous owner and can't be edited",
+  "blockedTitle": "Account blocked",
+  "blockedMessageFallback": "Your account has been blocked. Please contact support.",
+  "blockedBackToLogin": "Back to sign in"
 }

@@ -1,9 +1,11 @@
 import 'package:car_assistant/app.dart';
+import 'package:car_assistant/core/error/user_blocked_failure.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_failures.dart';
 import 'package:car_assistant/features/auth/domain/entities/auth_result.dart';
 import 'package:car_assistant/features/auth/domain/entities/otp_request.dart';
 import 'package:car_assistant/features/auth/domain/entities/user.dart';
 import 'package:car_assistant/features/auth/domain/repositories/auth_repository.dart';
+import 'package:car_assistant/features/auth/presentation/pages/blocked_page.dart';
 import 'package:car_assistant/features/auth/presentation/pages/complete_profile_page.dart';
 import 'package:car_assistant/features/auth/presentation/pages/otp_page.dart';
 import 'package:car_assistant/features/auth/presentation/pages/phone_page.dart';
@@ -234,5 +236,54 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  group('blocked account', () {
+    const message = 'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.';
+
+    /// What the app Dio's interceptor does on a 403 `user_blocked`.
+    Future<void> interceptorReportsBlocked(WidgetTester tester) =>
+        ProviderScope.containerOf(tester.element(find.byType(CarAssistantApp)))
+            .read(authStatusProvider.notifier)
+            .handleBlocked(message);
+
+    testWidgets('blocked on the phone page: the blocked page, then back to the phone page', (
+      tester,
+    ) async {
+      when(() => auth.hasSession()).thenAnswer((_) async => false);
+      when(() => auth.clearSession()).thenAnswer((_) async => const Right(unit));
+      await passSplash(tester);
+      expect(find.byType(PhonePage), findsOneWidget);
+
+      await interceptorReportsBlocked(tester);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(BlockedPage), findsOneWidget);
+      expect(find.text(message), findsOneWidget);
+      verify(() => auth.clearSession()).called(1);
+
+      await tester.tap(find.text('بازگشت به ورود'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PhonePage), findsOneWidget);
+      expect(find.byType(BlockedPage), findsNothing);
+    });
+
+    testWidgets('blocked while restoring the session: splash, then the blocked page', (
+      tester,
+    ) async {
+      when(() => auth.hasSession()).thenAnswer((_) async => true);
+      when(() => auth.clearSession()).thenAnswer((_) async => const Right(unit));
+      when(() => auth.getCurrentUser()).thenAnswer((_) async {
+        await interceptorReportsBlocked(tester);
+        return const Left(UserBlockedFailure(message));
+      });
+
+      await passSplash(tester);
+
+      expect(find.byType(BlockedPage), findsOneWidget);
+      expect(find.byType(HomePage), findsNothing);
+      verify(() => auth.clearSession()).called(1);
+    });
   });
 }

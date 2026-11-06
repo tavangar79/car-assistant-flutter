@@ -3539,4 +3539,13 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get recordLockedHint => 'این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست';
+
+  @override
+  String get blockedTitle => 'حساب مسدود شده';
+
+  @override
+  String get blockedMessageFallback => 'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.';
+
+  @override
+  String get blockedBackToLogin => 'بازگشت به ورود';
 }

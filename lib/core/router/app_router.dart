@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/pages/blocked_page.dart';
 import '../../features/auth/presentation/pages/complete_profile_page.dart';
 import '../../features/auth/presentation/pages/otp_page.dart';
 import '../../features/auth/presentation/pages/phone_page.dart';
@@ -62,6 +63,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => OtpPage(args: state.extra! as OtpArgs),
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.blockedPath,
+        name: AppRoutes.blockedName,
+        builder: (context, state) => const BlockedPage(),
       ),
       GoRoute(
         path: AppRoutes.completeProfilePath,

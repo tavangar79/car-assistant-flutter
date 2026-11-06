@@ -6,11 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/fake_token_storage.dart';
 
-/// Answers every request with [status] and records the last request.
+/// Answers every request with [status] and [body], and records the last request.
 class _FakeAdapter implements HttpClientAdapter {
-  _FakeAdapter(this.status);
+  _FakeAdapter(this.status, [this.body = '{}']);
 
   final int status;
+  final String body;
   RequestOptions? lastRequest;
 
   @override
@@ -21,7 +22,7 @@ class _FakeAdapter implements HttpClientAdapter {
   ) async {
     lastRequest = options;
     return ResponseBody.fromString(
-      '{}',
+      body,
       status,
       headers: {
         Headers.contentTypeHeader: [Headers.jsonContentType],
@@ -36,18 +37,24 @@ class _FakeAdapter implements HttpClientAdapter {
 void main() {
   late FakeTokenStorage storage;
   late int unauthorizedCalls;
+  late List<String> blockedMessages;
 
   setUp(() {
     storage = FakeTokenStorage();
     unauthorizedCalls = 0;
+    blockedMessages = [];
   });
 
-  (Dio, _FakeAdapter) build(int status) {
-    final adapter = _FakeAdapter(status);
+  (Dio, _FakeAdapter) build(int status, [String body = '{}']) {
+    final adapter = _FakeAdapter(status, body);
     final dio = Dio(BaseOptions(baseUrl: 'http://api.test'))
       ..httpClientAdapter = adapter
       ..interceptors.add(
-        AuthInterceptor(tokenStorage: storage, onUnauthorized: () => unauthorizedCalls++),
+        AuthInterceptor(
+          tokenStorage: storage,
+          onUnauthorized: () => unauthorizedCalls++,
+          onBlocked: blockedMessages.add,
+        ),
       );
     return (dio, adapter);
   }
@@ -116,5 +123,38 @@ void main() {
     await expectLater(dio.get<Object?>('/api/vehicles/42'), throwsA(isA<DioException>()));
 
     expect(unauthorizedCalls, 0);
+  });
+
+  group('user_blocked (403)', () {
+    const message = 'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.';
+    const blockedBody = '{"error":{"message":"$message","details":{"code":"user_blocked"}}}';
+
+    test('reports the server message from any call, with or without a token', () async {
+      storage.token = 'jwt';
+      final (dio, _) = build(403, blockedBody);
+      await expectLater(dio.get<Object?>('/api/vehicles'), throwsA(isA<DioException>()));
+
+      storage.token = null;
+      await expectLater(dio.post<Object?>('/api/auth/otp/request'), throwsA(isA<DioException>()));
+      await expectLater(dio.post<Object?>('/api/auth/otp/verify'), throwsA(isA<DioException>()));
+
+      expect(blockedMessages, [message, message, message]);
+      expect(unauthorizedCalls, 0);
+    });
+
+    test('ignores other 403s', () async {
+      storage.token = 'jwt';
+      final (dio, _) = build(
+        403,
+        '{"error":{"message":"Forbidden","details":{"code":"not_owner"}}}',
+      );
+      await expectLater(dio.get<Object?>('/api/vehicles/1'), throwsA(isA<DioException>()));
+
+      final (plain, _) = build(403);
+      await expectLater(plain.get<Object?>('/api/vehicles/1'), throwsA(isA<DioException>()));
+
+      expect(blockedMessages, isEmpty);
+      expect(unauthorizedCalls, 0);
+    });
   });
 }

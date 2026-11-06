@@ -5684,6 +5684,24 @@ abstract class AppLocalizations {
   /// In fa, this message translates to:
   /// **'این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست'**
   String get recordLockedHint;
+
+  /// Title of the page shown when the account is blocked.
+  ///
+  /// In fa, this message translates to:
+  /// **'حساب مسدود شده'**
+  String get blockedTitle;
+
+  /// Shown on the blocked page when the server sent no message.
+  ///
+  /// In fa, this message translates to:
+  /// **'حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.'**
+  String get blockedMessageFallback;
+
+  /// The blocked page's only button: back to the phone sign-in page.
+  ///
+  /// In fa, this message translates to:
+  /// **'بازگشت به ورود'**
+  String get blockedBackToLogin;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

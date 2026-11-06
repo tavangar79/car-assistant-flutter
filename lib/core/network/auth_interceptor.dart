@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../storage/token_storage.dart';
+import 'api_error_dto.dart';
 
 /// Adds `Authorization: Bearer <token>` to every request when a token is stored.
 ///
@@ -8,13 +9,16 @@ import '../storage/token_storage.dart';
 /// The OTP endpoints are excluded: a 401 there means a wrong code, not a lost session.
 /// A 404 from the account endpoints (`/api/auth/me`, and changing the photo) means the account was
 /// deleted, which also signs out; a 404 when loading the photo only means there is none.
+/// A 403 `user_blocked` from any call (the OTP endpoints included, with or without a token) calls
+/// [onBlocked] with the server message.
 class AuthInterceptor extends Interceptor {
-  AuthInterceptor({required this._tokenStorage, this._onUnauthorized});
+  AuthInterceptor({required this._tokenStorage, this._onUnauthorized, this._onBlocked});
 
   static const _header = 'Authorization';
 
   final TokenStorage _tokenStorage;
   final void Function()? _onUnauthorized;
+  final void Function(String message)? _onBlocked;
 
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
@@ -28,6 +32,10 @@ class AuthInterceptor extends Interceptor {
     final request = err.requestOptions;
     final sentToken = request.headers.containsKey(_header);
     final status = err.response?.statusCode;
+    if (status == 403) {
+      final error = ApiErrorDto.tryParse(err.response?.data);
+      if (error != null && error.isUserBlocked) _onBlocked?.call(error.message);
+    }
     final lostSession =
         (status == 401 && !_isOtpCall(request.path)) || (status == 404 && _isAccountCall(request));
     if (sentToken && lostSession) {

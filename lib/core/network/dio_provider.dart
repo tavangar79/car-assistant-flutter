@@ -7,7 +7,8 @@ import '../storage/token_storage_provider.dart';
 import 'auth_interceptor.dart';
 
 /// The app's single [Dio]: JSON against [AppConfig.apiBaseUrl], with the bearer token attached.
-/// A rejected token (401) signs the user out.
+/// A rejected token (401) signs the user out; a blocked account (403 `user_blocked`) opens the
+/// blocked page.
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
@@ -22,6 +23,9 @@ final dioProvider = Provider<Dio>((ref) {
       tokenStorage: ref.watch(tokenStorageProvider),
       onUnauthorized: () {
         if (ref.mounted) ref.read(authStatusProvider.notifier).handleUnauthorized();
+      },
+      onBlocked: (message) {
+        if (ref.mounted) ref.read(authStatusProvider.notifier).handleBlocked(message);
       },
     ),
   );

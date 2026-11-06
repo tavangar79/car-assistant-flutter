@@ -1,3 +1,4 @@
+import '../../../../core/error/user_blocked_failure.dart';
 import '../../../../core/utils/format_countdown.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/entities/auth_failures.dart';
@@ -10,5 +11,6 @@ String authFailureMessage(Object error, AppLocalizations l10n) => switch (error)
   TooManyRequestsFailure(:final retryAfterSeconds) when retryAfterSeconds > 0 =>
     l10n.authTooManyRequestsRetryIn(formatCountdown(retryAfterSeconds, l10n.localeName)),
   TooManyRequestsFailure() => l10n.authTooManyRequests,
+  UserBlockedFailure(:final message) => message,
   _ => l10n.authGenericError,
 };

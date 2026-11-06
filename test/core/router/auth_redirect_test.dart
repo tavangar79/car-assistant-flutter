@@ -58,4 +58,16 @@ void main() {
     expect(authRedirect(AuthStatus.signedOut, '/login-help'), phone);
     expect(authRedirect(AuthStatus.signedIn, '/loginx'), isNull);
   });
+
+  test('a blocked user only sees the blocked page, which nobody else can open', () {
+    const blocked = AppRoutes.blockedPath;
+    for (final location in [phone, otp, home, vehicles, profile]) {
+      expect(authRedirect(AuthStatus.blocked, location), blocked);
+    }
+    expect(authRedirect(AuthStatus.blocked, blocked), isNull);
+    expect(authRedirect(AuthStatus.signedOut, blocked), phone);
+    expect(authRedirect(AuthStatus.signedIn, blocked), home);
+    expect(authRedirect(AuthStatus.profileIncomplete, blocked), profile);
+    expect(authRedirect(AuthStatus.unknown, blocked), splash);
+  });
 }

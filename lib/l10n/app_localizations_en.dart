@@ -3556,4 +3556,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recordLockedHint => 'This record belongs to the previous owner and can\'t be edited';
+
+  @override
+  String get blockedTitle => 'Account blocked';
+
+  @override
+  String get blockedMessageFallback => 'Your account has been blocked. Please contact support.';
+
+  @override
+  String get blockedBackToLogin => 'Back to sign in';
 }

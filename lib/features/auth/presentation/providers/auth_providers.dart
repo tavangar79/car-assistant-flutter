@@ -19,6 +19,7 @@ import '../../domain/usecases/verify_otp.dart';
 import 'auth_status_notifier.dart';
 import 'avatar_controller.dart';
 import 'avatar_picker.dart';
+import 'blocked_message_notifier.dart';
 import 'complete_profile_controller.dart';
 import 'current_user_notifier.dart';
 import 'otp_args.dart';
@@ -79,6 +80,11 @@ final authStatusProvider = NotifierProvider<AuthStatusNotifier, AuthStatus>(Auth
 
 /// The signed-in user (phone, profile), or `null` when signed out or not loaded yet.
 final currentUserProvider = NotifierProvider<CurrentUserNotifier, User?>(CurrentUserNotifier.new);
+
+/// The server message of a blocked account, or `null` when not blocked.
+final blockedMessageProvider = NotifierProvider<BlockedMessageNotifier, String?>(
+  BlockedMessageNotifier.new,
+);
 
 /// View model of the phone page: the typed number, loading while a code is requested, and the last error.
 final phoneViewModelProvider = NotifierProvider.autoDispose<PhoneViewModel, PhoneState>(

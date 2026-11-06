@@ -107,6 +107,10 @@ abstract final class AppRoutes {
   static const otpPath = '/login/otp';
   static const otpName = 'otp';
 
+  /// The account is blocked: the server message and one action, back to the phone page.
+  static const blockedPath = '/blocked';
+  static const blockedName = 'blocked';
+
   /// First name, last name and birth date; shown after sign-in while the profile is incomplete.
   static const completeProfilePath = '/complete-profile';
   static const completeProfileName = 'completeProfile';

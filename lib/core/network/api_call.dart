@@ -3,6 +3,7 @@ import 'package:fpdart/fpdart.dart';
 
 import '../error/failure.dart';
 import '../error/network_failure.dart';
+import '../error/user_blocked_failure.dart';
 import 'api_error_dto.dart';
 
 /// Maps an HTTP error status (and the parsed error body, if any) to a feature-specific [Failure].
@@ -11,6 +12,7 @@ typedef StatusFailureMapper = Failure? Function(int status, ApiErrorDto? error);
 
 /// Runs [call] and turns every exception into a [Failure], so data sources can stay simple:
 /// - a [Failure] thrown by [call] is kept,
+/// - a 403 `user_blocked` becomes a [UserBlockedFailure], before [onStatus] sees it,
 /// - a [DioException] with a response goes through [onStatus] (generic [Failure] otherwise),
 /// - a [DioException] without a response (offline, timeout) becomes a [NetworkFailure],
 /// - anything else (e.g. a malformed body) becomes a generic [Failure].
@@ -34,6 +36,9 @@ Failure _fromDio(DioException exception, StatusFailureMapper? onStatus) {
   if (response == null) return const NetworkFailure();
   final status = response.statusCode ?? 0;
   final error = ApiErrorDto.tryParse(response.data);
+  if (status == 403 && error != null && error.isUserBlocked) {
+    return UserBlockedFailure(error.message);
+  }
   return onStatus?.call(status, error) ??
       Failure('HTTP $status: ${error?.message ?? 'unexpected response'}');
 }

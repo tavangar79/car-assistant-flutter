@@ -4874,5 +4874,17 @@
   "recordLockedHint": "این رکورد مربوط به مالک قبلی است و قابل ویرایش نیست",
   "@recordLockedHint": {
     "description": "Note on a locked record."
+  },
+  "blockedTitle": "حساب مسدود شده",
+  "@blockedTitle": {
+    "description": "Title of the page shown when the account is blocked."
+  },
+  "blockedMessageFallback": "حساب کاربری شما مسدود شده است. با پشتیبانی تماس بگیرید.",
+  "@blockedMessageFallback": {
+    "description": "Shown on the blocked page when the server sent no message."
+  },
+  "blockedBackToLogin": "بازگشت به ورود",
+  "@blockedBackToLogin": {
+    "description": "The blocked page's only button: back to the phone sign-in page."
   }
 }
